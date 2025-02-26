@@ -1,0 +1,258 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EmbedIO.BearerToken</name>
+    </assembly>
+    <members>
+        <member name="T:EmbedIO.BearerToken.BasicAuthorizationServerProvider">
+            <summary>
+            Basic Authorization Server Provider implementation.
+            </summary>
+        </member>
+        <member name="M:EmbedIO.BearerToken.BasicAuthorizationServerProvider.ValidateClientAuthentication(EmbedIO.BearerToken.ValidateClientAuthenticationContext)">
+            <inheritdoc />
+        </member>
+        <member name="M:EmbedIO.BearerToken.BasicAuthorizationServerProvider.GetExpirationDate">
+            <inheritdoc />
+        </member>
+        <member name="T:EmbedIO.BearerToken.BearerToken">
+            <summary>
+            Represents a Bearer Token JSON response.
+            </summary>
+        </member>
+        <member name="P:EmbedIO.BearerToken.BearerToken.Token">
+            <summary>
+            The JsonWebToken.
+            </summary>
+        </member>
+        <member name="P:EmbedIO.BearerToken.BearerToken.TokenType">
+            <summary>
+            The Token type.
+            </summary>
+        </member>
+        <member name="P:EmbedIO.BearerToken.BearerToken.ExpirationDate">
+            <summary>
+            Expiration Date.
+            </summary>
+        </member>
+        <member name="P:EmbedIO.BearerToken.BearerToken.Username">
+            <summary>
+            Client username.
+            </summary>
+        </member>
+        <member name="T:EmbedIO.BearerToken.BearerTokenModule">
+            <summary>
+            EmbedIO module to allow authorizations with Bearer Tokens.
+            </summary>
+        </member>
+        <member name="M:EmbedIO.BearerToken.BearerTokenModule.#ctor(System.String,EmbedIO.BearerToken.IAuthorizationServerProvider,Microsoft.IdentityModel.Tokens.SymmetricSecurityKey,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EmbedIO.BearerToken.BearerTokenModule" /> class.
+            </summary>
+            <param name="baseUrlPath">The base URL path.</param>
+            <param name="authorizationServerProvider">The authorization server provider.</param>
+            <param name="secretKey">The secret key.</param>
+            <param name="endpoint">The endpoint for the authorization (relative to baseUrlPath).</param>
+        </member>
+        <member name="M:EmbedIO.BearerToken.BearerTokenModule.#ctor(System.String,EmbedIO.BearerToken.IAuthorizationServerProvider,System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EmbedIO.BearerToken.BearerTokenModule" /> class.
+            </summary>
+            <param name="baseUrlPath">The base URL path.</param>
+            <param name="authorizationServerProvider">The authorization server provider.</param>
+            <param name="secretKeyString">The secret key string.</param>
+            <param name="endpoint">The endpoint for the authorization (relative to baseUrlPath).</param>
+            <exception cref="T:System.ArgumentNullException">secretKeyString</exception>
+            <exception cref="T:System.ArgumentException">A key must be 40 chars.</exception>
+        </member>
+        <member name="P:EmbedIO.BearerToken.BearerTokenModule.SecretKey">
+            <summary>
+            Gets the secret key.
+            </summary>
+            <value>
+            The secret key.
+            </value>
+        </member>
+        <member name="P:EmbedIO.BearerToken.BearerTokenModule.OnSuccessTransformation">
+            <summary>
+            Gets or sets the on success transformation method.
+            </summary>
+            <value>
+            The on success.
+            </value>
+        </member>
+        <member name="P:EmbedIO.BearerToken.BearerTokenModule.IsFinalHandler">
+            <inheritdoc />
+        </member>
+        <member name="M:EmbedIO.BearerToken.BearerTokenModule.OnRequestAsync(EmbedIO.IHttpContext)">
+            <inheritdoc />
+        </member>
+        <member name="T:EmbedIO.BearerToken.Extensions">
+            <summary>
+            Extension methods.
+            </summary>
+        </member>
+        <member name="M:EmbedIO.BearerToken.Extensions.GetValidationContext(EmbedIO.IHttpContext)">
+            <summary>
+            Retrieves a ValidationContext.
+            </summary>
+            <param name="context">The context.</param>
+            <returns>The Validation Context from the HTTP Context.</returns>
+        </member>
+        <member name="M:EmbedIO.BearerToken.Extensions.Rejected(EmbedIO.IHttpContext,System.Object)">
+            <summary>
+            Rejects a authentication challenge.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="error">The error.</param>
+        </member>
+        <member name="M:EmbedIO.BearerToken.Extensions.GetSecurityToken(EmbedIO.IHttpContext,System.String)">
+            <summary>
+            Gets the <see cref="T:Microsoft.IdentityModel.Tokens.SecurityToken" /> of the current context.
+            Returns null when the token is not found or not validated.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="secretKey">The secret key.</param>
+            <returns>The security token from the HTTP Context.</returns>
+        </member>
+        <member name="M:EmbedIO.BearerToken.Extensions.GetSecurityToken(EmbedIO.IHttpContext,Microsoft.IdentityModel.Tokens.SymmetricSecurityKey)">
+            <summary>
+            Gets the security token.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="secretKey">The secret key.</param>
+            <returns>The security token from the HTTP Context.</returns>
+        </member>
+        <member name="M:EmbedIO.BearerToken.Extensions.GetPrincipal(EmbedIO.IHttpContext,Microsoft.IdentityModel.Tokens.SymmetricSecurityKey)">
+            <summary>
+            Gets the principal.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="secretKey">The secret key.</param>
+            <returns>The security token from the HTTP Context.</returns>
+        </member>
+        <member name="M:EmbedIO.BearerToken.Extensions.GetPrincipal(EmbedIO.IHttpContext,Microsoft.IdentityModel.Tokens.SymmetricSecurityKey,Microsoft.IdentityModel.Tokens.SecurityToken@)">
+            <summary>
+            Gets the principal.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="secretKey">The secret key.</param>
+            <param name="securityToken">The security token.</param>
+            <returns>The claims.</returns>
+        </member>
+        <member name="M:EmbedIO.BearerToken.Extensions.WithBearerToken(EmbedIO.IWebServer,System.String,Microsoft.IdentityModel.Tokens.SymmetricSecurityKey,EmbedIO.BearerToken.IAuthorizationServerProvider)">
+            <summary>
+            Fluent-like method to attach BearerToken.
+            </summary>
+            <param name="this">The webserver.</param>
+            <param name="baseUrlPath">The base URL path.</param>
+            <param name="secretKey">The secret key.</param>
+            <param name="authorizationProvider">The authorization provider.</param>
+            <returns>
+            The same web server.
+            </returns>
+        </member>
+        <member name="M:EmbedIO.BearerToken.Extensions.WithBearerToken(EmbedIO.IWebServer,System.String,System.String,EmbedIO.BearerToken.IAuthorizationServerProvider)">
+            <summary>
+            Withes the bearer token.
+            </summary>
+            <param name="this">The webserver.</param>
+            <param name="baseUrlPath">The base URL path.</param>
+            <param name="secretKeyString">The secret key string.</param>
+            <param name="authorizationProvider">The authorization provider.</param>
+            <returns>
+            The same web server.
+            </returns>
+        </member>
+        <member name="T:EmbedIO.BearerToken.IAuthorizationServerProvider">
+            <summary>
+            Authorization Server Provider interface.
+            </summary>
+        </member>
+        <member name="M:EmbedIO.BearerToken.IAuthorizationServerProvider.ValidateClientAuthentication(EmbedIO.BearerToken.ValidateClientAuthenticationContext)">
+            <summary>
+            Validates a Client Authentication.
+            </summary>
+            <param name="context">The context.</param>
+            <returns>
+            A task representing the client authentication.
+            </returns>
+        </member>
+        <member name="M:EmbedIO.BearerToken.IAuthorizationServerProvider.GetExpirationDate">
+            <summary>
+            Gets a Expiration Date.
+            </summary>
+            <returns>Ticks until expiration date.</returns>
+        </member>
+        <member name="T:EmbedIO.BearerToken.ValidateClientAuthenticationContext">
+            <summary>
+            Context to share data with AuthorizationServerProvider.
+            </summary>
+        </member>
+        <member name="M:EmbedIO.BearerToken.ValidateClientAuthenticationContext.#ctor(EmbedIO.IHttpContext)">
+            <summary>
+            Initializes a new instance of the <see cref="T:EmbedIO.BearerToken.ValidateClientAuthenticationContext"/> class.
+            </summary>
+            <param name="httpContext">The HTTP context.</param>
+            <exception cref="T:System.ArgumentNullException">httpContext.</exception>
+        </member>
+        <member name="P:EmbedIO.BearerToken.ValidateClientAuthenticationContext.IdentityName">
+            <summary>
+            The Client Id.
+            </summary>
+        </member>
+        <member name="P:EmbedIO.BearerToken.ValidateClientAuthenticationContext.HasError">
+            <summary>
+            Flags if the Validation has errors.
+            </summary>
+        </member>
+        <member name="P:EmbedIO.BearerToken.ValidateClientAuthenticationContext.IsValidated">
+            <summary>
+            Indicates if the Validation is right.
+            </summary>
+        </member>
+        <member name="P:EmbedIO.BearerToken.ValidateClientAuthenticationContext.HttpContext">
+            <summary>
+            Http Context instance.
+            </summary>
+        </member>
+        <member name="P:EmbedIO.BearerToken.ValidateClientAuthenticationContext.Identity">
+            <summary>
+            Gets or sets the identity.
+            </summary>
+            <value>
+            The identity.
+            </value>
+        </member>
+        <member name="P:EmbedIO.BearerToken.ValidateClientAuthenticationContext.ErrorPayload">
+            <summary>
+            Gets or sets the error payload.
+            </summary>
+            <value>
+            The error payload.
+            </value>
+        </member>
+        <member name="M:EmbedIO.BearerToken.ValidateClientAuthenticationContext.Rejected(System.Object)">
+            <summary>
+            Rejects a validation with optional payload to be sent as JSON.
+            </summary>
+            <param name="errorPayload">The error payload.</param>
+        </member>
+        <member name="M:EmbedIO.BearerToken.ValidateClientAuthenticationContext.Validated(System.String)">
+            <summary>
+            Validates credentials with identity name.
+            </summary>
+            <param name="identityName">Name of the identity.</param>
+        </member>
+        <member name="M:EmbedIO.BearerToken.ValidateClientAuthenticationContext.GetToken(Microsoft.IdentityModel.Tokens.SymmetricSecurityKey,System.Nullable{System.DateTime})">
+            <summary>
+            Retrieve JsonWebToken.
+            </summary>
+            <param name="secretKey">The secret key.</param>
+            <param name="expires">The expires.</param>
+            <returns>
+            The token string.
+            </returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,932 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Serilog.Sinks.MSSqlServer</name>
+    </assembly>
+    <members>
+        <member name="T:Serilog.Sinks.MSSqlServer.SetProperty">
+            <summary>
+            Helper for applying only those properties actually specified in external configuration.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.SetProperty.PropertySetter`1">
+            <summary>
+            Simulates passing a property-setter to an "out" argument.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.SetProperty.IfNotNull``1(System.String,Serilog.Sinks.MSSqlServer.SetProperty.PropertySetter{``0})">
+            <summary>
+            This will only set a value (execute the PropertySetter delegate) if the value is non-null.
+            It also converts the provided value to the requested type. This allows configuration to only
+            apply property changes when external configuration has actually provided a value.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.SetProperty.IfNotNullOrEmpty``1(System.String,Serilog.Sinks.MSSqlServer.SetProperty.PropertySetter{``0})">
+            <summary>
+            This will only set a value (execute the PropertySetter delegate) if the value is non-null and
+            isn't empty or whitespace. This override is used when {T} is a string value that can't be empty.
+            It also converts the provided value to the requested type. This allows configuration to only
+            apply property changes when external configuration has actually provided a value.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.SetProperty.IfProvided``1(System.Configuration.ConfigurationElement,System.String,Serilog.Sinks.MSSqlServer.SetProperty.PropertySetter{``0})">
+            <summary>
+            Test the underlying property collection's value-origin flag for a non-default string value. Empty strings allowed.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.SetProperty.IfProvidedNotEmpty``1(System.Configuration.ConfigurationElement,System.String,Serilog.Sinks.MSSqlServer.SetProperty.PropertySetter{``0})">
+            <summary>
+            Test the underlying property collection's value-origin flag for a non-default, non-null, non-empty string value.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.ColumnOptions">
+            <summary>
+            Options that pertain to columns
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.Store">
+            <summary>
+            A list of columns that will be stored in the logs table in the database.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PrimaryKey">
+            <summary>
+            The column which acts as the table's primary key. Primary keys must be non-null, the
+            AllowNull property will always be forced to false. This can be a Standard Column or a
+            custom column in the AdditionalColumns collection. This defaults to the Id column for
+            backwards-compatibility reasons, but a primary key is optional. If the Id column is
+            removed while the primary key is set to the Id column, no primary key is created.
+            It is recommended to declare the primary key as a non-clustered index, although this
+            is not done by default for backwards-compatibility reasons. If the primary key is
+            not delcared as non-clustered and a Clustered Columnstore Index is not used, the
+            primary key will be created as a clustered index.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.ClusteredColumnstoreIndex">
+            <summary>
+            When true for auto-created tables, the table will be created with a Clustered
+            Columnstore Index. In this case, if the Id column is set as the primary key but
+            is not configured as a non-clustered index, it will not default to a clustered
+            index. Prior to SQL Server 2017 you must NOT use any NVARCHAR(MAX) columns, and
+            this restriction includes the Standard Columns (you must change their size).
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.DisableTriggers">
+            <summary>
+            Indicates if triggers should be disabled when inserting log entries.
+            Only applies when SqlBulkCopy is used.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.AdditionalColumns">
+            <summary>
+            Additional log event property columns.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.AdditionalDataColumns">
+            <summary>
+            Deprecated. Use the <see cref="P:Serilog.Sinks.MSSqlServer.ColumnOptions.AdditionalColumns"/> collection instead. The sink constructor
+            will migrate this collection to the new collection automatically until this feature is removed.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.Id">
+            <summary>
+            Options for the Id column.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.Level">
+            <summary>
+            Options for the Level column.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.TraceId">
+            <summary>
+            Options for the TraceId column.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.SpanId">
+            <summary>
+            Options for the SpanId column.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.Properties">
+            <summary>
+            Options for the Properties column.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.Exception">
+            <summary>
+            Options for the Exception column.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.MessageTemplate">
+            <summary>
+            Options for the MessageTemplate column.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.Message">
+            <summary>
+            Options for the Message column.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.TimeStamp">
+            <summary>
+            Options for the TimeStamp column.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.LogEvent">
+            <summary>
+            Options for the LogEvent column.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.GetStandardColumnOptions(Serilog.Sinks.MSSqlServer.StandardColumn)">
+            <summary>
+            Returns a reference to the Standard Column-specific subclass (ie. properties like ColumnOptions.Id) 
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.ColumnOptions.ExceptionColumnOptions">
+            <summary>
+            Options for the Exception column.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.ExceptionColumnOptions.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.ExceptionColumnOptions.DataType">
+            <summary>
+            The Exception column defaults to NVarChar and must be of a character-storage data type.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.FinalizeConfigurationForSinkConstructor">
+            <summary>
+            The logging sink and audit sink constructors call this. Defaults are resolved (like ensuring the
+            primary key is non-null) and obsolete features are migrated to their replacement features so
+            dependencies in the sink itself can be safely removed as early as possible.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.ColumnOptions.IdColumnOptions">
+            <summary>
+            Options for the Id column.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.IdColumnOptions.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.IdColumnOptions.DataType">
+            <summary>
+            The Id column must be either Int (default) or BigInt.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.IdColumnOptions.AllowNull">
+            <summary>
+            The Id column must never allow null values (it is an auto-incremnting identity value and normally the primary key).
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.IdColumnOptions.AsDataColumn">
+            <summary>
+            Overrides the SqlColumn base method to also set Id-specific properties.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.IdColumnOptions.BigInt">
+            <summary>
+            Set the DataType property to BigInt.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.ColumnOptions.LevelColumnOptions">
+            <summary>
+            Options for the Level column.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.LevelColumnOptions.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.LevelColumnOptions.DataType">
+            <summary>
+            The Level column must be either NVarChar (the default) or TinyInt (which stores the underlying Level enum value).
+            The recommended DataLength for NVarChar is 16 characters.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.LevelColumnOptions.StoreAsEnum">
+            <summary>
+            If true will store Level as an enum in a tinyint column as opposed to a string.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.ColumnOptions.LogEventColumnOptions">
+            <summary>
+            Options for the LogEvent column.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.LogEventColumnOptions.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.LogEventColumnOptions.DataType">
+            <summary>
+            The LogEvent column defaults to NVarChar and must be of a character-storage data type.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.LogEventColumnOptions.ExcludeAdditionalProperties">
+            <summary>
+            Exclude properties from the LogEvent column if they are being saved to additional columns.
+            Defaults to false for backwards-compatibility, but true is the recommended setting.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.LogEventColumnOptions.ExcludeStandardColumns">
+            <summary>
+            Whether to include Standard Columns in the LogEvent column (for backwards compatibility).
+            Defaults to false for backwards-compatibility, but true is the recommended setting.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.ColumnOptions.MessageColumnOptions">
+            <summary>
+            Options for the message column
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.MessageColumnOptions.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.MessageColumnOptions.DataType">
+            <summary>
+            The Message column defaults to NVarChar and must be of a character-storage data type.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.ColumnOptions.MessageTemplateColumnOptions">
+            <summary>
+            Options for the MessageTemplate column.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.MessageTemplateColumnOptions.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.MessageTemplateColumnOptions.DataType">
+            <summary>
+            The MessageTemplate column defaults to NVarChar and must be of a character-storage data type.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions">
+            <summary>
+            Options for the Properties column.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.DataType">
+            <summary>
+            The Properties column defaults to NVarChar but may also be defined as any other
+            character-storage type or as the SQL XML data type. The XML data type
+            is not recommended for high-volume logging due to CPU overhead.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.ExcludeAdditionalProperties">
+            <summary>
+            Exclude properties from the Properties column if they are being saved to additional columns.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.DictionaryElementName">
+            <summary>
+            The name to use for a dictionary element.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.ItemElementName">
+            <summary>
+            The name to use for an item element.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.OmitDictionaryContainerElement">
+            <summary>
+            If true will omit the "dictionary" container element, and will only include child elements.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.OmitSequenceContainerElement">
+            <summary>
+            If true will omit the "sequence" container element, and will only include child elements.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.OmitStructureContainerElement">
+            <summary>
+            If true will omit the "structure" container element, and will only include child elements.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.OmitElementIfEmpty">
+            <summary>
+            If true and the property value is empty, then don't include the element.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.PropertyElementName">
+            <summary>
+            The name to use for a property element.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.RootElementName">
+            <summary>
+            The name to use for the root element.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.SequenceElementName">
+            <summary>
+            The name to use for a sequence element.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.StructureElementName">
+            <summary>
+            The name to use for a structure element.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.UsePropertyKeyAsElementName">
+            <summary>
+            If true, will use the property key as the element name.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.PropertiesColumnOptions.PropertiesFilter">
+            <summary>
+            If set, will only store properties allowed by the filter.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.ColumnOptions.SpanIdColumnOptions">
+            <summary>
+            Options for the SpanId column.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.SpanIdColumnOptions.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.SpanIdColumnOptions.DataType">
+            <summary>
+            The SpanId column defaults to NVarChar and must be of a character-storage data type.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.ColumnOptions.TimeStampColumnOptions">
+            <summary>
+            Options for the TimeStamp column.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.TimeStampColumnOptions.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.TimeStampColumnOptions.DataType">
+            <summary>
+            The TimeStamp column only supports the DateTime, DateTime2 and DateTimeOffset data types.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.TimeStampColumnOptions.ConvertToUtc">
+            <summary>
+            If true, the logging source's local time is converted to Coordinated Universal Time.
+            By definition, UTC does not include any timezone or timezone offset information.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.ColumnOptions.TraceIdColumnOptions">
+            <summary>
+            Options for the TraceId column.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ColumnOptions.TraceIdColumnOptions.#ctor">
+            <summary>
+            Constructor.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ColumnOptions.TraceIdColumnOptions.DataType">
+            <summary>
+            The TraceId column defaults to NVarChar and must be of a character-storage data type.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.MSSqlServerAuditSink">
+            <summary>
+            Writes log events as rows in a table of MSSqlServer database using Audit logic, meaning that each row is synchronously committed
+            and any errors that occur are propagated to the caller.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.MSSqlServerAuditSink.#ctor(System.String,System.String,System.IFormatProvider,System.Boolean,Serilog.Sinks.MSSqlServer.ColumnOptions,System.String,Serilog.Formatting.ITextFormatter)">
+             <summary>
+             Construct a sink posting to the specified database.
+            
+             Note: this is the legacy version of the extension method. Please use the new one using MSSqlServerSinkOptions instead.
+            
+             </summary>
+             <param name="connectionString">Connection string to access the database.</param>
+             <param name="tableName">Name of the table to store the data in.</param>
+             <param name="schemaName">Name of the schema for the table to store the data in. The default is 'dbo'.</param>
+             <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+             <param name="autoCreateSqlTable">Create log table with the provided name on destination sql server.</param>
+             <param name="columnOptions">Options that pertain to columns</param>
+             <param name="logEventFormatter">Supplies custom formatter for the LogEvent column, or null</param>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.MSSqlServerAuditSink.#ctor(System.String,Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions,System.IFormatProvider,Serilog.Sinks.MSSqlServer.ColumnOptions,Serilog.Formatting.ITextFormatter)">
+            <summary>
+            Construct a sink posting to the specified database.
+            </summary>
+            <param name="connectionString">Connection string to access the database.</param>
+            <param name="sinkOptions">Supplies additional options for the sink</param>
+            <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+            <param name="columnOptions">Options that pertain to columns</param>
+            <param name="logEventFormatter">Supplies custom formatter for the LogEvent column, or null</param>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.MSSqlServerAuditSink.Emit(Serilog.Events.LogEvent)">
+            <summary>Emit the provided log event to the sink.</summary>
+            <param name="logEvent">The log event to write.</param>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.MSSqlServerAuditSink.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.MSSqlServerAuditSink.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the Serilog.Sinks.MSSqlServer.MSSqlServerAuditSink and optionally
+            releases the managed resources.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.MSSqlServerSink">
+            <summary>
+            Writes log events as rows in a table of MSSqlServer database.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.MSSqlServerSink.DefaultSchemaName">
+            <summary>
+            The default database schema name.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.MSSqlServerSink.DefaultBatchPostingLimit">
+            <summary>
+            A reasonable default for the number of events posted in each batch.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.MSSqlServerSink.DefaultPeriod">
+            <summary>
+            A reasonable default time to wait between checking for event batches.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.MSSqlServerSink.#ctor(System.String,System.String,System.Int32,System.TimeSpan,System.IFormatProvider,System.Boolean,Serilog.Sinks.MSSqlServer.ColumnOptions,System.String,Serilog.Formatting.ITextFormatter)">
+             <summary>
+             Construct a sink posting to the specified database.
+            
+             Note: this is the legacy version of the extension method. Please use the new one using MSSqlServerSinkOptions instead.
+            
+             </summary>
+             <param name="connectionString">Connection string to access the database.</param>
+             <param name="tableName">Name of the table to store the data in.</param>
+             <param name="schemaName">Name of the schema for the table to store the data in. The default is 'dbo'.</param>
+             <param name="batchPostingLimit">The maximum number of events to post in a single batch.</param>
+             <param name="period">The time to wait between checking for event batches.</param>
+             <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+             <param name="autoCreateSqlTable">Create log table with the provided name on destination sql server.</param>
+             <param name="columnOptions">Options that pertain to columns</param>
+             <param name="logEventFormatter">Supplies custom formatter for the LogEvent column, or null</param>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.MSSqlServerSink.#ctor(System.String,Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions,System.IFormatProvider,Serilog.Sinks.MSSqlServer.ColumnOptions,Serilog.Formatting.ITextFormatter)">
+            <summary>
+            Construct a sink posting to the specified database.
+            </summary>
+            <param name="connectionString">Connection string to access the database.</param>
+            <param name="sinkOptions">Supplies additional options for the sink</param>
+            <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+            <param name="columnOptions">Options that pertain to columns</param>
+            <param name="logEventFormatter">Supplies custom formatter for the LogEvent column, or null</param>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.MSSqlServerSink.EmitBatchAsync(System.Collections.Generic.IReadOnlyCollection{Serilog.Events.LogEvent})">
+            <summary>
+            Emit a batch of log events, running asynchronously.
+            </summary>
+            <param name="batch">The events to emit.</param>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.MSSqlServerSink.OnEmptyBatchAsync">
+            <summary>
+            Called upon batchperiod if no data is in batch. Not used by this sink.
+            </summary>
+            <returns>A completed task</returns>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.MSSqlServerSink.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.MSSqlServerSink.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the Serilog.Sinks.MSSqlServer.MSSqlServerAuditSink and optionally
+            releases the managed resources.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions">
+            <summary>
+            Provides MSSqlServerSink with configurable options.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions.#ctor">
+            <summary>
+            Initializes a new <see cref="T:Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions"/> instance with default values.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions.TableName">
+            <summary>
+            Name of the database table for writing the log events
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions.SchemaName">
+            <summary>
+            Name of the database schema (default: "dbo")
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions.AutoCreateSqlDatabase">
+            <summary>
+            Flag to automatically create the log events database if it does not exist (default: false)
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions.AutoCreateSqlTable">
+            <summary>
+            Flag to automatically create the log events table if it does not exist (default: false)
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions.EnlistInTransaction">
+            <summary>
+            Flag to make logging SQL commands take part in ambient transactions (default: false)
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions.BatchPostingLimit">
+            <summary>
+            Limits how many log events are written to the database per batch (default: 50)
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions.BatchPeriod">
+            <summary>
+            Time span until a batch of log events is written to the database (default: 5 seconds)
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions.EagerlyEmitFirstEvent">
+            <summary>
+            Flag to eagerly emit a batch containing the first received event (default: true)
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions.LevelSwitch">
+            <summary>
+            A switch allowing the pass-through minimum level to be changed at runtime
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions.UseSqlBulkCopy">
+            <summary>
+            Flag to use <see cref="T:Microsoft.Data.SqlClient.SqlBulkCopy"/> instead of individual INSERT statements (default: true)
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.Sinks.MSSqlServer.Options.SinkOptions">
+            <summary>
+            Provides MSSqlServerSink with configurable options.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.Output.JsonLogEventFormatter">
+            <summary>
+            Custom JSON formatter to generate content for the LogEvent Standard Column.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.Output.JsonLogEventFormatter.#ctor(Serilog.Sinks.MSSqlServer.ColumnOptions,Serilog.Sinks.MSSqlServer.Output.IStandardColumnDataGenerator)">
+            <summary>
+            Constructor. A reference to the parent IStandardColumnsDataGenerator object is used so that JSON
+            can serialize Standard Column values exactly the way they would be written
+            to discrete SQL columns.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.Output.JsonLogEventFormatter.Format(Serilog.Events.LogEvent,System.IO.TextWriter)">
+            <summary>
+            Format the log event into the output while respecting the LogEvent column settings.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.Platform.SqlBulkBatchWriter.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.Platform.SqlBulkBatchWriter.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the Serilog.Sinks.MSSqlServer.Platform.SqlBulkBatchWriter and optionally
+            releases the managed resources.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.Platform.SqlInsertStatementWriter.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.Platform.SqlInsertStatementWriter.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the Serilog.Sinks.MSSqlServer.Platform.SqlInsertStatementWriter and optionally
+            releases the managed resources.
+            </summary>
+            <param name="disposing">True to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.SqlColumn">
+            <summary>
+            Shared column customization options.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.SqlColumn.#ctor">
+            <summary>
+            Default constructor.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.SqlColumn.#ctor(System.String,System.Data.SqlDbType,System.Boolean,System.Int32)">
+            <summary>
+            Constructor with property initialization.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.SqlColumn.#ctor(System.Data.DataColumn)">
+            <summary>
+            A constructor that initializes the object from a DataColumn object.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.SqlColumn.ColumnName">
+            <summary>
+            The name of the column in the database. Always required.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.SqlColumn.DataType">
+            <summary>
+            The SQL data type to be stored in this column. Always required.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.SqlColumn.AllowNull">
+            <summary>
+            Indicates whether NULLs can be stored in this column. Default is true. Always required.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.SqlColumn.DataLength">
+            <summary>
+            For character-storage DataTypes such as CHAR or VARCHAR, this defines the maximum size. The default -1 represents MAX.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.SqlColumn.NonClusteredIndex">
+            <summary>
+            Determines whether a non-clustered index is created for this column. Compound indexes are not
+            supported for auto-created log tables. This property is only used when auto-creating a log table.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.SqlColumn.PropertyName">
+            <summary>
+            The name of the Serilog property to use as the value when filling the DataTable.
+            If not specified, the ColumnName and PropertyName are the same.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.SqlColumn.ResolveHierarchicalPropertyName">
+            <summary>
+            Controls whether hierarchical expressions in `PropertyName` are evaluated. The default is `true`.
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.SqlColumn.PropertyNameHierarchy">
+            <summary>
+            List of the hierachical parts of a property name and all sub properties (e.g. Property.Settings.EventName)
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.SqlColumn.HasHierarchicalPropertyName">
+            <summary>
+            True if property name is hierarchical (e.g. Property.Settings.EventName)
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.SqlColumn.AsDataColumn">
+            <summary>
+            Converts a SQL sink SqlColumn object to a System.Data.DataColumn object. The original
+            SqlColumn object is stored in the DataColumn's ExtendedProperties collection.
+            Virtual so that the Id Standard Column can perform additional configuration.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.SqlColumn.SetDataTypeFromConfigString(System.String)">
+            <summary>
+            Configuration accepts DataType as a simple string ("nvarchar" for example) for ease-of-use.
+            This converts to SqlDbType and stores it into the DataType property.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.SqlDataTypes">
+            <summary>
+            Helpers for validating and converting SQL data types and the corresponding .NET types used by the DataColumn class.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.SqlDataTypes.NotSupported">
+            <summary>
+            SqlDbType doesn't have anything like "None" so we indicate an unsupported type by
+            referencing a type we can guarantee the rest of the sink will never recognize.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.SqlDataTypes.SystemTypeMap">
+            <summary>
+            A collection keyed on the SqlDbType enum with values representing the equivalent DataColumn .NET type.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.SqlDataTypes.VariableCharacterColumnTypes">
+            <summary>
+            SQL column types for supported strings
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.SqlDataTypes.DataLengthRequired">
+            <summary>
+            The SQL column types which require a non-zero DataLength property.
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.SqlDataTypes.TryParseIfSupported(System.String,System.Data.SqlDbType@)">
+            <summary>
+            Like Enum.TryParse for SqlDbType but it also validates against the SqlTypeToSystemType list, returning
+            false if the requested SQL type is not supported by this sink.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.SqlDataTypes.ReverseTypeMap">
+            <summary>
+            A collection keyed on the DataColumn .NET types with values representing the default SqlDbType enum.
+            This exists for backwards-compatibility reasons since all configuration based on DataColumn has been
+            marked Obsolete and will be removed in a future release.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.SqlDataTypes.ColumnstoreCompatible">
+            <summary>
+            Clustered Columnstore Indexes only support a subset of the available SQL column types.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.StandardColumn">
+            <summary>
+                List of columns that are available to be written to the database, excluding Id and additional columns.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.StandardColumn.Id">
+            <summary>
+            The optional primary key
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.StandardColumn.Message">
+            <summary>
+            The message rendered with the template given the properties associated with the event.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.StandardColumn.MessageTemplate">
+            <summary>
+            The message template describing the event.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.StandardColumn.Level">
+            <summary>
+            The level of the event.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.StandardColumn.TraceId">
+            <summary>
+            The OpenTelemetry trace id of the event.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.StandardColumn.SpanId">
+            <summary>
+            The OpenTelemetry span id of the event.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.StandardColumn.TimeStamp">
+            <summary>
+            The time at which the event occurred.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.StandardColumn.Exception">
+            <summary>
+            An exception associated with the event, or null.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.StandardColumn.Properties">
+            <summary>
+            Properties associated with the event, including those presented in <see cref="F:Serilog.Sinks.MSSqlServer.StandardColumn.MessageTemplate"/>.
+            </summary>
+        </member>
+        <member name="F:Serilog.Sinks.MSSqlServer.StandardColumn.LogEvent">
+            <summary>
+            A log event.
+            </summary>
+        </member>
+        <member name="T:Serilog.Sinks.MSSqlServer.ValueConfigElement">
+            <summary>
+            Class for reading System.Configuration (app.config, web.config) elements of the form &lt;PropertyName Value="Some value" /&gt;'
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ValueConfigElement.#ctor">
+            <summary>
+            Intiazes a new instance of ValueConfigElement
+            </summary>
+        </member>
+        <member name="M:Serilog.Sinks.MSSqlServer.ValueConfigElement.#ctor(System.String)">
+            <summary>
+            Intiazes a new instance of ValueConfigElement with a value
+            </summary>
+        </member>
+        <member name="P:Serilog.Sinks.MSSqlServer.ValueConfigElement.Value">
+            <summary>
+            The value property
+            </summary>
+        </member>
+        <member name="T:Serilog.LoggerConfigurationMSSqlServerExtensions">
+            <summary>
+            Adds the WriteTo.MSSqlServer() extension method to <see cref="T:Serilog.LoggerConfiguration"/>.
+            </summary>
+        </member>
+        <member name="F:Serilog.LoggerConfigurationMSSqlServerExtensions.AppConfigSectionName">
+            <summary>
+            The configuration section name for app.config or web.config configuration files.
+            </summary>
+        </member>
+        <member name="M:Serilog.LoggerConfigurationMSSqlServerExtensions.MSSqlServer(Serilog.Configuration.LoggerSinkConfiguration,System.String,System.String,Microsoft.Extensions.Configuration.IConfiguration,Serilog.Events.LogEventLevel,System.Int32,System.Nullable{System.TimeSpan},System.IFormatProvider,System.Boolean,Serilog.Sinks.MSSqlServer.ColumnOptions,Microsoft.Extensions.Configuration.IConfigurationSection,System.String,Serilog.Formatting.ITextFormatter)">
+             <summary>
+             Adds a sink that writes log events to a table in a MSSqlServer database.
+             Create a database and execute the table creation script found here
+             https://gist.github.com/mivano/10429656
+             or use the autoCreateSqlTable option.
+            
+             Note: this is the legacy version of the extension method. Please use the new one using MSSqlServerSinkOptions instead.
+             
+             </summary>
+             <param name="loggerConfiguration">The logger configuration.</param>
+             <param name="connectionString">The connection string to the database where to store the events.</param>
+             <param name="tableName">Name of the table to store the events in.</param>
+             <param name="appConfiguration">Additional application-level configuration. Required if connectionString is a name.</param>
+             <param name="restrictedToMinimumLevel">The minimum log event level required in order to write an event to the sink.</param>
+             <param name="batchPostingLimit">The maximum number of events to post in a single batch.</param>
+             <param name="period">The time to wait between checking for event batches.</param>
+             <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+             <param name="autoCreateSqlTable">Create log table with the provided name on destination sql server.</param>
+             <param name="columnOptions">An externally-modified group of column settings</param>
+             <param name="columnOptionsSection">A config section defining various column settings</param>
+             <param name="schemaName">Name of the schema for the table to store the data in. The default is 'dbo'.</param>
+             <param name="logEventFormatter">Supplies custom formatter for the LogEvent column, or null</param>
+             <returns>Logger configuration, allowing configuration to continue.</returns>
+             <exception cref="T:System.ArgumentNullException">A required parameter is null.</exception>
+        </member>
+        <member name="M:Serilog.LoggerConfigurationMSSqlServerExtensions.MSSqlServer(Serilog.Configuration.LoggerSinkConfiguration,System.String,Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions,Microsoft.Extensions.Configuration.IConfigurationSection,Microsoft.Extensions.Configuration.IConfiguration,Serilog.Events.LogEventLevel,System.IFormatProvider,Serilog.Sinks.MSSqlServer.ColumnOptions,Microsoft.Extensions.Configuration.IConfigurationSection,Serilog.Formatting.ITextFormatter)">
+            <summary>
+            Adds a sink that writes log events to a table in a MSSqlServer database.
+            Create a database and execute the table creation script found here
+            https://gist.github.com/mivano/10429656
+            or use the autoCreateSqlTable option.
+            </summary>
+            <param name="loggerConfiguration">The logger configuration.</param>
+            <param name="connectionString">The connection string to the database where to store the events.</param>
+            <param name="sinkOptions">Supplies additional settings for the sink</param>
+            <param name="sinkOptionsSection">A config section defining additional settings for the sink</param>
+            <param name="appConfiguration">Additional application-level configuration. Required if connectionString is a name.</param>
+            <param name="restrictedToMinimumLevel">The minimum level for events passed through the sink. Ignored when LevelSwitch in <paramref name="sinkOptions"/> is specified.</param>
+            <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+            <param name="columnOptions">An externally-modified group of column settings</param>
+            <param name="columnOptionsSection">A config section defining various column settings</param>
+            <param name="logEventFormatter">Supplies custom formatter for the LogEvent column, or null</param>
+            <returns>Logger configuration, allowing configuration to continue.</returns>
+            <exception cref="T:System.ArgumentNullException">A required parameter is null.</exception>
+        </member>
+        <member name="M:Serilog.LoggerConfigurationMSSqlServerExtensions.MSSqlServer(Serilog.Configuration.LoggerAuditSinkConfiguration,System.String,System.String,Microsoft.Extensions.Configuration.IConfiguration,Serilog.Events.LogEventLevel,System.IFormatProvider,System.Boolean,Serilog.Sinks.MSSqlServer.ColumnOptions,Microsoft.Extensions.Configuration.IConfigurationSection,System.String,Serilog.Formatting.ITextFormatter)">
+             <summary>
+             Adds a sink that writes log events to a table in a MSSqlServer database.
+            
+             Note: this is the legacy version of the extension method. Please use the new one using MSSqlServerSinkOptions instead.
+             
+             </summary>
+             <param name="loggerAuditSinkConfiguration">The logger configuration.</param>
+             <param name="connectionString">The connection string to the database where to store the events.</param>
+             <param name="tableName">Name of the table to store the events in.</param>
+             <param name="appConfiguration">Additional application-level configuration. Required if connectionString is a name.</param>
+             <param name="restrictedToMinimumLevel">The minimum log event level required in order to write an event to the sink.</param>
+             <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+             <param name="autoCreateSqlTable">Create log table with the provided name on destination sql server.</param>
+             <param name="columnOptions">An externally-modified group of column settings</param>
+             <param name="columnOptionsSection">A config section defining various column settings</param>
+             <param name="schemaName">Name of the schema for the table to store the data in. The default is 'dbo'.</param>
+             <param name="logEventFormatter">Supplies custom formatter for the LogEvent column, or null</param>
+             <returns>Logger configuration, allowing configuration to continue.</returns>
+             <exception cref="T:System.ArgumentNullException">A required parameter is null.</exception>
+        </member>
+        <member name="M:Serilog.LoggerConfigurationMSSqlServerExtensions.MSSqlServer(Serilog.Configuration.LoggerAuditSinkConfiguration,System.String,Serilog.Sinks.MSSqlServer.MSSqlServerSinkOptions,Microsoft.Extensions.Configuration.IConfigurationSection,Microsoft.Extensions.Configuration.IConfiguration,Serilog.Events.LogEventLevel,System.IFormatProvider,Serilog.Sinks.MSSqlServer.ColumnOptions,Microsoft.Extensions.Configuration.IConfigurationSection,Serilog.Formatting.ITextFormatter)">
+            <summary>
+            Adds a sink that writes log events to a table in a MSSqlServer database.
+            </summary>
+            <param name="loggerAuditSinkConfiguration">The logger configuration.</param>
+            <param name="connectionString">The connection string to the database where to store the events.</param>
+            <param name="sinkOptions">Supplies additional settings for the sink</param>
+            <param name="sinkOptionsSection">A config section defining additional settings for the sink</param>
+            <param name="appConfiguration">Additional application-level configuration. Required if connectionString is a name.</param>
+            <param name="restrictedToMinimumLevel">The minimum level for events passed through the sink. Ignored when LevelSwitch in <paramref name="sinkOptions"/> is specified.</param>
+            <param name="formatProvider">Supplies culture-specific formatting information, or null.</param>
+            <param name="columnOptions">An externally-modified group of column settings</param>
+            <param name="columnOptionsSection">A config section defining various column settings</param>
+            <param name="logEventFormatter">Supplies custom formatter for the LogEvent column, or null</param>
+            <returns>Logger configuration, allowing configuration to continue.</returns>
+            <exception cref="T:System.ArgumentNullException">A required parameter is null.</exception>
+        </member>
+    </members>
+</doc>
