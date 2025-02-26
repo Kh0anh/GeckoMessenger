@@ -1,66 +1,101 @@
+
+--1. User
 CREATE TABLE Users (
     UserID INT PRIMARY KEY IDENTITY(1,1),
     Username VARCHAR(32) NOT NULL UNIQUE,
     Email VARCHAR(32) NOT NULL UNIQUE,
-    PhoneNumber VARCHAR(16) NOT NULL UNIQUE,
-	UserPassword VARCHAR(32) NOT NULL,
-    FirstName NVARCHAR(32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	MiddleName NVARCHAR(32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	LastName NVARCHAR(32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
-	Bio NVARCHAR(32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+    Phone_Number VARCHAR(16) NOT NULL UNIQUE,
+	Password_Hash VARCHAR(60) NOT NULL,
+    First_Name NVARCHAR(32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	Last_Name NVARCHAR(32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
+	Bio NVARCHAR(255) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL,
     Avatar VARCHAR(255) NOT NULL,
-    LastLogin DATETIME2(6) NOT NULL,
-    CreatedDate DATETIME NOT NULL DEFAULT SYSDATETIME()
+    Last_Login DATETIME2(3) NOT NULL,
+    Created_At DATETIME2(3) NOT NULL DEFAULT SYSDATETIME()
 );
 
+--2. Contact
+CREATE TABLE Contacts(
+	ContactID INT NOT NULL,
+	UserID INT NOT NULL,
+	Added_At DATETIME2(3) DEFAULT SYSUTCDATETIME(),
+	PRIMARY KEY (ContactID, UserID),
+	FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE,
+	FOREIGN KEY (ContactID) REFERENCES Users(UserID) ON DELETE CASCADE
+);
+
+--3. Conversation
 CREATE TABLE Conversations(
 	ConversationID INT PRIMARY KEY IDENTITY(1,1),
-	ConversationName VARCHAR(32) UNIQUE,
-	ConversationTitle VARCHAR(32) COLLATE SQL_Latin1_General_CP1_CI_AS,
+	Conversation_Name VARCHAR(32) UNIQUE,
+	Conversation_Title VARCHAR(32) COLLATE SQL_Latin1_General_CP1_CI_AS,
 	CreatorID INT NOT NULL,
-	CorversationType VARCHAR(7) NOT NULL,
-	CreatedDate DATETIME NOT NULL DEFAULT SYSDATETIME(),
-	Deleted BIT DEFAULT 0,
-	FOREIGN KEY (CreatorID) REFERENCES Users(UserID)
-)
+	Conversation_Type VARCHAR(7) NOT NULL,
+	Created_At DATETIME2(3) NOT NULL DEFAULT SYSDATETIME(),
+	Is_Deleted BIT DEFAULT 0,
+	FOREIGN KEY (CreatorID) REFERENCES Users(UserID) ON DELETE CASCADE
+);
 
+--4. Message
 CREATE TABLE Messages(
 	 MessageID INT PRIMARY KEY IDENTITY(1,1),
 	 ConversationID INT NOT NULL,
 	 SenderID INT NOT NULL,
-	 Content VARCHAR(MAX) NOT NULL,
-	 MessageType VARCHAR(5) NOT NULL,
+	 Content VARCHAR(MAX) NULL,
+	 Message_Type VARCHAR(20) NOT NULL,
 	 Attachment BIT NOT NULL,
-	 Deleted BIT NOT NULL,
-	 Timestamp DATETIME NOT NULL DEFAULT SYSDATETIME()
-	 FOREIGN KEY (ConversationID) REFERENCES Conversations(ConversationID),
-	 FOREIGN KEY (SenderID) REFERENCES Users(UserID)
-)
+	 Is_Deleted BIT DEFAULT 0 NOT NULL,
+	 Created_At DATETIME2(3) NOT NULL DEFAULT SYSDATETIME(),
+	 FOREIGN KEY (ConversationID) REFERENCES Conversations(ConversationID) ON DELETE CASCADE,
+	 FOREIGN KEY (SenderID) REFERENCES Users(UserID) ON DELETE CASCADE
+);
 
+--5. Participants
 CREATE TABLE Participants(
-	ParticipantID INT PRIMARY KEY IDENTITY(1,1),
 	ConversationID INT NOT NULL,
 	UserID INT NOT NULL,
-	FOREIGN KEY (ConversationID) REFERENCES Conversations(ConversationID),
-	FOREIGN KEY (UserID) REFERENCES Users(UserID)
-)
+	Nickname VARCHAR(64),
+	User_Role VARCHAR(10) NOT NULL,
+	Added_ByID INT NOT NULL,
+	Deleted_At DATETIME2(3) NULL, --Xoa hoac out cuoc tro chuyen, nhom. Neu tat ca deu out thi xoa nhom
+	PRIMARY KEY (UserID, ConversationID),
+	FOREIGN KEY (ConversationID) REFERENCES Conversations(ConversationID) ON DELETE CASCADE,
+	FOREIGN KEY (UserID) REFERENCES Users(UserID) ON DELETE CASCADE,
+	FOREIGN KEY (Added_ByID) REFERENCES Users(UserID) ON DELETE CASCADE
+);
 
+--6. Attachment
 CREATE TABLE Attachments(
 	AttachmentID INT PRIMARY KEY IDENTITY(1,1), 
 	MessageID INT NOT NULL,
-	AttachmentsType VARCHAR(5) NOT NULL,
-	ThumbnailURL VARCHAR(128) NOT NULL,
-	FileURL VARCHAR(128) NOT NULL,
-	CreatedDate DATETIME NOT NULL DEFAULT SYSDATETIME(),
-	DeleteDate DATETIME
-	FOREIGN KEY (MessageID) REFERENCES Messages(MessageID),
-)
+	Attachment_Type VARCHAR(20) NOT NULL,
+	Thumbnail_URL VARCHAR(128) NOT NULL,
+	File_URL VARCHAR(255) NULL,
+	Created_At DATETIME2(3) NOT NULL DEFAULT SYSDATETIME(),
+	Delete_At DATETIME2(3),
+	FOREIGN KEY (MessageID) REFERENCES Messages(MessageID) ON DELETE CASCADE
+);
 
-CREATE TABLE DeletedConversations(
-	DeletedConversationID INT PRIMARY KEY IDENTITY(1,1),
-	ConversationID INT NOT NULL,
-	UserID INT NOT NULL,
-	CreatedDate DATETIME NOT NULL DEFAULT SYSDATETIME(),
-	FOREIGN KEY (ConversationID) REFERENCES Conversations(ConversationID),
-	FOREIGN KEY (UserID) REFERENCES Users(UserID)
-)
+--7. Deleted Message
+CREATE TABLE Deleted_Messages(
+	Deleted_MessageID INT PRIMARY KEY IDENTITY(1,1),
+	MessageID INT NOT NULL,
+	Deleted_By INT NOT NULL,
+	Created_At DATETIME2(3) NOT NULL DEFAULT SYSDATETIME(),
+	FOREIGN KEY (MessageID) REFERENCES Messages(MessageID) ON DELETE CASCADE,
+	FOREIGN KEY (Deleted_By) REFERENCES Users(UserID) ON DELETE CASCADE
+);
+
+--8. Report
+CREATE TABLE Reports(
+	ReportID INT PRIMARY KEY IDENTITY(1,1),
+	ReporterID INT NOT NULL, --Nguoi report
+	ReportedID INT NULL, --Nguoi bi report
+	MessageID INT NULL,	--Tin nhan bi report
+	Reason VARCHAR(255) NOT NULL,
+	Report_Status VARCHAR(20) DEFAULT 'Pending', --Pending, Banned (Solved), Reviewed
+	Created_At DATETIME2(3) DEFAULT SYSUTCDATETIME(),
+	FOREIGN KEY (ReporterID) REFERENCES Users(UserID) ON DELETE CASCADE,
+	FOREIGN KEY (ReportedID) REFERENCES Users(UserID) ON DELETE CASCADE,
+	FOREIGN KEY (MessageID) REFERENCES Messages(MessageID) ON DELETE CASCADE
+);
