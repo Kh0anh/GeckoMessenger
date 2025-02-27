@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace Demo
 {
@@ -13,5 +7,13 @@ namespace Demo
     /// </summary>
     public partial class App : Application
     {
+        public static readonly string APIUrl = "http://localhost:8080/";
+        public static string UserToken;
+        public static MainWindow MainWinow;
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            MainWinow = new MainWindow();
+            MainWinow.Show();
+        }
     }
 }

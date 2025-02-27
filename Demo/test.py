@@ -1,53 +1,55 @@
 import requests
 
-BASE_URL = "http://localhost:9696/api"
+BASE_URL = "http://localhost:8080"
 
 # Đăng ký tài khoản
 def register(username, password):
-    url = f"{BASE_URL}/users/register"
-    data = {"username": username, "password": password}
-    response = requests.post(url, data=data)
-    return response.json()
-
-# Đăng nhập lấy token JWT
-def login(username, password):
-    url = f"{BASE_URL}/users/login"
-    data = {"username": username, "password": password}
-    response = requests.post(url, data=data)
-    return response.json().get("token", None)
-
-# Gửi tin nhắn
-def send_message(token, receiver_id, content, message_type="text"):
-    url = f"{BASE_URL}/messages/send"
-    headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
-    data = {"receiverID": receiver_id, "content": content, "message_Type": message_type}
-    response = requests.post(url, json=data, headers=headers)
-    return response.json()
-
-# Lấy danh sách tin nhắn
-def get_messages(token):
-    url = f"{BASE_URL}/messages/get"
-    headers = {"Authorization": f"Bearer {token}"}
-    response = requests.get(url, headers=headers)
-    return response.json()
-
-# Chạy thử các API
-if __name__ == "__main__":
-    username = "khanh"
-    password = "123"
-
-    # 1. Đăng ký
-    #print("Đăng ký:", register(username, password))
-
-    # 2. Đăng nhập để lấy token
-    token = login(username, password)
-    if token:
-        print("Token:", token)
-
-        # 3. Gửi tin nhắn
-        print("Gửi tin nhắn:", send_message(token, receiver_id=2, content="Hello từ Python!"))
-
-        # 4. Lấy danh sách tin nhắn
-        print("Danh sách tin nhắn:", get_messages(token))
+    url = f"{BASE_URL}/auth/register"
+    data = {"Username": username, "Password": password}
+    response = requests.post(url, json=data)
+    
+    if response.status_code == 201:
+        print(response.text)
+        print("✅ Register successful")
     else:
-        print("Đăng nhập thất bại!")
+        print("❌ Register failed:", response.status_code, response.text)
+
+# Đăng nhập và lấy token
+def login(username, password):
+    url = f"{BASE_URL}/auth/login"
+    data = {"Username": username, "Password": password}
+    response = requests.post(url, json=data)
+    
+    if response.status_code == 200:
+        print(response.json())
+        login_response = response.json()
+        token = login_response.get("Token")  # Lấy token từ phản hồi
+        print("✅ Login successful. Token:", token)
+        return token
+    else:
+        print("❌ Login failed:", response.status_code, response.text)
+        return None
+
+# Gửi request đến message/test với token
+def get_message(token):
+    url = f"{BASE_URL}/messages/test"
+    headers = {
+        "Authorization": f"Bearer {token}"  # Đưa token vào header
+    }
+    response = requests.get(url, headers=headers)
+
+    print("📩 Status Code:", response.status_code)
+    print("📩 Response:", response.text)
+
+# Thực thi chương trình
+if __name__ == "__main__":
+    USERNAME = "admsaiwn"
+    PASSWORD = "dsadw"
+
+    register(USERNAME, PASSWORD)  # Đăng ký tài khoản
+    token = login(USERNAME, PASSWORD)  # Đăng nhập để lấy token
+
+    if token:  # Nếu có token hợp lệ thì gửi request đến /message/test
+        get_message(token)
+    else:
+        print("❌ No valid token, cannot request /message/test")

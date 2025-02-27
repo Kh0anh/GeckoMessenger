@@ -1,0 +1,15 @@
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\DemoAPI.exe
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\ServiceStack.Client.dll
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\ServiceStack.Common.dll
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\ServiceStack.dll
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\ServiceStack.Interfaces.dll
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\ServiceStack.OrmLite.dll
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\ServiceStack.OrmLite.SqlServer.dll
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\ServiceStack.Text.dll
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\System.Diagnostics.DiagnosticSource.dll
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\System.Memory.dll
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\GeckoMessenger\Demo\DemoAPI\bin\Debug\BCrypt.Net-Next.dll

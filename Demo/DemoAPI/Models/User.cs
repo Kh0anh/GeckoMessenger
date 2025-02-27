@@ -1,25 +1,21 @@
-﻿using ServiceStack.Auth;
-using ServiceStack.DataAnnotations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ServiceStack.DataAnnotations;
 
 namespace DemoAPI.Models
 {
+    [Alias("Users")]
     public class User
     {
         [AutoIncrement]
-        [Required]
-        public int UserId { get; set; }
+        public int UserID { get; set; }
 
-        [StringLength(32)]
         [Required]
+        [Unique]
+        [StringLength(32)]
         public string Username { get; set; }
 
-        [StringLength(60)]
         [Required]
+        [StringLength(60)]
         public string PasswordHash { get; set; }
     }
+
 }

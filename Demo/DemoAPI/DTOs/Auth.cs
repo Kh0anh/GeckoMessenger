@@ -16,15 +16,29 @@ namespace DemoAPI.DTOs
         public string Password { get; set; }
     }
 
+    [Route("/auth/userExist")]
+    public class UserExist : IReturn<UserExistResponse>
+    {
+        public string Username { get; set; }
+    }
+
     public class RegisterResponse
     {
-        public int UserId { get; set; }
+        public bool Success { get; set; }
+        public int UserID { get; set; }
         public ResponseStatus ResponseStatus { get; set; }
     }
 
     public class LoginResponse
     {
+        public bool Success { get; set; }
         public string Token { get; set; }
+        public ResponseStatus ResponseStatus { get; set; }
+    }
+
+    public class UserExistResponse
+    {
+        public bool Exist { get; set; }
         public ResponseStatus ResponseStatus { get; set; }
     }
 }

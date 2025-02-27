@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ServiceStack.HttpClient</name>
+    </assembly>
+    <members>
+        <member name="P:ServiceStack.JsonHttpClient.Headers">
+            <summary>
+            Gets the collection of headers to be added to outgoing requests.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.JsonHttpClient.BasePath">
+            <summary>
+            Relative BasePath to use for predefined routes. Set with `UseBasePath` or `WithBasePath()`
+            Always contains '/' prefix + '/' suffix, e.g. /api/
+            </summary>
+        </member>
+        <member name="P:ServiceStack.JsonHttpClient.UseBasePath">
+            <summary>
+            Replace the Base reply/oneway paths to use a different prefix
+            </summary>
+        </member>
+    </members>
+</doc>
