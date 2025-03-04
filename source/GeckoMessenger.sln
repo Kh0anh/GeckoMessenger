@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIServer", "APIServer\APIServer.csproj", "{9501C8FB-DEA1-465F-A07E-55BF11351D96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Messenger", "Messenger\Messenger.csproj", "{A883C85E-189A-4CAF-A304-252B7EA65C7A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9501C8FB-DEA1-465F-A07E-55BF11351D96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9501C8FB-DEA1-465F-A07E-55BF11351D96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9501C8FB-DEA1-465F-A07E-55BF11351D96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9501C8FB-DEA1-465F-A07E-55BF11351D96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A883C85E-189A-4CAF-A304-252B7EA65C7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A883C85E-189A-4CAF-A304-252B7EA65C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A883C85E-189A-4CAF-A304-252B7EA65C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A883C85E-189A-4CAF-A304-252B7EA65C7A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

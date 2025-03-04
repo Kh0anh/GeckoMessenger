@@ -1,0 +1,1050 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ServiceStack.Client</name>
+    </assembly>
+    <members>
+        <member name="M:ServiceStack.ApiResultUtils.Api``1(ServiceStack.IServiceClient,ServiceStack.IReturn{``0})">
+            <summary>
+            Annotate Request DTOs with IGet, IPost, etc HTTP Verb markers to specify which HTTP Method is used:
+            https://docs.servicestack.net/csharp-client.html#http-verb-interface-markers
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ApiResultUtils.ApiAsync``1(ServiceStack.IServiceClient,ServiceStack.IReturn{``0})">
+            <summary>
+            Annotate Request DTOs with IGet, IPost, etc HTTP Verb markers to specify which HTTP Method is used:
+            https://docs.servicestack.net/csharp-client.html#http-verb-interface-markers
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ApiResultUtils.Api(ServiceStack.IServiceClient,ServiceStack.IReturnVoid)">
+            <summary>
+            Annotate Request DTOs with IGet, IPost, etc HTTP Verb markers to specify which HTTP Method is used:
+            https://docs.servicestack.net/csharp-client.html#http-verb-interface-markers
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ApiResultUtils.ApiAsync(ServiceStack.IServiceClient,ServiceStack.IReturnVoid)">
+            <summary>
+            Annotate Request DTOs with IGet, IPost, etc HTTP Verb markers to specify which HTTP Method is used:
+            https://docs.servicestack.net/csharp-client.html#http-verb-interface-markers
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ApiResultUtils.ToAuthenticateResponse(ServiceStack.RegisterResponse)">
+            <summary>
+            Convert AutoLogin RegisterResponse into AuthenticateResponse to avoid additional trip
+            </summary>
+        </member>
+        <member name="T:ServiceStack.AsyncServiceClient">
+            Need to provide async request options
+            http://msdn.microsoft.com/en-us/library/86wf6409(VS.71).aspx
+        </member>
+        <member name="P:ServiceStack.AsyncServiceClient.GlobalRequestFilter">
+            <summary>
+            The request filter is called before any request.
+            This request filter is executed globally.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AsyncServiceClient.GlobalResponseFilter">
+            <summary>
+            The response action is called once the server response is available.
+            It will allow you to access raw response information. 
+            This response action is executed globally.
+            Note that you should NOT consume the response stream as this is handled by ServiceStack
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AsyncServiceClient.OnAuthenticationRequired">
+            <summary>
+            Called before request resend, when the initial request required authentication
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AsyncServiceClient.RequestFilter">
+            <summary>
+            The request filter is called before any request.
+            This request filter only works with the instance where it was set (not global).
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AsyncServiceClient.ResponseFilter">
+            <summary>
+            The response action is called once the server response is available.
+            It will allow you to access raw response information. 
+            Note that you should NOT consume the response stream as this is handled by ServiceStack
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AsyncServiceClient.ResultsFilter">
+            <summary>
+            The ResultsFilter is called before the Request is sent allowing you to return a cached response.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AsyncServiceClient.ResultsFilterResponse">
+            <summary>
+            The ResultsFilterResponse is called before returning the response allowing responses to be cached.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AsyncServiceClient.ExceptionFilter">
+            <summary>
+            Called with requestUri, ResponseType when server returns 304 NotModified
+            </summary>
+        </member>
+        <member name="T:ServiceStack.CrudEvent">
+            <summary>
+            Capture a CRUD Event
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.EventType">
+            <summary>
+            AutoCrudOperation, e.g. Create, Update, Patch, Delete, Save
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.Model">
+            <summary>
+            DB Model
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.ModelId">
+            <summary>
+            Primary Key of DB Model
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.EventDate">
+            <summary>
+            Date of Event (UTC)
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.RowsUpdated">
+            <summary>
+            Rows Updated if available
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.RequestType">
+            <summary>
+            Request DTO Type
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.RequestBody">
+            <summary>
+            Serialized Request Body
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.UserAuthId">
+            <summary>
+            UserAuthId if Authenticated
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.UserAuthName">
+            <summary>
+            UserName or unique User Identifier
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.RemoteIp">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.Urn">
+            <summary>
+            URN format: urn:{requesttype}:{ModelId}
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.RefId">
+            <summary>
+            Custom Reference Data with integer Primary Key
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.RefIdStr">
+            <summary>
+            Custom Reference Data with non-integer Primary Key
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CrudEvent.Meta">
+            <summary>
+            Custom Metadata to attach to this event
+            </summary>
+        </member>
+        <member name="T:ServiceStack.UploadedFile">
+            <summary>
+            DTO to capture file uploaded using [UploadTo] 
+            </summary>
+        </member>
+        <member name="T:ServiceStack.StoreFileUpload">
+            <summary>
+            Upload a file to the specified managed location
+            </summary>
+        </member>
+        <member name="T:ServiceStack.GetFileUpload">
+            <summary>
+            Download file from the specified managed location
+            </summary>
+        </member>
+        <member name="T:ServiceStack.ReplaceFileUpload">
+            <summary>
+            Overwrite file at the specified managed location
+            </summary>
+        </member>
+        <member name="T:ServiceStack.DeleteFileUpload">
+            <summary>
+            Delete file at the specified managed location
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ClientConfig.UseSystemJson">
+            <summary>
+            Use System.Text JSON for JsonApiClient
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrud(ServiceStack.MetadataOperationType)">
+            <summary>
+            Is AutoQuery or Crud Request API
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudRead(ServiceStack.MetadataOperationType)">
+            <summary>
+            Is AutoQuery Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudWrite(ServiceStack.MetadataOperationType)">
+            <summary>
+            Is Crud Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrud(ServiceStack.MetadataType)">
+            <summary>
+            Is AutoQuery or Crud Request DTO
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudRead(ServiceStack.MetadataType)">
+            <summary>
+            Is AutoQuery Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsQuery(ServiceStack.MetadataType)">
+            <summary>
+            Is AutoQuery QueryDb`1 Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsQueryInto(ServiceStack.MetadataType)">
+            <summary>
+            Is AutoQuery Into QueryDb`2 Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsAnyQuery(ServiceStack.MetadataType)">
+            <summary>
+            Is Any AutoQuery Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsQueryData(ServiceStack.MetadataType)">
+            <summary>
+            Is AutoQuery QueryData`1 Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsQueryDataInto(ServiceStack.MetadataType)">
+            <summary>
+            Is AutoQuery QueryData`2 Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsAnyQueryData(ServiceStack.MetadataType)">
+            <summary>
+            Is AutoQuery Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudWrite(ServiceStack.MetadataType)">
+            <summary>
+            Is Crud Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrud(ServiceStack.MetadataType,System.String)">
+            <summary>
+            Is AutoQuery or Crud Request DTO for Data Model 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudWrite(ServiceStack.MetadataType,System.String)">
+            <summary>
+            Is Crud Request DTO for Data Model 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudRead(ServiceStack.MetadataType,System.String)">
+            <summary>
+            Is AutoQuery Request DTO for Data Model 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsAutoQuery(ServiceStack.MetadataType,System.String)">
+            <summary>
+            Is AutoQuery Request DTO for Data Model 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudCreate(ServiceStack.MetadataType)">
+            <summary>
+            Is ICreateDb or ISaveDb Crud Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudCreate(ServiceStack.MetadataType,System.String)">
+            <summary>
+            Is ICreateDb or ISaveDb Crud Request DTO for Data Model 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudUpdate(ServiceStack.MetadataType)">
+            <summary>
+            Is IPatchDb, IUpdateDb or ISaveDb Crud Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudUpdate(ServiceStack.MetadataType,System.String)">
+            <summary>
+            Is IPatchDb, IUpdateDb or ISaveDb Crud Request DTO for Data Model
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudCreateOrUpdate(ServiceStack.MetadataType)">
+            <summary>
+            Is ICreateDb, IPatchDb, IUpdateDb or ISaveDb Crud Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudCreateOrUpdate(ServiceStack.MetadataType,System.String)">
+            <summary>
+            Is ICreateDb, IPatchDb, IUpdateDb or ISaveDb Crud Request DTO for Data Model
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudDelete(ServiceStack.MetadataType)">
+            <summary>
+            Is IDeleteDb Crud Request DTO 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.IsCrudDelete(ServiceStack.MetadataType,System.String)">
+            <summary>
+            Is IDeleteDb Crud Request DTO for Data Model 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Crud.CrudModel(ServiceStack.MetadataType)">
+            <summary>
+            Retrieve AutoQuery Data Model from AutoQuery CRUD APIs
+            </summary>
+        </member>
+        <member name="T:ServiceStack.RsaUtils">
+            <summary>
+            Useful .NET Encryption Utils from:
+            https://andrewlocatelliwoodcock.wordpress.com/2011/08/01/implementing-rsa-asymmetric-public-private-key-encryption-in-c-encrypting-under-the-public-key/
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Html.Input.FromGridLayout(System.Collections.Generic.IEnumerable{System.Collections.Generic.List{ServiceStack.InputInfo}})">
+            <summary>
+            Convert from Grid Matrix of Inputs into a flat List of Inputs with configured grid classes
+            </summary>
+            <param name="gridLayout"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ServiceStack.Html.MediaRules.MinVisibleSize(System.Collections.Generic.IEnumerable{ServiceStack.MediaRule},System.String)">
+            <summary>
+            Returns the minimum visible size when the target should be visible.
+            Returns next Size if no rule was defined for the target.
+            Returns ExtraSmall (xs) if there were no 'Show' Media Rules.
+            </summary>
+            <param name="mediaRules"></param>
+            <param name="target">Property Name</param>
+            <returns></returns>
+        </member>
+        <member name="T:ServiceStack.Html.MediaSizes">
+            <summary>
+            Size | Bootstrap | Tailwind
+            xs   | -576px    |  
+            sm   | 576px     | -640px
+            md   | 768px     | 768px
+            lg   | 992px     | 1024px
+            xl   | 1200px    | 1280px
+            xxl  | 1400px    | 1536px
+            </summary>
+        </member>
+        <member name="T:ServiceStack.JsonApiClient">
+            <summary>
+            JsonApiClient designed to work with 
+            </summary>
+        </member>
+        <member name="P:ServiceStack.JsonApiClient.Headers">
+            <summary>
+            Gets the collection of headers to be added to outgoing requests.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.JsonApiClient.BasePath">
+            <summary>
+            Relative BasePath to use for predefined routes. Set with `UseBasePath` or `WithBasePath()`
+            Always contains '/' prefix + '/' suffix, e.g. /api/
+            </summary>
+        </member>
+        <member name="P:ServiceStack.JsonApiClient.UseBasePath">
+            <summary>
+            Replace the Base reply/oneway paths to use a different prefix
+            </summary>  
+        </member>
+        <member name="T:ServiceStack.JwtClaimTypes">
+            <summary>
+            https://www.iana.org/assignments/jwt/jwt.xhtml#claims
+            </summary>
+        </member>
+        <member name="F:ServiceStack.JwtClaimTypes.Name">
+            <summary>
+            Full name
+            </summary>
+        </member>
+        <member name="F:ServiceStack.JwtClaimTypes.GivenName">
+            <summary>
+            Given name(s) or first name(s)
+            </summary>
+        </member>
+        <member name="F:ServiceStack.JwtClaimTypes.FamilyName">
+            <summary>
+            Surname(s) or last name(s)	
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Messaging.MessageQueueClientFactory.GetMessageAsync(System.String)">
+            <summary>
+            Returns the next message from queueName or null if no message
+            </summary>
+            <param name="queueName"></param>
+            <returns></returns>
+        </member>
+        <member name="P:ServiceStack.LinkInfo.Show">
+            <summary>
+            Only show if authAttributes.contains(Show) E.g. limit to role:TheRole 
+            </summary>
+        </member>
+        <member name="P:ServiceStack.LinkInfo.Hide">
+            <summary>
+            Do not show if authAttributes.contains(Hide) E.g. hide from role:TheRole 
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ApiFormat.Locale">
+            <summary>
+            If not specified uses browser's navigator.languages
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ApiFormat.AssumeUtc">
+            <summary>
+            Assume Dates are returned as UTC 
+            </summary>
+        </member>
+        <member name="T:ServiceStack.CustomPluginInfo">
+            <summary>
+            Generic template for adding metadata info about custom plugins  
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CustomPluginInfo.AccessRole">
+            <summary>
+            Which User Roles have access to this Plugins Services. See RoleNames for built-in Roles.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CustomPluginInfo.ServiceRoutes">
+            <summary>
+            What Services Types (and their user-defined routes) are enabled in this plugin
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CustomPluginInfo.Enabled">
+            <summary>
+            List of enabled features in this plugin
+            </summary>
+        </member>
+        <member name="P:ServiceStack.CustomPluginInfo.Meta">
+            <summary>
+            Additional custom metadata about this plugin
+            </summary>
+        </member>
+        <member name="T:ServiceStack.AppInfo">
+            <summary>
+            App Info and 
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.BaseUrl">
+            <summary>
+            The App's BaseUrl
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.ServiceStackVersion">
+            <summary>
+            The ServiceStack Version
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.ServiceName">
+            <summary>
+            Name of the ServiceStack Instance
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.ApiVersion">
+            <summary>
+            The Config.ApiVersion
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.ServiceDescription">
+            <summary>
+            Textual description of the ServiceStack App (shown in Home Services list)
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.ServiceIconUrl">
+            <summary>
+            Icon for this ServiceStack App (shown in Home Services list)
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.BrandUrl">
+            <summary>
+            Link to your website users can click to find out more about you
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.BrandImageUrl">
+            <summary>
+            A custom logo or image that users can click on to visit your site
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.TextColor">
+            <summary>
+            The default color of text
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.LinkColor">
+            <summary>
+            The default color of links
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.BackgroundColor">
+            <summary>
+            The default background color of each screen
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.BackgroundImageUrl">
+            <summary>
+            The default background image of each screen anchored to the bottom left
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.IconUrl">
+            <summary>
+            The default icon for each of your App's Services
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.JsTextCase">
+            <summary>
+            The configured JsConfig.TextCase
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.UseSystemJson">
+            <summary>
+            Use System.Text.Json for APIs by default 
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.EndpointRouting">
+            <summary>
+            Info on Endpoint Routing
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AppInfo.Meta">
+            <summary>
+            Custom User-Defined Attributes
+            </summary>
+        </member>
+        <member name="T:ServiceStack.UiInfo">
+            <summary>
+            App Info and 
+            </summary>
+        </member>
+        <member name="P:ServiceStack.UiInfo.BrandIcon">
+            <summary>
+            The brand icon to use with App brand name
+            </summary>
+        </member>
+        <member name="P:ServiceStack.UiInfo.HideTags">
+            <summary>
+            Hide APIs with tags 
+            </summary>
+        </member>
+        <member name="P:ServiceStack.UiInfo.Modules">
+            <summary>
+            The module paths that are loaded
+            </summary>
+        </member>
+        <member name="P:ServiceStack.UiInfo.AlwaysHideTags">
+            <summary>
+            Always hide APIs with tags (inc DebugMode) 
+            </summary>
+        </member>
+        <member name="P:ServiceStack.UiInfo.AdminLinks">
+            <summary>
+            Admin UI Links
+            </summary>
+        </member>
+        <member name="P:ServiceStack.UiInfo.Theme">
+            <summary>
+            Default Themes for all UIs
+            </summary>
+        </member>
+        <member name="P:ServiceStack.UiInfo.Locode">
+            <summary>
+            The default styles to use for rendering AutoQuery UI Forms 
+            </summary>
+        </member>
+        <member name="P:ServiceStack.UiInfo.Explorer">
+            <summary>
+            The default styles to use for rendering API Explorer Forms 
+            </summary>
+        </member>
+        <member name="P:ServiceStack.UiInfo.Admin">
+            <summary>
+            The default styles to use for rendering Admin UI 
+            </summary>
+        </member>
+        <member name="P:ServiceStack.UiInfo.DefaultFormats">
+            <summary>
+            The default formats for displaying info
+            </summary>
+        </member>
+        <member name="P:ServiceStack.UiInfo.Meta">
+            <summary>
+            Custom User-Defined Attributes
+            </summary>
+        </member>
+        <member name="P:ServiceStack.AdminUi.Css">
+            <summary>
+            Customize Admin Users FormLayout
+            </summary>
+        </member>
+        <member name="M:ServiceStack.AppMetadataUtils.ReorderProperty(ServiceStack.MetadataType,System.String,System.String,System.String)">
+            <summary>
+            Reorder where the DB Column appears in Type (changes API &amp; UI ordering)
+            </summary>
+        </member>
+        <member name="M:ServiceStack.AppMetadataUtils.ReorderProperty(ServiceStack.MetadataType,System.String,System.Int32)">
+            <summary>
+            Reorder where the DB Column appears in Type (changes API &amp; UI ordering)
+            </summary>
+        </member>
+        <member name="M:ServiceStack.AppMetadataUtils.EachProperty(ServiceStack.MetadataType,System.Func{ServiceStack.MetadataPropertyType,System.Boolean},System.Action{ServiceStack.MetadataPropertyType})">
+            <summary>
+            Apply custom lambda to each matching property
+            </summary>
+        </member>
+        <member name="M:ServiceStack.AppMetadataUtils.RemoveProperty(ServiceStack.MetadataType,System.Predicate{ServiceStack.MetadataPropertyType})">
+            <summary>
+            Omit properties that match filter from inclusion in code-gen type
+            </summary>
+        </member>
+        <member name="M:ServiceStack.AppMetadataUtils.RemoveProperty(ServiceStack.MetadataType,System.String)">
+            <summary>
+            Omit property from inclusion in code-gen type
+            </summary>
+        </member>
+        <member name="M:ServiceStack.AppMetadataUtils.CreateRef(ServiceStack.MetadataPropertyType)">
+            <summary>
+            Best effort to create RefInfo from Reflection alone
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ResponseStatusUtils.CreateResponseStatus(System.String,System.String,System.Collections.Generic.IEnumerable{ServiceStack.Validation.ValidationErrorField})">
+            <summary>
+            Creates the error response from the values provided.
+            
+            If the errorCode is empty it will use the first validation error code, 
+            if there is none it will throw an error.
+            </summary>
+            <param name="errorCode">The error code.</param>
+            <param name="errorMessage">The error message.</param>
+            <param name="validationErrors">The validation errors.</param>
+            <returns></returns>
+        </member>
+        <member name="F:ServiceStack.Serialization.DataContractSerializer.quotas">
+            <summary>
+            Default MaxStringContentLength is 8k, and throws an exception when reached
+            </summary>
+        </member>
+        <member name="T:ServiceStack.Serialization.StringMapTypeDeserializer">
+            <summary>
+            Serializer cache of delegates required to create a type from a string map (e.g. for REST urls)
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Serialization.XmlSerializerWrapper.GetNamespace(System.Type)">
+            <summary>
+            Gets the namespace from an attribute marked on the type's definition
+            </summary>
+            <param name="type"></param>
+            <returns>Namespace of type</returns>
+        </member>
+        <member name="P:ServiceStack.ServerEventsClient.AllRequestFilters">
+            <summary>
+            Apply Request Filter to all ServerEventClient Requests
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServerEventsClient.RemoveAllRegistrations">
+            <summary>
+            Removes all registered Handlers, Named Receivers and Listeners
+            </summary>
+        </member>
+        <member name="T:ServiceStack.ServiceClientBase">
+            Need to provide async request options
+            http://msdn.microsoft.com/en-us/library/86wf6409(VS.71).aspx
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.GlobalRequestFilter">
+            <summary>
+            The request filter is called before any request.
+            This request filter is executed globally.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.GlobalResponseFilter">
+            <summary>
+            The response action is called once the server response is available.
+            It will allow you to access raw response information. 
+            This response action is executed globally.
+            Note that you should NOT consume the response stream as this is handled by ServiceStack
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.Headers">
+            <summary>
+            Gets the collection of headers to be added to outgoing requests.
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.SetBaseUri(System.String)">
+            <summary>
+            Sets all baseUri properties, using the Format property for the SyncReplyBaseUri and AsyncOneWayBaseUri
+            </summary>
+            <param name="baseUri">Base URI of the service</param>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.BasePath">
+            <summary>
+            Relative BasePath to use for predefined routes. Set with `UseBasePath` or `WithBasePath()`
+            Always contains '/' prefix + '/' suffix, e.g. /api/
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.UseBasePath">
+            <summary>
+            Replace the Base reply/oneway paths to use a different prefix
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.DisableAutoCompression">
+            <summary>
+            Whether to Accept Gzip,Deflate Content-Encoding and to auto decompress responses
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.UserName">
+            <summary>
+            The user name for basic authentication
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.Password">
+            <summary>
+            The password for basic authentication
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.SetCredentials(System.String,System.String)">
+            <summary>
+            Sets the username and the password for basic authentication.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.BearerToken">
+            <summary>
+            The Authorization Bearer Token to send with this request
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.Credentials">
+            <summary>
+            Gets or sets authentication information for the request.
+            Warning: It's recommend to use <see cref="P:ServiceStack.ServiceClientBase.UserName"/> and <see cref="P:ServiceStack.ServiceClientBase.Password"/> for basic auth.
+            This property is only used for IIS level authentication.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.AlwaysSendBasicAuthHeader">
+            <summary>
+            Determines if the basic auth header should be sent with every request.
+            By default, the basic auth header is only sent when "401 Unauthorized" is returned.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.StoreCookies">
+            <summary>
+            Specifies if cookies should be stored
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.OnAuthenticationRequired">
+            <summary>
+            Called before request resend, when the initial request required authentication
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.RefreshToken">
+            <summary>
+            If a request fails with a 401 Unauthorized and a BearerToken is present the client
+            will automatically fetch a new AccessToken using this RefreshToken and retry the request
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.RefreshTokenUri">
+            <summary>
+            Send the Request to get the AccessToken with the RefreshToken at a non-default location
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.EnableAutoRefreshToken">
+            <summary>
+            Whether to enable auto refreshing token of JWT Tokens from Refresh Tokens
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.RequestFilter">
+            <summary>
+            The request filter is called before any request.
+            This request filter only works with the instance where it was set (not global).
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.ResultsFilter">
+            <summary>
+            The ResultsFilter is called before the Request is sent allowing you to return a cached response.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.ResultsFilterResponse">
+            <summary>
+            The ResultsFilterResponse is called before returning the response allowing responses to be cached.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.ExceptionFilter">
+            <summary>
+            Called with requestUri, ResponseType when server returns 304 NotModified
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientBase.ResponseFilter">
+            <summary>
+            The response action is called once the server response is available.
+            It will allow you to access raw response information. 
+            Note that you should NOT consume the response stream as this is handled by ServiceStack
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.HandleResponseException``1(System.Exception,System.Object,System.String,System.Func{System.Net.WebRequest},System.Func{System.Net.WebRequest,System.Net.WebResponse},``0@)">
+            <summary>
+            Called by Send method if an exception occurs, for instance a System.Net.WebException because the server
+            returned an HTTP error code. Override if you want to handle specific exceptions or always want to parse the
+            response to a custom ErrorResponse DTO type instead of ServiceStack's ErrorResponse class. In case ex is a
+            <c>System.Net.WebException</c>, do not use
+            <c>createWebRequest</c>/<c>getResponse</c>/<c>HandleResponse&lt;TResponse&gt;</c> to parse the response
+            because that will result in the same exception again. Use
+            <c>ThrowWebServiceException&lt;YourErrorResponseType&gt;</c> to parse the response and to throw a
+            <c>WebServiceException</c> containing the parsed DTO. Then override Send to handle that exception.
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.Get(System.Object)">
+            <summary>
+            APIs returning HttpWebResponse must be explicitly Disposed, e.g using (var res = client.Get(url)) { ... }
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.Get(System.String)">
+            <summary>
+            APIs returning HttpWebResponse must be explicitly Disposed, e.g using (var res = client.Get(url)) { ... }
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.Delete(System.Object)">
+            <summary>
+            APIs returning HttpWebResponse must be explicitly Disposed, e.g using (var res = client.Delete(url)) { ... }
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.Delete(System.String)">
+            <summary>
+            APIs returning HttpWebResponse must be explicitly Disposed, e.g using (var res = client.Delete(url)) { ... }
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.Post(System.Object)">
+            <summary>
+            APIs returning HttpWebResponse must be explicitly Disposed, e.g using (var res = client.Post(url)) { ... }
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.Put(System.Object)">
+            <summary>
+            APIs returning HttpWebResponse must be explicitly Disposed, e.g using (var res = client.Put(url)) { ... }
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.CustomMethod(System.String,System.Object)">
+            <summary>
+            APIs returning HttpWebResponse must be explicitly Disposed, e.g using (var res = client.CustomMethod(method,dto)) { ... }
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.CustomMethod(System.String,System.String,System.Object)">
+            <summary>
+            APIs returning HttpWebResponse must be explicitly Disposed, e.g using (var res = client.CustomMethod(method,dto)) { ... }
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.Head(ServiceStack.IReturn)">
+            <summary>
+            APIs returning HttpWebResponse must be explicitly Disposed, e.g using (var res = client.Head(request)) { ... }
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.Head(System.Object)">
+            <summary>
+            APIs returning HttpWebResponse must be explicitly Disposed, e.g using (var res = client.Head(request)) { ... }
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientBase.Head(System.String)">
+            <summary>
+            APIs returning HttpWebResponse must be explicitly Disposed, e.g using (var res = client.Head(request)) { ... }
+            </summary>
+        </member>
+        <member name="P:ServiceStack.ServiceClientUtils.SupportedMethods">
+            <summary>
+            HTTP Methods supported my Service Clients
+            </summary>
+        </member>
+        <member name="M:ServiceStack.ServiceClientUtils.GetHttpMethod(System.Type)">
+            <summary>
+            Get the preferred HTTP method to use with this API, if it either:
+             - Implements IVerb marker interface
+             - Inherits AutoQuery/CRUD DTO
+             - Using a single distinct user defined [Route]
+            </summary>
+            <param name="requestType"></param>
+            <returns>preferred HTTP Method or null if cannot be inferred</returns>
+        </member>
+        <member name="M:ServiceStack.StreamCompressors.Set(System.String,ServiceStack.Caching.IStreamCompressor)">
+            <summary>
+            Register a new compressor for a specific encoding (defaults: gzip, deflate, br*) .NET6+ 
+            </summary>
+        </member>
+        <member name="M:ServiceStack.StreamCompressors.SupportsEncoding(System.String)">
+            <summary>
+            Is there a compressor registered with this encoding?
+            </summary>
+        </member>
+        <member name="M:ServiceStack.StreamCompressors.Get(System.String)">
+            <summary>
+            return the registered IStreamCompressor implementation for for this  
+            </summary>
+        </member>
+        <member name="M:ServiceStack.StreamCompressors.GetRequired(System.String)">
+            <summary>
+            Assert there exists a IStreamCompressor for this encoding
+            </summary>
+        </member>
+        <member name="M:ServiceStack.StreamCompressors.Remove(System.String)">
+            <summary>
+            Remove compression support for this encoding
+            </summary>
+        </member>
+        <member name="M:ServiceStack.StreamExt.Compress(System.String,System.String,System.Text.Encoding)">
+            <summary>
+            Compresses the specified text using the default compression method: Deflate
+            </summary>
+            <param name="text">The text.</param>
+            <param name="compressionType">Type of the compression.</param>
+            <param name="encoding"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ServiceStack.StreamExt.CompressBytes(System.Byte[],System.String)">
+            <summary>
+            Compresses the specified text using the default compression method: Deflate
+            </summary>
+        </member>
+        <member name="M:ServiceStack.StreamExt.Decompress(System.Byte[],System.String)">
+            <summary>
+            Decompresses the specified gz buffer using the default compression method: Inflate
+            </summary>
+            <param name="gzBuffer">The gz buffer.</param>
+            <param name="compressionType">Type of the compression.</param>
+            <returns></returns>
+        </member>
+        <member name="M:ServiceStack.StreamExt.Decompress(System.IO.Stream,System.String)">
+            <summary>
+            Decompresses the specified gz buffer using inflate or gzip method
+            </summary>
+            <param name="gzStream">Compressed stream</param>
+            <param name="compressionType">Type of the compression. Can be "gzip" or "deflate"</param>
+            <returns>Decompressed stream</returns>
+        </member>
+        <member name="M:ServiceStack.StreamExt.DecompressBytes(System.Byte[],System.String)">
+            <summary>
+            Decompresses the specified gz buffer using the default compression method: Inflate
+            </summary>
+        </member>
+        <member name="T:ServiceStack.UrlExtensions">
+            <summary>
+            Donated by Ivan Korneliuk from his post:
+            http://korneliuk.blogspot.com/2012/08/servicestack-reusing-dtos.html
+            
+            Modified to only allow using routes matching the supplied HTTP Verb
+            </summary>
+        </member>
+        <member name="M:ServiceStack.UrlExtensions.ToUrl(ServiceStack.IReturn,System.String,System.String)">
+            <summary>
+            Generate a url from a Request DTO. Pretty URL generation require Routes to be defined using `[Route]` on the Request DTO
+            </summary>
+        </member>
+        <member name="T:ServiceStack.Validation.ValidationError">
+            <summary>
+            The exception which is thrown when a validation error occurred.
+            This validation is serialized in a extra clean and human-readable way by ServiceStack.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.Validation.ValidationError.ErrorCode">
+            <summary>
+            Returns the first error code
+            </summary>
+            <value>The error code.</value>
+        </member>
+        <member name="M:ServiceStack.Validation.ValidationError.ToXml">
+            <summary>
+            Used if we need to serialize this exception to XML
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:ServiceStack.Validation.ValidationErrorResult">
+            <summary>
+            Encapsulates a validation result.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.Validation.ValidationErrorResult.SuccessCode">
+            <summary>
+            Gets or sets the success code.
+            </summary>
+            <value>The success code.</value>
+        </member>
+        <member name="P:ServiceStack.Validation.ValidationErrorResult.ErrorCode">
+            <summary>
+            Gets or sets the error code.
+            </summary>
+            <value>The error code.</value>
+        </member>
+        <member name="P:ServiceStack.Validation.ValidationErrorResult.SuccessMessage">
+            <summary>
+            Gets or sets the success message.
+            </summary>
+            <value>The success message.</value>
+        </member>
+        <member name="P:ServiceStack.Validation.ValidationErrorResult.ErrorMessage">
+            <summary>
+            Gets or sets the error message.
+            </summary>
+            <value>The error message.</value>
+        </member>
+        <member name="P:ServiceStack.Validation.ValidationErrorResult.Errors">
+            <summary>
+            The errors generated by the validation.
+            </summary>
+        </member>
+        <member name="P:ServiceStack.Validation.ValidationErrorResult.IsValid">
+            <summary>
+            Returns True if the validation was successful (errors list is empty).
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Validation.ValidationErrorResult.#ctor">
+            <summary>
+            Constructs a new ValidationResult
+            </summary>
+        </member>
+        <member name="M:ServiceStack.Validation.ValidationErrorResult.#ctor(System.Collections.Generic.IList{ServiceStack.Validation.ValidationErrorField})">
+            <summary>
+            Constructs a new ValidationResult
+            </summary>
+            <param name="errors">A list of validation results</param>
+        </member>
+        <member name="M:ServiceStack.Validation.ValidationErrorResult.#ctor(System.Collections.Generic.IList{ServiceStack.Validation.ValidationErrorField},System.String,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:ServiceStack.Validation.ValidationErrorResult"/> class.
+            </summary>
+            <param name="errors">The errors.</param>
+            <param name="successCode">The success code.</param>
+            <param name="errorCode">The error code.</param>
+        </member>
+        <member name="M:ServiceStack.Validation.ValidationErrorResult.Merge(ServiceStack.Validation.ValidationErrorResult)">
+            <summary>
+            Merge errors from another <see cref="T:ServiceStack.Validation.ValidationErrorResult"/>
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="F:ServiceStack.WebRequestUtils.ResponseDtoSuffix">
+            <summary>
+            Naming convention for the request's Response DTO
+            </summary>
+        </member>
+        <member name="M:ServiceStack.WebRequestUtils.GetResponseStatus(System.Object)">
+            <summary>
+            Shortcut to get the ResponseStatus whether it's bare or inside a IHttpResult
+            </summary>
+            <param name="response"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
