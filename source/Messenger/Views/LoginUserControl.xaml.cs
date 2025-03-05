@@ -25,7 +25,7 @@ namespace Messenger.Views
         {
             if (DataContext is LoginViewModel viewModel)
             {
-                _viewmodel.password = txPassword.Password;
+                _viewmodel.password = pwdPassword.Password;
             }
         }
     }

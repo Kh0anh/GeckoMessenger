@@ -5,7 +5,7 @@
              xmlns:hc="https://handyorg.github.io/handycontrol"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary Source="/Themes/Generic.xaml">
             <ResourceDictionary.MergedDictionaries>
                 <hc:ThemeResources RequestedTheme="Light" AccentColor="Blue"/>
                 <hc:Theme/>
