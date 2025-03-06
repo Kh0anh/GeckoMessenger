@@ -3,99 +3,104 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:local="clr-namespace:Messenger.Views"
-             xmlns:CC="clr-namespace:Messenger.Resouces.CustomControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel VerticalAlignment="Center" 
-                HorizontalAlignment="Center" 
-                Width="300">
-        <TextBlock Text="Tạo tài khoản" 
-                    FontSize="24" 
-                    HorizontalAlignment="Center" 
-                    Margin="0,0,0,20"/>
-        <TextBlock FontSize="12" 
-                    Margin="0,0,0,5">
-             <Run Text="TÊN ĐĂNG NHẬP"/>
-             <Run Text="*" Foreground="Red" FontWeight="Bold"/>
-        </TextBlock>
-        <TextBox Margin="0,0,0,10"
-                  FontSize="16"
-                  Height="32"
-                  Opacity="0.8"/>
-        <Grid Margin="0,0,0,10">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Margin="0,0,5,0">
-                <TextBlock FontSize="12" 
-                           Margin="0,0,0,5">
-                    <Run Text="TÊN"/>
-                    <Run Text="*" Foreground="Red" FontWeight="Bold"/>
-                </TextBlock>
-                <TextBox 
-                         FontSize="16"
-                         Height="32"
-                         Opacity="0.8"/>
-            </StackPanel>
-            <StackPanel Grid.Column="1"
-                        Margin="5,0,0,0">
-                <TextBlock FontSize="12" 
-                           Margin="0,0,0,5">
-                    <Run Text="HỌ"/>
-                    <Run Text="*" Foreground="Red" FontWeight="Bold"/>
-                </TextBlock>
-                <TextBox 
-                         FontSize="16"
-                         Height="32"
-                         Opacity="0.8"/>
-            </StackPanel>
-        </Grid>
-        <TextBlock FontSize="12" 
-                   Margin="0,0,0,5">
-            <Run Text="EMAIL"/>
-            <Run Text="*" Foreground="Red" FontWeight="Bold"/>
-        </TextBlock>
-        <TextBox Margin="0,0,0,10"
-                 FontSize="16"
-                 Height="32"
-                 Opacity="0.8"/>
-        <TextBlock FontSize="12" 
-                   Margin="0,0,0,5">
-            <Run Text="SỐ ĐIỆN THOẠI"/>
-        </TextBlock>
-        <TextBox Margin="0,0,0,10"
-                 FontSize="16"
-                 Height="32"
-                 Opacity="0.8"/>
-        <TextBlock FontSize="12"
-                    Margin="0,0,0,5">
-             <Run Text="MẬT KHẨU"/>
-             <Run Text="*" Foreground="Red" FontWeight="Bold"/>
-        </TextBlock>
-        <PasswordBox Margin="0,0,0,10"
-                  Height="32"
-                  FontSize="16"
-                  Opacity="0.8"/>
-        <CC:RoundedButton Content="Tiếp tục"
-                 BorderThickness="0"
-                 FontSize="12"
-                 Height="35"
-                 Width="300"
-                 Background="#0064e0"
-                 Foreground="White"
-                 Margin="0,8,0,10"
-                 CornerRadius="20"
-                 HoverBackground="#3383e6"
-                 OnClickBackground="#66a2ec"/>
-        <TextBlock TextDecorations="None" 
-                    HorizontalAlignment="Center">
-             <Hyperlink FontWeight="Bold"
-                        TextDecorations="None"
-                        Command="{Binding DataContext.SwitchToLoginCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
-                 Đã có tài khoản?
-             </Hyperlink>
-        </TextBlock>
-    </StackPanel>
+             d:DesignHeight="450" 
+             d:DesignWidth="800">
+    <Border Background="{DynamicResource MainBackgroundBrush}"
+            Width="350">
+        <StackPanel VerticalAlignment="Center" 
+                    HorizontalAlignment="Center"
+                    Width="350">
+            <!-- Title -->
+            <TextBlock Text="Tạo tài khoản" 
+                       FontSize="24" 
+                       FontWeight="SemiBold"
+                       HorizontalAlignment="Center" 
+                       Margin="0,0,0,30"/>
+
+            <!-- Username -->
+            <TextBox Style="{StaticResource TextBoxExtend}"
+                     Margin="0,0,0,15"
+                     Height="66"
+                     FontSize="14"
+                     hc:InfoElement.Title="TÊN ĐĂNG NHẬP"
+                     hc:InfoElement.TitlePlacement="Top"
+                     hc:InfoElement.Necessary="True"/>
+
+            <!-- First name, last name -->
+            <Grid Margin="0,0,0,15">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0"
+                         Style="{StaticResource TextBoxExtend}"
+                         Margin="0,0,5,0"
+                         Height="66"
+                         FontSize="14"
+                         hc:InfoElement.Title="TÊN"
+                         hc:InfoElement.TitlePlacement="Top"
+                         hc:InfoElement.Necessary="True"/>
+                <TextBox Grid.Column="1"
+                         Style="{StaticResource TextBoxExtend}"
+                         Margin="5,0,0,0"
+                         Height="66"
+                         FontSize="14"
+                         hc:InfoElement.Title="HỌ"
+                         hc:InfoElement.TitlePlacement="Top"
+                         hc:InfoElement.Necessary="True"/>
+            </Grid>
+
+            <!-- Email -->
+            <TextBox Style="{StaticResource TextBoxExtend}"
+                     Margin="0,0,0,15"
+                     Height="66"
+                     FontSize="14"
+                     hc:InfoElement.Title="EMAIL"
+                     hc:InfoElement.TitlePlacement="Top"
+                     hc:InfoElement.Necessary="True"/>
+
+            <!-- Số điện thoại -->
+            <TextBox Style="{StaticResource TextBoxExtend}"
+                     Margin="0,0,0,15"
+                     Height="66"
+                     FontSize="14"
+                     hc:InfoElement.Title="SỐ ĐIỆN THOẠI"
+                     hc:InfoElement.TitlePlacement="Top"/>
+
+            <!-- Password -->
+            <PasswordBox Style="{StaticResource PasswordBoxExtend}"
+                         Margin="0,0,0,15"
+                         Height="66"
+                         FontSize="14"
+                         hc:InfoElement.Title="MẬT KHẨU"
+                         hc:InfoElement.TitlePlacement="Top"
+                         hc:InfoElement.Necessary="True"/>
+
+            <!-- Next -->
+            <Button Content="Tiếp tục"
+                    Style="{StaticResource ButtonPrimary}"
+                    Height="46"
+                    Width="350"
+                    Margin="0,0,0,20"
+                    Command="{Binding RegisterCommand}"
+                    hc:BorderElement.CornerRadius="20"
+                    hc:BackgroundSwitchElement.MouseHoverBackground="{DynamicResource PrimaryDarkBrush}"/>
+
+            <!-- Have an account -->
+            <TextBlock HorizontalAlignment="Center"
+                       FontSize="12"
+                       Opacity="0.8">
+                <Run Text="Đã có tài khoản? "/>
+                <Hyperlink FontWeight="Bold"
+                           Foreground="{DynamicResource PrimaryBrush}"
+                           TextDecorations="None"
+                           Command="{Binding DataContext.SwitchToLoginCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                    Đăng nhập
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+    </Border>
 </UserControl>

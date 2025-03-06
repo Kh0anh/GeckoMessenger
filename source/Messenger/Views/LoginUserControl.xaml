@@ -4,68 +4,82 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:local="clr-namespace:Messenger.Views" xmlns:CC="clr-namespace:Messenger.Resouces.CustomControls"
+             xmlns:local="clr-namespace:Messenger.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel VerticalAlignment="Center" 
-                    HorizontalAlignment="Center" 
-                    Width="300">
+             d:DesignHeight="450" 
+             d:DesignWidth="800">
+    <Border Background="{DynamicResource MainBackgroundBrush}"
+            Width="350">
+        <StackPanel VerticalAlignment="Center" 
+                HorizontalAlignment="Center"
+                Width="350">
+            <!-- Title -->
             <TextBlock Text="Chào mừng trở lại!" 
                        FontSize="24" 
+                       FontWeight="SemiBold"
                        HorizontalAlignment="Center" 
-                       Margin="0,0,0,3"/>
+                       Margin="0,0,0,5"/>
             <TextBlock Text="Rất vui khi được gặp lại bạn!" 
-                       FontSize="18"
-                       Opacity="0.8"
+                       FontSize="16"
+                       Opacity="0.7"
                        HorizontalAlignment="Center" 
-                       Margin="0,0,0,20"/>
-            <TextBlock FontSize="12" 
-                       Margin="0,0,0,5">
-                <Run Text="TÊN ĐĂNG NHẬP HOẶC EMAIL"/>
-                <Run Text="*" Foreground="Red" FontWeight="Bold"/>
-            </TextBlock>
-        <TextBox Margin="0,0,0,10"
-                     FontSize="16"
-                     Height="32"
-                     Opacity="0.8"
+                       Margin="0,0,0,30"/>
+
+            <!-- Username or email -->
+            <TextBox Style="{StaticResource TextBoxExtend}"
+                     Margin="0,0,0,15"
+                     FontSize="14"
+                     Height="66"
+                     hc:InfoElement.Title="TÊN ĐĂNG NHẬP HOẶC EMAIL"
+                     hc:InfoElement.TitlePlacement="Top"
+                     hc:InfoElement.Necessary="True"
                      Text="{Binding username, Mode=OneWayToSource}"/>
-        <TextBlock FontSize="12"
-                       Margin="0,0,0,5">
-                <Run Text="MẬT KHẨU"/>
-                <Run Text="*" Foreground="Red" FontWeight="Bold"/>
-            </TextBlock>
-            <PasswordBox Margin="0,0,0,5"
-                     Height="32"
-                     FontSize="16"
-                     Opacity="0.8"
-                     x:Name="pwdPassword"
-                     PasswordChanged="PasswordBox_PasswordChanged"/>
-            <TextBlock HorizontalAlignment="Left">
-                <Hyperlink FontWeight="Thin"
-                           TextDecorations="None">
+
+            <!-- Password -->
+            <PasswordBox Style="{StaticResource PasswordBoxExtend}"
+                         Margin="0,0,0,5"
+                         FontSize="14"
+                         Height="66"
+                         hc:InfoElement.Title="MẬT KHẨU"
+                         hc:InfoElement.TitlePlacement="Top"
+                         hc:InfoElement.Necessary="True"
+                         x:Name="pwdPassword"
+                         PasswordChanged="PasswordBox_PasswordChanged"/>
+
+            <!-- Forgot password -->
+            <TextBlock HorizontalAlignment="Left"
+                       Margin="0,0,0,20">
+                <Hyperlink FontSize="12"
+                           Foreground="{DynamicResource PrimaryBrush}"
+                           TextDecorations="None"
+                           Command="{Binding ForgotPasswordCommand}">
                     Quên mật khẩu?
                 </Hyperlink>
             </TextBlock>
-        <CC:RoundedButton Content="Đăng nhập"
-                    BorderThickness="0"
-                    FontSize="12"
-                    Height="35"
-                    Margin="0,8,0,10"
-                    Command="{Binding LoginCommand}" 
-                    Width="300"
-                    Background="#0064e0"
-                    Foreground="White"
-                    CornerRadius="20"
-                    HoverBackground="#3383e6"
-                    OnClickBackground="#66a2ec"/>
-        <TextBlock TextDecorations="None" 
-                       HorizontalAlignment="Center">
-                Chưa có tài khoản?
+
+            <!-- Login -->
+            <Button Content="Đăng nhập"
+                    Style="{StaticResource ButtonPrimary}"
+                    Height="46"
+                    Width="350"
+                    FontSize="14"
+                    Margin="0,0,0,20"
+                    Command="{Binding LoginCommand}"
+                    hc:BorderElement.CornerRadius="20"
+                    hc:BackgroundSwitchElement.MouseHoverBackground="{DynamicResource PrimaryDarkBrush}"/>
+
+            <!-- Dont have account -->
+            <TextBlock HorizontalAlignment="Center"
+                       FontSize="12"
+                       Opacity="0.8">
+                <Run Text="Chưa có tài khoản? "/>
                 <Hyperlink FontWeight="Bold"
+                           Foreground="{DynamicResource PrimaryBrush}"
                            TextDecorations="None"
                            Command="{Binding DataContext.SwitchToRegisterCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                     Đăng ký
                 </Hyperlink>
             </TextBlock>
         </StackPanel>
+    </Border>
 </UserControl>

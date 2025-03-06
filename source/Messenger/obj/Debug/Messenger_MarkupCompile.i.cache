@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\GeckoMessenger\source\Messenger\App.xaml
-41333962602
+6-765721040
 
-1632122495
+2132589401
 371940476093
-MainWindow.xaml;Views\HomeUserControl.xaml;Views\LoginUserControl.xaml;Views\RegisterUserControl.xaml;
+MainWindow.xaml;Views\HomeUserControl.xaml;Views\Inbox\ChatUserControl.xaml;Views\Inbox\InboxUserControl.xaml;Views\LoginUserControl.xaml;Views\RegisterUserControl.xaml;
 
 True
 

@@ -27,7 +27,7 @@ namespace Messenger.ViewModels
             if (username == "test" && password == "test")
             {
                 Console.WriteLine("login");
-                _mainViewModel.NavigationTo(new HomeUserControl());
+                _mainViewModel.NavigationTo(new HomeUserControl(new HomeViewModel()));
             }
         }
     }

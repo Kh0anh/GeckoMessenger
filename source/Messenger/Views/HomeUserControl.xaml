@@ -3,35 +3,30 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:local="clr-namespace:Messenger.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+             d:DesignHeight="450" 
+             d:DesignWidth="800">
+    <Grid Background="{DynamicResource RegionBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60" />
-            <ColumnDefinition Width="40*" />
-            <ColumnDefinition Width="100*" />
+            <ColumnDefinition Width="60"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0"
-              Background="Gray"
-              Opacity="0.15">
-        </Grid>
-        <Grid Grid.Column="1"
-              Background="Gray"
-              Opacity="0.05">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
-                <TextBox Margin="0,0,0,10"
-                         FontSize="16"
-                         Height="32"
-                         />
-            </Grid>
-        </Grid>
-        <Grid Grid.Column="2"
-              Opacity="0">
-        </Grid>
+
+        <!-- Sidebar -->
+        <Border Grid.Column="0"
+                Background="{DynamicResource MainContentBackgroundBrush}"
+                BorderBrush="{DynamicResource BorderBrush}"
+                BorderThickness="0,0,1,0">
+            <StackPanel VerticalAlignment="Stretch">
+                <Border Width="50"
+                        Height="50"
+                        CornerRadius="50"
+                        Background="Gray"/>
+            </StackPanel>
+        </Border>
+        <ContentControl Content="{Binding CurrentView}" 
+                        Grid.Column="1"/>
     </Grid>
 </UserControl>

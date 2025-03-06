@@ -1,14 +1,14 @@
 ﻿using Messenger.ViewModels;
 using System.Windows.Controls;
 
-namespace Messenger.Views
+namespace Messenger.Views.Inbox
 {
     /// <summary>
-    /// Interaction logic for HomeUserControl.xaml
+    /// Interaction logic for Inbox.xaml
     /// </summary>
-    public partial class HomeUserControl : UserControl
+    public partial class InboxUserControl : UserControl
     {
-        public HomeUserControl(HomeViewModel viewmodel)
+        public InboxUserControl(InboxViewModel viewmodel)
         {
             InitializeComponent();
             DataContext = viewmodel;
