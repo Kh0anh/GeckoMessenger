@@ -36,10 +36,62 @@
                       hc:BorderElement.CornerRadius="5"/>
 
                 <!-- Inbox -->
-                
+                <ScrollViewer Grid.Row="1" 
+                              VerticalScrollBarVisibility="Auto"
+                              HorizontalAlignment="Stretch">
+                    <ListBox ItemsSource="{Binding Conversations}"
+                             SelectedItem="{Binding SelectedConversation}"
+                             Background="Transparent"
+                             BorderThickness="0"
+                             HorizontalAlignment="Stretch"
+                             HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Border Padding="5" 
+                                        Margin="2"
+                                        Background="{DynamicResource RegionBrush}"
+                                        CornerRadius="5"
+                                        HorizontalAlignment="Stretch">
+                                    <StackPanel Orientation="Horizontal">
+                                        <hc:Gravatar Margin="0,0,10,0"
+                                                     Width="40"
+                                                     Height="40"
+                                                     Style="{StaticResource GravatarCircle}"/>
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding ConversationName}" 
+                                                       FontWeight="Bold" 
+                                                       FontSize="14"/>
+                                            <TextBlock Text="{Binding LatestMessageContent}"  
+                                                       FontSize="12"/>
+                                            <TextBlock Text="{Binding LatestMessage, StringFormat=\{0:dd/MM/yyyy HH:mm\}}"
+                                                       FontSize="12" 
+                                                       Foreground="{DynamicResource SecondaryTextBrush}"/>
+                                        </StackPanel>
+                                    </StackPanel>
+                                </Border>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                        <ListBox.ItemContainerStyle>
+                            <Style TargetType="ListBoxItem">
+                                <Style.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                    </Trigger>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="{DynamicResource InfoBrush}"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListBox.ItemContainerStyle>
+                    </ListBox>
+                </ScrollViewer>
             </Grid>
         </Border>
-        <ContentControl Content="{Binding CurrentChat}"
-                        Grid.Column="1"/>
+
+        <!-- Chat Area -->
+        <ContentControl Grid.Column="1" 
+                        Content="{Binding CurrentChat}"/>
     </Grid>
 </UserControl>

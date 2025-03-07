@@ -47,9 +47,9 @@ namespace Messenger.ViewModels
             {
                 var newMessage = new Message
                 {
-                    Text = NewMessageText,
+                    Content = NewMessageText,
                     Timestamp = DateTime.Now,
-                    IsSentByMe = true
+                    IsSentByMe = false,
                 };
                 Messages.Add(newMessage);
                 NewMessageText = string.Empty;
@@ -58,8 +58,9 @@ namespace Messenger.ViewModels
     }
     public class Message
     {
-        public string Text { get; set; }
-        public DateTime Timestamp { get; set; }
+        public int MessageID { get; set; }
         public bool IsSentByMe { get; set; }
+        public string Content { get; set; }
+        public DateTime Timestamp { set; get; }
     }
 }

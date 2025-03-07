@@ -20,10 +20,12 @@
                 BorderBrush="{DynamicResource BorderBrush}"
                 BorderThickness="0,0,1,0">
             <StackPanel VerticalAlignment="Stretch">
-                <Border Width="50"
-                        Height="50"
-                        CornerRadius="50"
-                        Background="Gray"/>
+                <hc:Gravatar Id="{Binding UserAvatar}" 
+                             Style="{StaticResource GravatarCircle}"
+                             Width="50" 
+                             Height="50"
+                             Margin="5"
+                             Grid.Column="0"/>
             </StackPanel>
         </Border>
         <ContentControl Content="{Binding CurrentView}" 
