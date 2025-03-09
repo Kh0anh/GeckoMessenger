@@ -13,5 +13,15 @@ namespace Messenger.Views.Inbox
             InitializeComponent();
             DataContext = viewmodel;
         }
+
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            if (chatContextOpen.ContextMenu != null)
+            {
+                chatContextOpen.ContextMenu.IsOpen = true;
+                chatContextOpen.ContextMenu.PlacementTarget = chatContextOpen;
+                chatContextOpen.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+            }
+        }
     }
 }

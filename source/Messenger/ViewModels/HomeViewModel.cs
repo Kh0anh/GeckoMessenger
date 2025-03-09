@@ -1,4 +1,5 @@
-﻿using System.Windows.Input;
+﻿using Messenger.Views.Settings;
+using System.Windows.Input;
 
 namespace Messenger.ViewModels
 {
@@ -17,11 +18,13 @@ namespace Messenger.ViewModels
 
         public ICommand SwitchToInboxCommand { get; }
         public ICommand SwitchToContactCommand { get; }
+        public ICommand OpenSettingsCommand { get; }
 
         public HomeViewModel()
         {
             SwitchToInboxCommand = new RelayCommand(_ => SwitchToInbox());
             SwitchToContactCommand = new RelayCommand(_ => SwitchToContact());
+            OpenSettingsCommand = new RelayCommand(_ => OpenSettings());
 
             SwitchToInbox();
         }
@@ -37,12 +40,18 @@ namespace Messenger.ViewModels
 
         private void SwitchToContact()
         {
-            //NavigationTo(new Views.Inbox.ChatUserControl());
+            NavigationTo(new Views.Contact.ContactUserControl(new ContactViewModel()));
         }
 
-        public void SwitchToInbox()
+        private void SwitchToInbox()
         {
             NavigationTo(new Views.Inbox.InboxUserControl(new InboxViewModel()));
+        }
+
+        private void OpenSettings()
+        {
+            MainSettingsView settingsView = new MainSettingsView(new MainSettingsViewModel());
+            settingsView.ShowDialog();
         }
     }
 }

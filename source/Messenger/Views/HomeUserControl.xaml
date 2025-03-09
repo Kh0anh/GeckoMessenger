@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
              xmlns:local="clr-namespace:Messenger.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" 
@@ -19,14 +20,123 @@
                 Background="{DynamicResource MainContentBackgroundBrush}"
                 BorderBrush="{DynamicResource BorderBrush}"
                 BorderThickness="0,0,1,0">
-            <StackPanel VerticalAlignment="Stretch">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="60"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <hc:Gravatar Id="{Binding UserAvatar}" 
                              Style="{StaticResource GravatarCircle}"
                              Width="50" 
                              Height="50"
                              Margin="5"
-                             Grid.Column="0"/>
-            </StackPanel>
+                             Grid.Row="0">
+                </hc:Gravatar>
+                <Button Grid.Row="0"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Width="50"
+                        Height="50"
+                        x:Name="UserInfoOpen"
+                        Click="UserInfo_Click">
+                    <Button.ContextMenu>
+                        <ContextMenu Placement="Right"
+                                     HorizontalOffset="50"
+                                     VerticalOffset="-50">
+                            <MenuItem Header="JeeryNguyen"
+                                      Foreground="{DynamicResource Brush}"
+                                      FontWeight="Bold"
+                                      FontSize="14"
+                                      IsEnabled="False"/>
+                            <MenuItem Header="Xem hồ sơ"
+                                      Foreground="{DynamicResource Brush}"
+                                      FontWeight="Bold" 
+                                      FontSize="12"
+                                      Command="">
+                                <MenuItem.Icon>
+                                    <materialIcons:MaterialIcon Kind="OpenInNew" Width="16" Height="16"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Đăng xuất" 
+                                      Foreground="{DynamicResource DangerBrush}"
+                                      FontWeight="Bold" 
+                                      FontSize="12"
+                                      Command="">
+                                <MenuItem.Icon>
+                                    <materialIcons:MaterialIcon Kind="Logout" Width="16" Height="16"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+                <Button Width="50"
+                        Height="50"
+                        Margin="0,20,0,0"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Grid.Row="1"
+                        Command="{Binding SwitchToInboxCommand}">
+                    <materialIcons:MaterialIcon Kind="MessageText"
+                                                Width="30"
+                                                Height="30"/>
+                </Button>
+                <Button Width="50"
+                        Height="50"
+                        Margin="0,5,0,0"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Grid.Row="2"
+                        Command="{Binding SwitchToContactCommand}">
+                    <materialIcons:MaterialIcon Kind="Contacts"
+                            Width="30"
+                            Height="30"/>
+                </Button>
+                <Button Width="50"
+                        Height="50"
+                        Margin="0,5,0,5"
+                        Background="Transparent"
+                        BorderThickness="0"
+                        Grid.Row="3"
+                        VerticalAlignment="Bottom"
+                        x:Name="btSetting"
+                        Click="Settings_Click">
+                    <materialIcons:MaterialIcon Kind="Settings"
+                                                Width="30"
+                                                Height="30"/>
+                    <Button.ContextMenu>
+                        <ContextMenu Placement="Right"
+                                     HorizontalOffset="50"
+                                     VerticalOffset="-120">
+                            <MenuItem Header="GeckoMessenger v0.1"
+                                      Foreground="{DynamicResource Brush}"
+                                      FontWeight="Bold"
+                                      FontSize="14"
+                                      IsEnabled="False"/>
+                            <MenuItem Header="Cài đặt"
+                                      Foreground="{DynamicResource Brush}"
+                                      FontWeight="Bold" 
+                                      FontSize="12"
+                                      Command="{Binding OpenSettingsCommand}">
+                                <MenuItem.Icon>
+                                    <materialIcons:MaterialIcon Kind="Edit" Width="16" Height="16"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Click="Close_Click"
+                                      Header="Thoát ứng dụng" 
+                                      Foreground="{DynamicResource DangerBrush}"
+                                      FontWeight="Bold" 
+                                      FontSize="12"
+                                      Command="">
+                                <MenuItem.Icon>
+                                    <materialIcons:MaterialIcon Kind="Close" Width="16" Height="16"/>
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+            </Grid>
         </Border>
         <ContentControl Content="{Binding CurrentView}" 
                         Grid.Column="1"/>

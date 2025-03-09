@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:local="clr-namespace:Messenger.Views.Inbox" 
-             xmlns:material1="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
+             xmlns:local="clr-namespace:Messenger.Views.Inbox"
+             xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -20,8 +20,9 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="80"/>
-                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="60"/>
             </Grid.ColumnDefinitions>
             <hc:Gravatar Id="{Binding OtherUserAvatar}" 
                          Style="{StaticResource GravatarCircle}"
@@ -31,27 +32,68 @@
                          Margin="5"
                          Grid.Column="0"/>
             <TextBlock Text="{Binding OtherUserFullName}" 
-                       VerticalAlignment="Center" 
+                       VerticalAlignment="Center"
+                       FontWeight="Bold"
                        FontSize="16"
                        Grid.Column="1"/>
-            <Button Content="Gọi"
-                    hc:IconElement.Geometry="{StaticResource ErrorGeometry}"
-                    Command="{Binding VoiceCallCommand}" 
-                    Margin="5,0,0,0"
+            <Button Command="{Binding VoiceCallCommand}"
                     BorderBrush="Transparent"
                     Background="Transparent"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Grid.Column="2"/>
-            <Button Content="Video"
-                    hc:IconElement.Geometry="{StaticResource ErrorGeometry}"
-                    Command="{Binding VideoCallCommand}" 
-                    Margin="5,0,0,0"
+                    Grid.Column="2"
+                    Width="40"
+                    Height="40">
+                <materialIcons:MaterialIcon Kind="Call"
+                                            Width="24"
+                                            Height="24"/>
+            </Button>
+            <Button Command="{Binding VideoCallCommand}"
                     BorderBrush="Transparent"
                     Background="Transparent"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center"
-                    Grid.Column="3"/>
+                    Grid.Column="3"
+                    Width="40"
+                    Height="40">
+                <materialIcons:MaterialIcon Kind="Camera"
+                            Width="24"
+                            Height="24"/>
+            </Button>
+            <Button x:Name="chatContextOpen"
+                    Click="Button_Click"
+                    BorderBrush="Transparent"
+                    Background="Transparent"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Grid.Column="4"
+                    Width="40"
+                    Height="40">
+                <materialIcons:MaterialIcon Kind="DotsVertical"
+                                            Width="24"
+                                            Height="24"/>
+                <Button.ContextMenu>
+                    <ContextMenu Placement="Left"
+                                 HorizontalOffset="0"
+                                 VerticalOffset="0">
+                        <MenuItem Header="Chặn"
+                                  Foreground="{DynamicResource DangerBrush}"
+                                  FontWeight="Bold" 
+                                  FontSize="12"
+                                  Command="">
+                            <MenuItem.Icon>
+                                <materialIcons:MaterialIcon Kind="Block" Width="16" Height="16"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Tìm kiếm" 
+                                  Command="">
+                            <MenuItem.Icon>
+                                <materialIcons:MaterialIcon Kind="Search" Width="16" Height="16"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </Button.ContextMenu>
+            </Button>
         </Grid>
 
         <!-- View messages -->
@@ -129,7 +171,11 @@
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0"
                      Margin="5"
-                     Height="36"
+                     MinHeight="36"
+                     MaxHeight="120"
+                     TextWrapping="Wrap"
+                     AcceptsReturn="True"
+                     VerticalScrollBarVisibility="Auto"
                      Style="{DynamicResource TextBoxExtend}"
                      Text="{Binding NewMessageText, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.InputBindings>
@@ -141,16 +187,20 @@
                     Height="36"
                     Margin="0,0,5,0"
                     BorderBrush="Transparent"
-                    hc:IconElement.Geometry="{StaticResource AddGeometry}"
-                    Command="{Binding AttachFileCommand}"/>
+                    Command="{Binding AttachFileCommand}">
+                <materialIcons:MaterialIcon Kind="LinkVariantPlus"
+                                            Width="24"
+                                            Height="24"/>
+            </Button>
             <Button Grid.Column="2"
                     Width="50"
                     Height="36"
                     Margin="0,0,5,0"
                     BorderBrush="Transparent"
-                    Command="{Binding SendMessageCommand}"
-                    >
-                
+                    Command="{Binding SendMessageCommand}">
+                <materialIcons:MaterialIcon Kind="ImagePlus"
+                            Width="24"
+                            Height="24"/>
             </Button>
             <Button Grid.Column="3"
                     Width="50"
@@ -158,6 +208,9 @@
                     Margin="0,0,5,0"
                     BorderBrush="Transparent"
                     Command="{Binding SendMessageCommand}">
+                <materialIcons:MaterialIcon Kind="Send"
+                                            Width="24"
+                                            Height="24"/>
             </Button>
         </Grid>
     </Grid>

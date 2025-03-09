@@ -1,0 +1,98 @@
+﻿<UserControl x:Class="Messenger.Views.Settings.SettingsUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:hc="https://handyorg.github.io/handycontrol"
+             xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
+             xmlns:local="clr-namespace:Messenger.Views.Settings"
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="140"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Background="{DynamicResource MainContentBackgroundBrush}"
+              Margin="0,0,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <hc:Gravatar Width="100"
+                 Height="100"
+                 Style="{StaticResource GravatarCircle}"
+                 Grid.Column="0"/>
+            <StackPanel Grid.Column="1"
+                VerticalAlignment="Center">
+                <TextBlock 
+                   FontSize="22"
+                   FontWeight="Bold"
+                   Text="Họ Và Tên"/>
+                <TextBlock FontSize="14"
+                   FontWeight="Bold"
+                   Foreground="{DynamicResource SecondaryTextBrush}"
+                   Text="@kh0anh"/>
+            </StackPanel>
+        </Grid>
+        <Grid Background="{DynamicResource MainContentBackgroundBrush}"
+              Margin="0,5,0,0"
+              Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource InfoBrush}"/>
+                            <Setter Property="BorderThickness" Value="0"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Resources>
+            <Button HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Left"
+                    Background="Transparent"
+                    Margin="0,5,0,0"
+                    Height="42"
+                    BorderThickness="0"
+                    Grid.Row="0"
+                    Command="{Binding DataContext.SwitchToEditProfileCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                <StackPanel Orientation="Horizontal">
+                    <materialIcons:MaterialIcon Kind="AccountBoxEditOutline" 
+                                                Width="28" 
+                                                Height="28" 
+                                                Margin="0,0,5,0"/>
+                    <TextBlock Text="Chỉnh sửa trang cá nhân" 
+                               VerticalAlignment="Center"
+                               FontWeight="Medium"
+                               FontSize="14"/>
+                </StackPanel>
+            </Button>
+            <Button HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Left"
+                    Background="Transparent"
+                    Margin="0,5,0,0"
+                    Height="42"
+                    BorderThickness="0"
+                    Grid.Row="1"
+                    Command="{Binding DataContext.SwitchToEditPrivacyCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                <StackPanel Orientation="Horizontal">
+                    <materialIcons:MaterialIcon Kind="Lock" 
+                                                Width="28" 
+                                                Height="28" 
+                                                Margin="0,0,5,0"/>
+                    <TextBlock Text="Chỉnh sửa quyền riêng tư" 
+                               VerticalAlignment="Center"
+                               FontSize="14"
+                               FontWeight="Medium"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+    </Grid>
+</UserControl>

@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using Messenger.ViewModels;
+using System.Windows.Controls;
 
 namespace Messenger.Views.Contact
 {
@@ -7,9 +8,10 @@ namespace Messenger.Views.Contact
     /// </summary>
     public partial class ContactUserControl : UserControl
     {
-        public ContactUserControl()
+        public ContactUserControl(ContactViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
     }
 }

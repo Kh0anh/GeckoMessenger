@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:local="clr-namespace:Messenger.Views.Inbox"
+             xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -52,12 +53,17 @@
                                         Background="{DynamicResource RegionBrush}"
                                         CornerRadius="5"
                                         HorizontalAlignment="Stretch">
-                                    <StackPanel Orientation="Horizontal">
-                                        <hc:Gravatar Margin="0,0,10,0"
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <hc:Gravatar Margin="0,0,5,0"
                                                      Width="40"
                                                      Height="40"
-                                                     Style="{StaticResource GravatarCircle}"/>
-                                        <StackPanel>
+                                                     Style="{StaticResource GravatarCircle}"
+                                                     Grid.Column="0"/>
+                                        <StackPanel Grid.Column="1">
                                             <TextBlock Text="{Binding ConversationName}" 
                                                        FontWeight="Bold" 
                                                        FontSize="14"/>
@@ -67,7 +73,25 @@
                                                        FontSize="12" 
                                                        Foreground="{DynamicResource SecondaryTextBrush}"/>
                                         </StackPanel>
-                                    </StackPanel>
+                                        <Button Grid.Column="2"
+                                                HorizontalAlignment="Right"
+                                                VerticalAlignment="Top"
+                                                Background="Transparent"
+                                                BorderThickness="0"
+                                                Width="24"
+                                                Height="32">
+                                            <materialIcons:MaterialIcon Kind="DotsVertical"
+                                                                        Width="18"
+                                                                        Height="18"/>
+                                            <Button.ContextMenu>
+                                                <ContextMenu Placement="Right">
+                                                    <MenuItem Header="Xoá">
+                                                        
+                                                    </MenuItem>
+                                                </ContextMenu>
+                                            </Button.ContextMenu>
+                                        </Button>
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
