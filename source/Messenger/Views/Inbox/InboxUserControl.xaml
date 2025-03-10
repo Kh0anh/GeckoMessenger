@@ -10,7 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
 
@@ -48,19 +48,19 @@
                              HorizontalContentAlignment="Stretch">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border Padding="5" 
+                                <Border Padding="10" 
                                         Margin="2"
                                         Background="{DynamicResource RegionBrush}"
                                         CornerRadius="5"
                                         HorizontalAlignment="Stretch">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="50"/>
+                                            <ColumnDefinition Width="60"/>
                                             <ColumnDefinition Width="*"/>
                                         </Grid.ColumnDefinitions>
                                         <hc:Gravatar Margin="0,0,5,0"
-                                                     Width="40"
-                                                     Height="40"
+                                                     Width="50"
+                                                     Height="50"
                                                      Style="{StaticResource GravatarCircle}"
                                                      Grid.Column="0"/>
                                         <StackPanel Grid.Column="1">
@@ -85,7 +85,9 @@
                                                                         Height="18"/>
                                             <Button.ContextMenu>
                                                 <ContextMenu Placement="Right">
-                                                    <MenuItem Header="Xoá">
+                                                    <MenuItem Header="Xoá"
+                                                              FontSize="12"
+                                                              FontWeight="Medium">
                                                         
                                                     </MenuItem>
                                                 </ContextMenu>
@@ -99,11 +101,14 @@
                             <Style TargetType="ListBoxItem">
                                 <Style.Triggers>
                                     <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
+                                        <Setter Property="Background" 
+                                                Value="{DynamicResource SecondaryRegionBrush}"/>
                                         <Setter Property="BorderThickness" Value="0"/>
                                     </Trigger>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="{DynamicResource InfoBrush}"/>
+                                    <Trigger Property="IsMouseOver" 
+                                             Value="True">
+                                        <Setter Property="Background" 
+                                                Value="{DynamicResource SecondaryRegionBrush}"/>
                                         <Setter Property="BorderThickness" Value="0"/>
                                     </Trigger>
                                 </Style.Triggers>
