@@ -1,94 +1,128 @@
 ﻿<UserControl x:Class="Messenger.Views.Inbox.InboxUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:local="clr-namespace:Messenger.Views.Inbox"
              xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
 
         <!-- Inbox -->
         <Border Grid.Column="0"
-                Background="{DynamicResource SecondaryRegionBrush}"
+                Background="{DynamicResource MainBackgroundBrush}"
                 BorderBrush="{DynamicResource BorderBrush}"
                 BorderThickness="0,0,1,0">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
                 <!-- Searchbar -->
                 <hc:SearchBar Grid.Row="0"
-                      Style="{StaticResource SearchBarPlus}"
-                      hc:InfoElement.Placeholder="Tìm kiếm"
-                      Height="40"
-                      Margin="10,10,10,5"
-                      FontSize="14"
-                      Background="{DynamicResource MainContentBackgroundBrush}"
-                      BorderBrush="{DynamicResource BorderBrush}"
-                      hc:BorderElement.CornerRadius="5"/>
+                              Style="{StaticResource SearchBarPlus}"
+                              hc:InfoElement.Placeholder="Tìm kiếm"
+                              Height="40"
+                              Margin="10,10,10,5"
+                              FontSize="14"
+                              Background="{DynamicResource MainBackgroundBrush}"
+                              BorderBrush="{DynamicResource BorderBrush}"
+                              hc:BorderElement.CornerRadius="5" />
 
                 <!-- Inbox -->
-                <ScrollViewer Grid.Row="1" 
+                <ScrollViewer Grid.Row="1"
                               VerticalScrollBarVisibility="Auto"
                               HorizontalAlignment="Stretch">
                     <ListBox ItemsSource="{Binding Conversations}"
                              SelectedItem="{Binding SelectedConversation}"
+                             Style="{DynamicResource ListBoxBaseStyle}"
                              Background="Transparent"
                              BorderThickness="0"
                              HorizontalAlignment="Stretch"
                              HorizontalContentAlignment="Stretch">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <Border Padding="10" 
+                                <Border Padding="10"
                                         Margin="2"
-                                        Background="{DynamicResource RegionBrush}"
+                                        Background="{DynamicResource MainContentBackgroundBrush}"
                                         CornerRadius="5"
                                         HorizontalAlignment="Stretch">
                                     <Grid>
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="60"/>
-                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="60" />
+                                            <ColumnDefinition Width="*" />
                                         </Grid.ColumnDefinitions>
                                         <hc:Gravatar Margin="0,0,5,0"
                                                      Width="50"
                                                      Height="50"
                                                      Style="{StaticResource GravatarCircle}"
-                                                     Grid.Column="0"/>
+                                                     Grid.Column="0" />
                                         <StackPanel Grid.Column="1">
-                                            <TextBlock Text="{Binding ConversationName}" 
-                                                       FontWeight="Bold" 
-                                                       FontSize="14"/>
-                                            <TextBlock Text="{Binding LatestMessageContent}"  
-                                                       FontSize="12"/>
-                                            <TextBlock Text="{Binding LatestMessage, StringFormat=\{0:dd/MM/yyyy HH:mm\}}"
-                                                       FontSize="12" 
-                                                       Foreground="{DynamicResource SecondaryTextBrush}"/>
+                                            <TextBlock Text="{Binding ConversationName}"
+                                                       Foreground="{DynamicResource PrimaryTextBrush }"
+                                                       FontWeight="Medium"
+                                                       FontSize="14" />
+                                            <TextBlock Text="{Binding LatestMessageContent}"
+                                                       Foreground="{DynamicResource PrimaryTextBrush }"
+                                                       FontSize="12" />
+                                            <TextBlock
+                                                Text="{Binding LatestMessage, StringFormat=\{0:dd/MM/yyyy HH:mm\}}"
+                                                FontSize="12"
+                                                Foreground="{DynamicResource SecondaryTextBrush }" />
                                         </StackPanel>
-                                        <Button Grid.Column="2"
+                                        <Button Grid.Column="1"
                                                 HorizontalAlignment="Right"
                                                 VerticalAlignment="Top"
                                                 Background="Transparent"
                                                 BorderThickness="0"
                                                 Width="24"
-                                                Height="32">
+                                                Height="32"
+                                                Margin="0,-10,-10,0"
+                                                x:Name="btConversationContext"
+                                                Click="ConversationContext_OnClick">
                                             <materialIcons:MaterialIcon Kind="DotsVertical"
                                                                         Width="18"
-                                                                        Height="18"/>
+                                                                        Height="18" />
                                             <Button.ContextMenu>
-                                                <ContextMenu Placement="Right">
-                                                    <MenuItem Header="Xoá"
-                                                              FontSize="12"
-                                                              FontWeight="Medium">
-                                                        
+                                                <ContextMenu Placement="Right"
+                                                             VerticalOffset="-40"
+                                                             HorizontalOffset="20">
+                                                    <MenuItem Header="Đánh dấu đã xem"
+                                                              Foreground="{DynamicResource PrimaryBrush}"
+                                                              FontWeight="Medium"
+                                                              FontSize="12">
+                                                        <MenuItem.Icon>
+                                                            <materialIcons:MaterialIcon Kind="Tick"
+                                                                Width="16"
+                                                                Height="16" />
+                                                        </MenuItem.Icon>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Chặn người dùng"
+                                                              Foreground="{DynamicResource DangerBrush}"
+                                                              FontWeight="Medium"
+                                                              FontSize="12">
+                                                        <MenuItem.Icon>
+                                                            <materialIcons:MaterialIcon Kind="Block"
+                                                                Width="16"
+                                                                Height="16" />
+                                                        </MenuItem.Icon>
+                                                    </MenuItem>
+                                                    <MenuItem Header="Xoá cuộc trò chuyện"
+                                                              Foreground="{DynamicResource DangerBrush}"
+                                                              FontWeight="Medium"
+                                                              FontSize="12">
+                                                        <MenuItem.Icon>
+                                                            <materialIcons:MaterialIcon Kind="DeleteEmpty"
+                                                                Width="16"
+                                                                Height="16" />
+                                                        </MenuItem.Icon>
                                                     </MenuItem>
                                                 </ContextMenu>
                                             </Button.ContextMenu>
@@ -98,20 +132,34 @@
                             </DataTemplate>
                         </ListBox.ItemTemplate>
                         <ListBox.ItemContainerStyle>
-                            <Style TargetType="ListBoxItem">
-                                <Style.Triggers>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" 
-                                                Value="{DynamicResource SecondaryRegionBrush}"/>
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                    </Trigger>
-                                    <Trigger Property="IsMouseOver" 
-                                             Value="True">
-                                        <Setter Property="Background" 
-                                                Value="{DynamicResource SecondaryRegionBrush}"/>
-                                        <Setter Property="BorderThickness" Value="0"/>
-                                    </Trigger>
-                                </Style.Triggers>
+                            <Style TargetType="ListBoxItem"
+                                   BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Border x:Name="Bd"
+                                                    Background="{TemplateBinding Background}"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    BorderThickness="0"
+                                                    CornerRadius="5">
+                                                <ContentPresenter VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsSelected" Value="True">
+                                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource SecondaryRegionBrush}"/>
+                                                    <Setter TargetName="Bd" Property="BorderBrush" Value="{DynamicResource BorderBrush}"/>
+                                                    <Setter TargetName="Bd" Property="BorderThickness" Value="1"/>
+                                                </Trigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="Bd" Property="Background" Value="{DynamicResource SecondaryRegionBrush}"/>
+                                                </Trigger>
+                                                <Trigger Property="IsEnabled" Value="False">
+                                                    <Setter TargetName="Bd" Property="Opacity" Value="0.5"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
                             </Style>
                         </ListBox.ItemContainerStyle>
                     </ListBox>
@@ -120,7 +168,7 @@
         </Border>
 
         <!-- Chat Area -->
-        <ContentControl Grid.Column="1" 
-                        Content="{Binding CurrentChat}"/>
+        <ContentControl Grid.Column="1"
+                        Content="{Binding CurrentChat}" />
     </Grid>
 </UserControl>

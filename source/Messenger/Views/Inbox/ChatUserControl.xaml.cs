@@ -14,13 +14,13 @@ namespace Messenger.Views.Inbox
             DataContext = viewmodel;
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void ChatContextOpen_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            if (chatContextOpen.ContextMenu != null)
+            if (btChatContextOpen.ContextMenu != null)
             {
-                chatContextOpen.ContextMenu.IsOpen = true;
-                chatContextOpen.ContextMenu.PlacementTarget = chatContextOpen;
-                chatContextOpen.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+                btChatContextOpen.ContextMenu.IsOpen = true;
+                btChatContextOpen.ContextMenu.PlacementTarget = btChatContextOpen;
+                btChatContextOpen.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
             }
         }
     }

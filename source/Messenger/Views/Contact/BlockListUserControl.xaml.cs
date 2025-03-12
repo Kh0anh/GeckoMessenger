@@ -2,20 +2,19 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Messenger.Views.Inbox
+namespace Messenger.Views.Contact
 {
     /// <summary>
-    /// Interaction logic for Inbox.xaml
+    /// Interaction logic for BlockListUserControl.xaml
     /// </summary>
-    public partial class InboxUserControl : UserControl
+    public partial class BlockListUserControl : UserControl
     {
-        public InboxUserControl(InboxViewModel viewmodel)
+        public BlockListUserControl(BlockListViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = viewmodel;
+            DataContext = viewModel;
         }
-
-        private void ConversationContext_OnClick(object sender, RoutedEventArgs e)
+        private void BlockContextOpen_OnClick(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.ContextMenu != null)
             {

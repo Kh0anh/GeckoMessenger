@@ -16,7 +16,7 @@
             <!-- Title -->
             <TextBlock Text="Chào mừng trở lại!" 
                        FontSize="24" 
-                       FontWeight="SemiBold"
+                       FontWeight="Medium"
                        HorizontalAlignment="Center" 
                        Margin="0,0,0,5"/>
             <TextBlock Text="Rất vui khi được gặp lại bạn!" 
@@ -73,7 +73,7 @@
                        FontSize="12"
                        Opacity="0.8">
                 <Run Text="Chưa có tài khoản? "/>
-                <Hyperlink FontWeight="Bold"
+                <Hyperlink FontWeight="Medium"
                            Foreground="{DynamicResource PrimaryBrush}"
                            TextDecorations="None"
                            Command="{Binding DataContext.SwitchToRegisterCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">

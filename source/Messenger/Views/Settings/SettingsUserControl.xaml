@@ -28,7 +28,8 @@
                 <TextBlock 
                    FontSize="22"
                    FontWeight="Bold"
-                   Text="Họ Và Tên"/>
+                   Text="Họ Và Tên"
+                   Foreground="{DynamicResource PrimaryTextBrush}"/>
                 <TextBlock FontSize="14"
                    FontWeight="Bold"
                    Foreground="{DynamicResource SecondaryTextBrush}"
@@ -62,6 +63,7 @@
                     Height="42"
                     BorderThickness="0"
                     Grid.Row="0"
+                    Foreground="{DynamicResource PrimaryTextBrush}"
                     Command="{Binding DataContext.SwitchToEditProfileCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                 <StackPanel Orientation="Horizontal">
                     <materialIcons:MaterialIcon Kind="AccountBoxEditOutline" 
@@ -81,6 +83,7 @@
                     Height="42"
                     BorderThickness="0"
                     Grid.Row="1"
+                    Foreground="{DynamicResource PrimaryTextBrush}"
                     Command="{Binding DataContext.SwitchToEditPrivacyCommand, RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                 <StackPanel Orientation="Horizontal">
                     <materialIcons:MaterialIcon Kind="Lock" 

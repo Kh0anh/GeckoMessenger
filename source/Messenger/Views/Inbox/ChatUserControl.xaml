@@ -1,41 +1,42 @@
 ﻿<UserControl x:Class="Messenger.Views.Inbox.ChatUserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:local="clr-namespace:Messenger.Views.Inbox"
              xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!-- Header -->
-        <Grid Grid.Row="0" Background="{DynamicResource MainContentBackgroundBrush}">
+        <Grid Grid.Row="0"
+              Background="{DynamicResource MainBackgroundBrush}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="50" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
             </Grid.ColumnDefinitions>
-            <hc:Gravatar Id="{Binding OtherUserAvatar}" 
+            <hc:Gravatar Id="{Binding OtherUserAvatar}"
                          Style="{StaticResource GravatarCircle}"
-                         Width="35" 
+                         Width="35"
                          Height="35"
                          HorizontalAlignment="Left"
                          Margin="5"
-                         Grid.Column="0"/>
-            <TextBlock Text="{Binding OtherUserFullName}" 
+                         Grid.Column="0" />
+            <TextBlock Text="{Binding OtherUserFullName}"
                        VerticalAlignment="Center"
-                       FontWeight="Bold"
+                       FontWeight="Medium"
                        FontSize="16"
-                       Grid.Column="1"/>
+                       Grid.Column="1" />
             <Button Command="{Binding VoiceCallCommand}"
                     BorderBrush="Transparent"
                     Background="Transparent"
@@ -46,7 +47,7 @@
                     Height="40">
                 <materialIcons:MaterialIcon Kind="Call"
                                             Width="24"
-                                            Height="24"/>
+                                            Height="24" />
             </Button>
             <Button Command="{Binding VideoCallCommand}"
                     BorderBrush="Transparent"
@@ -57,11 +58,11 @@
                     Width="40"
                     Height="40">
                 <materialIcons:MaterialIcon Kind="Camera"
-                            Width="24"
-                            Height="24"/>
+                                            Width="24"
+                                            Height="24" />
             </Button>
-            <Button x:Name="chatContextOpen"
-                    Click="Button_Click"
+            <Button x:Name="btChatContextOpen"
+                    Click="ChatContextOpen_Click"
                     BorderBrush="Transparent"
                     Background="Transparent"
                     HorizontalAlignment="Right"
@@ -71,24 +72,24 @@
                     Height="40">
                 <materialIcons:MaterialIcon Kind="DotsVertical"
                                             Width="24"
-                                            Height="24"/>
+                                            Height="24" />
                 <Button.ContextMenu>
                     <ContextMenu Placement="Left"
                                  HorizontalOffset="0"
                                  VerticalOffset="0">
                         <MenuItem Header="Chặn"
                                   Foreground="{DynamicResource DangerBrush}"
-                                  FontWeight="Bold" 
+                                  FontWeight="Medium"
                                   FontSize="12"
                                   Command="">
                             <MenuItem.Icon>
-                                <materialIcons:MaterialIcon Kind="Block" Width="16" Height="16"/>
+                                <materialIcons:MaterialIcon Kind="Block" Width="16" Height="16" />
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="Tìm kiếm" 
+                        <MenuItem Header="Tìm kiếm"
                                   Command="">
                             <MenuItem.Icon>
-                                <materialIcons:MaterialIcon Kind="Search" Width="16" Height="16"/>
+                                <materialIcons:MaterialIcon Kind="Search" Width="16" Height="16" />
                             </MenuItem.Icon>
                         </MenuItem>
                     </ContextMenu>
@@ -97,77 +98,100 @@
         </Grid>
 
         <!-- View messages -->
-        <ScrollViewer Grid.Row="1" Background="{DynamicResource RegionBrush}" VerticalScrollBarVisibility="Auto">
+        <ScrollViewer Grid.Row="1"
+                      Background="{DynamicResource MainContentBackgroundBrush}"
+                      VerticalScrollBarVisibility="Auto">
             <ItemsControl ItemsSource="{Binding Messages}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <VirtualizingStackPanel/>
+                        <VirtualizingStackPanel />
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            <hc:Gravatar Grid.Column="0"
-                                         Id="{Binding SenderAvatar}"
-                                         Width="30"
-                                         Height="30"
-                                         Margin="5,0,5,0"
-                                         VerticalAlignment="Top">
-                                <hc:Gravatar.Style>
-                                    <Style TargetType="hc:Gravatar"
-                                           BasedOn="{StaticResource GravatarCircle}">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsSentByMe}" Value="True">
-                                                <Setter Property="Visibility" Value="Collapsed"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </hc:Gravatar.Style>
-                            </hc:Gravatar>
-                            <Border Grid.Column="1"
-                                    Padding="5" 
-                                    CornerRadius="5" 
-                                    Margin="5">
-                                <Border.Style>
-                                    <Style TargetType="Border">
-                                        <Setter Property="Background" 
-                                                Value="{DynamicResource MainContentBackgroundBrush}"/>
-                                        <Setter Property="HorizontalAlignment" 
-                                                Value="Left"/>
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsSentByMe}" Value="True">
-                                                <Setter Property="Background" Value="{DynamicResource PrimaryBrush}"/>
-                                                <Setter Property="HorizontalAlignment" Value="Right"/>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </Border.Style>
-                                <StackPanel>
-                                    <TextBlock Text="{Binding Content}"/>
-                                    <TextBlock Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}" 
-                                               FontSize="10" 
-                                               Foreground="{DynamicResource Brush}"
-                                               HorizontalAlignment="Right"/>
-                                </StackPanel>
-                            </Border>
-                        </Grid>
+                        <ContentControl Content="{Binding}">
+                            <ContentControl.Style>
+                                <Style TargetType="ContentControl">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSentByMe}" Value="False">
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition Width="Auto" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <hc:Gravatar Grid.Column="0"
+                                                                         Id="{Binding SenderAvatar}"
+                                                                         Width="30"
+                                                                         Height="30"
+                                                                         Margin="5,0,5,0"
+                                                                         VerticalAlignment="Top"
+                                                                         Style="{StaticResource GravatarCircle}" />
+                                                            <Border Grid.Column="1"
+                                                                    Padding="6"
+                                                                    CornerRadius="5"
+                                                                    Background="{DynamicResource SecondaryRegionBrush}"
+                                                                    Margin="5">
+                                                                <StackPanel>
+                                                                    <TextBlock Text="{Binding Content}"
+                                                                               Foreground="{DynamicResource PrimaryTextBrush}"
+                                                                               FontSize="14" />
+                                                                    <TextBlock
+                                                                        Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}"
+                                                                        FontSize="10"
+                                                                        Foreground="{DynamicResource SecondaryTextBrush }"
+                                                                        HorizontalAlignment="Left" />
+                                                                </StackPanel>
+                                                            </Border>
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+
+                                        <DataTrigger Binding="{Binding IsSentByMe}" Value="True">
+                                            <Setter Property="ContentTemplate">
+                                                <Setter.Value>
+                                                    <DataTemplate>
+                                                        <Border
+                                                            Padding="6"
+                                                            CornerRadius="5"
+                                                            Background="{DynamicResource SecondaryRegionBrush}"
+                                                            Margin="5"
+                                                            HorizontalAlignment="Right">
+                                                            <StackPanel>
+                                                                <TextBlock Text="{Binding Content}"
+                                                                           Foreground="{DynamicResource PrimaryTextBrush}"
+                                                                           FontSize="14" />
+                                                                <TextBlock
+                                                                    Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}"
+                                                                    FontSize="10"
+                                                                    Foreground="{DynamicResource SecondaryTextBrush }"
+                                                                    HorizontalAlignment="Right" />
+                                                            </StackPanel>
+                                                        </Border>
+                                                    </DataTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ContentControl.Style>
+                        </ContentControl>
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
 
         <!-- send message -->
-        <Grid Grid.Row="2" Background="{DynamicResource MainContentBackgroundBrush}">
+        <Grid Grid.Row="2" Background="{DynamicResource MainBackgroundBrush}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="0"
                      Margin="5"
@@ -179,7 +203,7 @@
                      Style="{DynamicResource TextBoxExtend}"
                      Text="{Binding NewMessageText, UpdateSourceTrigger=PropertyChanged}">
                 <TextBox.InputBindings>
-                    <KeyBinding Key="Enter" Command="{Binding SendMessageCommand}"/>
+                    <KeyBinding Key="Enter" Command="{Binding SendMessageCommand}" />
                 </TextBox.InputBindings>
             </TextBox>
             <Button Grid.Column="1"
@@ -190,7 +214,7 @@
                     Command="{Binding AttachFileCommand}">
                 <materialIcons:MaterialIcon Kind="LinkVariantPlus"
                                             Width="24"
-                                            Height="24"/>
+                                            Height="24" />
             </Button>
             <Button Grid.Column="2"
                     Width="50"
@@ -199,8 +223,8 @@
                     BorderBrush="Transparent"
                     Command="{Binding SendMessageCommand}">
                 <materialIcons:MaterialIcon Kind="ImagePlus"
-                            Width="24"
-                            Height="24"/>
+                                            Width="24"
+                                            Height="24" />
             </Button>
             <Button Grid.Column="3"
                     Width="50"
@@ -210,7 +234,7 @@
                     Command="{Binding SendMessageCommand}">
                 <materialIcons:MaterialIcon Kind="Send"
                                             Width="24"
-                                            Height="24"/>
+                                            Height="24" />
             </Button>
         </Grid>
     </Grid>

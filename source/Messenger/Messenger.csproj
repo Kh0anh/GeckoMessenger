@@ -121,20 +121,33 @@
     <Compile Include="Services\ServiceLocator.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
+    <Compile Include="ViewModels\BlockListViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
-    <Compile Include="ViewModels\ContactViewModel.cs" />
+    <Compile Include="ViewModels\ContactListViewModel.cs" />
     <Compile Include="ViewModels\EditPrivacyViewModel.cs" />
     <Compile Include="ViewModels\EditProfileViewModel.cs" />
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\InboxViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\MainContactViewModel.cs" />
     <Compile Include="ViewModels\MainSettingsViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\ProfileViewModel.cs" />
     <Compile Include="ViewModels\RegisterViewModel.cs" />
     <Compile Include="ViewModels\RelayCommand.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
-    <Compile Include="Views\Contact\ContactUserControl.xaml.cs">
-      <DependentUpon>ContactUserControl.xaml</DependentUpon>
+    <Compile Include="ViewModels\SuggestContactListViewModel.cs" />
+    <Compile Include="Views\Contact\BlockListUserControl.xaml.cs">
+      <DependentUpon>BlockListUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contact\ContactListUserControl.xaml.cs">
+      <DependentUpon>ContactListUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contact\MainContactUserControl.xaml.cs">
+      <DependentUpon>MainContactUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contact\SuggestContactListUserControl.xaml.cs">
+      <DependentUpon>SuggestContactListUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\HomeUserControl.xaml.cs">
       <DependentUpon>HomeUserControl.xaml</DependentUpon>
@@ -178,7 +191,19 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Views\Contact\ContactUserControl.xaml">
+    <Page Include="Views\Contact\BlockListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contact\ContactListUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contact\MainContactUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Contact\SuggestContactListUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

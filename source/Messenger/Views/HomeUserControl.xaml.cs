@@ -1,4 +1,6 @@
-﻿using Messenger.ViewModels;
+﻿using HandyControl.Themes;
+using Messenger.ViewModels;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Messenger.Views
@@ -37,6 +39,15 @@ namespace Messenger.Views
         private void Close_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             App.Current.Shutdown();
+        }
+
+        private void ChangeToSunny_OnClick(object sender, RoutedEventArgs e)
+        {
+            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Light;
+        }
+        private void ChangeToMoon_OnClick(object sender, RoutedEventArgs e)
+        {
+            ThemeManager.Current.ApplicationTheme = ApplicationTheme.Dark;
         }
     }
 }

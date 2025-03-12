@@ -39,8 +39,7 @@ namespace Messenger.ViewModels
         {
             if (view != null)
             {
-                _currentView = view;
-                OnPropertyChanged(nameof(CurrentView));
+                CurrentView = view;
             }
         }
 

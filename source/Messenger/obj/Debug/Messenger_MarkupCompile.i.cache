@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\GeckoMessenger\source\Messenger\App.xaml
-12966343033
+15-116387659
 
-332010184956
+40-898787075
 40714782369
-MainWindow.xaml;Views\Contact\ContactUserControl.xaml;Views\HomeUserControl.xaml;Views\Inbox\ChatUserControl.xaml;Views\Inbox\InboxUserControl.xaml;Views\LoginUserControl.xaml;Views\ProfileView.xaml;Views\RegisterUserControl.xaml;Views\Settings\EditPrivacyUserControl.xaml;Views\Settings\EditProfileUserControl.xaml;Views\Settings\SettingsUserControl.xaml;Views\Settings\MainSettingsView.xaml;
+MainWindow.xaml;Views\Contact\BlockListUserControl.xaml;Views\Contact\ContactListUserControl.xaml;Views\Contact\MainContactUserControl.xaml;Views\Contact\SuggestContactListUserControl.xaml;Views\HomeUserControl.xaml;Views\Inbox\ChatUserControl.xaml;Views\Inbox\InboxUserControl.xaml;Views\LoginUserControl.xaml;Views\ProfileView.xaml;Views\RegisterUserControl.xaml;Views\Settings\EditPrivacyUserControl.xaml;Views\Settings\EditProfileUserControl.xaml;Views\Settings\SettingsUserControl.xaml;Views\Settings\MainSettingsView.xaml;
 
-False
+True
 

@@ -2,20 +2,20 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace Messenger.Views.Inbox
+namespace Messenger.Views.Contact
 {
     /// <summary>
-    /// Interaction logic for Inbox.xaml
+    /// Interaction logic for ContactListUserControl.xaml
     /// </summary>
-    public partial class InboxUserControl : UserControl
+    public partial class ContactListUserControl : UserControl
     {
-        public InboxUserControl(InboxViewModel viewmodel)
+        public ContactListUserControl(ContactListViewModel viewModel)
         {
             InitializeComponent();
-            DataContext = viewmodel;
+            DataContext = viewModel;
         }
 
-        private void ConversationContext_OnClick(object sender, RoutedEventArgs e)
+        private void ContactContextOpen_OnClick(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.ContextMenu != null)
             {

@@ -2,7 +2,7 @@
 
 namespace Messenger.ViewModels
 {
-    public class ContactViewModel : BaseViewModel
+    public class ContactListViewModel : BaseViewModel
     {
         private List<Contact> _Contacts;
         public List<Contact> Contacts
@@ -14,7 +14,7 @@ namespace Messenger.ViewModels
                 OnPropertyChanged();
             }
         }
-        public ContactViewModel()
+        public ContactListViewModel()
         {
             Contacts = new List<Contact>()
             {
@@ -22,25 +22,16 @@ namespace Messenger.ViewModels
                 {
                     Avatar = "User0",
                     FullName = "Jerry Vo",
-                    Username = "tomandbaby",
-                    Email = "jerry@hotmail.com",
-                    Bio = "Tìm FWB"
                 },
                 new Contact
                 {
                     Avatar = "User1",
                     FullName = "Jerry Nguyen",
-                    Username = "User001235421",
-                    Bio = "Tìm gia huy"
                 },
                  new Contact
                 {
                     Avatar = "DownMan",
                     FullName = "Down Main Anime",
-                    Username = "Down2004",
-                    Email = "downtown@hotmail.com",
-                    PhoneNumber = "0927283913",
-                    Bio = "Alo"
                 }
             };
         }
@@ -49,10 +40,5 @@ namespace Messenger.ViewModels
     {
         public string Avatar { get; set; }
         public string FullName { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Bio { get; set; }
-
     }
 }

@@ -117,7 +117,7 @@
                           HorizontalAlignment="Stretch"
                           HorizontalContentAlignment="Stretch"
                           Height="46">
-                <Grid Width="390">
+                <Grid Width="350">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -213,7 +213,7 @@
                           HorizontalAlignment="Stretch"
                           HorizontalContentAlignment="Stretch"
                           Height="46">
-                <Grid Width="390">
+                <Grid Width="350">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -315,7 +315,7 @@
                           HorizontalAlignment="Stretch"
                           HorizontalContentAlignment="Stretch"
                           Height="46">
-                <Grid Width="390">
+                <Grid Width="350">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="35" />
@@ -404,7 +404,7 @@
                           HorizontalAlignment="Stretch"
                           HorizontalContentAlignment="Stretch"
                           Height="46">
-                <Grid Width="390">
+                <Grid Width="350">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="100" />
@@ -493,7 +493,7 @@
                           HorizontalAlignment="Stretch"
                           HorizontalContentAlignment="Stretch"
                           Height="46">
-                <Grid Width="390">
+                <Grid Width="350">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="100" />

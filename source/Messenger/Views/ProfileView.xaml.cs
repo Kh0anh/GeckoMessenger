@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using Messenger.ViewModels;
+using System.Windows;
 
 namespace Messenger.Views
 {
@@ -7,9 +8,10 @@ namespace Messenger.Views
     /// </summary>
     public partial class ProfileView : Window
     {
-        public ProfileView()
+        public ProfileView(ProfileViewModel viewModel)
         {
             InitializeComponent();
+            DataContext = viewModel;
         }
     }
 }

@@ -46,15 +46,15 @@
                                      HorizontalOffset="50"
                                      VerticalOffset="-50">
                             <MenuItem Header="JeeryNguyen"
-                                      Foreground="{DynamicResource Brush}"
+                                      Foreground="{DynamicResource PrimaryTextBrush }"
                                       FontWeight="Bold"
                                       FontSize="14"
                                       IsEnabled="False"/>
                             <MenuItem Header="Xem hồ sơ"
-                                      Foreground="{DynamicResource Brush}"
+                                      Foreground="{DynamicResource PrimaryTextBrush }"
                                       FontWeight="Bold" 
                                       FontSize="12"
-                                      Command="">
+                                      Command="{Binding OpenProfileViewCommand}">
                                 <MenuItem.Icon>
                                     <materialIcons:MaterialIcon Kind="OpenInNew" Width="16" Height="16"/>
                                 </MenuItem.Icon>
@@ -108,14 +108,41 @@
                     <Button.ContextMenu>
                         <ContextMenu Placement="Right"
                                      HorizontalOffset="50"
-                                     VerticalOffset="-120">
+                                     VerticalOffset="-150">
                             <MenuItem Header="GeckoMessenger v0.1"
-                                      Foreground="{DynamicResource Brush}"
-                                      FontWeight="Bold"
+                                      Foreground="{DynamicResource PrimaryTextBrush }"
+                                      FontWeight="Medium"
                                       FontSize="14"
                                       IsEnabled="False"/>
+                            <MenuItem Header="Đổi màu nền"
+                                      Foreground="{DynamicResource PrimaryTextBrush }"
+                                      FontWeight="Medium" 
+                                      FontSize="12"
+                                      Command="{Binding OpenSettingsCommand}">
+                                <MenuItem.Icon>
+                                    <materialIcons:MaterialIcon Kind="Color" Width="16" Height="16"/>
+                                </MenuItem.Icon>
+                                <MenuItem Header="Màu sáng"
+                                          Foreground="{DynamicResource PrimaryTextBrush }"
+                                          FontWeight="Medium"
+                                          FontSize="12"
+                                          Click="ChangeToSunny_OnClick">
+                                    <MenuItem.Icon>
+                                        <materialIcons:MaterialIcon Kind="WbSunny" Width="16" Height="16"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                                <MenuItem Header="Màu tối"
+                                          Foreground="{DynamicResource PrimaryTextBrush }"
+                                          FontWeight="Medium"
+                                          FontSize="12"
+                                          Click="ChangeToMoon_OnClick">
+                                    <MenuItem.Icon>
+                                        <materialIcons:MaterialIcon Kind="MoonAndStars" Width="16" Height="16"/>
+                                    </MenuItem.Icon>
+                                </MenuItem>
+                            </MenuItem>
                             <MenuItem Header="Cài đặt"
-                                      Foreground="{DynamicResource Brush}"
+                                      Foreground="{DynamicResource PrimaryTextBrush }"
                                       FontWeight="Bold" 
                                       FontSize="12"
                                       Command="{Binding OpenSettingsCommand}">
@@ -126,7 +153,7 @@
                             <MenuItem Click="Close_Click"
                                       Header="Thoát ứng dụng" 
                                       Foreground="{DynamicResource DangerBrush}"
-                                      FontWeight="Bold" 
+                                      FontWeight="Medium" 
                                       FontSize="12"
                                       Command="">
                                 <MenuItem.Icon>

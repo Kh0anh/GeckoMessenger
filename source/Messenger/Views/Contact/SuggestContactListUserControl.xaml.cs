@@ -4,11 +4,11 @@ using System.Windows.Controls;
 namespace Messenger.Views.Contact
 {
     /// <summary>
-    /// Interaction logic for Contact.xaml
+    /// Interaction logic for SuggestContactUserControl.xaml
     /// </summary>
-    public partial class ContactUserControl : UserControl
+    public partial class SuggestContactListUserControl : UserControl
     {
-        public ContactUserControl(ContactViewModel viewModel)
+        public SuggestContactListUserControl(SuggestContactListViewModel viewModel)
         {
             InitializeComponent();
             DataContext = viewModel;

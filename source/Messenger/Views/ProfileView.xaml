@@ -7,10 +7,11 @@
         xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
         xmlns:local="clr-namespace:Messenger.Views"
         mc:Ignorable="d"
-        Title="ProfileView" Height="450" Width="320">
+        Title="ProfileView" Height="800" Width="400">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="120"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid Background="{DynamicResource MainContentBackgroundBrush}"
@@ -49,9 +50,29 @@
                                             Width="18"/>
             </Button>
         </Grid>
+        <Grid Background="{DynamicResource MainContentBackgroundBrush}" Grid.Row="1" Margin="0,5,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <materialIcons:MaterialIcon Kind="Bio"
+                                        Height="28"
+                                        Width="28"
+                                        Margin="5"
+                                        Grid.Column="0" />
+            <TextBlock Grid.Column="1"
+                       Foreground="{DynamicResource SecondaryTextBrush}"
+                       Text="Nội dung tiểu sử"
+                       FontSize="14"
+                       VerticalAlignment="Center"
+                       Margin="5"
+                       Background="Transparent"
+                       TextWrapping="Wrap"
+                       TextTrimming="CharacterEllipsis"/>
+        </Grid>
         <Grid Background="{DynamicResource MainContentBackgroundBrush}"
               Margin="0,5,0,5"
-              Grid.Row="1">
+              Grid.Row="2">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -59,52 +80,126 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Margin="15, 5,15,5"
-                       Grid.Row="0">
-                <Run Text="Đây là bio của tôi"
-                     FontSize="13"/>
-                <LineBreak/>
-                <Run Text="Tiểu sử"
-                     FontSize="13"
-                     Foreground="{DynamicResource SecondaryTextBrush}"/>
-            </TextBlock>
-            <TextBlock Margin="15, 5,15,5"
-                       Grid.Row="1">
-                <Run Text="@kh0anh"
-                     FontSize="13"
-                     Foreground="{DynamicResource PrimaryBrush}"/>
-                <LineBreak/>
-                <Run Text="Tên người dùng"
-                     FontSize="13"
-                     Foreground="{DynamicResource SecondaryTextBrush}"/>
-            </TextBlock>
-            <TextBlock Margin="15, 5,15,5"
-                       Grid.Row="2">
-                <Run Text="test@email.com"
-                     FontSize="13"/>
-                <LineBreak/>
-                <Run Text="Email"
-                     FontSize="13"
-                     Foreground="{DynamicResource SecondaryTextBrush}"/>
-            </TextBlock>
-            <TextBlock Margin="15, 5,15,5"
-                       Grid.Row="3">
-                <Run Text="0917288372"
-                     FontSize="13"/>
-                <LineBreak/>
-                <Run Text="Số điện thoại"
-                     FontSize="13"
-                     Foreground="{DynamicResource SecondaryTextBrush}"/>
-            </TextBlock>
-            <TextBlock Margin="15, 5,15,5"
-                       Grid.Row="4">
-                <Run Text="{Binding Birthday, StringFormat='{}{0:dd/MM/yyyy}'}"
-                     FontSize="13"/>
-                <LineBreak/>
-                <Run Text="Ngày sinh"
-                     FontSize="13"
-                     Foreground="{DynamicResource SecondaryTextBrush}"/>
-            </TextBlock>
+            <Border Grid.Row="0"
+                    BorderThickness="0,1,0,1"
+                    BorderBrush="{DynamicResource BorderBrush}">
+                <Grid Margin="10"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <materialIcons:MaterialIcon Kind="At"
+                                                Height="28"
+                                                Width="28"
+                                                Margin="3,0,10,0"
+                                                Grid.Column="0" />
+                    <TextBlock Text="Tên người dùng"
+                               FontWeight="Medium"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               Grid.Column="1" />
+                    <TextBlock Text="@VoNguyenGiaHuy"
+                               FontWeight="Medium"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Stretch"
+                               TextAlignment="Right"
+                               Grid.Column="2" />
+                </Grid>
+            </Border>
+            <Border Grid.Row="1"
+                    BorderThickness="0,1,0,1"
+                    BorderBrush="{DynamicResource BorderBrush}">
+                <Grid Margin="10"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <materialIcons:MaterialIcon Kind="EmailBox"
+                                                Height="28"
+                                                Width="28"
+                                                Margin="3,0,10,0"
+                                                Grid.Column="0" />
+                    <TextBlock Text="Email"
+                               FontWeight="Medium"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               Grid.Column="1" />
+                    <TextBlock Text="kh0anh@protonmail.com"
+                               FontWeight="Medium"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Stretch"
+                               TextAlignment="Right"
+                               Grid.Column="2" />
+                </Grid>
+            </Border>
+            <Border Grid.Row="2"
+                    BorderThickness="0,1,0,1"
+                    BorderBrush="{DynamicResource BorderBrush}">
+                <Grid Margin="10"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <materialIcons:MaterialIcon Kind="Call"
+                                                Height="28"
+                                                Width="28"
+                                                Margin="3,0,10,0"
+                                                Grid.Column="0" />
+                    <TextBlock Text="Số điện thoại"
+                               FontWeight="Medium"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               Grid.Column="1" />
+                    <TextBlock Text="09199199199"
+                               FontWeight="Medium"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Stretch"
+                               TextAlignment="Right"
+                               Grid.Column="2" />
+                </Grid>
+            </Border>
+            <Border Grid.Row="3"
+                    BorderThickness="0,1,0,1"
+                    BorderBrush="{DynamicResource BorderBrush}">
+                <Grid Margin="10"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <materialIcons:MaterialIcon Kind="DateRange"
+                                                Height="28"
+                                                Width="28"
+                                                Margin="3,0,10,0"
+                                                Grid.Column="0" />
+                    <TextBlock Text="Ngày tham gia"
+                               FontWeight="Medium"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               Grid.Column="1" />
+                    <TextBlock Text="11/11/1111"
+                               FontWeight="Medium"
+                               FontSize="14"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Stretch"
+                               TextAlignment="Right"
+                               Grid.Column="2" />
+                </Grid>
+            </Border>
         </Grid>
     </Grid>
 </Window>
