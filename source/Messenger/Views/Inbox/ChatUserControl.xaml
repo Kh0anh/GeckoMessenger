@@ -9,131 +9,231 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <!-- Header -->
-        <Grid Grid.Row="0"
-              Background="{DynamicResource MainBackgroundBrush}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="50" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-            </Grid.ColumnDefinitions>
-            <hc:Gravatar Id="{Binding OtherUserAvatar}"
-                         Style="{StaticResource GravatarCircle}"
-                         Width="35"
-                         Height="35"
-                         HorizontalAlignment="Left"
-                         Margin="5"
-                         Grid.Column="0" />
-            <TextBlock Text="{Binding OtherUserFullName}"
-                       VerticalAlignment="Center"
-                       FontWeight="Medium"
-                       FontSize="16"
-                       Grid.Column="1" />
-            <Button Command="{Binding VoiceCallCommand}"
-                    BorderBrush="Transparent"
-                    Background="Transparent"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Grid.Column="2"
-                    Width="40"
-                    Height="40">
-                <materialIcons:MaterialIcon Kind="Call"
-                                            Width="24"
-                                            Height="24" />
-            </Button>
-            <Button Command="{Binding VideoCallCommand}"
-                    BorderBrush="Transparent"
-                    Background="Transparent"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Center"
-                    Grid.Column="3"
-                    Width="40"
-                    Height="40">
-                <materialIcons:MaterialIcon Kind="Camera"
-                                            Width="24"
-                                            Height="24" />
-            </Button>
-            <Button x:Name="btChatContextOpen"
-                    Click="ChatContextOpen_Click"
-                    BorderBrush="Transparent"
-                    Background="Transparent"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Grid.Column="4"
-                    Width="40"
-                    Height="40">
-                <materialIcons:MaterialIcon Kind="DotsVertical"
-                                            Width="24"
-                                            Height="24" />
-                <Button.ContextMenu>
-                    <ContextMenu Placement="Left"
-                                 HorizontalOffset="0"
-                                 VerticalOffset="0">
-                        <MenuItem Header="Chặn"
-                                  Foreground="{DynamicResource DangerBrush}"
-                                  FontWeight="Medium"
-                                  FontSize="12"
-                                  Command="">
-                            <MenuItem.Icon>
-                                <materialIcons:MaterialIcon Kind="Block" Width="16" Height="16" />
-                            </MenuItem.Icon>
-                        </MenuItem>
-                        <MenuItem Header="Tìm kiếm"
-                                  Command="">
-                            <MenuItem.Icon>
-                                <materialIcons:MaterialIcon Kind="Search" Width="16" Height="16" />
-                            </MenuItem.Icon>
-                        </MenuItem>
-                    </ContextMenu>
-                </Button.ContextMenu>
-            </Button>
-        </Grid>
+            <!-- Header -->
+            <Grid Grid.Row="0"
+                  Background="{DynamicResource MainBackgroundBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+                <TextBlock VerticalAlignment="Center"
+                           Grid.Column="0"
+                           Margin="20,0,0,0">
+                    <Run Text="{Binding OtherUserFullName}"
+                         FontSize="14"
+                         FontWeight="Medium"
+                         Foreground="{DynamicResource PrimaryTextBrush}" />
+                    <LineBreak />
+                    <Run Text="Đang hoạt động"
+                         Foreground="{DynamicResource SecondaryTextBrush}" />
+                </TextBlock>
+                <ToggleButton x:Name="ToggleSearchMessage"
+                              BorderThickness="0"
+                              IsChecked="False"
+                              Style="{StaticResource ToggleButtonFlip}"
+                              Grid.Column="1">
+                    <hc:StatusSwitchElement.CheckedElement>
+                        <materialIcons:MaterialIcon Kind="Search"
+                                                    Width="24"
+                                                    Height="24"
+                                                    Foreground="{DynamicResource PrimaryBrush}" />
+                    </hc:StatusSwitchElement.CheckedElement>
+                    <Border>
+                        <materialIcons:MaterialIcon Kind="Search"
+                                                    Width="24"
+                                                    Height="24" />
+                    </Border>
+                </ToggleButton>
+                <Button Command="{Binding VoiceCallCommand}"
+                        BorderBrush="Transparent"
+                        Background="Transparent"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Grid.Column="2"
+                        Width="38"
+                        Height="38">
+                    <materialIcons:MaterialIcon Kind="Call"
+                                                Width="20"
+                                                Height="20" />
+                </Button>
+                <Button Command="{Binding VideoCallCommand}"
+                        BorderBrush="Transparent"
+                        Background="Transparent"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Grid.Column="3"
+                        Width="38"
+                        Height="38">
+                    <materialIcons:MaterialIcon Kind="Camera"
+                                                Width="20"
+                                                Height="20" />
+                </Button>
+                <ToggleButton x:Name="ToggleChatInfo"
+                              BorderThickness="0"
+                              IsChecked="False"
+                              Style="{StaticResource ToggleButtonFlip}"
+                              Grid.Column="4">
+                    <hc:StatusSwitchElement.CheckedElement>
+                        <materialIcons:MaterialIcon Kind="MenuClose"
+                                                    Width="24"
+                                                    Height="24"
+                                                    Foreground="{DynamicResource PrimaryBrush}" />
+                    </hc:StatusSwitchElement.CheckedElement>
+                    <Border>
+                        <materialIcons:MaterialIcon Kind="MenuOpen"
+                                                    Width="24"
+                                                    Height="24" />
+                    </Border>
+                </ToggleButton>
+                <Button x:Name="btChatContextOpen"
+                        Click="ChatContextOpen_Click"
+                        BorderBrush="Transparent"
+                        Background="Transparent"
+                        HorizontalAlignment="Right"
+                        VerticalAlignment="Center"
+                        Grid.Column="5"
+                        Width="40"
+                        Height="40">
+                    <materialIcons:MaterialIcon Kind="DotsVertical"
+                                                Width="24"
+                                                Height="24" />
+                    <Button.ContextMenu>
+                        <ContextMenu Placement="Left"
+                                     HorizontalOffset="0"
+                                     VerticalOffset="0">
+                            <MenuItem Header="Chặn"
+                                      Foreground="{DynamicResource DangerBrush}"
+                                      FontWeight="Medium"
+                                      FontSize="12"
+                                      Command="">
+                                <MenuItem.Icon>
+                                    <materialIcons:MaterialIcon Kind="Block" Width="16" Height="16" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem Header="Tìm kiếm"
+                                      Command="">
+                                <MenuItem.Icon>
+                                    <materialIcons:MaterialIcon Kind="Search" Width="16" Height="16" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+            </Grid>
 
-        <!-- View messages -->
-        <ScrollViewer Grid.Row="1"
-                      Background="{DynamicResource MainContentBackgroundBrush}"
-                      VerticalScrollBarVisibility="Auto">
-            <ItemsControl ItemsSource="{Binding Messages}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <VirtualizingStackPanel />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <ContentControl Content="{Binding}">
-                            <ContentControl.Style>
-                                <Style TargetType="ContentControl">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsSentByMe}" Value="False">
-                                            <Setter Property="ContentTemplate">
-                                                <Setter.Value>
-                                                    <DataTemplate>
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="Auto" />
-                                                                <ColumnDefinition Width="Auto" />
-                                                            </Grid.ColumnDefinitions>
-                                                            <hc:Gravatar Grid.Column="0"
-                                                                         Id="{Binding SenderAvatar}"
-                                                                         Width="30"
-                                                                         Height="30"
-                                                                         Margin="5,0,5,0"
-                                                                         VerticalAlignment="Top"
-                                                                         Style="{StaticResource GravatarCircle}" />
-                                                            <Border Grid.Column="1"
-                                                                    Padding="6"
-                                                                    CornerRadius="5"
-                                                                    Background="{DynamicResource SecondaryRegionBrush}"
-                                                                    Margin="5">
+            <!--Search message-->
+            <Grid Grid.Row="1"
+                  Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Setter Property="Visibility" Value="Collapsed" />
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsChecked, ElementName=ToggleSearchMessage}" Value="True">
+                                <Setter Property="Visibility" Value="Visible" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <hc:TextBox Grid.Column="0"
+                            hc:InfoElement.Placeholder="Tìm kiếm tin nhắn"
+                            FontSize="14"
+                            Padding="5"/>
+                <StackPanel Grid.Column="1"
+                            Margin="5,0,5 0"
+                            Orientation="Horizontal">
+                    <Button Margin="5,0,5 0">
+                        <materialIcons:MaterialIcon  Kind="ArrowUp"/>
+                    </Button>
+                    <Button Margin="5,0,5 0">
+                        <materialIcons:MaterialIcon  Kind="ArrowDown"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+
+            <!-- View messages -->
+            <ScrollViewer Grid.Row="2"
+                          Background="{DynamicResource SecondaryRegionBrush}"
+                          VerticalScrollBarVisibility="Auto">
+                <ItemsControl ItemsSource="{Binding Messages}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <ContentControl Content="{Binding}">
+                                <ContentControl.Style>
+                                    <Style TargetType="ContentControl">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSentByMe}" Value="False">
+                                                <Setter Property="ContentTemplate">
+                                                    <Setter.Value>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <hc:Gravatar Grid.Column="0"
+                                                                             Id="{Binding SenderAvatar}"
+                                                                             Width="30"
+                                                                             Height="30"
+                                                                             Margin="5,0,5,0"
+                                                                             VerticalAlignment="Top"
+                                                                             Style="{StaticResource GravatarCircle}" />
+                                                                <Border Grid.Column="1"
+                                                                        Padding="6"
+                                                                        CornerRadius="5"
+                                                                        Background="{DynamicResource MainContentBackgroundBrush}"
+                                                                        Margin="5">
+                                                                    <StackPanel>
+                                                                        <TextBlock Text="{Binding Content}"
+                                                                            Foreground="{DynamicResource PrimaryTextBrush}"
+                                                                            FontSize="14" />
+                                                                        <TextBlock
+                                                                            Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}"
+                                                                            FontSize="10"
+                                                                            Foreground="{DynamicResource SecondaryTextBrush }"
+                                                                            HorizontalAlignment="Left" />
+                                                                    </StackPanel>
+                                                                </Border>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+
+                                            <DataTrigger Binding="{Binding IsSentByMe}" Value="True">
+                                                <Setter Property="ContentTemplate">
+                                                    <Setter.Value>
+                                                        <DataTemplate>
+                                                            <Border
+                                                                Padding="6"
+                                                                CornerRadius="5"
+                                                                Background="{DynamicResource MainContentBackgroundBrush}"
+                                                                Margin="5"
+                                                                HorizontalAlignment="Right">
                                                                 <StackPanel>
                                                                     <TextBlock Text="{Binding Content}"
                                                                                Foreground="{DynamicResource PrimaryTextBrush}"
@@ -142,100 +242,336 @@
                                                                         Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}"
                                                                         FontSize="10"
                                                                         Foreground="{DynamicResource SecondaryTextBrush }"
-                                                                        HorizontalAlignment="Left" />
+                                                                        HorizontalAlignment="Right" />
                                                                 </StackPanel>
                                                             </Border>
-                                                        </Grid>
-                                                    </DataTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger>
+                                                        </DataTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ContentControl.Style>
+                            </ContentControl>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
 
-                                        <DataTrigger Binding="{Binding IsSentByMe}" Value="True">
-                                            <Setter Property="ContentTemplate">
-                                                <Setter.Value>
-                                                    <DataTemplate>
-                                                        <Border
-                                                            Padding="6"
-                                                            CornerRadius="5"
-                                                            Background="{DynamicResource SecondaryRegionBrush}"
-                                                            Margin="5"
-                                                            HorizontalAlignment="Right">
-                                                            <StackPanel>
-                                                                <TextBlock Text="{Binding Content}"
-                                                                           Foreground="{DynamicResource PrimaryTextBrush}"
-                                                                           FontSize="14" />
-                                                                <TextBlock
-                                                                    Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}"
-                                                                    FontSize="10"
-                                                                    Foreground="{DynamicResource SecondaryTextBrush }"
-                                                                    HorizontalAlignment="Right" />
-                                                            </StackPanel>
-                                                        </Border>
-                                                    </DataTemplate>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ContentControl.Style>
-                        </ContentControl>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </ScrollViewer>
+            <!-- send message -->
+            <Grid Grid.Row="3" Background="{DynamicResource MainBackgroundBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0"
+                         Margin="5"
+                         MinHeight="36"
+                         MaxHeight="120"
+                         Padding="15,0,0,0"
+                         TextWrapping="Wrap"
+                         AcceptsReturn="True"
+                         VerticalScrollBarVisibility="Auto"
+                         hc:BorderElement.CornerRadius="20"
+                         FontSize="14"
+                         Style="{DynamicResource TextBoxExtend}"
+                         Text="{Binding NewMessageText, UpdateSourceTrigger=PropertyChanged}">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SendMessageCommand}" />
+                    </TextBox.InputBindings>
+                </TextBox>
+                <Button Grid.Column="1"
+                        Width="40"
+                        Height="36"
+                        BorderBrush="Transparent"
+                        Command="{Binding AttachFileCommand}">
+                    <materialIcons:MaterialIcon Kind="LinkVariantPlus"
+                                                Width="20"
+                                                Height="20" />
+                </Button>
+                <Button Grid.Column="2"
+                        Width="40"
+                        Height="36"
+                        BorderBrush="Transparent"
+                        Command="{Binding SendMessageCommand}">
+                    <materialIcons:MaterialIcon Kind="ImagePlus"
+                                                Width="20"
+                                                Height="20" />
+                </Button>
+                <Button Grid.Column="3"
+                        Width="50"
+                        Height="36"
+                        BorderBrush="Transparent"
+                        Command="{Binding SendMessageCommand}">
+                    <materialIcons:MaterialIcon Kind="Send"
+                                                Width="20"
+                                                Height="20" />
+                </Button>
+            </Grid>
+        </Grid>
+        <Grid Grid.Column="1"
+              Width="300">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="51" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.Style>
+                <Style TargetType="Grid">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding IsChecked, ElementName=ToggleChatInfo}" Value="True">
+                            <Setter Property="Visibility" Value="Visible" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Grid.Style>
+            <Grid Grid.Row="0"
+                  Background="{DynamicResource MainContentBackgroundBrush}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="Thông tin"
+                           VerticalAlignment="Center"
+                           FontSize="14"
+                           FontWeight="Medium"
+                           Margin="10,0,10,0" />
+                <Button Grid.Column="1"
+                        Width="36"
+                        Height="36"
+                        Margin="0,0,10,0"
+                        Background="Transparent"
+                        BorderThickness="0">
+                    <Button.Content>
+                        <materialIcons:MaterialIcon Kind="Close"
+                                                    Width="20"
+                                                    Height="20" />
+                    </Button.Content>
+                    <Button.Triggers>
+                        <EventTrigger RoutedEvent="Button.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <BooleanAnimationUsingKeyFrames Storyboard.TargetName="ToggleChatInfo"
+                                                                    Storyboard.TargetProperty="IsChecked">
+                                        <DiscreteBooleanKeyFrame KeyTime="0:0:0"
+                                                                 Value="False" />
+                                    </BooleanAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Button.Triggers>
+                </Button>
+            </Grid>
+            <Grid Background="{DynamicResource MainContentBackgroundBrush}"
+                  Height="100"
+                  Grid.Row="1"
+                  Margin="0,0,0,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <hc:Gravatar Width="80"
+                             Height="80"
+                             Style="{StaticResource GravatarCircle}"
+                             Grid.Column="0" />
+                <StackPanel Grid.Column="1"
+                            VerticalAlignment="Center">
+                    <TextBlock Margin="5"
+                               FontSize="16"
+                               FontWeight="Bold"
+                               Text="Họ Và Tên" />
+                    <TextBlock Margin="5"
+                               FontSize="12"
+                               FontWeight="Bold"
+                               Foreground="{DynamicResource SecondaryTextBrush}"
+                               Text="Trực tuyến lần cuối 10:23 AM" />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Row="2"
+                  Margin="0,5,0,5"
+                  Background="{DynamicResource MainContentBackgroundBrush}">
+                <Grid Height="40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="200" />
+                        <ColumnDefinition Width="50" />
+                    </Grid.ColumnDefinitions>
+                    <materialIcons:MaterialIcon Kind="Bell"
+                                                Width="20"
+                                                Height="20" />
+                    <TextBlock Text="Thông báo"
+                               Grid.Column="1"
+                               Margin="5"
+                               FontSize="14"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center" />
+                    <ToggleButton IsChecked="True"
+                                  Style="{StaticResource ToggleButtonSwitch}"
+                                  Grid.Column="2" />
+                </Grid>
+            </Grid>
+            <StackPanel Grid.Row="3"
+                        Margin="0,5,0,5"
+                        Background="{DynamicResource MainContentBackgroundBrush}">
+                <Grid Height="40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="250" />
+                    </Grid.ColumnDefinitions>
+                    <materialIcons:MaterialIcon Kind="Image"
+                                                Width="20"
+                                                Height="20" />
+                    <TextBlock Text="0 Hình ảnh"
+                               Grid.Column="1"
+                               Margin="5"
+                               FontSize="14"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource PrimaryTextBrush}" />
+                </Grid>
+                <Grid Height="40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="250" />
+                    </Grid.ColumnDefinitions>
+                    <materialIcons:MaterialIcon Kind="Video"
+                                                Width="20"
+                                                Height="20" />
+                    <TextBlock Text="0 Video"
+                               Grid.Column="1"
+                               Margin="5"
+                               FontSize="14"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource PrimaryTextBrush}" />
+                </Grid>
+                <Grid Height="40">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50" />
+                        <ColumnDefinition Width="250" />
+                    </Grid.ColumnDefinitions>
+                    <materialIcons:MaterialIcon Kind="File"
+                                                Width="20"
+                                                Height="20" />
+                    <TextBlock Text="0 Tệp tin"
+                               Grid.Column="1"
+                               Margin="5"
+                               FontSize="14"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource PrimaryTextBrush}" />
+                </Grid>
+            </StackPanel>
+            <StackPanel Grid.Row="4"
+                        Background="{DynamicResource MainContentBackgroundBrush}"
+                        Margin="0,5,0,5">
+                <StackPanel.Resources>
+                    <Style TargetType="Button"
+                           BasedOn="{StaticResource ButtonDefault}">
+                        <Setter Property="Background"
+                                Value="{DynamicResource MainContentBackgroundBrush}" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter Property="Background"
+                                        Value="{DynamicResource MainBackgroundBrush}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Width="300"
+                        Height="40"
+                        BorderThickness="0"
+                        Click="SearchMessageOpen_OnClick">
+                    <Grid Width="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <materialIcons:MaterialIcon Kind="Search"
+                                                    Width="20"
+                                                    Height="20"
+                                                    Foreground="{DynamicResource PrimaryTextBrush}" />
+                        <TextBlock Text="Tìm kiếm tin nhắn"
+                                   Grid.Column="1"
+                                   Margin="5"
+                                   FontSize="14"
+                                   FontWeight="Medium"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource PrimaryTextBrush}" />
+                    </Grid>
+                </Button>
+            </StackPanel>
+            <StackPanel Grid.Row="5"
+                        Background="{DynamicResource MainContentBackgroundBrush}"
+                        Margin="0,5,0,5">
+                <StackPanel.Resources>
+                    <Style TargetType="Button"
+                           BasedOn="{StaticResource ButtonDefault}">
+                        <Setter Property="Background"
+                                Value="{DynamicResource MainContentBackgroundBrush}" />
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter Property="Background"
+                                        Value="{DynamicResource MainBackgroundBrush}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Width="300"
+                        Height="40"
+                        BorderThickness="0">
+                    <Grid Width="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <materialIcons:MaterialIcon Kind="Report"
+                                                    Width="20"
+                                                    Height="20"
+                                                    Foreground="{DynamicResource DangerBrush}" />
+                        <TextBlock Text="Báo cáo người dùng"
+                                   Grid.Column="1"
+                                   Margin="5"
+                                   FontSize="14"
+                                   FontWeight="Medium"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource DangerBrush}" />
+                    </Grid>
+                </Button>
+                <Button Width="300"
+                        Height="40"
+                        BorderThickness="0">
+                    <Grid Width="300">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <materialIcons:MaterialIcon Kind="TrashEmpty"
+                                                    Width="20"
+                                                    Height="20"
+                                                    Foreground="{DynamicResource DangerBrush}" />
+                        <TextBlock Text="Xoá cuộc trò chuyện"
+                                   Grid.Column="1"
+                                   Margin="5"
+                                   FontSize="14"
+                                   FontWeight="Medium"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Center"
+                                   Foreground="{DynamicResource DangerBrush}" />
+                    </Grid>
+                </Button>
+            </StackPanel>
 
-        <!-- send message -->
-        <Grid Grid.Row="2" Background="{DynamicResource MainBackgroundBrush}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="0"
-                     Margin="5"
-                     MinHeight="36"
-                     MaxHeight="120"
-                     TextWrapping="Wrap"
-                     AcceptsReturn="True"
-                     VerticalScrollBarVisibility="Auto"
-                     Style="{DynamicResource TextBoxExtend}"
-                     Text="{Binding NewMessageText, UpdateSourceTrigger=PropertyChanged}">
-                <TextBox.InputBindings>
-                    <KeyBinding Key="Enter" Command="{Binding SendMessageCommand}" />
-                </TextBox.InputBindings>
-            </TextBox>
-            <Button Grid.Column="1"
-                    Width="50"
-                    Height="36"
-                    Margin="0,0,5,0"
-                    BorderBrush="Transparent"
-                    Command="{Binding AttachFileCommand}">
-                <materialIcons:MaterialIcon Kind="LinkVariantPlus"
-                                            Width="24"
-                                            Height="24" />
-            </Button>
-            <Button Grid.Column="2"
-                    Width="50"
-                    Height="36"
-                    Margin="0,0,5,0"
-                    BorderBrush="Transparent"
-                    Command="{Binding SendMessageCommand}">
-                <materialIcons:MaterialIcon Kind="ImagePlus"
-                                            Width="24"
-                                            Height="24" />
-            </Button>
-            <Button Grid.Column="3"
-                    Width="50"
-                    Height="36"
-                    Margin="0,0,5,0"
-                    BorderBrush="Transparent"
-                    Command="{Binding SendMessageCommand}">
-                <materialIcons:MaterialIcon Kind="Send"
-                                            Width="24"
-                                            Height="24" />
-            </Button>
         </Grid>
     </Grid>
 </UserControl>

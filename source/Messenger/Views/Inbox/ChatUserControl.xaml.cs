@@ -1,4 +1,5 @@
 ﻿using Messenger.ViewModels;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace Messenger.Views.Inbox
@@ -22,6 +23,11 @@ namespace Messenger.Views.Inbox
                 btChatContextOpen.ContextMenu.PlacementTarget = btChatContextOpen;
                 btChatContextOpen.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
             }
+        }
+
+        private void SearchMessageOpen_OnClick(object sender, RoutedEventArgs e)
+        {
+            ToggleSearchMessage.IsChecked = !ToggleSearchMessage.IsChecked;
         }
     }
 }

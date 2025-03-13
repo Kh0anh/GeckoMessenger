@@ -6,7 +6,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:local="clr-namespace:Messenger"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="900">
+        Title="MainWindow" Height="800" Width="1400">
     <Grid>
         <ContentControl Content="{Binding CurrentView}" />
     </Grid>

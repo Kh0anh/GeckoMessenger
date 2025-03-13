@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\GeckoMessenger\Demo\Demo\obj\Debug\
+D:\GeckoMessenger\demo\Demo\obj\Debug\
 Demo
 none
 false
 DEBUG;TRACE
-D:\GeckoMessenger\Demo\Demo\App.xaml
-5-433034730
+D:\GeckoMessenger\demo\Demo\App.xaml
+5-1337045140
 
-10-1039459578
-42-2010632393
+10-1925101016
+421079044538
 MainWindow.xaml;Views\Chat.xaml;Views\Home.xaml;Views\Login.xaml;Views\Registration.xaml;
 
-False
+True
 
