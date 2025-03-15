@@ -141,8 +141,8 @@
             <Grid Grid.Row="1"
                   Margin="5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <Grid.Style>
                     <Style TargetType="Grid">
@@ -157,15 +157,15 @@
                 <hc:TextBox Grid.Column="0"
                             hc:InfoElement.Placeholder="Tìm kiếm tin nhắn"
                             FontSize="14"
-                            Padding="5"/>
+                            Padding="5" />
                 <StackPanel Grid.Column="1"
                             Margin="5,0,5 0"
                             Orientation="Horizontal">
                     <Button Margin="5,0,5 0">
-                        <materialIcons:MaterialIcon  Kind="ArrowUp"/>
+                        <materialIcons:MaterialIcon Kind="ArrowUp" />
                     </Button>
                     <Button Margin="5,0,5 0">
-                        <materialIcons:MaterialIcon  Kind="ArrowDown"/>
+                        <materialIcons:MaterialIcon Kind="ArrowDown" />
                     </Button>
                 </StackPanel>
             </Grid>
@@ -183,15 +183,28 @@
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <ContentControl Content="{Binding}">
+                                <ContentControl.Resources>
+                                    <Style x:Key="MessageContextStyle"
+                                           TargetType="StackPanel">
+                                        <Setter Property="Opacity" Value="0" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver"
+                                                     Value="True">
+                                                <Setter Property="Opacity" Value="100"></Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ContentControl.Resources>
                                 <ContentControl.Style>
                                     <Style TargetType="ContentControl">
                                         <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsSentByMe}" Value="False">
+                                            <DataTrigger Binding="{Binding IsSentByMe}" Value="True">
                                                 <Setter Property="ContentTemplate">
                                                     <Setter.Value>
                                                         <DataTemplate>
                                                             <Grid>
                                                                 <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto" />
                                                                     <ColumnDefinition Width="Auto" />
                                                                     <ColumnDefinition Width="Auto" />
                                                                 </Grid.ColumnDefinitions>
@@ -218,33 +231,91 @@
                                                                             HorizontalAlignment="Left" />
                                                                     </StackPanel>
                                                                 </Border>
+                                                                <StackPanel Grid.Column="2"
+                                                                            Style="{StaticResource MessageContextStyle}"
+                                                                            Orientation="Horizontal">
+                                                                    <Button hc:BorderElement.CornerRadius="20"
+                                                                            Width="28"
+                                                                            Height="28"
+                                                                            Margin="5"
+                                                                            BorderThickness="0"
+                                                                            ToolTip="Xoá"
+                                                                            Background="{DynamicResource DangerBrush}"
+                                                                            Foreground="{DynamicResource MainContentBackgroundBrush}">
+                                                                        <materialIcons:MaterialIcon Kind="TrashEmpty"
+                                                                            Width="16"
+                                                                            Height="16" />
+                                                                    </Button>
+                                                                    <Button hc:BorderElement.CornerRadius="20"
+                                                                            Width="28"
+                                                                            Height="28"
+                                                                            BorderThickness="0"
+                                                                            ToolTip="Xoá"
+                                                                            Background="{DynamicResource DangerBrush}"
+                                                                            Foreground="{DynamicResource MainContentBackgroundBrush}">
+                                                                        <materialIcons:MaterialIcon Kind="AlertCircle"
+                                                                            Width="16"
+                                                                            Height="16" />
+                                                                    </Button>
+                                                                </StackPanel>
                                                             </Grid>
                                                         </DataTemplate>
                                                     </Setter.Value>
                                                 </Setter>
                                             </DataTrigger>
-
-                                            <DataTrigger Binding="{Binding IsSentByMe}" Value="True">
+                                            <DataTrigger Binding="{Binding IsSentByMe}" Value="False">
                                                 <Setter Property="ContentTemplate">
                                                     <Setter.Value>
                                                         <DataTemplate>
-                                                            <Border
-                                                                Padding="6"
-                                                                CornerRadius="5"
-                                                                Background="{DynamicResource MainContentBackgroundBrush}"
-                                                                Margin="5"
-                                                                HorizontalAlignment="Right">
-                                                                <StackPanel>
-                                                                    <TextBlock Text="{Binding Content}"
-                                                                               Foreground="{DynamicResource PrimaryTextBrush}"
-                                                                               FontSize="14" />
-                                                                    <TextBlock
-                                                                        Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}"
-                                                                        FontSize="10"
-                                                                        Foreground="{DynamicResource SecondaryTextBrush }"
-                                                                        HorizontalAlignment="Right" />
+                                                            <Grid HorizontalAlignment="Right">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <StackPanel Grid.Column="0"
+                                                                            Style="{StaticResource MessageContextStyle}"
+                                                                            Orientation="Horizontal">
+                                                                    <Button hc:BorderElement.CornerRadius="20"
+                                                                            Width="28"
+                                                                            Height="28"
+                                                                            BorderThickness="0"
+                                                                            ToolTip="Xoá"
+                                                                            Background="{DynamicResource DangerBrush}"
+                                                                            Foreground="{DynamicResource MainContentBackgroundBrush}">
+                                                                        <materialIcons:MaterialIcon Kind="AlertCircle"
+                                                                            Width="16"
+                                                                            Height="16" />
+                                                                    </Button>
+                                                                    <Button hc:BorderElement.CornerRadius="20"
+                                                                            Width="28"
+                                                                            Height="28"
+                                                                            Margin="5"
+                                                                            BorderThickness="0"
+                                                                            ToolTip="Xoá"
+                                                                            Background="{DynamicResource DangerBrush}"
+                                                                            Foreground="{DynamicResource MainContentBackgroundBrush}">
+                                                                        <materialIcons:MaterialIcon Kind="TrashEmpty"
+                                                                            Width="16"
+                                                                            Height="16" />
+                                                                    </Button>
                                                                 </StackPanel>
-                                                            </Border>
+                                                                <Border Grid.Column="1"
+                                                                        Padding="6"
+                                                                        CornerRadius="5"
+                                                                        Background="{DynamicResource MainContentBackgroundBrush}"
+                                                                        Margin="5">
+                                                                    <StackPanel>
+                                                                        <TextBlock Text="{Binding Content}"
+                                                                            Foreground="{DynamicResource PrimaryTextBrush}"
+                                                                            FontSize="14" />
+                                                                        <TextBlock
+                                                                            Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}"
+                                                                            FontSize="10"
+                                                                            Foreground="{DynamicResource SecondaryTextBrush }"
+                                                                            HorizontalAlignment="Right" />
+                                                                    </StackPanel>
+                                                                </Border>
+                                                            </Grid>
                                                         </DataTemplate>
                                                     </Setter.Value>
                                                 </Setter>

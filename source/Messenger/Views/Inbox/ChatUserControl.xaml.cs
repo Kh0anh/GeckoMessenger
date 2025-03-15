@@ -29,5 +29,15 @@ namespace Messenger.Views.Inbox
         {
             ToggleSearchMessage.IsChecked = !ToggleSearchMessage.IsChecked;
         }
+
+        private void MessageContextOpen_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button && button.ContextMenu != null)
+            {
+                button.ContextMenu.PlacementTarget = button;
+                button.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
+                button.ContextMenu.IsOpen = true;
+            }
+        }
     }
 }
