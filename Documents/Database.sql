@@ -192,3 +192,27 @@ ADD FOREIGN KEY (AttachmentTypeID) REFERENCES AttachmentType(AttachmentTypeID);
 
 ALTER TABLE MessageDelete
 ADD FOREIGN KEY (DeleteTypeID) REFERENCES DeleteType(DeleteTypeID);
+
+INSERT INTO ConversationType (ConversationTypeName)
+VALUES ('CHAT'), ('GROUP');
+
+INSERT INTO GroupType (GroupTypeName)
+VALUES ('PUBLIC'), ('INVITE'), ('PRIVATE');
+
+INSERT INTO ConversationRole (ConversationRoleName)
+VALUES ('OWNER'), ('STAFF'), ('USER');
+
+INSERT INTO MessageType (MessageTypeName)
+VALUES ('TEXT'), ('CALL'), ('AUDIO');
+
+INSERT INTO DeleteType (DeleteTypeName)
+VALUES ('ALL'), ('ONLYME');
+
+INSERT INTO AttachmentType (AttachmentTypeName)
+VALUES ('PHOTO'), ('VIDEO'), ('FILE');
+
+INSERT INTO Privacy (PrivacyName)
+VALUES ('NOBODY'), ('CONTACT'), ('PUBLIC');
+
+INSERT INTO ReportStatus(ReportStatusName)
+VALUES ('PENDING'), ('BANNED'), ('REVIEWED');

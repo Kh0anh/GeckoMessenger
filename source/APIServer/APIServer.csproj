@@ -110,6 +110,26 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHost.cs" />
+    <Compile Include="Models\Attachments.cs" />
+    <Compile Include="Models\AttachmentType.cs" />
+    <Compile Include="Models\BannedAccounts.cs" />
+    <Compile Include="Models\Contacts.cs" />
+    <Compile Include="Models\ConversationRole.cs" />
+    <Compile Include="Models\Conversations.cs" />
+    <Compile Include="Models\ConversationType.cs" />
+    <Compile Include="Models\DeleteConversations.cs" />
+    <Compile Include="Models\DeleteType.cs" />
+    <Compile Include="Models\GroupType.cs" />
+    <Compile Include="Models\Managers.cs" />
+    <Compile Include="Models\MessageDelete.cs" />
+    <Compile Include="Models\Messages.cs" />
+    <Compile Include="Models\MessageType.cs" />
+    <Compile Include="Models\Participants.cs" />
+    <Compile Include="Models\Privacy.cs" />
+    <Compile Include="Models\Reports.cs" />
+    <Compile Include="Models\ReportStatus.cs" />
+    <Compile Include="Models\Users.cs" />
+    <Compile Include="Models\UserSettings.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -119,7 +139,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DTOs\" />
-    <Folder Include="Models\" />
     <Folder Include="Services\" />
     <Folder Include="Utils\" />
   </ItemGroup>

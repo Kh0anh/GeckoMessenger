@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "D:\\GeckoMessenger\\demo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|D:\\GeckoMessenger\\demo\\demoapi\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|d:\\geckomessenger\\demo\\demoapi\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
@@ -11,7 +11,7 @@
       "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\apphost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|d:\\geckomessenger\\demo\\demoapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|D:\\GeckoMessenger\\demo\\demoapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -110,7 +110,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -126,6 +126,19 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "App.config",
+              "DocumentMoniker": "D:\\GeckoMessenger\\demo\\DemoAPI\\App.config",
+              "RelativeDocumentMoniker": "DemoAPI\\App.config",
+              "ToolTip": "D:\\GeckoMessenger\\demo\\DemoAPI\\App.config",
+              "RelativeToolTip": "DemoAPI\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-02-26T22:50:23.035Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "AuthService.cs",
               "DocumentMoniker": "D:\\GeckoMessenger\\demo\\DemoAPI\\Services\\AuthService.cs",
@@ -134,8 +147,7 @@
               "RelativeToolTip": "DemoAPI\\Services\\AuthService.cs",
               "ViewState": "AgIAAD4AAAAAAAAAAAAAABQAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T22:12:50.741Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T22:12:50.741Z"
             },
             {
               "$type": "Bookmark",
@@ -187,8 +199,7 @@
               "RelativeToolTip": "DemoAPI\\AppHost.cs",
               "ViewState": "AgIAAAwAAAAAAAAAAAAAABEAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T22:01:03.553Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T22:01:03.553Z"
             },
             {
               "$type": "Document",
@@ -201,19 +212,6 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
               "WhenOpened": "2025-02-27T17:38:14.879Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "App.config",
-              "DocumentMoniker": "D:\\GeckoMessenger\\demo\\DemoAPI\\App.config",
-              "RelativeDocumentMoniker": "DemoAPI\\App.config",
-              "ToolTip": "D:\\GeckoMessenger\\demo\\DemoAPI\\App.config",
-              "RelativeToolTip": "DemoAPI\\App.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-02-26T22:50:23.035Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
