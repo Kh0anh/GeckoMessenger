@@ -86,7 +86,7 @@
                 </Button>
                 <ToggleButton x:Name="ToggleChatInfo"
                               BorderThickness="0"
-                              IsChecked="False"
+                              IsChecked="True"
                               Style="{StaticResource ToggleButtonFlip}"
                               Grid.Column="4">
                     <hc:StatusSwitchElement.CheckedElement>

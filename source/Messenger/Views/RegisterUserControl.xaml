@@ -79,6 +79,15 @@
                          hc:InfoElement.TitlePlacement="Top"
                          hc:InfoElement.Necessary="True"/>
 
+            <!-- Password -->
+            <hc:DatePicker Margin="0,0,0,15"
+                         Height="66"
+                         FontSize="14"
+                         Text="1/1/2004"
+                         hc:InfoElement.Title="NGÀY SINH"
+                         hc:InfoElement.TitlePlacement="Top"
+                         hc:InfoElement.Necessary="True"/>
+
             <!-- Next -->
             <Button Content="Tiếp tục"
                     Style="{StaticResource ButtonPrimary}"
