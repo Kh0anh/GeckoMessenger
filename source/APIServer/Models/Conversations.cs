@@ -25,5 +25,14 @@ namespace APIServer.Models
         public byte? GroupTypeID { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        [Reference]
+        public User Creator { get; set; }
+
+        [Reference]
+        public ConversationType ConversationType { get; set; }
+
+        [Reference]
+        public GroupType GroupType { get; set; }
     }
 }

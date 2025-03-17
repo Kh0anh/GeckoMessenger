@@ -24,5 +24,14 @@ namespace APIServer.Models
         public DateTime CreatedAt { get; set; }
 
         public DateTime? DeleteDate { get; set; }
+
+        [Reference]
+        public Conversation Conversation { get; set; }
+
+        [Reference]
+        public User User { get; set; }
+
+        [Reference]
+        public ConversationRole ConversationRole { get; set; }
     }
 }

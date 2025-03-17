@@ -21,5 +21,14 @@ namespace APIServer.Models
         public byte MessageType { get; set; }
 
         public DateTime CreatedAt { get; set; }
+
+        [Reference]
+        public Conversation Conversation { get; set; }
+
+        [Reference]
+        public User Sender { get; set; }
+
+        [Reference]
+        public MessageType MessageTypeRef { get; set; }
     }
 }
