@@ -45,3 +45,6 @@ C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\APIServer\obj\Debug\
 C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\APIServer\obj\Debug\APIServer.csproj.Up2Date
 C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\APIServer\obj\Debug\APIServer.exe
 C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\APIServer\obj\Debug\APIServer.pdb
+C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\APIServer\bin\Debug\ServiceStack.Jwks.dll
+C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\APIServer\bin\Debug\ServiceStack.OrmLite.SqlServer.dll
+C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\APIServer\bin\Debug\ServiceStack.OrmLite.SqlServer.xml
