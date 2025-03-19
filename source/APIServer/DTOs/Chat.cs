@@ -33,6 +33,37 @@ namespace APIServer.DTOs
         public DateTime After { get; set; }
     }
 
+    [Route("/chat/deleteMessage")]
+    public class DeleteMessage : IReturn<DeleteMessageResponse>
+    {
+        public int MessageID { get; set; }
+        public string DeleteType { get; set; }
+    }
+
+    [Route("/chat/changeNickname")]
+    public class ChangeNickname : IReturn<ChangeNicknameResponse>
+    {
+        public int ConversationID { get; set; }
+        public string Nickname { get; set; }
+    }
+
+    [Route("/chat/sendMessage")]
+    public class SendMessage : IReturn<SendMessageResponse>
+    {
+        public int ConversationID { get; set; }
+        public string Content { get; set; }
+        public string MessageType { get; set; }
+        public InAttachment[] Attachments { get;set; }
+    }
+
+    public class SendMessageResponse { 
+        public MessageResponse Message { get; set; }
+    }
+
+    public class ChangeNicknameResponse { }
+
+    public class DeleteMessageResponse { }
+
     public class GetMessagesResponse
     {
         public MessageResponse[] Messages { get; set; }
@@ -106,5 +137,12 @@ namespace APIServer.DTOs
         public string ThumnailURL { get; set; }
         public string FileURL { get; set; }
         public DateTime CreatedAt { get; set; }
+    }
+
+    public class InAttachment
+    {
+        public string AttachmentType { get; set; }
+        public string FileName { get; set; }
+        public byte[] FileData { get; set; }
     }
 }

@@ -1,17 +1,15 @@
-﻿using ServiceStack;
+﻿using APIServer.DTOs;
+using APIServer.Models;
+using APIServer.Utils;
+using ServiceStack;
 using ServiceStack.Data;
+using ServiceStack.IO;
+using ServiceStack.OrmLite;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using APIServer.Models;
-using ServiceStack.OrmLite;
-using ServiceStack.Script;
-using APIServer.DTOs;
-using DeleteConversation = APIServer.DTOs.DeleteConversation;
-using System.Collections;
 
 namespace APIServer.Services
 {
@@ -19,7 +17,7 @@ namespace APIServer.Services
     {
         public IDbConnectionFactory DB { get; set; }
 
-        public object Post(DTOs.NewChat request)
+        public object Post(NewChat request)
         {
             //Xác thực token
             var session = this.GetSession();
@@ -41,7 +39,7 @@ namespace APIServer.Services
                 if (participant == null)
                 {
                     return new HttpResult(new
-                        { Error = "ParticipantNotFound", Message = "The participant does not exist." })
+                    { Error = "ParticipantNotFound", Message = "The participant does not exist." })
                     {
                         StatusCode = HttpStatusCode.Unauthorized
                     };
@@ -134,7 +132,7 @@ namespace APIServer.Services
                 if (conversation == null)
                 {
                     return new HttpResult(new
-                        { Error = "ConversationNotFound", Message = "Conversation does not exist." })
+                    { Error = "ConversationNotFound", Message = "Conversation does not exist." })
                     {
                         StatusCode = HttpStatusCode.OK
                     };
@@ -146,7 +144,7 @@ namespace APIServer.Services
                 if (participant == null)
                 {
                     return new HttpResult(new
-                        { Error = "ParticipantNotFound", Message = "You are not a participant in the conversation." })
+                    { Error = "ParticipantNotFound", Message = "You are not a participant in the conversation." })
                     {
                         StatusCode = HttpStatusCode.OK
                     };
@@ -157,7 +155,7 @@ namespace APIServer.Services
                     participant.ConversationRole.ConversationRoleName != "OWNER")
                 {
                     return new HttpResult(new
-                        { Error = "PermissionDenied", Message = "You do not have permission to delete." })
+                    { Error = "PermissionDenied", Message = "You do not have permission to delete." })
                     {
                         StatusCode = HttpStatusCode.OK
                     };
@@ -300,7 +298,7 @@ namespace APIServer.Services
                 if (participant == null)
                 {
                     return new HttpResult(new
-                        { Error = "ParticipantNotFound", Message = "You are not a participant in the conversation." })
+                    { Error = "ParticipantNotFound", Message = "You are not a participant in the conversation." })
                     {
                         StatusCode = HttpStatusCode.OK
                     };
@@ -376,6 +374,183 @@ namespace APIServer.Services
 
                 return new HttpResult(new GetMessagesResponse() { Messages = messageResponses.ToArray() },
                     HttpStatusCode.OK);
+            }
+        }
+
+        public object Post(DTOs.DeleteMessage request)
+        {
+            var session = this.GetSession();
+            if (!session.IsAuthenticated)
+            {
+                return new HttpResult(new { Error = "TokenUnauthorized", Message = "User is not authenticated." })
+                {
+                    StatusCode = HttpStatusCode.Unauthorized
+                };
+            }
+
+            int userID = int.Parse(session.UserAuthId);
+
+            using (var db = DB.Open())
+            {
+                var message = db.Single<Message>(m => m.MessageID == request.MessageID);
+                if (message == null)
+                {
+                    return new HttpResult(new
+                    { Error = "MessageNotFound", Message = "Message doenst not exist." })
+                    {
+                        StatusCode = HttpStatusCode.OK
+                    };
+                }
+
+                Participant participant =
+                    db.Single<Participant>(p => p.ConversationID == message.ConversationID && p.UserID == userID);
+                if (participant == null)
+                {
+                    return new HttpResult(new
+                    { Error = "ParticipantNotFound", Message = "You are not a participant in the conversation." })
+                    {
+                        StatusCode = HttpStatusCode.OK
+                    };
+                }
+
+                DeleteType deleteType = db.Single<DeleteType>(dt => dt.DeleteTypeName == request.DeleteType);
+                if (deleteType == null)
+                {
+                    return new HttpResult(new
+                    { Error = "DeletyeTypeNotFound", Message = "Delete type doenst not exist." })
+                    {
+                        StatusCode = HttpStatusCode.OK
+                    };
+                }
+
+                MessageDelete messageDelete = new MessageDelete
+                {
+                    MessageID = message.MessageID,
+                    DeleteByUserID = userID,
+                    DeleteTypeID = deleteType.DeleteTypeID,
+                };
+
+                db.Insert(messageDelete);
+
+                return new HttpResult(new DeleteMessageResponse { }, HttpStatusCode.OK);
+            }
+        }
+
+        public object Post(DTOs.ChangeNickname request)
+        {
+            var session = this.GetSession();
+            if (!session.IsAuthenticated)
+            {
+                return new HttpResult(new { Error = "TokenUnauthorized", Message = "User is not authenticated." })
+                {
+                    StatusCode = HttpStatusCode.Unauthorized
+                };
+            }
+
+            int userID = int.Parse(session.UserAuthId);
+
+            using (var db = DB.Open())
+            {
+                Participant participant =
+                    db.Single<Participant>(p => p.ConversationID == request.ConversationID && p.UserID == userID);
+                if (participant == null)
+                {
+                    return new HttpResult(new
+                    { Error = "ParticipantNotFound", Message = "You are not a participant in the conversation." })
+                    {
+                        StatusCode = HttpStatusCode.OK
+                    };
+                }
+
+                participant.NickName = request.Nickname;
+                db.Update(participant);
+
+                return new HttpResult(new DTOs.ChangeNicknameResponse { }, HttpStatusCode.OK);
+            }
+        }
+
+        public object Post(DTOs.SendMessage request)
+        {
+            var session = this.GetSession();
+            if (!session.IsAuthenticated)
+            {
+                return new HttpResult(new { Error = "TokenUnauthorized", Message = "User is not authenticated." })
+                {
+                    StatusCode = HttpStatusCode.Unauthorized
+                };
+            }
+
+            int userID = int.Parse(session.UserAuthId);
+
+            using (var db = DB.Open())
+            {
+                Participant participant =
+                  db.Single<Participant>(p => p.ConversationID == request.ConversationID && p.UserID == userID);
+                if (participant == null)
+                {
+                    return new HttpResult(new
+                    { Error = "ParticipantNotFound", Message = "You are not a participant in the conversation." })
+                    {
+                        StatusCode = HttpStatusCode.OK
+                    };
+                }
+
+                MessageType messageType = db.Single<MessageType>(dt => dt.MessageTypeName == request.MessageType);
+                if (messageType == null)
+                {
+                    return new HttpResult(new
+                    { Error = "MessageTypeNotFound", Message = "Delete type doenst not exist." })
+                    {
+                        StatusCode = HttpStatusCode.OK
+                    };
+                }
+
+                Message newMessage = new Message
+                {
+                    ConversationID = request.ConversationID,
+                    SenderID = userID,
+                    Content = request.Content,
+                    MessageType = messageType.MessageTypeID,
+                };
+
+                db.Save(newMessage);
+
+                List<Attachment> attachmentInserts = new List<Attachment>();
+                foreach (var attachment in request.Attachments)
+                {
+                    AttachmentType attachmentType = db.Single<AttachmentType>(a => a.AttachmentTypeName == attachment.AttachmentType);
+                    if (attachmentType == null)
+                    {
+                        return new HttpResult(new
+                        { Error = "AttachmentTypeNotFound", Message = "Attachment type doenst not exist." })
+                        {
+                            StatusCode = HttpStatusCode.OK
+                        };
+                    }
+
+                    string fileName = string.Format("{0}_{1}", Hash.GetMD5HashByString(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + Hash.GetMD5Hash(attachment.FileData)).Substring(0,8), attachment.FileName.Replace(" ","_"));
+
+                    VirtualFiles.WriteFile(fileName, attachment.FileData);
+
+                    attachmentInserts.Add(new Attachment
+                    {
+                        MessageID = newMessage.MessageID,
+                        AttachmentTypeID = attachmentType.AttachmentTypeID,
+                        ThumbnailURL = "",
+                        FileURL = fileName
+                    });
+                }
+
+                foreach (var attachmentInsert in attachmentInserts)
+                {
+                    db.Save(attachmentInsert);
+                }
+
+               //...
+
+                return new HttpResult(new SendMessageResponse {
+
+                }, HttpStatusCode.OK);
             }
         }
     }
