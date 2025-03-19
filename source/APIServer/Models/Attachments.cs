@@ -24,5 +24,11 @@ namespace APIServer.Models
         public DateTime CreatedAt { get; set; }
 
         public DateTime? DeleteDate { get; set; }
+
+        [Reference]
+        public Message Message { get; set; }
+
+        [Reference]
+        public AttachmentType AttachmentType { get; set; }
     }
 }

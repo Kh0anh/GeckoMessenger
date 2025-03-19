@@ -104,9 +104,7 @@ namespace APIServer.Services
                     Avatar = "storages/DefaultAvatar.png",
                     CreatedAt = DateTime.UtcNow
                 };
-
-                db.Insert(user);
-                user.UserID = (int)db.LastInsertId();
+                db.Save(user);
 
                 var contactPrivacy = db.Single<Privacy>(p => p.PrivacyName == "CONTACT");
                 var publicPrivacy = db.Single<Privacy>(p => p.PrivacyName == "PUBLIC");
@@ -123,8 +121,7 @@ namespace APIServer.Services
                     InviteGroupPrivacy = contactPrivacy.PrivacyID,
                     MessagePrivacy = publicPrivacy.PrivacyID,
                 };
-
-                db.Insert(userSetting);
+                db.Save(userSetting);
 
                 var authFeature = HostContext.GetPlugin<AuthFeature>();
                 var jwtProvider = authFeature.AuthProviders.OfType<JwtAuthProvider>().FirstOrDefault();
