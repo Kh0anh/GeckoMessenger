@@ -16,15 +16,17 @@ namespace APIServer.Services
     {
         public IDbConnectionFactory DB { get; set; }
 
+        //Đăng nhập
         public object Post(DTOs.Login request)
         {
             if ((request.Username.IsNullOrEmpty() && request.Email.IsNullOrEmpty()) ||
                 request.Password.IsNullOrEmpty())
             {
-                return new HttpResult(new { Error = "RequiredField", Message = "This field cannot be empty." })
+                return new HttpResult(new DTOs.LoginResponse
                 {
-                    StatusCode = HttpStatusCode.OK
-                };
+                    Error = "RequiredField",
+                    Message = "This field cannot be empty."
+                }, HttpStatusCode.BadRequest);
             }
 
             using (var db = DB.Open())
@@ -34,10 +36,11 @@ namespace APIServer.Services
 
                 if (user == null || !verifyPassword(request.Password, user.HashPassword))
                 {
-                    return new HttpResult(new { Error = "Incorrect", Message = "The username or password is incorrect." })
+                    return new HttpResult(new DTOs.LoginResponse
                     {
-                        StatusCode = HttpStatusCode.OK
-                    };
+                        Error = "Incorrect",
+                        Message = "The username or password is incorrect."
+                    }, HttpStatusCode.Unauthorized);
                 }
 
                 var authFeature = HostContext.GetPlugin<AuthFeature>();
@@ -45,51 +48,48 @@ namespace APIServer.Services
 
                 if (jwtProvider == null)
                 {
-                    return new HttpResult(new { Error = "ServerError", Message = "JWT Authentication is not configured." })
+                    return new HttpResult(new DTOs.LoginResponse
                     {
-                        StatusCode = HttpStatusCode.InternalServerError
-                    };
+                        Error = "ServerError",
+                        Message = "JWT Authentication is not configured."
+                    }, HttpStatusCode.InternalServerError);
                 }
 
                 var token = jwtProvider.CreateJwtBearerToken(new AuthUserSession
                 {
                     UserAuthId = user.UserID.ToString(),
                 });
+
                 return new HttpResult(new DTOs.LoginResponse
                 {
-                    UserID = user.UserID,
-                    Username = user.Username,
-                    Email = user.Email,
-                    PhoneNumber = user.PhoneNumber,
-                    Birthday = user.Birthday,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Bio = user.Bio,
-                    Avatar = user.Avatar,
                     Token = token,
+                    Message = "Login successful"
                 }, HttpStatusCode.OK);
             }
         }
 
+        //Đăng ký
         public object Post(DTOs.Register request)
         {
             if (request.Username.IsNullOrEmpty() || request.Email.IsNullOrEmpty() ||
                 request.Password.IsNullOrEmpty() || request.PhoneNumber.IsNullOrEmpty())
             {
-                return new HttpResult(new { Error = "RequiredField", Message = "All fields are required." })
+                return new HttpResult(new DTOs.RegisterResponse
                 {
-                    StatusCode = HttpStatusCode.OK
-                };
+                    Error = "RequiredField",
+                    Message = "All fields are required."
+                }, HttpStatusCode.BadRequest);
             }
 
             using (var db = DB.Open())
             {
                 if (db.Exists<User>(u => u.Username == request.Username || u.Email == request.Email))
                 {
-                    return new HttpResult(new { Error = "AlreadyExists", Message = "Username or Email already exists." })
+                    return new HttpResult(new DTOs.RegisterResponse
                     {
-                        StatusCode = HttpStatusCode.OK
-                    };
+                        Error = "AlreadyExists",
+                        Message = "Username or Email already exists."
+                    }, HttpStatusCode.Conflict);
                 }
 
                 var user = new User
@@ -123,15 +123,83 @@ namespace APIServer.Services
                 };
                 db.Save(userSetting);
 
-                return new HttpResult(new DTOs.RegisterResponse { }, HttpStatusCode.OK);
+                var authFeature = HostContext.GetPlugin<AuthFeature>();
+                var jwtProvider = authFeature.AuthProviders.OfType<JwtAuthProvider>().FirstOrDefault();
+
+                if (jwtProvider == null)
+                {
+                    return new HttpResult(new DTOs.RegisterResponse
+                    {
+                        Error = "ServerError",
+                        Message = "JWT Authentication is not configured."
+                    }, HttpStatusCode.InternalServerError);
+                }
+
+                var token = jwtProvider.CreateJwtBearerToken(new AuthUserSession
+                {
+                    UserAuthId = user.UserID.ToString(),
+                });
+
+                return new HttpResult(new DTOs.RegisterResponse
+                {
+                    Token = token,
+                    Message = "Registration successful"
+                }, HttpStatusCode.Created);
             }
         }
 
+        //Đổi mật khẩu
+        public object Post(DTOs.ChangePassword request)
+        {
+            if (request.OldPassword.IsNullOrEmpty() || request.NewPassword.IsNullOrEmpty())
+            {
+                return new HttpResult(new DTOs.ChangePasswordResponse
+                {
+                    Error = "RequiredField",
+                    Message = "Old password and new password are required."
+                }, HttpStatusCode.BadRequest);
+            }
+
+            using (var db = DB.Open())
+            {
+                var userId = int.Parse(GetSession().UserAuthId);
+                var user = db.SingleById<User>(userId);
+
+                if (user == null)
+                {
+                    return new HttpResult(new DTOs.ChangePasswordResponse
+                    {
+                        Error = "NotFound",
+                        Message = "User not found."
+                    }, HttpStatusCode.NotFound);
+                }
+
+                // Xác thực mật khẩu cũ
+                if (!verifyPassword(request.OldPassword, user.HashPassword))
+                {
+                    return new HttpResult(new DTOs.ChangePasswordResponse
+                    {
+                        Error = "Incorrect",
+                        Message = "Current password is incorrect."
+                    }, HttpStatusCode.Unauthorized);
+                }
+
+                // Hash và cập nhật mật khẩu mới
+                user.HashPassword = hashPassword(request.NewPassword);
+                db.Update<User>(new { HashPassword = user.HashPassword }, u => u.UserID == userId);
+
+                return new HttpResult(new DTOs.ChangePasswordResponse
+                {
+                    Message = "Password changed successfully"
+                }, HttpStatusCode.OK);
+            }
+        }
 
         private static string hashPassword(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password, workFactor: 12);
         }
+
         private static bool verifyPassword(string password, string hash)
         {
             return BCrypt.Net.BCrypt.Verify(password, hash);

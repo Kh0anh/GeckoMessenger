@@ -14,9 +14,16 @@ namespace APIServer.DTOs
         public string Email { get; set; }
         public string Password { get; set; }
     }
+    public class LoginResponse
+    {
+        public string Error { get; set; }
+        public string Message { get; set; }
+        public string Token { get; set; }
+    }
+
 
     [Route("/auth/register")]
-    public class Register : IReturn<LoginResponse>
+    public class Register : IReturn<RegisterResponse>
     {
         public string Username { get; set; }
         public string Email { get; set; }
@@ -27,19 +34,24 @@ namespace APIServer.DTOs
         public string LastName { get; set; }
     }
 
-    public class LoginResponse
+    public class RegisterResponse 
     {
-        public int UserID { get; set; }
-        public string Username { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public DateTime Birthday { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Bio { get; set; }
-        public string Avatar { get; set; }
+        public string Error { get; set; }
+        public string Message { get; set; }
         public string Token { get; set; }
     }
 
-    public class RegisterResponse { }
+
+    [Route("/auth/changePassword")]
+    public class ChangePassword : IReturn<ChangePasswordResponse>
+    {
+        public string OldPassword { get; set; }
+        public string NewPassword { get; set; }
+    }
+
+    public class ChangePasswordResponse 
+    {
+        public string Error { get; set; }
+        public string Message { get; set; }
+    }
 }
