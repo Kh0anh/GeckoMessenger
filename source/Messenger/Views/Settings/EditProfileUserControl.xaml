@@ -168,7 +168,7 @@
                         <hc:TextBox.Text>
                             <Binding Path="EditUsername" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
-                                    <hc:RegexRule Pattern="^[a-zA-Z0-9._]{3,16}$"
+                                    <hc:RegexRule Pattern="^[a-zA-Z0-9._]{3,32}$"
                                                   ErrorContent="Định dạng tên người dùng sai" />
                                 </Binding.ValidationRules>
                             </Binding>

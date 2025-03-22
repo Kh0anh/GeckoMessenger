@@ -1,13 +1,11 @@
 ﻿using APIServer.Models;
 using ServiceStack;
-using ServiceStack.Auth;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
-using System.IO;
 
 namespace APIServer.Services
 {
@@ -20,7 +18,7 @@ namespace APIServer.Services
         {
             using (var db = DB.Open())
             {
-                var exists = db.Exists<User>(u => 
+                var exists = db.Exists<Users>(u =>
                     (!request.Username.IsNullOrEmpty() && u.Username == request.Username) ||
                     (!request.Email.IsNullOrEmpty() && u.Email == request.Email) ||
                     (!request.PhoneNumber.IsNullOrEmpty() && u.PhoneNumber == request.PhoneNumber)
@@ -39,7 +37,7 @@ namespace APIServer.Services
         {
             using (var db = DB.Open())
             {
-                var user = db.SingleById<User>(request.UserID);
+                var user = db.SingleById<Users>(request.UserID);
                 if (user == null)
                 {
                     return new HttpResult(new DTOs.GetInfoResponse
@@ -60,9 +58,10 @@ namespace APIServer.Services
                         Birthday = user.Birthday,
                         FirstName = user.FirstName,
                         LastName = user.LastName,
-                        Avatar = user.Avatar
+                        Avatar = user.Avatar,
+                        CreatedAt = user.CreatedAt,
                     }
-                });
+                }, HttpStatusCode.OK);
             }
         }
 
@@ -71,7 +70,7 @@ namespace APIServer.Services
         {
             using (var db = DB.Open())
             {
-                var user = db.SingleById<User>(request.UserID);
+                var user = db.SingleById<Users>(request.UserID);
                 if (user == null)
                 {
                     return new HttpResult(new DTOs.ActiveStatusResponse
@@ -89,7 +88,7 @@ namespace APIServer.Services
                 {
                     Message = "Last login updated successfully",
                     IsActive = true
-                });
+                }, HttpStatusCode.OK);
             }
         }
 
@@ -98,7 +97,7 @@ namespace APIServer.Services
         {
             using (var db = DB.Open())
             {
-                var user = db.SingleById<User>(userId);
+                var user = db.SingleById<Users>(userId);
                 if (user == null)
                 {
                     return new HttpResult(new DTOs.ActiveStatusResponse
@@ -115,7 +114,7 @@ namespace APIServer.Services
                 {
                     Message = "Status retrieved successfully",
                     IsActive = isActive
-                });
+                }, HttpStatusCode.OK);
             }
         }
 
@@ -125,7 +124,7 @@ namespace APIServer.Services
             var userId = int.Parse(GetSession().UserAuthId);
             using (var db = DB.Open())
             {
-                var user = db.SingleById<User>(userId);
+                var user = db.SingleById<Users>(userId);
                 if (user == null)
                 {
                     return new HttpResult(new DTOs.UpdateInfoResponse
@@ -137,7 +136,7 @@ namespace APIServer.Services
 
                 // Kiểm tra email/phone đã tồn tại chưa
                 if (!request.Email.IsNullOrEmpty() && request.Email != user.Email &&
-                    db.Exists<User>(u => u.Email == request.Email))
+                    db.Exists<Users>(u => u.Email == request.Email))
                 {
                     return new HttpResult(new DTOs.UpdateInfoResponse
                     {
@@ -147,7 +146,7 @@ namespace APIServer.Services
                 }
 
                 if (!request.PhoneNumber.IsNullOrEmpty() && request.PhoneNumber != user.PhoneNumber &&
-                    db.Exists<User>(u => u.PhoneNumber == request.PhoneNumber))
+                    db.Exists<Users>(u => u.PhoneNumber == request.PhoneNumber))
                 {
                     return new HttpResult(new DTOs.UpdateInfoResponse
                     {
@@ -157,7 +156,7 @@ namespace APIServer.Services
                 }
 
                 // Cập nhật thông tin
-                db.Update<User>(new
+                db.Update<Users>(new
                 {
                     Email = request.Email ?? user.Email,
                     PhoneNumber = request.PhoneNumber ?? user.PhoneNumber,
@@ -169,7 +168,7 @@ namespace APIServer.Services
                 return new HttpResult(new DTOs.UpdateInfoResponse
                 {
                     Message = "Information updated successfully"
-                });
+                }, HttpStatusCode.OK);
             }
         }
 
@@ -189,7 +188,7 @@ namespace APIServer.Services
             var userId = int.Parse(GetSession().UserAuthId);
             using (var db = DB.Open())
             {
-                var user = db.SingleById<User>(userId);
+                var user = db.SingleById<Users>(userId);
                 if (user == null)
                 {
                     return new HttpResult(new DTOs.UpdateAvatarResponse
@@ -203,7 +202,7 @@ namespace APIServer.Services
                 {
                     // Lưu avatar và cập nhật đường dẫn
                     var avatarUrl = UpdateAvatar(request.Avatar, userId);
-                    db.Update<User>(new { Avatar = avatarUrl }, u => u.UserID == userId);
+                    db.Update<Users>(new { Avatar = avatarUrl }, u => u.UserID == userId);
 
                     return new HttpResult(new DTOs.UpdateAvatarResponse
                     {
@@ -251,11 +250,11 @@ namespace APIServer.Services
 
             using (var db = DB.Open())
             {
-                var query = db.From<User>();
-                
+                var query = db.From<Users>();
+
                 // Tìm kiếm theo tên (FirstName hoặc LastName) hoặc email
                 var searchTerm = $"%{request.Query}%";
-                query = query.Where(u => 
+                query = query.Where(u =>
                     u.FirstName.Contains(searchTerm) ||
                     u.LastName.Contains(searchTerm) ||
                     u.Email.Contains(searchTerm) ||
@@ -327,10 +326,10 @@ namespace APIServer.Services
                 // Lưu file với tên đặc biệt để tránh ghi đè
                 string fileName = $"{userId}_{DateTime.UtcNow.Ticks}.jpg";
                 string filePath = Path.Combine(storageDir, fileName);
-                
+
                 // Ghi file
                 File.WriteAllBytes(filePath, imageBytes);
-                
+
                 // Trả về đường dẫn tương đối để hiển thị trong response
                 return $"/Resources/avatars/{fileName}";
             }

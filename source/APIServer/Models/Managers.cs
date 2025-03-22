@@ -2,7 +2,7 @@
 
 namespace APIServer.Models
 {
-    public class Manager
+    public class Managers
     {
         [PrimaryKey]
         [AutoIncrement]

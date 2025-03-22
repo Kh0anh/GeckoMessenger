@@ -1,5 +1,4 @@
 ﻿using Messenger.ViewModels;
-using System.Windows;
 using System.Windows.Controls;
 
 namespace Messenger.Views
@@ -19,14 +18,6 @@ namespace Messenger.Views
             InitializeComponent();
             _viewmodel = viewmodel;
             DataContext = viewmodel;
-        }
-
-        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is LoginViewModel viewModel)
-            {
-                _viewmodel.password = pwdPassword.Password;
-            }
         }
     }
 }

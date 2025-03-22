@@ -121,8 +121,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppHost.cs" />
+    <Compile Include="DTOs\Admin.cs" />
     <Compile Include="DTOs\Auth.cs" />
     <Compile Include="DTOs\Chat.cs" />
+    <Compile Include="DTOs\Contact.cs" />
+    <Compile Include="DTOs\Report.cs" />
+    <Compile Include="DTOs\User.cs" />
     <Compile Include="Models\Attachments.cs" />
     <Compile Include="Models\AttachmentType.cs" />
     <Compile Include="Models\BannedAccounts.cs" />
@@ -146,8 +150,12 @@
     <Compile Include="Plugins\FilePlugin.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AdminService.cs" />
     <Compile Include="Services\AuthService.cs" />
     <Compile Include="Services\ChatService.cs" />
+    <Compile Include="Services\ContactService.cs" />
+    <Compile Include="Services\ReportService.cs" />
+    <Compile Include="Services\UserService.cs" />
     <Compile Include="Utils\Hash.cs" />
     <Compile Include="Utils\ResourceHelper.cs" />
   </ItemGroup>

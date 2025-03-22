@@ -1,12 +1,6 @@
-﻿using ServiceStack.IO;
+﻿using APIServer.Utils;
 using ServiceStack;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Hosting;
-using APIServer.Utils;
+using ServiceStack.IO;
 using System.IO;
 
 namespace APIServer.Plugins

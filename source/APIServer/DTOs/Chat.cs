@@ -1,11 +1,5 @@
 ﻿using ServiceStack;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using APIServer.Models;
-using ServiceStack.DataAnnotations;
 
 namespace APIServer.DTOs
 {
@@ -22,15 +16,15 @@ namespace APIServer.DTOs
     }
 
     [Route("/chat/getConversations")]
-    public class GetConversations : IReturn<GetConversationResponse>{}
+    public class GetConversations : IReturn<GetConversationResponse> { }
 
     [Route("/chat/getMessages")]
     public class GetMessages : IReturn<GetMessagesResponse>
     {
         public int ConversationID { get; set; }
-        public int? Limit { get; set; }
-        public DateTime Before { get; set; }
-        public DateTime After { get; set; }
+        public int? Limit { get; set; } = null;
+        public DateTime? Before { get; set; } = null;
+        public DateTime? After { get; set; } = null;
     }
 
     [Route("/chat/deleteMessage")]
@@ -53,10 +47,33 @@ namespace APIServer.DTOs
         public int ConversationID { get; set; }
         public string Content { get; set; }
         public string MessageType { get; set; }
-        public InAttachment[] Attachments { get;set; }
+        public InAttachment[] Attachments { get; set; }
     }
 
-    public class SendMessageResponse { 
+    [Route("/chat/findChat")]
+    public class FindChat : IReturn<FindChatResponse>
+    {
+        public int UserID { get; set; }
+    }
+
+    [Route("/chat/findConversation")]
+    public class FindConversation : IReturn<FindConversationResponse>
+    {
+        public int ConversationID { get; set; }
+    }
+
+    public class FindConversationResponse
+    {
+        public ConversationResponse Conversation { get; set; }
+    }
+
+    public class FindChatResponse
+    {
+        public ConversationResponse Conversation { get; set; }
+    }
+
+    public class SendMessageResponse
+    {
         public MessageResponse Message { get; set; }
     }
 
@@ -78,14 +95,15 @@ namespace APIServer.DTOs
 
     public class NewChatResponse
     {
-        public int ConversationID { get; set; }
-        public string ConversationName { get; set; }
-        public string ConversationTitle { get; set; }
-        public int CreatorID { get; set; }
-        public string ConversationType { get; set; }
-        public string GroupType { get; set; }
-        public DateTime CreateAt { get; set; }
-        public ParticipantResponse[] Participants { get; set; }
+        public ConversationResponse Conversation { get; set; }
+        //public int ConversationID { get; set; }
+        //public string ConversationName { get; set; }
+        //public string ConversationTitle { get; set; }
+        //public int CreatorID { get; set; }
+        //public string ConversationType { get; set; }
+        //public string GroupType { get; set; }
+        //public DateTime CreateAt { get; set; }
+        //public ParticipantResponse[] Participants { get; set; }
     }
 
     public class ParticipantResponse
@@ -98,7 +116,8 @@ namespace APIServer.DTOs
         public DateTime CreatedAt { get; set; }
     }
 
-    public class ConversationResponse{
+    public class ConversationResponse
+    {
         public int ConversationID { get; set; }
         public string ConversationName { get; set; }
         public string ConversationTitle { get; set; }
@@ -109,6 +128,7 @@ namespace APIServer.DTOs
 
         public ParticipantResponse[] Participants { get; set; }
         public string LatestMessage { get; set; }
+        public DateTime LatestMessageTime { get; set; }
     }
 
     public class MessageResponse

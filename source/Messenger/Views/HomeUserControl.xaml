@@ -1,163 +1,205 @@
-﻿<UserControl x:Class="Messenger.Views.HomeUserControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
-             xmlns:local="clr-namespace:Messenger.Views"
-             mc:Ignorable="d" 
-             d:DesignHeight="450" 
-             d:DesignWidth="800">
+﻿<UserControl
+    x:Class="Messenger.Views.HomeUserControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:Messenger.Views"
+    xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignHeight="450"
+    d:DesignWidth="800"
+    mc:Ignorable="d">
     <Grid Background="{DynamicResource RegionBrush}">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="60"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="60" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <!-- Sidebar -->
-        <Border Grid.Column="0"
-                Background="{DynamicResource MainContentBackgroundBrush}"
-                BorderBrush="{DynamicResource BorderBrush}"
-                BorderThickness="0,0,1,0">
+        <!--  Sidebar  -->
+        <Border
+            Grid.Column="0"
+            Background="{DynamicResource MainContentBackgroundBrush}"
+            BorderBrush="{DynamicResource BorderBrush}"
+            BorderThickness="0,0,1,0">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="60"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="60" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <hc:Gravatar Id="{Binding UserAvatar}" 
-                             Style="{StaticResource GravatarCircle}"
-                             Width="50" 
-                             Height="50"
-                             Margin="5"
-                             Grid.Row="0">
-                </hc:Gravatar>
-                <Button Grid.Row="0"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Width="50"
-                        Height="50"
-                        x:Name="UserInfoOpen"
-                        Click="UserInfo_Click">
+                <hc:Gravatar
+                    Grid.Row="0"
+                    Width="50"
+                    Height="50"
+                    Margin="5"
+                    Id="{Binding UserAvatar}"
+                    Source="{Binding UserInfo.Avatar}"
+                    Style="{StaticResource GravatarCircle}" />
+                <Button
+                    x:Name="UserInfoOpen"
+                    Grid.Row="0"
+                    Width="50"
+                    Height="50"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="UserInfo_Click">
                     <Button.ContextMenu>
-                        <ContextMenu Placement="Right"
-                                     HorizontalOffset="50"
-                                     VerticalOffset="-50">
-                            <MenuItem Header="JeeryNguyen"
-                                      Foreground="{DynamicResource PrimaryTextBrush }"
-                                      FontWeight="Bold"
-                                      FontSize="14"
-                                      IsEnabled="False"/>
-                            <MenuItem Header="Xem hồ sơ"
-                                      Foreground="{DynamicResource PrimaryTextBrush }"
-                                      FontWeight="Bold" 
-                                      FontSize="12"
-                                      Command="{Binding OpenProfileViewCommand}">
+                        <ContextMenu
+                            HorizontalOffset="50"
+                            Placement="Right"
+                            VerticalOffset="-50">
+                            <MenuItem
+                                FontSize="14"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource PrimaryTextBrush}"
+                                Header="{Binding UserInfo.FullName}"
+                                IsEnabled="False" />
+                            <MenuItem
+                                Command="{Binding OpenProfileViewCommand}"
+                                FontSize="12"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource PrimaryTextBrush}"
+                                Header="Xem hồ sơ">
                                 <MenuItem.Icon>
-                                    <materialIcons:MaterialIcon Kind="OpenInNew" Width="16" Height="16"/>
+                                    <materialIcons:MaterialIcon
+                                        Width="16"
+                                        Height="16"
+                                        Kind="OpenInNew" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Header="Đăng xuất" 
-                                      Foreground="{DynamicResource DangerBrush}"
-                                      FontWeight="Bold" 
-                                      FontSize="12"
-                                      Command="">
+                            <MenuItem
+                                Command="{Binding LogoutCommand}"
+                                FontSize="12"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource DangerBrush}"
+                                Header="Đăng xuất">
                                 <MenuItem.Icon>
-                                    <materialIcons:MaterialIcon Kind="Logout" Width="16" Height="16"/>
+                                    <materialIcons:MaterialIcon
+                                        Width="16"
+                                        Height="16"
+                                        Kind="Logout" />
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>
                     </Button.ContextMenu>
                 </Button>
-                <Button Width="50"
-                        Height="50"
-                        Margin="0,20,0,0"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Grid.Row="1"
-                        Command="{Binding SwitchToInboxCommand}">
-                    <materialIcons:MaterialIcon Kind="MessageText"
-                                                Width="30"
-                                                Height="30"/>
+                <Button
+                    Grid.Row="1"
+                    Width="50"
+                    Height="50"
+                    Margin="0,20,0,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Command="{Binding SwitchToInboxCommand}">
+                    <materialIcons:MaterialIcon
+                        Width="30"
+                        Height="30"
+                        Kind="MessageText" />
                 </Button>
-                <Button Width="50"
-                        Height="50"
-                        Margin="0,5,0,0"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Grid.Row="2"
-                        Command="{Binding SwitchToContactCommand}">
-                    <materialIcons:MaterialIcon Kind="Contacts"
-                            Width="30"
-                            Height="30"/>
+                <Button
+                    Grid.Row="2"
+                    Width="50"
+                    Height="50"
+                    Margin="0,5,0,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Command="{Binding SwitchToContactCommand}">
+                    <materialIcons:MaterialIcon
+                        Width="30"
+                        Height="30"
+                        Kind="Contacts" />
                 </Button>
-                <Button Width="50"
-                        Height="50"
-                        Margin="0,5,0,5"
-                        Background="Transparent"
-                        BorderThickness="0"
-                        Grid.Row="3"
-                        VerticalAlignment="Bottom"
-                        x:Name="btSetting"
-                        Click="Settings_Click">
-                    <materialIcons:MaterialIcon Kind="Settings"
-                                                Width="30"
-                                                Height="30"/>
+                <Button
+                    x:Name="btSetting"
+                    Grid.Row="3"
+                    Width="50"
+                    Height="50"
+                    Margin="0,5,0,5"
+                    VerticalAlignment="Bottom"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Click="Settings_Click">
+                    <materialIcons:MaterialIcon
+                        Width="30"
+                        Height="30"
+                        Kind="Settings" />
                     <Button.ContextMenu>
-                        <ContextMenu Placement="Right"
-                                     HorizontalOffset="50"
-                                     VerticalOffset="-150">
-                            <MenuItem Header="GeckoMessenger v0.1"
-                                      Foreground="{DynamicResource PrimaryTextBrush }"
-                                      FontWeight="Medium"
-                                      FontSize="14"
-                                      IsEnabled="False"/>
-                            <MenuItem Header="Đổi màu nền"
-                                      Foreground="{DynamicResource PrimaryTextBrush }"
-                                      FontWeight="Medium" 
-                                      FontSize="12"
-                                      Command="{Binding OpenSettingsCommand}">
+                        <ContextMenu
+                            HorizontalOffset="50"
+                            Placement="Right"
+                            VerticalOffset="-150">
+                            <MenuItem
+                                FontSize="14"
+                                FontWeight="Medium"
+                                Foreground="{DynamicResource PrimaryTextBrush}"
+                                Header="GeckoMessenger v0.1"
+                                IsEnabled="False" />
+                            <MenuItem
+                                Command="{Binding OpenSettingsCommand}"
+                                FontSize="12"
+                                FontWeight="Medium"
+                                Foreground="{DynamicResource PrimaryTextBrush}"
+                                Header="Đổi màu nền">
                                 <MenuItem.Icon>
-                                    <materialIcons:MaterialIcon Kind="Color" Width="16" Height="16"/>
+                                    <materialIcons:MaterialIcon
+                                        Width="16"
+                                        Height="16"
+                                        Kind="Color" />
                                 </MenuItem.Icon>
-                                <MenuItem Header="Màu sáng"
-                                          Foreground="{DynamicResource PrimaryTextBrush }"
-                                          FontWeight="Medium"
-                                          FontSize="12"
-                                          Click="ChangeToSunny_OnClick">
+                                <MenuItem
+                                    Click="ChangeToSunny_OnClick"
+                                    FontSize="12"
+                                    FontWeight="Medium"
+                                    Foreground="{DynamicResource PrimaryTextBrush}"
+                                    Header="Màu sáng">
                                     <MenuItem.Icon>
-                                        <materialIcons:MaterialIcon Kind="WbSunny" Width="16" Height="16"/>
+                                        <materialIcons:MaterialIcon
+                                            Width="16"
+                                            Height="16"
+                                            Kind="WbSunny" />
                                     </MenuItem.Icon>
                                 </MenuItem>
-                                <MenuItem Header="Màu tối"
-                                          Foreground="{DynamicResource PrimaryTextBrush }"
-                                          FontWeight="Medium"
-                                          FontSize="12"
-                                          Click="ChangeToMoon_OnClick">
+                                <MenuItem
+                                    Click="ChangeToMoon_OnClick"
+                                    FontSize="12"
+                                    FontWeight="Medium"
+                                    Foreground="{DynamicResource PrimaryTextBrush}"
+                                    Header="Màu tối">
                                     <MenuItem.Icon>
-                                        <materialIcons:MaterialIcon Kind="MoonAndStars" Width="16" Height="16"/>
+                                        <materialIcons:MaterialIcon
+                                            Width="16"
+                                            Height="16"
+                                            Kind="MoonAndStars" />
                                     </MenuItem.Icon>
                                 </MenuItem>
                             </MenuItem>
-                            <MenuItem Header="Cài đặt"
-                                      Foreground="{DynamicResource PrimaryTextBrush }"
-                                      FontWeight="Bold" 
-                                      FontSize="12"
-                                      Command="{Binding OpenSettingsCommand}">
+                            <MenuItem
+                                Command="{Binding OpenSettingsCommand}"
+                                FontSize="12"
+                                FontWeight="Bold"
+                                Foreground="{DynamicResource PrimaryTextBrush}"
+                                Header="Cài đặt">
                                 <MenuItem.Icon>
-                                    <materialIcons:MaterialIcon Kind="Edit" Width="16" Height="16"/>
+                                    <materialIcons:MaterialIcon
+                                        Width="16"
+                                        Height="16"
+                                        Kind="Edit" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Click="Close_Click"
-                                      Header="Thoát ứng dụng" 
-                                      Foreground="{DynamicResource DangerBrush}"
-                                      FontWeight="Medium" 
-                                      FontSize="12"
-                                      Command="">
+                            <MenuItem
+                                Click="Close_Click"
+                                Command=""
+                                FontSize="12"
+                                FontWeight="Medium"
+                                Foreground="{DynamicResource DangerBrush}"
+                                Header="Thoát ứng dụng">
                                 <MenuItem.Icon>
-                                    <materialIcons:MaterialIcon Kind="Close" Width="16" Height="16"/>
+                                    <materialIcons:MaterialIcon
+                                        Width="16"
+                                        Height="16"
+                                        Kind="Close" />
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>
@@ -165,7 +207,6 @@
                 </Button>
             </Grid>
         </Border>
-        <ContentControl Content="{Binding CurrentView}" 
-                        Grid.Column="1"/>
+        <ContentControl Grid.Column="1" Content="{Binding CurrentView}" />
     </Grid>
 </UserControl>

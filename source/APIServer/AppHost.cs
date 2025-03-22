@@ -1,17 +1,17 @@
-﻿using System;
-using System.Text;
-using APIServer.Plugins;
+﻿using APIServer.Plugins;
 using APIServer.Services;
 using ServiceStack;
 using ServiceStack.Auth;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
+using System;
+using System.Text;
 
 namespace APIServer
 {
     public class AppHost : AppSelfHostBase
     {
-        public AppHost() : base("GeckoMessengerAPI", typeof(AuthService).Assembly) { }
+        public AppHost() : base("GeckoMessengerAPI", typeof(AdminService).Assembly, typeof(AuthService).Assembly, typeof(ChatService).Assembly, typeof(ContactService).Assembly, typeof(ReportService).Assembly, typeof(UserService).Assembly) { }
 
         public override void Configure(Funq.Container container)
         {

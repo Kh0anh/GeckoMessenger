@@ -3,7 +3,7 @@ using System;
 
 namespace APIServer.Models
 {
-    public class Conversation
+    public class Conversations
     {
         [PrimaryKey]
         [AutoIncrement]
@@ -15,7 +15,7 @@ namespace APIServer.Models
         [StringLength(32)]
         public string ConversationTitle { get; set; }
 
-        [References(typeof(User))]
+        [References(typeof(Users))]
         public int CreatorID { get; set; }
 
         [References(typeof(ConversationType))]
@@ -24,10 +24,11 @@ namespace APIServer.Models
         [References(typeof(GroupType))]
         public byte? GroupTypeID { get; set; }
 
+        [Default("GETDATE()")]
         public DateTime CreatedAt { get; set; }
 
         [Reference]
-        public User Creator { get; set; }
+        public Users Creator { get; set; }
 
         [Reference]
         public ConversationType ConversationType { get; set; }

@@ -117,9 +117,17 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DTOs\Admin.cs" />
+    <Compile Include="DTOs\Auth.cs" />
+    <Compile Include="DTOs\Chat.cs" />
+    <Compile Include="DTOs\Contact.cs" />
+    <Compile Include="DTOs\Report.cs" />
+    <Compile Include="DTOs\User.cs" />
     <Compile Include="Models\Conversation.cs" />
     <Compile Include="Services\ServiceLocator.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Utils\Converts.cs" />
+    <Compile Include="Utils\LoadImage.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BlockListViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />

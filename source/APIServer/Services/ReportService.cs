@@ -1,14 +1,8 @@
-﻿using APIServer.Models;
-using ServiceStack;
-using ServiceStack.Auth;
+﻿using ServiceStack;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APIServer.Services
 {
@@ -19,7 +13,7 @@ namespace APIServer.Services
         // Tạo báo cáo mới
         public object Post(DTOs.Report request)
         {
-            if ((request.ReportedMessageID == null && request.ReportedUserID == null) || 
+            if ((request.ReportedMessageID == null && request.ReportedUserID == null) ||
                 (request.ReportedMessageID != null && request.ReportedUserID != null))
             {
                 return new HttpResult(new DTOs.ReportResponse
@@ -40,7 +34,7 @@ namespace APIServer.Services
 
             using (var db = DB.Open())
             {
-                var newReport = new Models.Report
+                var newReport = new Models.Reports
                 {
                     ReporterID = int.Parse(GetSession().UserAuthId),
                     ReportedID = request.ReportedUserID ?? 0,

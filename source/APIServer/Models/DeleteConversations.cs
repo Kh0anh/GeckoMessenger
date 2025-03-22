@@ -3,18 +3,19 @@ using System;
 
 namespace APIServer.Models
 {
-    public class DeleteConversation
+    public class DeleteConversations
     {
         [PrimaryKey]
         [AutoIncrement]
         public int DeletedConversationID { get; set; }
 
-        [References(typeof(Conversation))]
+        [References(typeof(Conversations))]
         public int ConversationID { get; set; }
 
-        [References(typeof(User))]
+        [References(typeof(Users))]
         public int UserID { get; set; }
 
+        [Default("GETDATE()")]
         public DateTime CreatedAt { get; set; }
     }
 }

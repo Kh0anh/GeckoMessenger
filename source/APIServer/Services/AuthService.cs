@@ -4,11 +4,9 @@ using ServiceStack.Auth;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APIServer.Services
 {
@@ -31,7 +29,7 @@ namespace APIServer.Services
 
             using (var db = DB.Open())
             {
-                var user = db.Single<User>(u =>
+                var user = db.Single<Users>(u =>
                     u.Username == request.Username || (!request.Email.IsNullOrEmpty() && u.Email == request.Email));
 
                 if (user == null || !verifyPassword(request.Password, user.HashPassword))
@@ -63,6 +61,7 @@ namespace APIServer.Services
                 return new HttpResult(new DTOs.LoginResponse
                 {
                     Token = token,
+                    UserID = user.UserID,
                     Message = "Login successful"
                 }, HttpStatusCode.OK);
             }
@@ -83,7 +82,7 @@ namespace APIServer.Services
 
             using (var db = DB.Open())
             {
-                if (db.Exists<User>(u => u.Username == request.Username || u.Email == request.Email))
+                if (db.Exists<Users>(u => u.Username == request.Username || u.Email == request.Email))
                 {
                     return new HttpResult(new DTOs.RegisterResponse
                     {
@@ -92,24 +91,26 @@ namespace APIServer.Services
                     }, HttpStatusCode.Conflict);
                 }
 
-                var user = new User
+                var user = new Users
                 {
                     Username = request.Username,
                     Email = request.Email,
                     PhoneNumber = request.PhoneNumber,
-                    Birthday = request.Birthday,
+                    Birthday = request.Birthday.Date,
                     HashPassword = hashPassword(request.Password),
                     FirstName = request.FirstName,
                     LastName = request.LastName,
+                    Bio = "",
                     Avatar = "storages/DefaultAvatar.png",
-                    CreatedAt = DateTime.UtcNow
+                    LastLogin = DateTime.UtcNow
                 };
+                Debug.WriteLine(request.Birthday.ToString("yyyy-MM-dd"));
                 db.Save(user);
 
                 var contactPrivacy = db.Single<Privacy>(p => p.PrivacyName == "CONTACT");
                 var publicPrivacy = db.Single<Privacy>(p => p.PrivacyName == "PUBLIC");
 
-                var userSetting = new UserSetting
+                var userSetting = new UserSettings
                 {
                     UserID = user.UserID,
                     StatusPrivacy = contactPrivacy.PrivacyID,
@@ -143,6 +144,7 @@ namespace APIServer.Services
                 return new HttpResult(new DTOs.RegisterResponse
                 {
                     Token = token,
+                    UserID = user.UserID,
                     Message = "Registration successful"
                 }, HttpStatusCode.Created);
             }
@@ -163,7 +165,7 @@ namespace APIServer.Services
             using (var db = DB.Open())
             {
                 var userId = int.Parse(GetSession().UserAuthId);
-                var user = db.SingleById<User>(userId);
+                var user = db.SingleById<Users>(userId);
 
                 if (user == null)
                 {
@@ -186,7 +188,7 @@ namespace APIServer.Services
 
                 // Hash và cập nhật mật khẩu mới
                 user.HashPassword = hashPassword(request.NewPassword);
-                db.Update<User>(new { HashPassword = user.HashPassword }, u => u.UserID == userId);
+                db.Update<Users>(new { HashPassword = user.HashPassword }, u => u.UserID == userId);
 
                 return new HttpResult(new DTOs.ChangePasswordResponse
                 {

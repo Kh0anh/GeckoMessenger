@@ -1,14 +1,10 @@
 ﻿using APIServer.Models;
 using ServiceStack;
-using ServiceStack.Auth;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APIServer.Services
 {
@@ -51,7 +47,7 @@ namespace APIServer.Services
             using (var db = DB.Open())
             {
                 // Kiểm tra người dùng bị ban tồn tại
-                var user = db.SingleById<User>(request.BanUserID);
+                var user = db.SingleById<Users>(request.BanUserID);
                 if (user == null)
                 {
                     return new HttpResult(new DTOs.Admin.BanResponse
@@ -64,7 +60,7 @@ namespace APIServer.Services
                 // Kiểm tra tin nhắn tồn tại (nếu có)
                 if (request.MessageID > 0)
                 {
-                    var message = db.SingleById<Message>(request.MessageID);
+                    var message = db.SingleById<Models.Messages>(request.MessageID);
                     if (message == null)
                     {
                         return new HttpResult(new DTOs.Admin.BanResponse
@@ -76,7 +72,7 @@ namespace APIServer.Services
                 }
 
                 // Kiểm tra ban hiện tại
-                var existingBan = db.Single<BannedAccount>(b => b.BannedID == request.BanUserID && b.Expired > DateTime.UtcNow);
+                var existingBan = db.Single<BannedAccounts>(b => b.BannedID == request.BanUserID && b.Expired > DateTime.UtcNow);
                 if (existingBan != null)
                 {
                     return new HttpResult(new DTOs.Admin.BanResponse
@@ -87,7 +83,7 @@ namespace APIServer.Services
                     }, HttpStatusCode.Conflict);
                 }
 
-                var ban = new BannedAccount
+                var ban = new BannedAccounts
                 {
                     CreatorID = int.Parse(GetSession().UserAuthId),
                     BannedID = request.BanUserID,
@@ -97,8 +93,8 @@ namespace APIServer.Services
 
                 db.Insert(ban);
 
-                var status = request.BanExpirationDate.HasValue ? 
-                    DTOs.Admin.BanStatus.Temporary : 
+                var status = request.BanExpirationDate.HasValue ?
+                    DTOs.Admin.BanStatus.Temporary :
                     DTOs.Admin.BanStatus.Permanent;
 
                 return new HttpResult(new DTOs.Admin.BanResponse
@@ -135,7 +131,7 @@ namespace APIServer.Services
             using (var db = DB.Open())
             {
                 // Kiểm tra người dùng tồn tại
-                var user = db.SingleById<User>(request.UnbanUserID);
+                var user = db.SingleById<Users>(request.UnbanUserID);
                 if (user == null)
                 {
                     return new HttpResult(new DTOs.Admin.UnBanResponse
@@ -146,7 +142,7 @@ namespace APIServer.Services
                 }
 
                 // Kiểm tra xem người dùng có bị ban hay không
-                var activeBan = db.Single<BannedAccount>(b => b.BannedID == request.UnbanUserID && b.Expired > DateTime.UtcNow);
+                var activeBan = db.Single<BannedAccounts>(b => b.BannedID == request.UnbanUserID && b.Expired > DateTime.UtcNow);
                 if (activeBan == null)
                 {
                     return new HttpResult(new DTOs.Admin.UnBanResponse
@@ -162,7 +158,7 @@ namespace APIServer.Services
                 db.Update(activeBan);
 
                 // Cập nhật trạng thái người dùng
-                db.Update<User>(new { IsBanned = false }, u => u.UserID == request.UnbanUserID);
+                db.Update<Users>(new { IsBanned = false }, u => u.UserID == request.UnbanUserID);
 
                 return new HttpResult(new DTOs.Admin.UnBanResponse
                 {
@@ -181,7 +177,7 @@ namespace APIServer.Services
             var userId = int.Parse(GetSession().UserAuthId);
             using (var db = DB.Open())
             {
-                return db.Exists<Manager>(m => m.ManagerID == userId);
+                return db.Exists<Managers>(m => m.ManagerID == userId);
             }
         }
     }

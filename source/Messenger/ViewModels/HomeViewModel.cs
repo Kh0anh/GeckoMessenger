@@ -1,4 +1,5 @@
-﻿using Messenger.Views;
+﻿using Messenger.Services;
+using Messenger.Views;
 using Messenger.Views.Settings;
 using System.Windows.Input;
 
@@ -7,6 +8,8 @@ namespace Messenger.ViewModels
 {
     public class HomeViewModel : BaseViewModel
     {
+        private readonly MainViewModel _MainViewModel;
+
         private object _currentView;
         public object CurrentView
         {
@@ -18,19 +21,36 @@ namespace Messenger.ViewModels
             }
         }
 
+        public Services.UserInfo UserInfo { get; set; }
+
         public ICommand SwitchToInboxCommand { get; }
         public ICommand SwitchToContactCommand { get; }
         public ICommand OpenSettingsCommand { get; }
         public ICommand OpenProfileViewCommand { get; }
+        public ICommand LogoutCommand { get; }
 
-        public HomeViewModel()
+        public HomeViewModel(MainViewModel mainViewModel)
         {
+            _MainViewModel = mainViewModel;
+
             SwitchToInboxCommand = new RelayCommand(_ => SwitchToInbox());
             SwitchToContactCommand = new RelayCommand(_ => SwitchToContact());
             OpenSettingsCommand = new RelayCommand(_ => OpenSettings());
             OpenProfileViewCommand = new RelayCommand(_ => OpenProfileView());
+            LogoutCommand = new RelayCommand(_ => Logout());
+
+            var userService = ServiceLocator.GetService<IUserService>();
+            UserInfo = userService.User;
 
             SwitchToInbox();
+        }
+
+        private void Logout()
+        {
+            var userService = ServiceLocator.GetService<IUserService>();
+            userService.ClearUser();
+
+            _MainViewModel.SwitchToLoginCommand.Execute(null);
         }
 
         public void NavigationTo(object view)
@@ -60,7 +80,7 @@ namespace Messenger.ViewModels
 
         private void OpenProfileView()
         {
-            ProfileView settingsView = new ProfileView(new ProfileViewModel());
+            ProfileView settingsView = new ProfileView(new ProfileViewModel(UserInfo.UserID));
             settingsView.ShowDialog();
         }
     }

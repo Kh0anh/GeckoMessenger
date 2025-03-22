@@ -3,16 +3,16 @@ using System;
 
 namespace APIServer.Models
 {
-    public class BannedAccount
+    public class BannedAccounts
     {
         [PrimaryKey]
         [AutoIncrement]
         public int BanID { get; set; }
 
-        [References(typeof(Manager))]
+        [References(typeof(Managers))]
         public int CreatorID { get; set; }
 
-        [References(typeof(User))]
+        [References(typeof(Users))]
         public int BannedID { get; set; }
 
         public string Reason { get; set; }

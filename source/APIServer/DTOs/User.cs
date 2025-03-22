@@ -1,9 +1,6 @@
 ﻿using ServiceStack;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APIServer.DTOs
 {
@@ -16,7 +13,7 @@ namespace APIServer.DTOs
         public string PhoneNumber { get; set; }
     }
 
-    public class ExistedInfoResponse 
+    public class ExistedInfoResponse
     {
         public string Error { get; set; }
         public string Message { get; set; }
@@ -38,7 +35,7 @@ namespace APIServer.DTOs
     }
 
     //Thông tin người dùng được lấy ra
-    public class UserInfo 
+    public class UserInfo
     {
         public int UserID { get; set; }
         public string Username { get; set; }
@@ -60,7 +57,7 @@ namespace APIServer.DTOs
         public int UserID { get; set; }  // Thêm UserID vào DTO
     }
 
-    public class ActiveStatusResponse 
+    public class ActiveStatusResponse
     {
         public string Error { get; set; }
         public string Message { get; set; }
@@ -79,7 +76,7 @@ namespace APIServer.DTOs
         public string Bio { get; set; }
     }
 
-    public class UpdateInfoResponse 
+    public class UpdateInfoResponse
     {
         public string Error { get; set; }
         public string Message { get; set; }
@@ -92,7 +89,7 @@ namespace APIServer.DTOs
         public string Avatar { get; set; }
     }
 
-    public class UpdateAvatarResponse 
+    public class UpdateAvatarResponse
     {
         public string Error { get; set; }
         public string Message { get; set; }
@@ -107,7 +104,7 @@ namespace APIServer.DTOs
         public int MaxResult { get; set; } //Số lượng user tối đa trả về
     }
 
-    public class SearchUserResponse 
+    public class SearchUserResponse
     {
         public string Error { get; set; }
         public string Message { get; set; }

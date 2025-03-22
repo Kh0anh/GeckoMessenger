@@ -21,13 +21,23 @@
                        Margin="0,0,0,30"/>
 
             <!-- Username -->
-            <TextBox Style="{StaticResource TextBoxExtend}"
+            <hc:TextBox  Style="{StaticResource TextBoxExtend}"
                      Margin="0,0,0,15"
                      Height="66"
                      FontSize="14"
                      hc:InfoElement.Title="TÊN ĐĂNG NHẬP"
                      hc:InfoElement.TitlePlacement="Top"
-                     hc:InfoElement.Necessary="True"/>
+                     hc:InfoElement.Necessary="True"
+                     >
+                <hc:TextBox.Text>
+                    <Binding Path="Username" UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <hc:RegexRule Pattern="^[a-zA-Z0-9._]{3,32}$"
+                          ErrorContent="Định dạng tên người dùng sai" />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </hc:TextBox.Text>
+            </hc:TextBox>
 
             <!-- First name, last name -->
             <Grid Margin="0,0,0,15">
@@ -35,59 +45,123 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0"
+                <hc:TextBox Grid.Column="0"
                          Style="{StaticResource TextBoxExtend}"
                          Margin="0,0,5,0"
                          Height="66"
                          FontSize="14"
                          hc:InfoElement.Title="TÊN"
                          hc:InfoElement.TitlePlacement="Top"
-                         hc:InfoElement.Necessary="True"/>
-                <TextBox Grid.Column="1"
+                         hc:InfoElement.Necessary="True">
+                    <hc:TextBox.Text>
+                        <Binding Path="FirstName" 
+                                 Mode="TwoWay"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <hc:RegexRule Pattern="^.{3,32}$"
+                                              ErrorContent="Tối đa 20 ký tự, tối thiếu 3 ký tự" 
+                                              />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </hc:TextBox.Text>
+                </hc:TextBox>
+                <hc:TextBox Grid.Column="1"
                          Style="{StaticResource TextBoxExtend}"
                          Margin="5,0,0,0"
                          Height="66"
                          FontSize="14"
                          hc:InfoElement.Title="HỌ"
                          hc:InfoElement.TitlePlacement="Top"
-                         hc:InfoElement.Necessary="True"/>
+                         hc:InfoElement.Necessary="True">
+                    <hc:TextBox.Text>
+                        <Binding Path="LastName" 
+                                 Mode="TwoWay"
+                                 UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <hc:RegexRule Pattern="^.{3,32}$"
+                                              ErrorContent="Tối đa 20 ký tự, tối thiếu 3 ký tự" />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </hc:TextBox.Text>
+                </hc:TextBox>
             </Grid>
 
             <!-- Email -->
-            <TextBox Style="{StaticResource TextBoxExtend}"
+            <hc:TextBox Style="{StaticResource TextBoxExtend}"
                      Margin="0,0,0,15"
                      Height="66"
                      FontSize="14"
                      hc:InfoElement.Title="EMAIL"
                      hc:InfoElement.TitlePlacement="Top"
-                     hc:InfoElement.Necessary="True"/>
+                     hc:InfoElement.Necessary="True">
+                <Binding Path="Email" 
+                         Mode="TwoWay"
+                         UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <hc:RegexRule Type="Mail"
+                                      ErrorContent="Định dạng email sai" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </hc:TextBox>
 
             <!-- Số điện thoại -->
-            <TextBox Style="{StaticResource TextBoxExtend}"
+            <hc:TextBox Style="{StaticResource TextBoxExtend}"
                      Margin="0,0,0,15"
                      Height="66"
                      FontSize="14"
                      hc:InfoElement.Title="SỐ ĐIỆN THOẠI"
-                     hc:InfoElement.TitlePlacement="Top"/>
+                     hc:InfoElement.TitlePlacement="Top">
+                <hc:TextBox.Text>
+                    <Binding Path="PhoneNumber" 
+                             Mode="TwoWay"
+                             UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <hc:RegexRule Pattern="^(\+84|0)(3|5|7|8|9)\d{8}$"
+                                          ErrorContent="Định dạng số điện thoại sai"
+                                          />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </hc:TextBox.Text>
+            </hc:TextBox>
 
             <!-- Password -->
-            <PasswordBox Style="{StaticResource PasswordBoxExtend}"
+            <hc:PasswordBox ShowEyeButton="True"
                          Margin="0,0,0,15"
                          Height="66"
                          FontSize="14"
                          hc:InfoElement.Title="MẬT KHẨU"
                          hc:InfoElement.TitlePlacement="Top"
-                         hc:InfoElement.Necessary="True"/>
+                         hc:InfoElement.Necessary="True"
+                         IsSafeEnabled="False"
+                         UnsafePassword="{Binding Password, Mode=TwoWay}"/>
 
             <!-- Password -->
             <hc:DatePicker Margin="0,0,0,15"
                          Height="66"
                          FontSize="14"
-                         Text="1/1/2004"
+                         Text="{Binding Birthday, Mode=TwoWay}"
                          hc:InfoElement.Title="NGÀY SINH"
                          hc:InfoElement.TitlePlacement="Top"
                          hc:InfoElement.Necessary="True"/>
 
+            <TextBlock Text="{Binding Error, Mode=OneWay}"
+                       FontSize="14"
+                       Margin="5,0,0,5"
+                       FontWeight="Medium"
+                       HorizontalAlignment="Left"
+                       Foreground="{DynamicResource DangerBrush}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock"
+                           BasedOn="{StaticResource TextBlockBaseStyle}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Error}" Value="">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            
             <!-- Next -->
             <Button Content="Tiếp tục"
                     Style="{StaticResource ButtonPrimary}"
@@ -95,8 +169,11 @@
                     Width="350"
                     Margin="0,0,0,20"
                     Command="{Binding RegisterCommand}"
+                    
                     hc:BorderElement.CornerRadius="20"
-                    hc:BackgroundSwitchElement.MouseHoverBackground="{DynamicResource PrimaryDarkBrush}"/>
+                    hc:BackgroundSwitchElement.MouseHoverBackground="{DynamicResource PrimaryDarkBrush}">
+
+            </Button>
 
             <!-- Have an account -->
             <TextBlock HorizontalAlignment="Center"

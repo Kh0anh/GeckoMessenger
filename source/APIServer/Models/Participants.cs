@@ -3,16 +3,16 @@ using System;
 
 namespace APIServer.Models
 {
-    public class Participant
+    public class Participants
     {
         [PrimaryKey]
         [AutoIncrement]
         public int ParticipantID { get; set; }
 
-        [References(typeof(Conversation))]
+        [References(typeof(Conversations))]
         public int ConversationID { get; set; }
 
-        [References(typeof(User))]
+        [References(typeof(Users))]
         public int UserID { get; set; }
 
         [StringLength(32)]
@@ -21,15 +21,16 @@ namespace APIServer.Models
         [References(typeof(ConversationRole))]
         public byte ConversationRoleID { get; set; }
 
+        [Default("GETDATE()")]
         public DateTime CreatedAt { get; set; }
 
         public DateTime? DeleteDate { get; set; }
 
         [Reference]
-        public Conversation Conversation { get; set; }
+        public Conversations Conversation { get; set; }
 
         [Reference]
-        public User User { get; set; }
+        public Users User { get; set; }
 
         [Reference]
         public ConversationRole ConversationRole { get; set; }

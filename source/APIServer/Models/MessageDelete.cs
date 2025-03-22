@@ -9,15 +9,16 @@ namespace APIServer.Models
         [AutoIncrement]
         public int MessageDeleteID { get; set; }
 
-        [References(typeof(Message))]
+        [References(typeof(Messages))]
         public int MessageID { get; set; }
 
-        [References(typeof(User))]
+        [References(typeof(Users))]
         public int DeleteByUserID { get; set; }
 
         [References(typeof(DeleteType))]
         public byte DeleteTypeID { get; set; }
 
+        [Default("GETDATE()")]
         public DateTime CreatedAt { get; set; }
     }
 }

@@ -3,11 +3,9 @@ using APIServer.Models;
 using APIServer.Utils;
 using ServiceStack;
 using ServiceStack.Data;
-using ServiceStack.IO;
 using ServiceStack.OrmLite;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
 
@@ -33,7 +31,7 @@ namespace APIServer.Services
 
             using (var db = DB.Open())
             {
-                var participant = db.Single<User>(u => u.UserID == request.ParticipantID);
+                var participant = db.Single<Users>(u => u.UserID == request.ParticipantID);
 
                 //Kiểm tra xem người tham gia tồn tại không
                 if (participant == null)
@@ -48,9 +46,8 @@ namespace APIServer.Services
                 //Các điều kiện privacy
                 //...
 
-
                 var conversationTypeChat = db.Single<ConversationType>(p => p.ConversationTypeName == "CHAT");
-                Conversation newConversation = new Conversation
+                Conversations newConversation = new Conversations
                 {
                     CreatorID = userID,
                     ConversationTypeID = conversationTypeChat.ConversationTypeID,
@@ -58,7 +55,7 @@ namespace APIServer.Services
                 db.Save(newConversation);
 
                 var roleUser = db.Single<ConversationRole>(p => p.ConversationRoleName == "USER");
-                Participant pA = new Participant
+                Participants pA = new Participants
                 {
                     ConversationID = newConversation.ConversationID,
                     UserID = userID,
@@ -66,7 +63,7 @@ namespace APIServer.Services
                 };
                 db.Save(pA);
 
-                Participant pB = new Participant
+                Participants pB = new Participants
                 {
                     ConversationID = newConversation.ConversationID,
                     UserID = participant.UserID,
@@ -79,14 +76,15 @@ namespace APIServer.Services
                 db.LoadReferences(pB);
                 return new HttpResult(new DTOs.NewChatResponse
                 {
-                    ConversationID = newConversation.ConversationID,
-                    ConversationName = newConversation.ConversationName,
-                    ConversationTitle = newConversation.ConversationTitle,
-                    CreatorID = newConversation.CreatorID,
-                    ConversationType = newConversation.ConversationType.ConversationTypeName,
-                    GroupType = newConversation.GroupType?.GroupTypeName ?? null,
-                    CreateAt = newConversation.CreatedAt,
-                    Participants = new ParticipantResponse[]
+                    Conversation = new ConversationResponse
+                    {
+                        ConversationID = newConversation.ConversationID,
+                        ConversationName = newConversation.ConversationName,
+                        ConversationTitle = newConversation.ConversationTitle,
+                        CreatorID = newConversation.CreatorID,
+                        ConversationType = newConversation.ConversationType.ConversationTypeName,
+                        GroupType = newConversation.GroupType?.GroupTypeName ?? null,
+                        Participants = new ParticipantResponse[]
                     {
                         new ParticipantResponse
                         {
@@ -106,6 +104,7 @@ namespace APIServer.Services
                             ConversationRole = pB.ConversationRole.ConversationRoleName,
                             CreatedAt = pB.CreatedAt
                         }
+                    }
                     }
                 }, HttpStatusCode.OK);
             }
@@ -128,7 +127,7 @@ namespace APIServer.Services
             using (var db = DB.Open())
             {
                 //Kiểm tra có cuộc trò chuyện không
-                var conversation = db.Single<Conversation>(p => p.ConversationID == request.ConversationID);
+                var conversation = db.Single<Conversations>(p => p.ConversationID == request.ConversationID);
                 if (conversation == null)
                 {
                     return new HttpResult(new
@@ -139,7 +138,7 @@ namespace APIServer.Services
                 }
 
                 //Kiểm tra có tham gia cuộc trò chuyện không
-                var participant = db.Single<Participant>(p =>
+                var participant = db.Single<Participants>(p =>
                     p.UserID == userID && p.ConversationID == conversation.ConversationID);
                 if (participant == null)
                 {
@@ -161,7 +160,7 @@ namespace APIServer.Services
                     };
                 }
 
-                var deleteConversation = new Models.DeleteConversation
+                var deleteConversation = new Models.DeleteConversations
                 {
                     ConversationID = conversation.ConversationID,
                     UserID = userID,
@@ -190,16 +189,16 @@ namespace APIServer.Services
                 List<ConversationResponse> conversationResponses = new List<ConversationResponse>();
 
                 var conversationIds = db.Column<int>(
-                    db.From<Participant>().Where(p => p.UserID == userID).Select(p => p.ConversationID)
+                    db.From<Participants>().Where(p => p.UserID == userID).Select(p => p.ConversationID)
                 );
 
-                var conversations = db.Select<Conversation>(
-                    db.From<Conversation>().Where(c => conversationIds.Contains(c.ConversationID))
+                var conversations = db.Select<Conversations>(
+                    db.From<Conversations>().Where(c => conversationIds.Contains(c.ConversationID))
                 );
 
                 foreach (var conversation in conversations)
                 {
-                    var participants = db.Select(db.From<Participant>()
+                    var participants = db.Select(db.From<Participants>()
                         .Where(c => c.ConversationID == conversation.ConversationID));
 
                     List<ParticipantResponse> participantResponses = new List<ParticipantResponse>();
@@ -217,24 +216,25 @@ namespace APIServer.Services
                         });
                     }
 
-
-                    var latestMessage = db.Single<Message>(
-                        db.From<Message>()
+                    var latestMessage = db.Single<Models.Messages>(
+                        db.From<Models.Messages>()
                             .Where(m => m.ConversationID == conversation.ConversationID)
                             .OrderByDescending(m => m.CreatedAt)
                             .Limit(1)
                     );
 
-                    string latestMessageText = "";
+                    string latestMessageText = string.Empty;
+                    DateTime latestMessageTime = conversation.CreatedAt;
                     if (latestMessage != null)
                     {
                         db.LoadReferences(latestMessage);
+                        latestMessageTime = latestMessage.CreatedAt;
                         if (latestMessage.MessageTypeRef.MessageTypeName == "TEXT")
                         {
                             if (latestMessage.Content == "")
                             {
                                 long attachmentCount =
-                                    db.Count<Attachment>(a => a.MessageID == latestMessage.MessageID);
+                                    db.Count<Attachments>(a => a.MessageID == latestMessage.MessageID);
                                 latestMessageText = latestMessage.SenderID == userID
                                     ? $"Bạn đã gửi {attachmentCount.ToString()} tệp đính kèm"
                                     : $"Đã nhận {attachmentCount.ToString()} tệp đính kèm";
@@ -257,6 +257,7 @@ namespace APIServer.Services
                         }
                     }
 
+                    db.LoadReferences(conversation);
                     ConversationResponse conversationResponse = new ConversationResponse
                     {
                         ConversationID = conversation.ConversationID,
@@ -268,7 +269,8 @@ namespace APIServer.Services
                         CreatedAt = conversation.CreatedAt,
 
                         Participants = participantResponses.ToArray(),
-                        LatestMessage = latestMessageText
+                        LatestMessage = latestMessageText,
+                        LatestMessageTime = latestMessageTime
                     };
                     conversationResponses.Add(conversationResponse);
                 }
@@ -293,8 +295,8 @@ namespace APIServer.Services
 
             using (var db = DB.Open())
             {
-                Participant participant =
-                    db.Single<Participant>(p => p.ConversationID == request.ConversationID && p.UserID == userID);
+                Participants participant =
+                    db.Single<Participants>(p => p.ConversationID == request.ConversationID && p.UserID == userID);
                 if (participant == null)
                 {
                     return new HttpResult(new
@@ -307,7 +309,7 @@ namespace APIServer.Services
                 var typeOnlyMe = db.Single<DeleteType>(dt => dt.DeleteTypeName == "ONLYME");
                 var typeAll = db.Single<DeleteType>(dt => dt.DeleteTypeName == "ALL");
 
-                var query = db.From<Message>().Where(x => x.ConversationID == request.ConversationID)
+                var query = db.From<Models.Messages>().Where(x => x.ConversationID == request.ConversationID)
                     .LeftJoin<MessageDelete>((m, md) => m.MessageID == md.MessageID &&
                                                         ((md.DeleteTypeID == typeAll.DeleteTypeID) ||
                                                          (md.DeleteTypeID == typeOnlyMe.DeleteTypeID &&
@@ -319,15 +321,15 @@ namespace APIServer.Services
                 if (request.After != null)
                     query.Where(x => x.CreatedAt > request.After);
 
-                query.OrderByDescending(x => x.CreatedAt);
+                query.OrderBy(x => x.CreatedAt);
 
                 if (request.Limit != null)
                     query.Limit(request.Limit.Value);
 
                 List<MessageResponse> messageResponses = new List<MessageResponse>();
-                foreach (var message in db.Select<Message>(query))
+                foreach (var message in db.Select<Models.Messages>(query))
                 {
-                    var attachments = db.Select(db.From<Attachment>()
+                    var attachments = db.Select(db.From<Attachments>()
                         .Where(a => a.MessageID == message.MessageID));
 
                     List<AttachmentResponse> attachmentResponses = new List<AttachmentResponse>();
@@ -392,7 +394,7 @@ namespace APIServer.Services
 
             using (var db = DB.Open())
             {
-                var message = db.Single<Message>(m => m.MessageID == request.MessageID);
+                var message = db.Single<Models.Messages>(m => m.MessageID == request.MessageID);
                 if (message == null)
                 {
                     return new HttpResult(new
@@ -402,8 +404,8 @@ namespace APIServer.Services
                     };
                 }
 
-                Participant participant =
-                    db.Single<Participant>(p => p.ConversationID == message.ConversationID && p.UserID == userID);
+                Participants participant =
+                    db.Single<Participants>(p => p.ConversationID == message.ConversationID && p.UserID == userID);
                 if (participant == null)
                 {
                     return new HttpResult(new
@@ -451,8 +453,8 @@ namespace APIServer.Services
 
             using (var db = DB.Open())
             {
-                Participant participant =
-                    db.Single<Participant>(p => p.ConversationID == request.ConversationID && p.UserID == userID);
+                Participants participant =
+                    db.Single<Participants>(p => p.ConversationID == request.ConversationID && p.UserID == userID);
                 if (participant == null)
                 {
                     return new HttpResult(new
@@ -466,6 +468,221 @@ namespace APIServer.Services
                 db.Update(participant);
 
                 return new HttpResult(new DTOs.ChangeNicknameResponse { }, HttpStatusCode.OK);
+            }
+        }
+
+        public object Get(DTOs.FindChat request)
+        {
+            var session = this.GetSession();
+            if (!session.IsAuthenticated)
+            {
+                return new HttpResult(new { Error = "TokenUnauthorized", Message = "User is not authenticated." })
+                {
+                    StatusCode = HttpStatusCode.Unauthorized
+                };
+            }
+
+            int userID = int.Parse(session.UserAuthId);
+
+            using (var db = DB.Open())
+            {
+                var conversationTypeChat = db.Single<ConversationType>(p => p.ConversationTypeName == "CHAT");
+
+                var conversation = db.Single<Conversations>(@"
+    SELECT * FROM Conversations c
+    WHERE c.ConversationTypeID = @conversationTypeID
+    AND EXISTS (
+        SELECT 1 FROM Participants p
+        WHERE p.ConversationID = c.ConversationID AND p.UserID = @userID
+    )
+    AND EXISTS (
+        SELECT 1 FROM Participants p
+        WHERE p.ConversationID = c.ConversationID AND p.UserID = @requestUserID
+    )",
+    new { conversationTypeID = conversationTypeChat.ConversationTypeID, userID, requestUserID = request.UserID }
+);
+
+                if (conversation == null)
+                {
+                    return new HttpResult(new FindChatResponse() { Conversation = null },
+                        HttpStatusCode.OK);
+                }
+
+                var participants = db.Select(db.From<Participants>()
+                    .Where(c => c.ConversationID == conversation.ConversationID));
+
+                List<ParticipantResponse> participantResponses = new List<ParticipantResponse>();
+                foreach (var participant in participants)
+                {
+                    db.LoadReferences(participant);
+                    participantResponses.Add(new ParticipantResponse
+                    {
+                        ParticipantID = participant.ParticipantID,
+                        ConversationID = participant.ConversationID,
+                        UserID = participant.UserID,
+                        NickName = participant.NickName,
+                        ConversationRole = participant.ConversationRole.ConversationRoleName,
+                        CreatedAt = participant.CreatedAt
+                    });
+                }
+
+                var latestMessage = db.Single<Models.Messages>(
+                    db.From<Models.Messages>()
+                        .Where(m => m.ConversationID == conversation.ConversationID)
+                        .OrderByDescending(m => m.CreatedAt)
+                        .Limit(1)
+                );
+
+                string latestMessageText = "";
+                if (latestMessage != null)
+                {
+                    db.LoadReferences(latestMessage);
+                    if (latestMessage.MessageTypeRef.MessageTypeName == "TEXT")
+                    {
+                        if (latestMessage.Content == "")
+                        {
+                            long attachmentCount =
+                                db.Count<Attachments>(a => a.MessageID == latestMessage.MessageID);
+                            latestMessageText = latestMessage.SenderID == userID
+                                ? $"Bạn đã gửi {attachmentCount.ToString()} tệp đính kèm"
+                                : $"Đã nhận {attachmentCount.ToString()} tệp đính kèm";
+                        }
+                        else
+                        {
+                            latestMessageText = latestMessage.SenderID == userID
+                                ? $"Bạn: {latestMessage.Content}"
+                                : latestMessage.Content;
+                        }
+                    }
+                    else if (latestMessage.MessageTypeRef.MessageTypeName == "CALL")
+                    {
+                        latestMessageText = latestMessage.SenderID == userID ? "Bạn đã gọi" : "Đã nhận cuộc gọi";
+                    }
+                    else if (latestMessage.MessageTypeRef.MessageTypeName == "AUDIO")
+                    {
+                        latestMessageText =
+                            latestMessage.SenderID == userID ? "Bạn đã gửi" : "Đã nhận một âm thanh";
+                    }
+                }
+                db.LoadReferences(conversation);
+                ConversationResponse conversationResponse = new ConversationResponse
+                {
+                    ConversationID = conversation.ConversationID,
+                    ConversationName = conversation.ConversationName,
+                    ConversationTitle = conversation.ConversationTitle,
+                    CreatorID = conversation.CreatorID,
+                    ConversationType = conversation.ConversationType.ConversationTypeName,
+                    GroupType = conversation.GroupType?.GroupTypeName ?? null,
+                    CreatedAt = conversation.CreatedAt,
+
+                    Participants = participantResponses.ToArray(),
+                    LatestMessage = latestMessageText
+                };
+
+                return new HttpResult(new FindChatResponse() { Conversation = conversationResponse },
+                    HttpStatusCode.OK);
+            }
+        }
+
+        public object Get(DTOs.FindConversation request)
+        {
+            var session = this.GetSession();
+            if (!session.IsAuthenticated)
+            {
+                return new HttpResult(new { Error = "TokenUnauthorized", Message = "User is not authenticated." })
+                {
+                    StatusCode = HttpStatusCode.Unauthorized
+                };
+            }
+
+            int userID = int.Parse(session.UserAuthId);
+
+            using (var db = DB.Open())
+            {
+                var conversation = db.Single<Conversations>(
+                    db.From<Conversations>()
+                    .Where(c => c.ConversationID == request.ConversationID)
+                    );
+
+                if (conversation == null)
+                {
+                    return new HttpResult(new FindChatResponse() { Conversation = null },
+                        HttpStatusCode.OK);
+                }
+
+                var participants = db.Select(db.From<Participants>()
+                    .Where(c => c.ConversationID == conversation.ConversationID));
+
+                List<ParticipantResponse> participantResponses = new List<ParticipantResponse>();
+                foreach (var participant in participants)
+                {
+                    db.LoadReferences(participant);
+                    participantResponses.Add(new ParticipantResponse
+                    {
+                        ParticipantID = participant.ParticipantID,
+                        ConversationID = participant.ConversationID,
+                        UserID = participant.UserID,
+                        NickName = participant.NickName,
+                        ConversationRole = participant.ConversationRole.ConversationRoleName,
+                        CreatedAt = participant.CreatedAt
+                    });
+                }
+
+                var latestMessage = db.Single<Models.Messages>(
+                    db.From<Models.Messages>()
+                        .Where(m => m.ConversationID == conversation.ConversationID)
+                        .OrderBy(m => m.CreatedAt)
+                );
+
+                string latestMessageText = "";
+                if (latestMessage != null)
+                {
+                    db.LoadReferences(latestMessage);
+                    if (latestMessage.MessageTypeRef.MessageTypeName == "TEXT")
+                    {
+                        if (latestMessage.Content == "")
+                        {
+                            long attachmentCount =
+                                db.Count<Attachments>(a => a.MessageID == latestMessage.MessageID);
+                            latestMessageText = latestMessage.SenderID == userID
+                                ? $"Bạn đã gửi {attachmentCount.ToString()} tệp đính kèm"
+                                : $"Đã nhận {attachmentCount.ToString()} tệp đính kèm";
+                        }
+                        else
+                        {
+                            latestMessageText = latestMessage.SenderID == userID
+                                ? $"Bạn: {latestMessage.Content}"
+                                : latestMessage.Content;
+                        }
+                    }
+                    else if (latestMessage.MessageTypeRef.MessageTypeName == "CALL")
+                    {
+                        latestMessageText = latestMessage.SenderID == userID ? "Bạn đã gọi" : "Đã nhận cuộc gọi";
+                    }
+                    else if (latestMessage.MessageTypeRef.MessageTypeName == "AUDIO")
+                    {
+                        latestMessageText =
+                            latestMessage.SenderID == userID ? "Bạn đã gửi" : "Đã nhận một âm thanh";
+                    }
+                }
+
+                db.LoadReferences(conversation);
+                ConversationResponse conversationResponse = new ConversationResponse
+                {
+                    ConversationID = conversation.ConversationID,
+                    ConversationName = conversation.ConversationName,
+                    ConversationTitle = conversation.ConversationTitle,
+                    CreatorID = conversation.CreatorID,
+                    ConversationType = conversation.ConversationType.ConversationTypeName,
+                    GroupType = conversation.GroupType?.GroupTypeName ?? null,
+                    CreatedAt = conversation.CreatedAt,
+
+                    Participants = participantResponses.ToArray(),
+                    LatestMessage = latestMessageText
+                };
+
+                return new HttpResult(new FindChatResponse() { Conversation = conversationResponse },
+                    HttpStatusCode.OK);
             }
         }
 
@@ -484,16 +701,17 @@ namespace APIServer.Services
 
             using (var db = DB.Open())
             {
-                Participant participant =
-                  db.Single<Participant>(p => p.ConversationID == request.ConversationID && p.UserID == userID);
+                Participants participant =
+                  db.Single<Participants>(p => p.ConversationID == request.ConversationID && p.UserID == userID);
                 if (participant == null)
                 {
                     return new HttpResult(new
                     { Error = "ParticipantNotFound", Message = "You are not a participant in the conversation." })
                     {
-                        StatusCode = HttpStatusCode.OK
+                        StatusCode = HttpStatusCode.Unauthorized
                     };
                 }
+                db.LoadReferences(participant);
 
                 MessageType messageType = db.Single<MessageType>(dt => dt.MessageTypeName == request.MessageType);
                 if (messageType == null)
@@ -501,11 +719,11 @@ namespace APIServer.Services
                     return new HttpResult(new
                     { Error = "MessageTypeNotFound", Message = "Delete type doenst not exist." })
                     {
-                        StatusCode = HttpStatusCode.OK
+                        StatusCode = HttpStatusCode.NotFound
                     };
                 }
 
-                Message newMessage = new Message
+                Models.Messages newMessage = new Models.Messages
                 {
                     ConversationID = request.ConversationID,
                     SenderID = userID,
@@ -515,41 +733,71 @@ namespace APIServer.Services
 
                 db.Save(newMessage);
 
-                List<Attachment> attachmentInserts = new List<Attachment>();
-                foreach (var attachment in request.Attachments)
+
+                List<AttachmentResponse> attachments = new List<AttachmentResponse>();
+                if (request.Attachments != null)
                 {
-                    AttachmentType attachmentType = db.Single<AttachmentType>(a => a.AttachmentTypeName == attachment.AttachmentType);
-                    if (attachmentType == null)
+                    List<Attachments> attachmentInserts = new List<Attachments>();
+                    foreach (var attachment in request.Attachments)
                     {
-                        return new HttpResult(new
-                        { Error = "AttachmentTypeNotFound", Message = "Attachment type doenst not exist." })
+                        AttachmentType attachmentType = db.Single<AttachmentType>(a => a.AttachmentTypeName == attachment.AttachmentType);
+                        if (attachmentType == null)
                         {
-                            StatusCode = HttpStatusCode.OK
-                        };
+                            return new HttpResult(new
+                            { Error = "AttachmentTypeNotFound", Message = "Attachment type doenst not exist." })
+                            {
+                                StatusCode = HttpStatusCode.OK
+                            };
+                        }
+
+                        string fileName = string.Format("{0}_{1}", Hash.GetMD5HashByString(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + Hash.GetMD5Hash(attachment.FileData)).Substring(0, 8), attachment.FileName.Replace(" ", "_"));
+
+                        VirtualFiles.WriteFile(fileName, attachment.FileData);
+
+                        attachmentInserts.Add(new Attachments
+                        {
+                            MessageID = newMessage.MessageID,
+                            AttachmentTypeID = attachmentType.AttachmentTypeID,
+                            ThumbnailURL = "",
+                            FileURL = fileName
+                        });
                     }
 
-                    string fileName = string.Format("{0}_{1}", Hash.GetMD5HashByString(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss") + Hash.GetMD5Hash(attachment.FileData)).Substring(0,8), attachment.FileName.Replace(" ","_"));
-
-                    VirtualFiles.WriteFile(fileName, attachment.FileData);
-
-                    attachmentInserts.Add(new Attachment
+                    foreach (var attachmentInsert in attachmentInserts)
                     {
-                        MessageID = newMessage.MessageID,
-                        AttachmentTypeID = attachmentType.AttachmentTypeID,
-                        ThumbnailURL = "",
-                        FileURL = fileName
-                    });
+                        db.Save(attachmentInsert);
+                        db.LoadReferences(attachmentInsert);
+                        attachments.Add(new AttachmentResponse
+                        {
+                            AttachmentID = attachmentInsert.AttachmentID,
+                            AttachmentType = attachmentInsert.AttachmentType.AttachmentTypeName,
+                            ThumnailURL = attachmentInsert.ThumbnailURL,
+                            FileURL = attachmentInsert.FileURL,
+                            CreatedAt = attachmentInsert.CreatedAt
+                        });
+                    }
                 }
 
-                foreach (var attachmentInsert in attachmentInserts)
+                MessageResponse messageResponse = new MessageResponse
                 {
-                    db.Save(attachmentInsert);
-                }
+                    MessageID = newMessage.MessageID,
+                    Sender = new UserResponse
+                    {
+                        UserID = participant.User.UserID,
+                        Username = participant.User.Username,
+                        FirstName = participant.User.FirstName,
+                        LastName = participant.User.LastName,
+                        Avatar = participant.User.Avatar,
+                    },
+                    Content = newMessage.Content,
+                    MessageType = request.MessageType,
+                    CreatedAt = newMessage.CreatedAt,
+                    Attachments = attachments.ToArray()
+                };
 
-               //...
-
-                return new HttpResult(new SendMessageResponse {
-
+                return new HttpResult(new SendMessageResponse
+                {
+                    Message = messageResponse,
                 }, HttpStatusCode.OK);
             }
         }

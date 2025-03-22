@@ -1,10 +1,5 @@
 ﻿using ServiceStack;
 using ServiceStack.DataAnnotations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace APIServer.DTOs
 {
@@ -13,7 +8,7 @@ namespace APIServer.DTOs
     {
         [Required]
         public int ReporterID { get; set; }
-        
+
         public int? ReportedMessageID { get; set; }
         public int? ReportedUserID { get; set; }
 

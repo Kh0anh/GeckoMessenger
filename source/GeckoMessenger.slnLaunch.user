@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "Debug All",
+    "Projects": [
+      {
+        "Path": "APIServer\\APIServer.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "Messenger\\Messenger.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

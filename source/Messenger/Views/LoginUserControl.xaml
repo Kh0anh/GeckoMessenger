@@ -33,18 +33,18 @@
                      hc:InfoElement.Title="TÊN ĐĂNG NHẬP HOẶC EMAIL"
                      hc:InfoElement.TitlePlacement="Top"
                      hc:InfoElement.Necessary="True"
-                     Text="{Binding username, Mode=OneWayToSource}"/>
+                     Text="{Binding Username, Mode=TwoWay}"/>
 
             <!-- Password -->
-            <PasswordBox Style="{StaticResource PasswordBoxExtend}"
-                         Margin="0,0,0,5"
+            <hc:PasswordBox Margin="0,0,0,5"
                          FontSize="14"
                          Height="66"
                          hc:InfoElement.Title="MẬT KHẨU"
                          hc:InfoElement.TitlePlacement="Top"
                          hc:InfoElement.Necessary="True"
                          x:Name="pwdPassword"
-                         PasswordChanged="PasswordBox_PasswordChanged"/>
+                         IsSafeEnabled="False"
+                         UnsafePassword="{Binding Password, Mode=TwoWay}"/>
 
             <!-- Forgot password -->
             <TextBlock HorizontalAlignment="Left"
@@ -55,6 +55,24 @@
                            Command="{Binding ForgotPasswordCommand}">
                     Quên mật khẩu?
                 </Hyperlink>
+            </TextBlock>
+
+            <TextBlock Text="{Binding Error, Mode=OneWay}"
+                       FontSize="14"
+                       Margin="5,0,0,5"
+                       FontWeight="Medium"
+                       HorizontalAlignment="Left"
+                       Foreground="{DynamicResource DangerBrush}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock"
+                           BasedOn="{StaticResource TextBlockBaseStyle}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Error}" Value="">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
             </TextBlock>
 
             <!-- Login -->

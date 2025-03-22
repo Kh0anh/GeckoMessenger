@@ -2,10 +2,10 @@
 
 namespace APIServer.Models
 {
-    public class UserSetting
+    public class UserSettings
     {
         [PrimaryKey]
-        [References(typeof(User))]
+        [References(typeof(Users))]
         public int UserID { get; set; }
 
         [References(typeof(Privacy))]

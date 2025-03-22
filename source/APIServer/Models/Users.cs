@@ -3,7 +3,7 @@ using System;
 
 namespace APIServer.Models
 {
-    public class User
+    public class Users
     {
         [PrimaryKey]
         [AutoIncrement]

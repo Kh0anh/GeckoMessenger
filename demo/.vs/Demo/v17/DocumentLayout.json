@@ -3,7 +3,27 @@
   "WorkspaceRootPath": "D:\\GeckoMessenger\\demo\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|D:\\GeckoMessenger\\demo\\demoapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{DC9ED091-D3AF-4E7E-A91A-C570E9FE3C9C}|Demo\\Demo.csproj|D:\\GeckoMessenger\\demo\\demo\\views\\login.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC9ED091-D3AF-4E7E-A91A-C570E9FE3C9C}|Demo\\Demo.csproj|solutionrelative:demo\\views\\login.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DC9ED091-D3AF-4E7E-A91A-C570E9FE3C9C}|Demo\\Demo.csproj|D:\\GeckoMessenger\\demo\\demo\\models\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DC9ED091-D3AF-4E7E-A91A-C570E9FE3C9C}|Demo\\Demo.csproj|solutionrelative:demo\\models\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|D:\\GeckoMessenger\\demo\\demoapi\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|D:\\GeckoMessenger\\demo\\demoapi\\dtos\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\dtos\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|D:\\GeckoMessenger\\demo\\demoapi\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|d:\\geckomessenger\\demo\\demoapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -15,36 +35,16 @@
       "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\dtos\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|D:\\GeckoMessenger\\demo\\demoapi\\dtos\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\dtos\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|D:\\GeckoMessenger\\demo\\demoapi\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|D:\\GeckoMessenger\\demo\\demoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|d:\\geckomessenger\\demo\\demoapi\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|D:\\GeckoMessenger\\demo\\demoapi\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|D:\\GeckoMessenger\\demo\\demoapi\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\models\\message.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC9ED091-D3AF-4E7E-A91A-C570E9FE3C9C}|Demo\\Demo.csproj|D:\\GeckoMessenger\\demo\\demo\\models\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC9ED091-D3AF-4E7E-A91A-C570E9FE3C9C}|Demo\\Demo.csproj|solutionrelative:demo\\models\\auth.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|D:\\GeckoMessenger\\demo\\demoapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{696CD654-FF35-4D86-8619-4A0FCAC7EF9F}|DemoAPI\\DemoAPI.csproj|solutionrelative:demoapi\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DC9ED091-D3AF-4E7E-A91A-C570E9FE3C9C}|Demo\\Demo.csproj|D:\\GeckoMessenger\\demo\\demo\\views\\login.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DC9ED091-D3AF-4E7E-A91A-C570E9FE3C9C}|Demo\\Demo.csproj|solutionrelative:demo\\views\\login.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{DC9ED091-D3AF-4E7E-A91A-C570E9FE3C9C}|Demo\\Demo.csproj|D:\\GeckoMessenger\\demo\\demo\\views\\registration.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -110,7 +110,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 14,
           "Children": [
             {
               "$type": "Bookmark",
@@ -126,24 +126,11 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
+              "Name": "ST:0:0:{d84ee353-0bef-5a41-a649-8f89aca5d84d}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "App.config",
-              "DocumentMoniker": "D:\\GeckoMessenger\\demo\\DemoAPI\\App.config",
-              "RelativeDocumentMoniker": "DemoAPI\\App.config",
-              "ToolTip": "D:\\GeckoMessenger\\demo\\DemoAPI\\App.config",
-              "RelativeToolTip": "DemoAPI\\App.config",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAAAAYAAABlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-02-26T22:50:23.035Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 5,
               "Title": "AuthService.cs",
               "DocumentMoniker": "D:\\GeckoMessenger\\demo\\DemoAPI\\Services\\AuthService.cs",
               "RelativeDocumentMoniker": "DemoAPI\\Services\\AuthService.cs",
@@ -162,14 +149,14 @@
               "RelativeDocumentMoniker": "DemoAPI\\DTOs\\Message.cs",
               "ToolTip": "D:\\GeckoMessenger\\demo\\DemoAPI\\DTOs\\Message.cs",
               "RelativeToolTip": "DemoAPI\\DTOs\\Message.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAcwCEAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAABsAAAAAAAAAAAA3wCMAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-26T22:45:01.356Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 7,
               "Title": "Auth.cs",
               "DocumentMoniker": "D:\\GeckoMessenger\\demo\\DemoAPI\\DTOs\\Auth.cs",
               "RelativeDocumentMoniker": "DemoAPI\\DTOs\\Auth.cs",
@@ -177,25 +164,24 @@
               "RelativeToolTip": "DemoAPI\\DTOs\\Auth.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAmwCQAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T22:44:49.638Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T22:44:49.638Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 1,
               "Title": "Auth.cs",
               "DocumentMoniker": "D:\\GeckoMessenger\\demo\\Demo\\Models\\Auth.cs",
               "RelativeDocumentMoniker": "Demo\\Models\\Auth.cs",
               "ToolTip": "D:\\GeckoMessenger\\demo\\Demo\\Models\\Auth.cs",
               "RelativeToolTip": "Demo\\Models\\Auth.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAzwAQAAAAZAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAwAQAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-27T22:02:04.267Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 6,
               "Title": "AppHost.cs",
               "DocumentMoniker": "D:\\GeckoMessenger\\demo\\DemoAPI\\AppHost.cs",
               "RelativeDocumentMoniker": "DemoAPI\\AppHost.cs",
@@ -203,8 +189,7 @@
               "RelativeToolTip": "DemoAPI\\AppHost.cs",
               "ViewState": "AgIAABUAAAAAAAAAAAAowC0AAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T22:01:03.553Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T22:01:03.553Z"
             },
             {
               "$type": "Document",
@@ -220,7 +205,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 4,
               "Title": "Message.cs",
               "DocumentMoniker": "D:\\GeckoMessenger\\demo\\DemoAPI\\Models\\Message.cs",
               "RelativeDocumentMoniker": "DemoAPI\\Models\\Message.cs",
@@ -233,7 +218,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "User.cs",
               "DocumentMoniker": "D:\\GeckoMessenger\\demo\\DemoAPI\\Models\\User.cs",
               "RelativeDocumentMoniker": "DemoAPI\\Models\\User.cs",
@@ -241,12 +226,11 @@
               "RelativeToolTip": "DemoAPI\\Models\\User.cs",
               "ViewState": "AgIAAAYAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T22:14:59.603Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T22:14:59.603Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 2,
               "Title": "Conversation.cs",
               "DocumentMoniker": "D:\\GeckoMessenger\\demo\\DemoAPI\\Models\\Conversation.cs",
               "RelativeDocumentMoniker": "DemoAPI\\Models\\Conversation.cs",
@@ -263,7 +247,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 0,
+              "Title": "Login.xaml.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\demo\\Demo\\Views\\Login.xaml.cs",
+              "RelativeDocumentMoniker": "Demo\\Views\\Login.xaml.cs",
+              "ToolTip": "D:\\GeckoMessenger\\demo\\Demo\\Views\\Login.xaml.cs",
+              "RelativeToolTip": "Demo\\Views\\Login.xaml.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAC4AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-02-27T21:33:07.663Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "App.config",
+              "DocumentMoniker": "D:\\GeckoMessenger\\demo\\DemoAPI\\App.config",
+              "RelativeDocumentMoniker": "DemoAPI\\App.config",
+              "ToolTip": "D:\\GeckoMessenger\\demo\\DemoAPI\\App.config",
+              "RelativeToolTip": "DemoAPI\\App.config",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAAAYAAABlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-02-26T22:50:23.035Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\GeckoMessenger\\demo\\DemoAPI\\Program.cs",
               "RelativeDocumentMoniker": "DemoAPI\\Program.cs",
@@ -271,12 +280,11 @@
               "RelativeToolTip": "DemoAPI\\Program.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAAABIAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-26T21:49:54.8Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-02-26T21:49:54.8Z"
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:0:0:{d84ee353-0bef-5a41-a649-8f89aca5d84d}"
+              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
             },
             {
               "$type": "Document",
@@ -301,18 +309,6 @@
               "ViewState": "AgIAABEAAAAAAAAAAAAQwCUAAABrAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-02-27T21:42:15.294Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Login.xaml.cs",
-              "DocumentMoniker": "D:\\GeckoMessenger\\demo\\Demo\\Views\\Login.xaml.cs",
-              "RelativeDocumentMoniker": "Demo\\Views\\Login.xaml.cs",
-              "ToolTip": "D:\\GeckoMessenger\\demo\\Demo\\Views\\Login.xaml.cs",
-              "RelativeToolTip": "Demo\\Views\\Login.xaml.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAA1wBQAAAALAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-27T21:33:07.663Z"
             },
             {
               "$type": "Document",

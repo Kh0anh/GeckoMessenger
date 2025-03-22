@@ -24,18 +24,19 @@
             <hc:Gravatar Width="80"
                          Height="80"
                          Style="{StaticResource GravatarCircle}"
-                         Grid.Column="0"/>
+                         Grid.Column="0"
+                         Source="{Binding Avatar}"/>
             <StackPanel Grid.Column="1"
                         VerticalAlignment="Center">
                 <TextBlock Margin="5"
                            FontSize="16"
                            FontWeight="Bold"
-                           Text="Họ Và Tên"/>
+                           Text="{Binding FullName}"/>
                 <TextBlock Margin="5"
                            FontSize="12"
                            FontWeight="Bold"
                            Foreground="{DynamicResource SecondaryTextBrush}"
-                           Text="Trực tuyến lần cuối 10:23 AM"/>
+                           Text="{Binding Activity}"/>
             </StackPanel>
             <Button Grid.Column="2"
                     HorizontalAlignment="Right"
@@ -62,7 +63,7 @@
                                         Grid.Column="0" />
             <TextBlock Grid.Column="1"
                        Foreground="{DynamicResource SecondaryTextBrush}"
-                       Text="Nội dung tiểu sử"
+                       Text="{Binding Bio}"
                        FontSize="14"
                        VerticalAlignment="Center"
                        Margin="5"
@@ -81,7 +82,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Border Grid.Row="0"
-                    BorderThickness="0,1,0,1"
+                    BorderThickness="0,2,0,1"
                     BorderBrush="{DynamicResource BorderBrush}">
                 <Grid Margin="10"
                       HorizontalAlignment="Stretch"
@@ -101,7 +102,7 @@
                                FontSize="14"
                                VerticalAlignment="Center"
                                Grid.Column="1" />
-                    <TextBlock Text="@VoNguyenGiaHuy"
+                    <TextBlock Text="{Binding Path=Username, StringFormat='@{0}'}"
                                FontWeight="Medium"
                                FontSize="14"
                                VerticalAlignment="Center"
@@ -109,6 +110,15 @@
                                TextAlignment="Right"
                                Grid.Column="2" />
                 </Grid>
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Username}" Value="">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
             </Border>
             <Border Grid.Row="1"
                     BorderThickness="0,1,0,1"
@@ -118,7 +128,7 @@
                       VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <materialIcons:MaterialIcon Kind="EmailBox"
@@ -131,14 +141,22 @@
                                FontSize="14"
                                VerticalAlignment="Center"
                                Grid.Column="1" />
-                    <TextBlock Text="kh0anh@protonmail.com"
+                    <TextBlock Text="{Binding Email}"
                                FontWeight="Medium"
                                FontSize="14"
                                VerticalAlignment="Center"
-                               HorizontalAlignment="Stretch"
-                               TextAlignment="Right"
+                               HorizontalAlignment="Right"
                                Grid.Column="2" />
                 </Grid>
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Email}" Value="">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
             </Border>
             <Border Grid.Row="2"
                     BorderThickness="0,1,0,1"
@@ -148,7 +166,7 @@
                       VerticalAlignment="Stretch">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <materialIcons:MaterialIcon Kind="Call"
@@ -161,7 +179,7 @@
                                FontSize="14"
                                VerticalAlignment="Center"
                                Grid.Column="1" />
-                    <TextBlock Text="09199199199"
+                    <TextBlock Text="{Binding PhoneNumber}"
                                FontWeight="Medium"
                                FontSize="14"
                                VerticalAlignment="Center"
@@ -169,9 +187,18 @@
                                TextAlignment="Right"
                                Grid.Column="2" />
                 </Grid>
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding PhoneNumber}" Value="">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
             </Border>
             <Border Grid.Row="3"
-                    BorderThickness="0,1,0,1"
+                    BorderThickness="0,1,0,2"
                     BorderBrush="{DynamicResource BorderBrush}">
                 <Grid Margin="10"
                       HorizontalAlignment="Stretch"
@@ -191,7 +218,7 @@
                                FontSize="14"
                                VerticalAlignment="Center"
                                Grid.Column="1" />
-                    <TextBlock Text="11/11/1111"
+                    <TextBlock Text="{Binding JoinDate}"
                                FontWeight="Medium"
                                FontSize="14"
                                VerticalAlignment="Center"
@@ -199,6 +226,15 @@
                                TextAlignment="Right"
                                Grid.Column="2" />
                 </Grid>
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding JoinDate}" Value="">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
             </Border>
         </Grid>
     </Grid>

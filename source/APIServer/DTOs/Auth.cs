@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ServiceStack;
+﻿using ServiceStack;
+using System;
 
 namespace APIServer.DTOs
 {
@@ -18,6 +14,7 @@ namespace APIServer.DTOs
     {
         public string Error { get; set; }
         public string Message { get; set; }
+        public int UserID { get; set; }
         public string Token { get; set; }
     }
 
@@ -28,16 +25,17 @@ namespace APIServer.DTOs
         public string Username { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
-        public DateTime Birthday{ get; set; }
+        public DateTime Birthday { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
 
-    public class RegisterResponse 
+    public class RegisterResponse
     {
         public string Error { get; set; }
         public string Message { get; set; }
+        public int UserID { get; set; }
         public string Token { get; set; }
     }
 
@@ -49,7 +47,7 @@ namespace APIServer.DTOs
         public string NewPassword { get; set; }
     }
 
-    public class ChangePasswordResponse 
+    public class ChangePasswordResponse
     {
         public string Error { get; set; }
         public string Message { get; set; }

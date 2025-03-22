@@ -9,6 +9,7 @@ namespace Messenger.Views.Inbox
     /// </summary>
     public partial class InboxUserControl : UserControl
     {
+
         public InboxUserControl(InboxViewModel viewmodel)
         {
             InitializeComponent();
@@ -22,6 +23,19 @@ namespace Messenger.Views.Inbox
                 button.ContextMenu.PlacementTarget = button;
                 button.ContextMenu.Placement = System.Windows.Controls.Primitives.PlacementMode.Bottom;
                 button.ContextMenu.IsOpen = true;
+            }
+        }
+
+        private void SearchBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is HandyControl.Controls.AutoCompleteTextBox autoCompleteTextBox)
+            {
+                var selectedItem = autoCompleteTextBox.SelectedItem as ViewModels.Conversation;
+                if (selectedItem != null)
+                {
+                    var viewModel = DataContext as InboxViewModel;
+                    viewModel?.SearchSelectionChangedCommand.Execute(selectedItem);
+                }
             }
         }
     }
