@@ -13,6 +13,13 @@ namespace Messenger.Views.Inbox
         {
             InitializeComponent();
             DataContext = viewmodel;
+            if (DataContext is ChatViewModel viewModel)
+            {
+                viewModel.ScrollToEnd += () =>
+                {
+                    MessagesScrollViewer.ScrollToEnd();
+                };
+            }
         }
 
         private void ChatContextOpen_Click(object sender, System.Windows.RoutedEventArgs e)

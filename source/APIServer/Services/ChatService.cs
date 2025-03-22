@@ -6,6 +6,7 @@ using ServiceStack.Data;
 using ServiceStack.OrmLite;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 
@@ -733,6 +734,7 @@ namespace APIServer.Services
 
                 db.Save(newMessage);
 
+                Debug.WriteLine(newMessage.Content);
 
                 List<AttachmentResponse> attachments = new List<AttachmentResponse>();
                 if (request.Attachments != null)

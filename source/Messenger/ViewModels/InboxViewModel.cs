@@ -50,6 +50,17 @@ namespace Messenger.ViewModels
             }
         }
 
+        private string _Search;
+        public string Search
+        {
+            get => _Search;
+            set
+            {
+                _Search = value;
+                OnPropertyChanged(nameof(Search));
+            }
+        }
+
         public ICommand SearchSelectionChangedCommand { get; }
 
         public InboxViewModel()

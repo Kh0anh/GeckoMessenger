@@ -38,5 +38,17 @@ namespace Messenger.Views.Inbox
                 }
             }
         }
+        private void AutoCompleteTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (sender is HandyControl.Controls.AutoCompleteTextBox textBox && textBox.SelectedItem is Conversation selectedConversation)
+            {
+                var viewModel = DataContext as InboxViewModel;
+                if (viewModel?.SearchSelectionChangedCommand?.CanExecute(selectedConversation) == true)
+                {
+                    viewModel.SearchSelectionChangedCommand.Execute(selectedConversation);
+                }
+            }
+        }
+
     }
 }

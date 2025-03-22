@@ -194,6 +194,7 @@
 
             <!--  View messages  -->
             <ScrollViewer
+                x:Name="MessagesScrollViewer"
                 Grid.Row="2"
                 Background="{DynamicResource SecondaryRegionBrush}"
                 VerticalScrollBarVisibility="Auto">

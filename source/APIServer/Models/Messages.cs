@@ -15,6 +15,7 @@ namespace APIServer.Models
         [References(typeof(Users))]
         public int SenderID { get; set; }
 
+        [CustomField("VARCHAR(MAX) COLLATE Latin1_General_100_CI_AS_SC_UTF8")]
         public string Content { get; set; }
 
         [References(typeof(MessageType))]

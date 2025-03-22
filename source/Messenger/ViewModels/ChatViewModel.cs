@@ -5,10 +5,12 @@ using ServiceStack;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -82,7 +84,7 @@ namespace Messenger.ViewModels
         {
             while (true)
             {
-                await Task.Delay(1000);
+                await Task.Delay(500);
 
                 var userService = ServiceLocator.GetService<IUserService>();
                 if (userService.User == null)
@@ -130,6 +132,8 @@ namespace Messenger.ViewModels
                                     };
 
                                     Messages.Add(newMessage);
+
+                                    Messages.CollectionChanged += Messages_CollectionChanged;
                                 }
                             }
                         });
@@ -329,6 +333,19 @@ namespace Messenger.ViewModels
                 });
             }
         }
+
+        private void Messages_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ScrollToEnd?.Invoke();
+                });
+            }
+        }
+
+        public event Action ScrollToEnd;
     }
     public class Message
     {

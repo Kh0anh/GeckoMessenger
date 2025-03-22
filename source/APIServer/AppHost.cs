@@ -18,6 +18,7 @@ namespace APIServer
             container.AddSingleton<IDbConnectionFactory>(new OrmLiteConnectionFactory(
                 Program.ConnectString,
                 SqlServerDialect.Provider));
+            OrmLiteConfig.DialectProvider.GetStringConverter().UseUnicode = true;
 
             Plugins.Add(new FilePlugin());
 

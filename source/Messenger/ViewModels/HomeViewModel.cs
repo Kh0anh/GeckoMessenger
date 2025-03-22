@@ -1,5 +1,7 @@
 ﻿using Messenger.Services;
 using Messenger.Views;
+using Messenger.Views.Contact;
+using Messenger.Views.Inbox;
 using Messenger.Views.Settings;
 using System.Windows.Input;
 
@@ -28,6 +30,9 @@ namespace Messenger.ViewModels
         public ICommand OpenSettingsCommand { get; }
         public ICommand OpenProfileViewCommand { get; }
         public ICommand LogoutCommand { get; }
+
+        private InboxUserControl InboxUserControl = new InboxUserControl(new InboxViewModel());
+        private MainContactUserControl MainContactUserControl = new Views.Contact.MainContactUserControl(new MainContactViewModel());
 
         public HomeViewModel(MainViewModel mainViewModel)
         {
@@ -64,12 +69,12 @@ namespace Messenger.ViewModels
 
         private void SwitchToContact()
         {
-            NavigationTo(new Views.Contact.MainContactUserControl(new MainContactViewModel()));
+            NavigationTo(MainContactUserControl);
         }
 
         private void SwitchToInbox()
         {
-            NavigationTo(new Views.Inbox.InboxUserControl(new InboxViewModel()));
+            NavigationTo(InboxUserControl);
         }
 
         private void OpenSettings()

@@ -37,16 +37,33 @@
                     BorderBrush="{DynamicResource BorderBrush}"
                     FontSize="14"
                     ItemsSource="{Binding Conversations}"
-                    SelectionChanged="SearchBox_SelectionChanged"
-                    StaysOpenOnEdit="False">
+                    SelectionChanged="AutoCompleteTextBox_SelectionChanged"
+                    StaysOpenOnEdit="False"
+                    Text="{Binding Search, Mode=TwoWay}">
                     <hc:AutoCompleteTextBox.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <TextBlock Text="{Binding ConversationName}" />
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <hc:Gravatar
+                                    Grid.Column="0"
+                                    Width="30"
+                                    Height="30"
+                                    Margin="0,0,5,0"
+                                    Source="{Binding ConversationAvatar}"
+                                    Style="{StaticResource GravatarCircle}" />
+                                <TextBlock
+                                    Grid.Column="1"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding ConversationName}" />
                             </Grid>
                         </DataTemplate>
                     </hc:AutoCompleteTextBox.ItemTemplate>
                 </hc:AutoCompleteTextBox>
+
                 <!--  Inbox  -->
                 <ScrollViewer
                     Grid.Row="1"
