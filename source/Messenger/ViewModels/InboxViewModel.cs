@@ -50,14 +50,14 @@ namespace Messenger.ViewModels
             }
         }
 
-        private string _Search;
-        public string Search
+        private string _SearchText;
+        public string SearchText
         {
-            get => _Search;
+            get => _SearchText;
             set
             {
-                _Search = value;
-                OnPropertyChanged(nameof(Search));
+                _SearchText = value;
+                OnPropertyChanged(nameof(SearchText));
             }
         }
 

@@ -1,6 +1,8 @@
-﻿using Messenger.ViewModels;
+﻿using HandyControl.Controls;
+using Messenger.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Messenger.Views.Inbox
 {
@@ -25,30 +27,13 @@ namespace Messenger.Views.Inbox
                 button.ContextMenu.IsOpen = true;
             }
         }
-
-        private void SearchBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ClearSearchBar_OnClick(object sender, RoutedEventArgs e)
         {
-            if (sender is HandyControl.Controls.AutoCompleteTextBox autoCompleteTextBox)
+            if (DataContext is InboxViewModel viewModel)
             {
-                var selectedItem = autoCompleteTextBox.SelectedItem as ViewModels.Conversation;
-                if (selectedItem != null)
-                {
-                    var viewModel = DataContext as InboxViewModel;
-                    viewModel?.SearchSelectionChangedCommand.Execute(selectedItem);
-                }
+                viewModel.SearchText = "";
             }
+            Keyboard.ClearFocus();
         }
-        private void AutoCompleteTextBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (sender is HandyControl.Controls.AutoCompleteTextBox textBox && textBox.SelectedItem is Conversation selectedConversation)
-            {
-                var viewModel = DataContext as InboxViewModel;
-                if (viewModel?.SearchSelectionChangedCommand?.CanExecute(selectedConversation) == true)
-                {
-                    viewModel.SearchSelectionChangedCommand.Execute(selectedConversation);
-                }
-            }
-        }
-
     }
 }
