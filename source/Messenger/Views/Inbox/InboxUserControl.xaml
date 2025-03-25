@@ -39,7 +39,7 @@
                         Background="{DynamicResource MainBackgroundBrush}"
                         BorderBrush="{DynamicResource BorderBrush}"
                         FontSize="14"
-                        Text="{Binding SearchText, Mode=TwoWay}">
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                         <hc:SearchBar.Style>
                             <Style BasedOn="{StaticResource SearchBarPlus}" TargetType="hc:SearchBar">
                                 <Setter Property="Tag" Value="Hidden" />
@@ -57,7 +57,7 @@
                         Background="Transparent"
                         BorderThickness="0"
                         Click="ClearSearchBar_OnClick"
-                        Content="Xóa"
+                        Content="Đóng"
                         FontSize="14"
                         Foreground="{DynamicResource DangerBrush}"
                         Visibility="{Binding ElementName=SearchBar, Path=Tag}" />
@@ -113,7 +113,7 @@
                             HorizontalContentAlignment="Stretch"
                             Background="Transparent"
                             BorderThickness="0"
-                            ItemsSource="{Binding Conversations}"
+                            ItemsSource="{Binding Conversations, Mode=TwoWay}"
                             SelectedItem="{Binding SelectedConversation}"
                             Style="{DynamicResource ListBoxBaseStyle}">
                             <ListBox.ItemTemplate>
@@ -251,8 +251,8 @@
                             HorizontalContentAlignment="Stretch"
                             Background="{DynamicResource MainContentBackgroundBrush}"
                             BorderThickness="0"
-                            ItemsSource="{Binding Conversations}"
-                            SelectedItem="{Binding SelectedConversation}"
+                            ItemsSource="{Binding SearchResults, Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedConversation, Mode=OneWayToSource}"
                             Style="{DynamicResource ListBoxBaseStyle}"
                             Visibility="{Binding ElementName=SearchBar, Path=Tag}">
                             <ListBox.ItemTemplate>
@@ -273,7 +273,7 @@
                                                 Width="40"
                                                 Height="40"
                                                 Margin="0,0,5,0"
-                                                Source="{Binding ConversationAvatar}"
+                                                Source="{Binding UserAvatar}"
                                                 Style="{StaticResource GravatarCircle}" />
                                             <TextBlock
                                                 Grid.Column="1"
@@ -281,7 +281,7 @@
                                                 FontSize="14"
                                                 FontWeight="Medium"
                                                 Foreground="{DynamicResource PrimaryTextBrush}"
-                                                Text="{Binding ConversationName}" />
+                                                Text="{Binding FullName}" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>

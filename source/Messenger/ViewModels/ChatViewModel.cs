@@ -86,10 +86,15 @@ namespace Messenger.ViewModels
             {
                 await Task.Delay(500);
 
+                if (ConversationInfo == null)
+                {
+                    continue;
+                }
+
                 var userService = ServiceLocator.GetService<IUserService>();
                 if (userService.User == null)
                 {
-                    continue;
+                    break;
                 }
 
                 var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
@@ -177,6 +182,8 @@ namespace Messenger.ViewModels
         private void LoadUserConversation(int userID)
         {
             var userService = ServiceLocator.GetService<IUserService>();
+            if (userService == null)
+                return;
 
             var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
             client.BearerToken = userService.User.AuthToken;
@@ -212,6 +219,9 @@ namespace Messenger.ViewModels
         private void LoadConversation(int conversationID)
         {
             var userService = ServiceLocator.GetService<IUserService>();
+
+            if (userService == null)
+                return;
 
             var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
             client.BearerToken = userService.User.AuthToken;

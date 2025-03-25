@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -23,7 +24,7 @@ namespace Messenger.ViewModels
             set
             {
                 _CurrentChat = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(CurrentChat));
             }
         }
 
@@ -34,12 +35,12 @@ namespace Messenger.ViewModels
             set
             {
                 _Conversations = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Conversations));
             }
         }
 
-        private Conversation _SelectedConversation;
-        public Conversation SelectedConversation
+        private object _SelectedConversation;
+        public object SelectedConversation
         {
             get => _SelectedConversation;
             set
@@ -50,7 +51,9 @@ namespace Messenger.ViewModels
             }
         }
 
-        private string _SearchText;
+        private CancellationTokenSource _cts;
+
+        private string _SearchText = "";
         public string SearchText
         {
             get => _SearchText;
@@ -58,6 +61,22 @@ namespace Messenger.ViewModels
             {
                 _SearchText = value;
                 OnPropertyChanged(nameof(SearchText));
+
+                if (_SearchText.Length > 2)
+                {
+                    DoSearch(_SearchText);
+                }
+            }
+        }
+
+        private ObservableCollection<SearchResult> _SearchResults;
+        public ObservableCollection<SearchResult> SearchResults
+        {
+            get => _SearchResults;
+            set
+            {
+                _SearchResults = value;
+                OnPropertyChanged(nameof(SearchResults));
             }
         }
 
@@ -67,8 +86,69 @@ namespace Messenger.ViewModels
         {
             SearchSelectionChangedCommand = new RelayCommand<Conversation>(SearchSelectionChanged);
             Conversations = new ObservableCollection<Conversation>();
+            SearchResults = new ObservableCollection<SearchResult>();
 
             Task.Run(TaskLoadConversation);
+        }
+
+        private async void DoSearch(string searchText)
+        {
+            _cts?.Cancel();
+            _cts = new CancellationTokenSource();
+            var token = _cts.Token;
+
+            try
+            {
+                await Task.Delay(500, token);
+                if (token.IsCancellationRequested) return;
+
+                Search(searchText);
+            }
+            catch (TaskCanceledException) { }
+        }
+
+        private void Search(string searchText)
+        {
+            var userService = ServiceLocator.GetService<IUserService>();
+            if (userService.User == null)
+            {
+                return;
+            }
+
+            var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
+            client.BearerToken = userService.User.AuthToken;
+
+            var searchUser = new DTOs.SearchUser
+            {
+                Query = searchText,
+                MaxResult = 5
+            };
+
+            try
+            {
+                var response = client.Get(searchUser);
+
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    SearchResults.Clear();
+                    OnPropertyChanged(nameof(SearchResults));
+                });
+
+                foreach (var user in response.Users)
+                {
+
+                    var result = new SearchResult(user);
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        SearchResults.Add(result);
+                        OnPropertyChanged(nameof(SearchResults));
+                    });
+                }
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine(err);
+            }
         }
 
         private async void TaskLoadConversation()
@@ -95,7 +175,11 @@ namespace Messenger.ViewModels
                     {
                         App.Current.Dispatcher.Invoke(() =>
                         {
-                            var selectedId = SelectedConversation?.ConversationID;
+                            int selectedId = -1;
+                            if (SelectedConversation is Conversation conversation)
+                            {
+                                selectedId = conversation.ConversationID;
+                            }
 
                             foreach (var conversationResponse in response.Conversations)
                             {
@@ -148,9 +232,9 @@ namespace Messenger.ViewModels
                         });
                     }
                 }
-                catch (Exception ex)
+                catch (Exception err)
                 {
-                    Debug.WriteLine(ex);
+                    Debug.WriteLine(err);
                 }
             }
         }
@@ -183,9 +267,9 @@ namespace Messenger.ViewModels
                     conversation.ConversationAvatar = avatarImage;
                 });
             }
-            catch (Exception ex)
+            catch (Exception err)
             {
-                Debug.WriteLine(ex);
+                Debug.WriteLine(err);
             }
         }
 
@@ -196,8 +280,52 @@ namespace Messenger.ViewModels
 
         private void UpdateCurrentChat()
         {
-            CurrentChat = SelectedConversation?.ChatView;
+            if (SelectedConversation is SearchResult sr)
+            {
+                CurrentChat = sr.ChatView;
+            }
+            if (SelectedConversation is Conversation c)
+            {
+                CurrentChat = c.ChatView;
+            }
         }
+    }
+
+    public class SearchResult : BaseViewModel
+    {
+        public SearchResult(DTOs.UserInfo userInfo)
+        {
+            this.FullName = userInfo.LastName + " " + userInfo.FirstName;
+
+            var avatarUrl = ConfigurationManager.AppSettings["APIUrl"] + userInfo.Avatar;
+            UserAvatar = LoadImage.LoadImageFromUrl(avatarUrl);
+
+            ChatView = new ChatUserControl(new ChatViewModel(userID: userInfo.UserID));
+        }
+
+        private ImageSource _UserAvatar;
+        public ImageSource UserAvatar
+        {
+            get => _UserAvatar;
+            set
+            {
+                _UserAvatar = value;
+                OnPropertyChanged(nameof(UserAvatar));
+            }
+        }
+
+        private string _FullName;
+        public string FullName
+        {
+            get => _FullName;
+            set
+            {
+                _FullName = value;
+                OnPropertyChanged(nameof(_FullName));
+            }
+        }
+
+        public ChatUserControl ChatView { get; set; }
     }
 
     public class Conversation : BaseViewModel

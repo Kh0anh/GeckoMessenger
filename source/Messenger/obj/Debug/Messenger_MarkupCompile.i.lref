@@ -1,6 +1,18 @@
-﻿
-
-FD:\GeckoMessenger\source\Messenger\Views\Contact\BlockListUserControl.xaml;;
-FD:\GeckoMessenger\source\Messenger\Views\Contact\SuggestContactListUserControl.xaml;;
-FD:\GeckoMessenger\source\Messenger\Views\Inbox\InboxUserControl.xaml;;
+﻿Z:\GeckoMessenger\source\Messenger\obj\Debug\GeneratedInternalTypeHelper.g.i.cs
+FZ:\GeckoMessenger\source\Messenger\App.xaml;;
+FZ:\GeckoMessenger\source\Messenger\MainWindow.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\Contact\BlockListUserControl.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\Contact\ContactListUserControl.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\Contact\MainContactUserControl.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\Contact\SuggestContactListUserControl.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\HomeUserControl.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\Inbox\ChatUserControl.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\Inbox\InboxUserControl.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\LoginUserControl.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\ProfileView.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\RegisterUserControl.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\Settings\EditPrivacyUserControl.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\Settings\EditProfileUserControl.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\Settings\SettingsUserControl.xaml;;
+FZ:\GeckoMessenger\source\Messenger\Views\Settings\MainSettingsView.xaml;;
 
