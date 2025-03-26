@@ -111,5 +111,3 @@ namespace Messenger.DTOs
         public List<UserInfo> Users { get; set; }
     }
 }
-
-

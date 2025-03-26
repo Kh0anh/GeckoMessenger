@@ -53,6 +53,7 @@ namespace APIServer.Services
                     {
                         UserID = user.UserID,
                         Username = user.Username,
+                        Bio = user.Bio,
                         Email = user.Email,
                         PhoneNumber = user.PhoneNumber,
                         Birthday = user.Birthday,
