@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace Messenger.ViewModels
@@ -21,6 +22,8 @@ namespace Messenger.ViewModels
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string JoinDate { get; set; }
+
+        public ICommand Edit { get; set; }
         public ProfileViewModel(int userID)
         {
             Task.Run(() =>
@@ -59,7 +62,10 @@ namespace Messenger.ViewModels
                     {
                         Bio = response.Data.Bio;
                     }
-
+                    else
+                    {
+                        Bio = "Không có tiểu sử";
+                    }
                     if (!string.IsNullOrEmpty(response.Data.Username))
                     {
                         Username = response.Data.Username;
@@ -104,11 +110,8 @@ namespace Messenger.ViewModels
         }
         private void CloseWindow()
         {
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-                window?.Close();
-            });
+            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+            window?.Close();
         }
     }
 }

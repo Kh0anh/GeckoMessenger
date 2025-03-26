@@ -322,12 +322,10 @@ namespace APIServer.Services
                 if (request.After != null)
                     query.Where(x => x.CreatedAt > request.After);
 
-                if (request.Limit != null)
-                {
-                    query.Limit(request.Limit.Value);
-                }
-
                 query.OrderBy(x => x.CreatedAt);
+
+                if (request.Limit != null)
+                    query.Limit(request.Limit.Value);
 
                 List<MessageResponse> messageResponses = new List<MessageResponse>();
                 foreach (var message in db.Select<Models.Messages>(query))

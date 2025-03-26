@@ -34,7 +34,7 @@ namespace Messenger.Utils
                 bitmap.CacheOption = BitmapCacheOption.OnLoad;
                 bitmap.StreamSource = stream;
                 bitmap.EndInit();
-                bitmap.Freeze();
+                bitmap.Freeze(); // Để tránh lỗi trong luồng UI
             }
             return bitmap;
         }

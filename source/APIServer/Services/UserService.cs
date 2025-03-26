@@ -3,7 +3,6 @@ using ServiceStack;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -54,6 +53,7 @@ namespace APIServer.Services
                     {
                         UserID = user.UserID,
                         Username = user.Username,
+                        Bio = user.Bio,
                         Email = user.Email,
                         PhoneNumber = user.PhoneNumber,
                         Birthday = user.Birthday,
@@ -235,17 +235,6 @@ namespace APIServer.Services
         // Tìm kiếm user
         public object Get(DTOs.SearchUser request)
         {
-            var session = this.GetSession();
-            if (!session.IsAuthenticated)
-            {
-                return new HttpResult(new { Error = "TokenUnauthorized", Message = "User is not authenticated." })
-                {
-                    StatusCode = HttpStatusCode.Unauthorized
-                };
-            }
-
-            int userID = int.Parse(session.UserAuthId);
-
             if (request.Query.IsNullOrEmpty())
             {
                 return new HttpResult(new DTOs.SearchUserResponse
@@ -265,14 +254,12 @@ namespace APIServer.Services
                 var query = db.From<Users>();
 
                 // Tìm kiếm theo tên (FirstName hoặc LastName) hoặc email
-
+                var searchTerm = $"%{request.Query}%";
                 query = query.Where(u =>
-                    u.UserID != userID &&
-                    (u.FirstName.ToLower().Contains(request.Query.ToLower()) ||
-                    u.LastName.ToLower().Contains(request.Query.ToLower()) ||
-                    u.Username.ToLower().Contains(request.Query.ToLower()) ||
-                    u.Email.ToLower().Contains(request.Query.ToLower()) ||
-                    u.PhoneNumber.ToLower().Contains(request.Query.ToLower()))
+                    u.FirstName.Contains(searchTerm) ||
+                    u.LastName.Contains(searchTerm) ||
+                    u.Email.Contains(searchTerm) ||
+                    u.PhoneNumber.Contains(searchTerm)
                 );
 
                 var users = db.Select(query.Limit(request.MaxResult))
@@ -292,7 +279,7 @@ namespace APIServer.Services
                 {
                     Message = users.Count > 0 ? $"Found {users.Count} users" : "No users found",
                     Users = users
-                }, HttpStatusCode.OK);
+                });
             }
         }
 

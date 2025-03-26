@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
-             xmlns:local="clr-namespace:Messenger.Views.Settings"
+             xmlns:local="clr-namespace:Messenger.Views.Settings" xmlns:viewmodels="clr-namespace:Messenger.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:EditProfileViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="800" d:DesignWidth="400">
     <Grid>
@@ -104,7 +104,7 @@
                                         Grid.Column="0" />
             <TextBox Grid.Column="1"
                      Style="{StaticResource TextBoxExtend}"
-                     hc:InfoElement.Placeholder="Nội dung tiểu sử"
+                     hc:InfoElement.Placeholder="{Binding Bio}"
                      FontSize="14"
                      BorderThickness="0"
                      Background="Transparent" />
@@ -118,6 +118,10 @@
                           HorizontalContentAlignment="Stretch"
                           Height="46">
                 <Grid Width="350">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="11*"/>
+                        <RowDefinition Height="17*"/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="*" />
@@ -127,19 +131,19 @@
                                                 Height="28"
                                                 Width="28"
                                                 Margin="3,0,10,0"
-                                                Grid.Column="0" />
+                                                Grid.Column="0" Grid.RowSpan="2" />
                     <TextBlock Text="Tên người dùng"
                                FontWeight="Medium"
                                FontSize="14"
-                               VerticalAlignment="Center"
-                               Grid.Column="1" />
-                    <TextBlock Text="@VoNguyenGiaHuy"
+                               VerticalAlignment="Top"
+                               Grid.Column="1" Grid.ColumnSpan="2" Margin="0,5,154,0" Grid.RowSpan="2" />
+                    <TextBlock Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='@{0}'}"
                                FontWeight="Medium"
                                FontSize="14"
-                               VerticalAlignment="Center"
-                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Top"
                                TextAlignment="Right"
-                               Grid.Column="2" />
+                               Grid.Column="2" Margin="0,5,0,0" Grid.RowSpan="2" 
+                               Foreground="Black"/>
                 </Grid>
             </ToggleButton>
             <Grid>
@@ -206,7 +210,8 @@
                     <Button Content="Lưu"
                             FontSize="14"
                             Width="50"
-                            Height="32" />
+                            Height="32" 
+                            Command="{Binding SaveProfile}"/>
                 </DockPanel>
             </Grid>
             <ToggleButton x:Name="ToggleFullNameEdit"
@@ -229,7 +234,7 @@
                                FontSize="14"
                                VerticalAlignment="Center"
                                Grid.Column="1" />
-                    <TextBlock Text="Võ Nguyễn Gia Huy"
+                    <TextBlock Text="{Binding Fullname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                FontWeight="Medium"
                                FontSize="14"
                                VerticalAlignment="Center"
@@ -275,13 +280,15 @@
                              Height="36"
                              Grid.Column="0"
                              Style="{StaticResource TextBoxExtend}"
-                             hc:InfoElement.Placeholder="Họ" />
+                             hc:InfoElement.Placeholder="Họ" 
+                             Text="{Binding EditLastname, Mode=TwoWay}"/>
                     <TextBox Margin="5"
                              FontSize="14"
                              Height="36"
                              Grid.Column="1"
                              Style="{StaticResource TextBoxExtend}"
-                             hc:InfoElement.Placeholder="Tên" />
+                             hc:InfoElement.Placeholder="Tên" 
+                             Text="{Binding EditFirstname, Mode=TwoWay}"/>
                 </Grid>
                 <DockPanel HorizontalAlignment="Right"
                            Grid.Row="1"
@@ -308,7 +315,8 @@
                     <Button Content="Lưu"
                             FontSize="14"
                             Width="50"
-                            Height="32" />
+                            Height="32" 
+                            Command="{Binding SaveProfile}"/>
                 </DockPanel>
             </Grid>
             <ToggleButton x:Name="ToggleEmailEdit"
@@ -331,7 +339,7 @@
                                FontSize="14"
                                VerticalAlignment="Center"
                                Grid.Column="1" />
-                    <TextBlock Text="kh0anh@protonmail.com"
+                    <TextBlock Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                FontWeight="Medium"
                                FontSize="14"
                                VerticalAlignment="Center"
@@ -397,7 +405,8 @@
                     <Button Content="Lưu"
                             FontSize="14"
                             Width="50"
-                            Height="32" />
+                            Height="32" 
+                            Command="{Binding SaveProfile}"/>
                 </DockPanel>
             </Grid>
             <ToggleButton x:Name="TogglePhoneNumberEdit"
@@ -420,7 +429,7 @@
                                FontSize="14"
                                VerticalAlignment="Center"
                                Grid.Column="1" />
-                    <TextBlock Text="09199199199"
+                    <TextBlock Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                FontWeight="Medium"
                                FontSize="14"
                                VerticalAlignment="Center"
@@ -452,7 +461,7 @@
                                 hc:InfoElement.Placeholder="Số điện thoại"
                                 hc:InfoElement.Necessary="True">
                         <hc:TextBox.Text>
-                            <Binding Path="EditEmail" UpdateSourceTrigger="PropertyChanged">
+                            <Binding Path="EditPhoneNumber" UpdateSourceTrigger="PropertyChanged">
                                 <Binding.ValidationRules>
                                     <hc:RegexRule Pattern="^(\+84|0)(3|5|7|8|9)\d{8}$"
                                                   ErrorContent="Định dạng số điện thoại sai" />
@@ -486,7 +495,8 @@
                     <Button Content="Lưu"
                             FontSize="14"
                             Width="50"
-                            Height="32" />
+                            Height="32" 
+                            Command="{Binding SaveProfile}"/>
                 </DockPanel>
             </Grid>
             <ToggleButton x:Name="ToggleBirthdayEdit"
@@ -509,7 +519,7 @@
                                FontSize="14"
                                VerticalAlignment="Center"
                                Grid.Column="1" />
-                    <TextBlock Text="10/11/2004"
+                    <TextBlock Text="{Binding Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                FontWeight="Medium"
                                FontSize="14"
                                VerticalAlignment="Center"
@@ -564,7 +574,8 @@
                     <Button Content="Lưu"
                             FontSize="14"
                             Width="50"
-                            Height="32" />
+                            Height="32" 
+                            Command="{Binding SaveProfile}"/>
                 </DockPanel>
             </Grid>
         </StackPanel>
