@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
-        xmlns:local="clr-namespace:Messenger.Views"
+        xmlns:local="clr-namespace:Messenger.Views" xmlns:viewmodels="clr-namespace:Messenger.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:ProfileViewModel}"
         mc:Ignorable="d"
         Title="ProfileView" Height="800" Width="400">
     <Grid>
@@ -45,7 +45,8 @@
                     Width="36"
                     BorderThickness="0"
                     Background="Transparent"
-                    Margin="3">
+                    Margin="3"
+                    Command="{Binding Edit}">
                 <materialIcons:MaterialIcon Kind="Edit"
                                             Height="18"
                                             Width="18"/>

@@ -29,6 +29,10 @@ namespace Messenger.Views.Inbox
         }
         private void ClearSearchBar_OnClick(object sender, RoutedEventArgs e)
         {
+            if (DataContext is InboxViewModel viewModel)
+            {
+                viewModel.SearchText = "";
+            }
             Keyboard.ClearFocus();
         }
     }
