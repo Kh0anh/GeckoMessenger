@@ -21,6 +21,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="46" />
             </Grid.RowDefinitions>
 
             <!--  Header  -->
@@ -193,181 +194,367 @@
             </Grid>
 
             <!--  View messages  -->
-            <ScrollViewer
-                x:Name="MessagesScrollViewer"
-                Grid.Row="2"
-                Background="{DynamicResource SecondaryRegionBrush}"
-                VerticalScrollBarVisibility="Auto">
-                <ItemsControl ItemsSource="{Binding Messages}">
-                    <ItemsControl.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <VirtualizingStackPanel />
-                        </ItemsPanelTemplate>
-                    </ItemsControl.ItemsPanel>
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <ContentControl Content="{Binding}">
-                                <ContentControl.Resources>
-                                    <Style x:Key="MessageContextStyle" TargetType="StackPanel">
-                                        <Setter Property="Opacity" Value="0" />
-                                        <Style.Triggers>
-                                            <Trigger Property="IsMouseOver" Value="True">
-                                                <Setter Property="Opacity" Value="100" />
-                                            </Trigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </ContentControl.Resources>
-                                <ContentControl.Style>
-                                    <Style TargetType="ContentControl">
-                                        <Style.Triggers>
-                                            <DataTrigger Binding="{Binding IsSentByMe}" Value="False">
-                                                <Setter Property="ContentTemplate">
-                                                    <Setter.Value>
-                                                        <DataTemplate>
-                                                            <Grid>
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="Auto" />
-                                                                    <ColumnDefinition Width="Auto" />
-                                                                    <ColumnDefinition Width="Auto" />
-                                                                </Grid.ColumnDefinitions>
-                                                                <hc:Gravatar
-                                                                    Grid.Column="0"
-                                                                    Width="30"
-                                                                    Height="30"
-                                                                    Margin="5,0,5,0"
-                                                                    VerticalAlignment="Top"
-                                                                    Source="{Binding UserAvatar}"
-                                                                    Style="{StaticResource GravatarCircle}" />
-                                                                <Border
-                                                                    Grid.Column="1"
-                                                                    Margin="5"
-                                                                    Padding="6"
-                                                                    Background="{DynamicResource MainContentBackgroundBrush}"
-                                                                    CornerRadius="5">
+            <Grid Grid.Row="2">
+                <ScrollViewer
+                    x:Name="MessagesScrollViewer"
+                    Background="{DynamicResource SecondaryRegionBrush}"
+                    VerticalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Messages}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding}">
+                                    <ContentControl.Resources>
+                                        <Style x:Key="MessageContextStyle" TargetType="StackPanel">
+                                            <Setter Property="Opacity" Value="0" />
+                                            <Style.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Opacity" Value="100" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Resources>
+                                    <ContentControl.Style>
+                                        <Style TargetType="ContentControl">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsSentByMe}" Value="False">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="*" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <Grid Grid.Row="0">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="Auto" />
+                                                                            <ColumnDefinition Width="Auto" />
+                                                                            <ColumnDefinition Width="Auto" />
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <hc:Gravatar
+                                                                            Grid.Column="0"
+                                                                            Width="30"
+                                                                            Height="30"
+                                                                            Margin="5,0,5,0"
+                                                                            VerticalAlignment="Top"
+                                                                            Source="{Binding UserAvatar}"
+                                                                            Style="{StaticResource GravatarCircle}" />
+                                                                        <Border
+                                                                            Grid.Column="1"
+                                                                            Margin="5"
+                                                                            Padding="6"
+                                                                            Background="{DynamicResource MainContentBackgroundBrush}"
+                                                                            CornerRadius="5">
+                                                                            <StackPanel>
+                                                                                <TextBlock
+                                                                                    FontSize="14"
+                                                                                    Foreground="{DynamicResource PrimaryTextBrush}"
+                                                                                    Text="{Binding Content}" />
+                                                                                <TextBlock
+                                                                                    HorizontalAlignment="Left"
+                                                                                    FontSize="10"
+                                                                                    Foreground="{DynamicResource SecondaryTextBrush}"
+                                                                                    Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}" />
+                                                                            </StackPanel>
+                                                                        </Border>
+                                                                        <StackPanel
+                                                                            Grid.Column="2"
+                                                                            Orientation="Horizontal"
+                                                                            Style="{StaticResource MessageContextStyle}">
+                                                                            <Button
+                                                                                Width="28"
+                                                                                Height="28"
+                                                                                Margin="5"
+                                                                                hc:BorderElement.CornerRadius="20"
+                                                                                Background="{DynamicResource DangerBrush}"
+                                                                                BorderThickness="0"
+                                                                                Foreground="{DynamicResource MainContentBackgroundBrush}"
+                                                                                ToolTip="Xoá">
+                                                                                <materialIcons:MaterialIcon
+                                                                                    Width="16"
+                                                                                    Height="16"
+                                                                                    Kind="TrashEmpty" />
+                                                                            </Button>
+                                                                            <Button
+                                                                                Width="28"
+                                                                                Height="28"
+                                                                                hc:BorderElement.CornerRadius="20"
+                                                                                Background="{DynamicResource DangerBrush}"
+                                                                                BorderThickness="0"
+                                                                                Foreground="{DynamicResource MainContentBackgroundBrush}"
+                                                                                ToolTip="Xoá">
+                                                                                <materialIcons:MaterialIcon
+                                                                                    Width="16"
+                                                                                    Height="16"
+                                                                                    Kind="AlertCircle" />
+                                                                            </Button>
+                                                                        </StackPanel>
+                                                                    </Grid>
+                                                                    <ItemsControl
+                                                                        Grid.Row="1"
+                                                                        HorizontalAlignment="Left"
+                                                                        ItemsSource="{Binding Photos}">
+                                                                        <ItemsControl.Style>
+                                                                            <Style TargetType="ItemsControl">
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding Photos.Length}" Value="0">
+                                                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </ItemsControl.Style>
+                                                                        <ItemsControl.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <Image
+                                                                                    Width="600"
+                                                                                    Height="330"
+                                                                                    Source="{Binding Image}" />
+                                                                            </DataTemplate>
+                                                                        </ItemsControl.ItemTemplate>
+                                                                    </ItemsControl>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding IsSentByMe}" Value="True">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <Grid HorizontalAlignment="Right">
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="*" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <Grid Grid.Row="0" HorizontalAlignment="Right">
+                                                                        <Grid.ColumnDefinitions>
+                                                                            <ColumnDefinition Width="Auto" />
+                                                                            <ColumnDefinition Width="Auto" />
+                                                                        </Grid.ColumnDefinitions>
+                                                                        <StackPanel
+                                                                            Grid.Column="0"
+                                                                            Orientation="Horizontal"
+                                                                            Style="{StaticResource MessageContextStyle}">
+                                                                            <Button
+                                                                                Width="28"
+                                                                                Height="28"
+                                                                                hc:BorderElement.CornerRadius="20"
+                                                                                Background="{DynamicResource DangerBrush}"
+                                                                                BorderThickness="0"
+                                                                                Foreground="{DynamicResource MainContentBackgroundBrush}"
+                                                                                ToolTip="Xoá">
+                                                                                <materialIcons:MaterialIcon
+                                                                                    Width="16"
+                                                                                    Height="16"
+                                                                                    Kind="AlertCircle" />
+                                                                            </Button>
+                                                                            <Button
+                                                                                Width="28"
+                                                                                Height="28"
+                                                                                Margin="5"
+                                                                                hc:BorderElement.CornerRadius="20"
+                                                                                Background="{DynamicResource DangerBrush}"
+                                                                                BorderThickness="0"
+                                                                                Foreground="{DynamicResource MainContentBackgroundBrush}"
+                                                                                ToolTip="Xoá">
+                                                                                <materialIcons:MaterialIcon
+                                                                                    Width="16"
+                                                                                    Height="16"
+                                                                                    Kind="TrashEmpty" />
+                                                                            </Button>
+                                                                        </StackPanel>
+                                                                        <Border
+                                                                            Grid.Column="1"
+                                                                            Margin="5"
+                                                                            Padding="6"
+                                                                            Background="{DynamicResource MainContentBackgroundBrush}"
+                                                                            CornerRadius="5">
+                                                                            <StackPanel>
+                                                                                <TextBlock
+                                                                                    FontSize="14"
+                                                                                    Foreground="{DynamicResource PrimaryTextBrush}"
+                                                                                    Text="{Binding Content}" />
+                                                                                <TextBlock
+                                                                                    HorizontalAlignment="Right"
+                                                                                    FontSize="10"
+                                                                                    Foreground="{DynamicResource SecondaryTextBrush}"
+                                                                                    Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}" />
+                                                                            </StackPanel>
+                                                                        </Border>
+                                                                    </Grid>
+                                                                    <ItemsControl Grid.Row="1" ItemsSource="{Binding Photos}">
+                                                                        <ItemsControl.Style>
+                                                                            <Style TargetType="ItemsControl">
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding Photos.Length}" Value="0">
+                                                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </ItemsControl.Style>
+                                                                        <ItemsControl.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <Image
+                                                                                    Width="600"
+                                                                                    Height="330"
+                                                                                    Margin="5"
+                                                                                    HorizontalAlignment="Right"
+                                                                                    Source="{Binding Image}" />
+                                                                            </DataTemplate>
+                                                                        </ItemsControl.ItemTemplate>
+                                                                    </ItemsControl>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
+
+            <!--  Attachments  -->
+            <Grid Grid.Row="3">
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Attachments.Count}" Value="0">
+                                <Setter Property="Visibility" Value="Hidden" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+                <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                    <ItemsControl ItemsSource="{Binding Attachments}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <ContentControl Content="{Binding}">
+                                    <ContentControl.Style>
+                                        <Style TargetType="ContentControl">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding FileType}" Value="PHOTO">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <Grid x:Name="Item" Margin="5">
+                                                                    <Grid.Style>
+                                                                        <Style TargetType="Grid">
+                                                                            <Setter Property="Tag" Value="Hidden" />
+                                                                            <Style.Triggers>
+                                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                                    <Setter Property="Tag" Value="Visible" />
+                                                                                </Trigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Grid.Style>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition />
+                                                                    </Grid.ColumnDefinitions>
                                                                     <StackPanel>
-                                                                        <TextBlock
-                                                                            FontSize="14"
-                                                                            Foreground="{DynamicResource PrimaryTextBrush}"
-                                                                            Text="{Binding Content}" />
-                                                                        <TextBlock
-                                                                            HorizontalAlignment="Left"
-                                                                            FontSize="10"
-                                                                            Foreground="{DynamicResource SecondaryTextBrush}"
-                                                                            Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}" />
+                                                                        <Image
+                                                                            Width="50"
+                                                                            Height="50"
+                                                                            Source="{Binding Thumnail}" />
+                                                                        <TextBlock Margin="5" Text="{Binding FileName}" />
                                                                     </StackPanel>
-                                                                </Border>
-                                                                <StackPanel
-                                                                    Grid.Column="2"
-                                                                    Orientation="Horizontal"
-                                                                    Style="{StaticResource MessageContextStyle}">
                                                                     <Button
                                                                         Width="28"
                                                                         Height="28"
-                                                                        Margin="5"
+                                                                        HorizontalAlignment="Center"
+                                                                        VerticalAlignment="Center"
                                                                         hc:BorderElement.CornerRadius="20"
                                                                         Background="{DynamicResource DangerBrush}"
                                                                         BorderThickness="0"
+                                                                        Command="{Binding DataContext.RemoveAttachmentCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                        CommandParameter="{Binding}"
                                                                         Foreground="{DynamicResource MainContentBackgroundBrush}"
-                                                                        ToolTip="Xoá">
+                                                                        ToolTip="Xoá"
+                                                                        Visibility="{Binding ElementName=Item, Path=Tag}">
                                                                         <materialIcons:MaterialIcon
                                                                             Width="16"
                                                                             Height="16"
                                                                             Kind="TrashEmpty" />
                                                                     </Button>
-                                                                    <Button
-                                                                        Width="28"
-                                                                        Height="28"
-                                                                        hc:BorderElement.CornerRadius="20"
-                                                                        Background="{DynamicResource DangerBrush}"
-                                                                        BorderThickness="0"
-                                                                        Foreground="{DynamicResource MainContentBackgroundBrush}"
-                                                                        ToolTip="Xoá">
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                                <DataTrigger Binding="{Binding FileType}" Value="FILE">
+                                                    <Setter Property="ContentTemplate">
+                                                        <Setter.Value>
+                                                            <DataTemplate>
+                                                                <Grid x:Name="Item" Margin="5">
+                                                                    <Grid.Style>
+                                                                        <Style TargetType="Grid">
+                                                                            <Setter Property="Tag" Value="Hidden" />
+                                                                            <Style.Triggers>
+                                                                                <Trigger Property="IsMouseOver" Value="True">
+                                                                                    <Setter Property="Tag" Value="Visible" />
+                                                                                </Trigger>
+                                                                            </Style.Triggers>
+                                                                        </Style>
+                                                                    </Grid.Style>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition />
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <StackPanel>
                                                                         <materialIcons:MaterialIcon
-                                                                            Width="16"
-                                                                            Height="16"
-                                                                            Kind="AlertCircle" />
-                                                                    </Button>
-                                                                </StackPanel>
-                                                            </Grid>
-                                                        </DataTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </DataTrigger>
-                                            <DataTrigger Binding="{Binding IsSentByMe}" Value="True">
-                                                <Setter Property="ContentTemplate">
-                                                    <Setter.Value>
-                                                        <DataTemplate>
-                                                            <Grid HorizontalAlignment="Right">
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="Auto" />
-                                                                    <ColumnDefinition Width="Auto" />
-                                                                </Grid.ColumnDefinitions>
-                                                                <StackPanel
-                                                                    Grid.Column="0"
-                                                                    Orientation="Horizontal"
-                                                                    Style="{StaticResource MessageContextStyle}">
+                                                                            Width="50"
+                                                                            Height="50"
+                                                                            Kind="File" />
+                                                                        <TextBlock Margin="5" Text="{Binding FileName}" />
+                                                                    </StackPanel>
                                                                     <Button
                                                                         Width="28"
                                                                         Height="28"
+                                                                        HorizontalAlignment="Center"
+                                                                        VerticalAlignment="Center"
                                                                         hc:BorderElement.CornerRadius="20"
                                                                         Background="{DynamicResource DangerBrush}"
                                                                         BorderThickness="0"
+                                                                        Command="{Binding DataContext.RemoveAttachmentCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                                        CommandParameter="{Binding}"
                                                                         Foreground="{DynamicResource MainContentBackgroundBrush}"
-                                                                        ToolTip="Xoá">
-                                                                        <materialIcons:MaterialIcon
-                                                                            Width="16"
-                                                                            Height="16"
-                                                                            Kind="AlertCircle" />
-                                                                    </Button>
-                                                                    <Button
-                                                                        Width="28"
-                                                                        Height="28"
-                                                                        Margin="5"
-                                                                        hc:BorderElement.CornerRadius="20"
-                                                                        Background="{DynamicResource DangerBrush}"
-                                                                        BorderThickness="0"
-                                                                        Foreground="{DynamicResource MainContentBackgroundBrush}"
-                                                                        ToolTip="Xoá">
+                                                                        ToolTip="Xoá"
+                                                                        Visibility="{Binding ElementName=Item, Path=Tag}">
                                                                         <materialIcons:MaterialIcon
                                                                             Width="16"
                                                                             Height="16"
                                                                             Kind="TrashEmpty" />
                                                                     </Button>
-                                                                </StackPanel>
-                                                                <Border
-                                                                    Grid.Column="1"
-                                                                    Margin="5"
-                                                                    Padding="6"
-                                                                    Background="{DynamicResource MainContentBackgroundBrush}"
-                                                                    CornerRadius="5">
-                                                                    <StackPanel>
-                                                                        <TextBlock
-                                                                            FontSize="14"
-                                                                            Foreground="{DynamicResource PrimaryTextBrush}"
-                                                                            Text="{Binding Content}" />
-                                                                        <TextBlock
-                                                                            HorizontalAlignment="Right"
-                                                                            FontSize="10"
-                                                                            Foreground="{DynamicResource SecondaryTextBrush}"
-                                                                            Text="{Binding Timestamp, StringFormat='{}{0:HH:mm}'}" />
-                                                                    </StackPanel>
-                                                                </Border>
-                                                            </Grid>
-                                                        </DataTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </DataTrigger>
-                                        </Style.Triggers>
-                                    </Style>
-                                </ContentControl.Style>
-                            </ContentControl>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </ContentControl.Style>
+                                </ContentControl>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+            </Grid>
 
             <!--  send message  -->
-            <Grid Grid.Row="3" Background="{DynamicResource MainBackgroundBrush}">
+            <Grid Grid.Row="4" Background="{DynamicResource MainBackgroundBrush}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="Auto" />
@@ -405,7 +592,7 @@
                     Width="40"
                     Height="36"
                     BorderBrush="Transparent"
-                    Command="{Binding AttachFileCommand}">
+                    Command="{Binding GiveFileCommand}">
                     <materialIcons:MaterialIcon
                         Width="20"
                         Height="20"
@@ -416,7 +603,7 @@
                     Width="40"
                     Height="36"
                     BorderBrush="Transparent"
-                    Command="{Binding SendMessageCommand}">
+                    Command="{Binding GivePhotoCommand}">
                     <materialIcons:MaterialIcon
                         Width="20"
                         Height="20"
@@ -434,7 +621,7 @@
                         Kind="Send" />
                 </Button>
             </Grid>
-            <Grid Grid.Row="3">
+            <Grid Grid.Row="4">
                 <Grid.Resources>
                     <Style BasedOn="{StaticResource ButtonDefault}" TargetType="Button">
                         <Setter Property="Background" Value="{DynamicResource MainBackgroundBrush}" />
@@ -542,7 +729,13 @@
                         Width="80"
                         Height="80"
                         Source="{Binding Avatar}"
-                        Style="{StaticResource GravatarCircle}" />
+                        Style="{StaticResource GravatarCircle}">
+                        <hc:Interaction.Triggers>
+                            <hc:EventTrigger EventName="MouseLeftButtonUp">
+                                <hc:InvokeCommandAction Command="{Binding OpenProfileCommand}" />
+                            </hc:EventTrigger>
+                        </hc:Interaction.Triggers>
+                    </hc:Gravatar>
                     <StackPanel Grid.Column="1" VerticalAlignment="Center">
                         <TextBlock
                             Margin="5"
@@ -554,7 +747,7 @@
                             FontSize="12"
                             FontWeight="Bold"
                             Foreground="{DynamicResource SecondaryTextBrush}"
-                            Text="Trực tuyến lần cuối 10:23 AM" />
+                            Text="Đang hoạt động" />
                     </StackPanel>
                 </Grid>
                 <Grid Grid.Row="2">
@@ -612,7 +805,7 @@
                                 VerticalAlignment="Center"
                                 FontSize="14"
                                 Foreground="{DynamicResource PrimaryTextBrush}"
-                                Text="0 Hình ảnh" />
+                                Text="{Binding PhotoCount, StringFormat='{}{0} Hình Ảnh'}" />
                         </Grid>
                         <Grid Height="40">
                             <Grid.ColumnDefinitions>

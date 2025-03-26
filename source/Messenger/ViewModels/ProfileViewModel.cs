@@ -104,8 +104,11 @@ namespace Messenger.ViewModels
         }
         private void CloseWindow()
         {
-            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            window?.Close();
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                window?.Close();
+            });
         }
     }
 }

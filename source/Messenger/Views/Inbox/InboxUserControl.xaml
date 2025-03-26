@@ -16,7 +16,6 @@
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
 
-        <!--  Inbox  -->
         <Border
             Grid.Column="0"
             Background="{DynamicResource MainBackgroundBrush}"
@@ -62,41 +61,6 @@
                         Foreground="{DynamicResource DangerBrush}"
                         Visibility="{Binding ElementName=SearchBar, Path=Tag}" />
                 </Grid>
-                <!--<hc:AutoCompleteTextBox
-                    Height="40"
-                    Margin="10,10,10,5"
-                    hc:BorderElement.CornerRadius="5"
-                    hc:InfoElement.Placeholder="Tìm kiếm"
-                    Background="{DynamicResource MainBackgroundBrush}"
-                    BorderBrush="{DynamicResource BorderBrush}"
-                    FontSize="14"
-                    ItemsSource="{Binding Conversations}"
-                    SelectionChanged="AutoCompleteTextBox_SelectionChanged"
-                    StaysOpenOnEdit="False"
-                    Text="{Binding Search, Mode=TwoWay}">
-                    <hc:AutoCompleteTextBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <hc:Gravatar
-                                    Grid.Column="0"
-                                    Width="30"
-                                    Height="30"
-                                    Margin="0,0,5,0"
-                                    Source="{Binding ConversationAvatar}"
-                                    Style="{StaticResource GravatarCircle}" />
-                                <TextBlock
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Text="{Binding ConversationName}" />
-                            </Grid>
-                        </DataTemplate>
-                    </hc:AutoCompleteTextBox.ItemTemplate>
-                </hc:AutoCompleteTextBox>-->
 
                 <!--  Inbox  -->
                 <ScrollViewer
