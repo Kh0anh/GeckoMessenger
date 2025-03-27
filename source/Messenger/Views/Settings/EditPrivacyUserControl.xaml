@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
-             xmlns:local="clr-namespace:Messenger.Views.Settings"
+             xmlns:local="clr-namespace:Messenger.Views.Settings" xmlns:viewmodels="clr-namespace:Messenger.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:EditPrivacyViewModel}"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="320">
     <Grid>
@@ -42,10 +42,10 @@
                           Padding="8"
                           FontSize="14"
                           FontWeight="Medium"
-                          BorderThickness="0">
-                    <ComboBoxItem Content="Ẩn"/>
-                    <ComboBoxItem Content="Liên hệ"/>
-                    <ComboBoxItem Content="Công khai"/>
+                          BorderThickness="0"
+                          ItemsSource="{Binding PrivacyOptions}"
+                          SelectedItem="{Binding SelectedActiveStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          DisplayMemberPath="PrivacyName">
                     <ComboBox.Style>
                         <Style TargetType="hc:ComboBox" BasedOn="{StaticResource ComboBoxPlusBaseStyle}">
                             <Style.Triggers>
@@ -71,10 +71,10 @@
                              Padding="8"
                              FontSize="14"
                              FontWeight="Medium"
-                             BorderThickness="0">
-                    <ComboBoxItem Content="Ẩn"/>
-                    <ComboBoxItem Content="Liên hệ"/>
-                    <ComboBoxItem Content="Công khai"/>
+                             BorderThickness="0"
+                             ItemsSource="{Binding PrivacyOptions}"
+                             SelectedItem="{Binding ActiveStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    
                     <ComboBox.Style>
                         <Style TargetType="hc:ComboBox" BasedOn="{StaticResource ComboBoxPlusBaseStyle}">
                             <Style.Triggers>

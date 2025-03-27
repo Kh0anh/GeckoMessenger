@@ -110,6 +110,38 @@ namespace APIServer.DTOs
         public string Message { get; set; }
         public List<UserInfo> Users { get; set; }
     }
+
+    //Cập nhật quyền riêng tư
+    [Route("/user/updatePrivacy")]
+    public class UpdatePrivacy : IReturn<UpdatePrivacyResponse>
+    {
+        public byte ActiveStatus { get; set; }
+    }
+
+    public class UpdatePrivacyResponse
+    {
+        public string Error { get; set; }
+        public string Message { get; set; }
+    }
+    [Route("/user/getPrivacy")]
+    public class GetPrivacy : IReturn<GetPrivacyResponse>
+    {
+        public int UserID { get; set; }
+    }
+    public class GetPrivacyResponse
+    {
+        public string Error { get; set; }
+        public string Message { get; set; }
+        public PrivacyInfo Data { get; set; }
+    }
+
+    public class PrivacyInfo
+    { 
+        public byte ActiveStatus { get; set; }
+        public byte BioPrivacy { get; set; }
+        public byte PhoneNumberPrivacy { get; set; }
+
+    }
 }
 
 

@@ -286,6 +286,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\APIServer\APIServer.csproj">
+      <Project>{9501C8FB-DEA1-465F-A07E-55BF11351D96}</Project>
+      <Name>APIServer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

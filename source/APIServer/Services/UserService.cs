@@ -339,5 +339,60 @@ namespace APIServer.Services
                 throw new HttpError(HttpStatusCode.InternalServerError, "ServerError", "Failed to save avatar");
             }
         }
+
+        //Cập nhật quyền riêng tư
+        public object Put(DTOs.UpdatePrivacy request)
+        {
+            // Lấy uid và kiểm tra xem có tồn tại hay không?
+            var userId = int.Parse(GetSession().UserAuthId);
+            using (var db = DB.Open())
+            {
+                var userSettings = db.SingleById<UserSettings>(userId);
+                if (userSettings == null)
+                {
+                    return new HttpResult(new DTOs.UpdatePrivacyResponse
+                    {
+                        Error = "InvalidPrivacyID",
+                        Message = "Invalid Privacy ID"
+                    }, HttpStatusCode.BadRequest);
+                }
+
+                // Cập nhật thông tin quyền riêng tư
+                userSettings.StatusPrivacy = request.ActiveStatus;
+                db.Update(userSettings);
+
+                return new HttpResult(new DTOs.UpdatePrivacyResponse
+                {
+                    Message = "Privacy updated successfully"
+                }, HttpStatusCode.OK);
+            }
+        }
+
+        // Lấy quyền riêng tư
+        public object Get(DTOs.GetPrivacy request)
+        {
+            using (var db = DB.Open())
+            {
+                var user = db.SingleById<UserSettings>(request.UserID);
+                if (user == null)
+                {
+                    return new HttpResult(new DTOs.GetPrivacyResponse
+                    {
+                        Error = "NotFound",
+                        Message = "User settings not found"
+                    }, HttpStatusCode.NotFound);
+                }
+
+                return new HttpResult(new DTOs.GetPrivacyResponse
+                {
+                    Data = new DTOs.PrivacyInfo
+                    {
+                        ActiveStatus = user.StatusPrivacy,
+                        BioPrivacy = user.BioPrivacy,
+
+                    }
+                }, HttpStatusCode.OK);
+            }
+        }
     }
 }
