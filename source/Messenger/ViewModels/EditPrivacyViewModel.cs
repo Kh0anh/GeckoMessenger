@@ -12,49 +12,51 @@ namespace Messenger.ViewModels
 {
     public class EditPrivacyViewModel : BaseViewModel
     {
-        public ObservableCollection<Privacy> PrivacyOptions { get; set; }
-        private Privacy _selectedActiveStatus;
-        private bool _isSettingSelectedActiveStatus; // Flag to prevent infinite loop
+        public ObservableCollection<PrivacyConfig> PrivacyOptions { get; set; }
 
-        public Privacy SelectedActiveStatus
+        private PrivacyConfig _SelectedActiveStatus;
+        public PrivacyConfig SelectedActiveStatus
         {
-            get => _selectedActiveStatus;
+            get => _SelectedActiveStatus;
             set
             {
-                if (_isSettingSelectedActiveStatus) return; // Prevent loop
-                _selectedActiveStatus = value;
-                OnPropertyChanged(nameof(SelectedActiveStatus));
-                SavePrivacy?.Execute(_selectedActiveStatus);
+                _SelectedActiveStatus = value;
+                SavePrivacy?.Execute(_SelectedActiveStatus);
             }
         }
 
         public byte ActiveStatus { get; set; }
         public ICommand SavePrivacy { get; set; }
-        public EditPrivacyViewModel(int? userID = null)
+
+        private UserInfo _UserInfo { get; set; }
+        public EditPrivacyViewModel()
         {
             SavePrivacy = new RelayCommand(_ => EditPrivacy());
-            PrivacyOptions = new ObservableCollection<Privacy>
+            PrivacyOptions = new ObservableCollection<PrivacyConfig>
                 {
-                    new Privacy { PrivacyID = 1, PrivacyName = "Ẩn" },
-                    new Privacy { PrivacyID = 2, PrivacyName = "Liên hệ" },
-                    new Privacy { PrivacyID = 3, PrivacyName = "Công khai" }
+                    new PrivacyConfig { PrivacyTitle = "Ẩn", PrivacyName=  "NOBODY"},
+                    new PrivacyConfig { PrivacyTitle = "Liên hệ", PrivacyName=  "CONTACT"},
+                    new PrivacyConfig { PrivacyTitle = "Công khai", PrivacyName=  "PUBLIC" }
                 };
+
             var userService = ServiceLocator.GetService<IUserService>();
-            if (userID != null)
+            if (userService.User == null)
             {
-                LoadUserPrivacy(userID.Value);
+                return;
             }
+
+            _UserInfo = userService.User;
+            LoadUserPrivacy();
         }
 
         public void EditPrivacy()
         {
-            var userService = ServiceLocator.GetService<IUserService>();
             var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
-            client.BearerToken = userService.User.AuthToken;
+            client.BearerToken = _UserInfo.AuthToken;
 
             var updatePrivacy = new DTOs.UpdatePrivacy
             {
-                ActiveStatus = SelectedActiveStatus?.PrivacyID ?? default(byte),
+                ActiveStatus = SelectedActiveStatus.PrivacyName,
             };
 
             var response = client.Put(updatePrivacy);
@@ -66,69 +68,31 @@ namespace Messenger.ViewModels
             else
             {
                 Debug.WriteLine("Privacy updated successfully!");
-                LoadUserPrivacy(userService.User.UserID);
             }
         }
 
-        public void LoadUserPrivacy(int userID)
+        public void LoadUserPrivacy()
         {
-            var userService = ServiceLocator.GetService<IUserService>();
             var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
-            client.BearerToken = userService.User.AuthToken;
+            client.BearerToken = _UserInfo.AuthToken;
 
-            var getPrivacy = new DTOs.GetPrivacy { UserID = userID };
+            var getPrivacy = new DTOs.GetPrivacy { UserID = _UserInfo.UserID };
             var response = client.Get(getPrivacy);
-
-            if (response == null)
-            {
-                Debug.WriteLine("Error: response is null.");
-                return;
-            }
-            else
-            {
-                Debug.WriteLine($"response is not null = {(response.Data.ActiveStatus).GetType()}");
-            }
 
             if (response.Error != null)
             {
-                Debug.WriteLine($"Error loading user privacy: {response.Message}");
+                Debug.WriteLine($"{response.Error}");
                 return;
             }
 
-            // Log giá trị ActiveStatus từ response
-            Debug.WriteLine($"ActiveStatus từ response: {response.Data.ActiveStatus}");
-
-            // Log các phần tử trong PrivacyOptions
-            foreach (var privacy in PrivacyOptions)
-            {
-                Debug.WriteLine($"PrivacyID: {privacy.PrivacyID}, PrivacyName: {privacy.PrivacyName}");
-            }
-
-            // Set the flag to prevent triggering SavePrivacy
-            _isSettingSelectedActiveStatus = true;
-
-            SelectedActiveStatus = PrivacyOptions.FirstOrDefault(p => p.PrivacyID == response.Data.ActiveStatus);
-
-            _isSettingSelectedActiveStatus = false; // Reset the flag
-
-            // Kiểm tra kết quả
-            if (SelectedActiveStatus == null)
-            {
-                Debug.WriteLine("SelectedActiveStatus là null. Không tìm thấy PrivacyID khớp.");
-            }
-            else
-            {
-                Debug.WriteLine($"SelectedActiveStatus được gán thành: {SelectedActiveStatus.PrivacyName}");
-            }
-
-            // Kiểm tra xem giá trị ActiveStatus có khớp với bất kỳ PrivacyID nào trong PrivacyOptions hay không
-            foreach (var privacy in PrivacyOptions)
-            {
-                if (privacy.PrivacyID == response.Data.ActiveStatus)
-                {
-                    Debug.WriteLine($"Khớp với PrivacyID: {privacy.PrivacyID}");
-                }
-            }
+            _SelectedActiveStatus = PrivacyOptions.SingleOrDefault<PrivacyConfig>(p => p.PrivacyName == response.Data.ActiveStatus);
+            Debug.WriteLine(_SelectedActiveStatus.PrivacyName);
+            OnPropertyChanged(nameof(SelectedActiveStatus));
         }
+    }
+    public class PrivacyConfig
+    {
+        public string PrivacyTitle { get; set; }
+        public string PrivacyName { get; set; }
     }
 }

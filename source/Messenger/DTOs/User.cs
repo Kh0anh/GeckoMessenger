@@ -115,7 +115,7 @@ namespace Messenger.DTOs
     [Route("/user/updatePrivacy")]
     public class UpdatePrivacy : IReturn<UpdatePrivacyResponse>
     {
-        public byte ActiveStatus { get; set; }
+        public string ActiveStatus { get; set; }
     }
 
     public class UpdatePrivacyResponse
@@ -123,7 +123,6 @@ namespace Messenger.DTOs
         public string Error { get; set; }
         public string Message { get; set; }
     }
-
     [Route("/user/getPrivacy")]
     public class GetPrivacy : IReturn<GetPrivacyResponse>
     {
@@ -138,9 +137,10 @@ namespace Messenger.DTOs
 
     public class PrivacyInfo
     {
-        public byte ActiveStatus { get; set; }
-        public byte BioPrivacy { get; set; }
-        public byte PhoneNumberPrivacy { get; set; }
-
+        public string ActiveStatus { get; set; }
+        public string BioPrivacy { get; set; }
+        public string PhoneNumberPrivacy { get; set; }
     }
 }
+
+

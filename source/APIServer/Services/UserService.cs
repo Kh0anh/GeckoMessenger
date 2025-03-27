@@ -3,6 +3,7 @@ using ServiceStack;
 using ServiceStack.Data;
 using ServiceStack.OrmLite;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -344,7 +345,15 @@ namespace APIServer.Services
         public object Put(DTOs.UpdatePrivacy request)
         {
             // Lấy uid và kiểm tra xem có tồn tại hay không?
-            var userId = int.Parse(GetSession().UserAuthId);
+            if (!int.TryParse(GetSession().UserAuthId, out int userId))
+            {
+                return new HttpResult(new DTOs.UpdatePrivacyResponse
+                {
+                    Error = "InvalidUserID",
+                    Message = "User ID is invalid"
+                }, HttpStatusCode.BadRequest);
+            }
+
             using (var db = DB.Open())
             {
                 var userSettings = db.SingleById<UserSettings>(userId);
@@ -358,8 +367,9 @@ namespace APIServer.Services
                 }
 
                 // Cập nhật thông tin quyền riêng tư
-                userSettings.StatusPrivacy = request.ActiveStatus;
+                userSettings.StatusPrivacy = db.Single<Privacy>(u => u.PrivacyName == request.ActiveStatus).PrivacyID;
                 db.Update(userSettings);
+                Debug.WriteLine(request.ActiveStatus);
 
                 return new HttpResult(new DTOs.UpdatePrivacyResponse
                 {
@@ -387,9 +397,8 @@ namespace APIServer.Services
                 {
                     Data = new DTOs.PrivacyInfo
                     {
-                        ActiveStatus = user.StatusPrivacy,
-                        BioPrivacy = user.BioPrivacy,
-
+                        ActiveStatus = db.Single<Privacy>(u => u.PrivacyID == user.StatusPrivacy).PrivacyName,
+                        BioPrivacy = db.Single<Privacy>(u => u.PrivacyID == user.BioPrivacy).PrivacyName,
                     }
                 }, HttpStatusCode.OK);
             }
