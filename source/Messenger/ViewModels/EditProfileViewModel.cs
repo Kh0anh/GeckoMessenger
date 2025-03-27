@@ -1,15 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using Messenger.Services;
 using ServiceStack;
-using Messenger.DTOs;
-using Messenger.Services;
-using static ServiceStack.Diagnostics.Events;
+using System;
 using System.Configuration;
 using System.Diagnostics;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using ServiceStack.Web;
+using System.Windows.Input;
 
 namespace Messenger.ViewModels
 {
@@ -41,7 +35,7 @@ namespace Messenger.ViewModels
         public DateTime EditBirthday { get; set; }
 
         public ICommand SaveProfile { get; set; }
-        public EditProfileViewModel(int? userID = null)
+        public EditProfileViewModel()
         {
             SaveProfile = new RelayCommand(_ => EditProfile(), _ => CanEditProfile());
             var userService = ServiceLocator.GetService<IUserService>();
