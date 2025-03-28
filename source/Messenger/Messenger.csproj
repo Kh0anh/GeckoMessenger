@@ -133,6 +133,7 @@
     <Compile Include="Utils\LoadImage.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\BlockListViewModel.cs" />
+    <Compile Include="ViewModels\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\ChatViewModel.cs" />
     <Compile Include="ViewModels\ContactListViewModel.cs" />
     <Compile Include="ViewModels\EditPrivacyViewModel.cs" />
@@ -177,6 +178,9 @@
     </Compile>
     <Compile Include="Views\RegisterUserControl.xaml.cs">
       <DependentUpon>RegisterUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\ChangePasswordUserControl.xaml.cs">
+      <DependentUpon>ChangePasswordUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Settings\EditPrivacyUserControl.xaml.cs">
       <DependentUpon>EditPrivacyUserControl.xaml</DependentUpon>
@@ -239,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegisterUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\ChangePasswordUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

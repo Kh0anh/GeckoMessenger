@@ -72,7 +72,10 @@ namespace APIServer.Services
                 {
                     return new HttpResult(new AddContactResponse { }, HttpStatusCode.OK);
                 }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
                 var newContact = new Contacts
                 {
                     ContactID = userID,

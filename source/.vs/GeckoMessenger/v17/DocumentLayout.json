@@ -1,5 +1,9 @@
 {
   "Version": 1,
+<<<<<<< HEAD
+  "WorkspaceRootPath": "D:\\Projects\\Uni\\GeckoMessenger\\source\\",
+  "Documents": [],
+=======
   "WorkspaceRootPath": "D:\\GeckoMessenger\\source\\",
   "Documents": [
     {
@@ -187,6 +191,7 @@
       "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\apphost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -194,9 +199,13 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 13,
+          "SelectedChildIndex": -1,
           "Children": [
             {
+<<<<<<< HEAD
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+=======
               "$type": "Document",
               "DocumentIndex": 39,
               "Title": "User.cs",
@@ -222,6 +231,7 @@
               "WhenOpened": "2025-03-27T10:27:22.013Z",
               "IsPinned": true,
               "EditorCaption": ""
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
             },
             {
               "$type": "Bookmark",
@@ -233,11 +243,13 @@
             },
             {
               "$type": "Bookmark",
-              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d84ee353-0bef-5a41-a649-8f89aca5d84d}"
+<<<<<<< HEAD
+=======
             },
             {
               "$type": "Bookmark",
@@ -800,6 +812,7 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-27T18:10:47.854Z"
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
             }
           ]
         }
