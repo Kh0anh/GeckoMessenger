@@ -156,6 +156,7 @@
     <Compile Include="Services\ContactService.cs" />
     <Compile Include="Services\ReportService.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="Utils\E2EEHelper.cs" />
     <Compile Include="Utils\Hash.cs" />
     <Compile Include="Utils\ResourceHelper.cs" />
   </ItemGroup>
