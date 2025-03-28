@@ -18,21 +18,21 @@ namespace Messenger.ViewModels
         {
             SuggestContacts = new List<Contact>()
             {
-                new Contact
-                {
-                    Avatar = "User0",
-                    FullName = "Jerry Vo",
-                },
-                new Contact
-                {
-                    Avatar = "User1",
-                    FullName = "Jerry Nguyen",
-                },
-                new Contact
-                {
-                    Avatar = "DownMan",
-                    FullName = "Down Main Anime",
-                }
+                //new Contact
+                //{
+                //    Avatar = "User0",
+                //    FullName = "Jerry Vo",
+                //},
+                //new Contact
+                //{
+                //    Avatar = "User1",
+                //    FullName = "Jerry Nguyen",
+                //},
+                //new Contact
+                //{
+                //    Avatar = "DownMan",
+                //    FullName = "Down Main Anime",
+                //}
             };
         }
     }

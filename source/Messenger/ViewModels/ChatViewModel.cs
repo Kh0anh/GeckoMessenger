@@ -1,6 +1,8 @@
-﻿using Messenger.DTOs;
+﻿using HandyControl.Tools.Command;
+using Messenger.DTOs;
 using Messenger.Services;
 using Messenger.Utils;
+using Messenger.Views;
 using ServiceStack;
 using System;
 using System.Collections.Generic;
@@ -8,9 +10,10 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Configuration;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 
@@ -22,6 +25,7 @@ namespace Messenger.ViewModels
         public int UserID { get; set; }
         public string FullName { get; set; }
         public string Activity { get; set; }
+        public int PhotoCount { get; set; }
 
         private bool _IsStarted;
         public bool IsStarted
@@ -34,14 +38,26 @@ namespace Messenger.ViewModels
         }
         private ConversationResponse ConversationInfo { get; set; }
 
-        private ObservableCollection<Message> _messages;
+        private ObservableCollection<Message> _Messages;
         public ObservableCollection<Message> Messages
         {
-            get => _messages;
+            get => _Messages;
             set
             {
-                _messages = value;
+                _Messages = value;
                 OnPropertyChanged(nameof(Messages));
+            }
+        }
+
+
+        private ObservableCollection<Attachment> _Attachments;
+        public ObservableCollection<Attachment> Attachments
+        {
+            get => _Attachments;
+            set
+            {
+                _Attachments = value;
+                OnPropertyChanged(nameof(Attachments));
             }
         }
 
@@ -60,12 +76,21 @@ namespace Messenger.ViewModels
 
         public ICommand StartNewChatCommand { get; }
         public ICommand SendMessageCommand { get; }
-
+        public ICommand GiveFileCommand { get; }
+        public ICommand GivePhotoCommand { get; }
+        public ICommand RemoveAttachmentCommand { get; }
+        public ICommand OpenProfileCommand { get; }
         public ChatViewModel(int? userID = null, int? conversationID = null)
         {
             Messages = new ObservableCollection<Message>();
+            Attachments = new ObservableCollection<Attachment>();
+
             SendMessageCommand = new RelayCommand(_ => SendMessage());
             StartNewChatCommand = new RelayCommand(_ => StartNewChat());
+            GiveFileCommand = new RelayCommand(_ => GiveFile());
+            OpenProfileCommand = new RelayCommand(_ => OpenProfile());
+            GivePhotoCommand = new RelayCommand(_ => GivePhoto());
+            RemoveAttachmentCommand = new RelayCommand<Object>(a => RemoveAttachment(a));
 
             if (userID != null)
             {
@@ -80,16 +105,88 @@ namespace Messenger.ViewModels
             Task.Run(TaskLoadMessage);
         }
 
+        private void GiveFile()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Title = "Chọn một tệp",
+                Multiselect = false
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Task.Run(() =>
+                {
+                    var attachment = new Attachment
+                    {
+                        FileName = Path.GetFileName(openFileDialog.FileName),
+                        FileType = "FILE",
+                        Data = File.ReadAllBytes(openFileDialog.FileName),
+                    };
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        Attachments.Add(attachment);
+                    });
+                });
+            }
+        }
+
+        private void OpenProfile()
+        {
+            ProfileView settingsView = new ProfileView(new ProfileViewModel(UserID));
+            settingsView.ShowDialog();
+        }
+
+        private void GivePhoto()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Title = "Chọn một hình ảnh",
+                Filter = "Hình ảnh|*.jpg;*.jpeg;*.png;*.bmp;*.gif",
+                Multiselect = false
+            };
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Task.Run(() =>
+                {
+                    var attachment = new Attachment
+                    {
+                        FileName = Path.GetFileName(openFileDialog.FileName),
+                        FileType = "PHOTO",
+                        Data = File.ReadAllBytes(openFileDialog.FileName),
+                    };
+                    attachment.Thumnail = Utils.LoadImage.LoadImageFromBytes(attachment.Data);
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        Attachments.Add(attachment);
+                    });
+                });
+            }
+        }
+        private void RemoveAttachment(Object attachment)
+        {
+            Debug.WriteLine("work");
+            if (attachment is Attachment a && Attachments.Contains(a))
+            {
+                Attachments.Remove(a);
+            }
+        }
         private async void TaskLoadMessage()
         {
             while (true)
             {
-                await Task.Delay(500);
+                await Task.Delay(300);
+
+                if (ConversationInfo == null)
+                {
+                    continue;
+                }
 
                 var userService = ServiceLocator.GetService<IUserService>();
                 if (userService.User == null)
                 {
-                    continue;
+                    break;
                 }
 
                 var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
@@ -105,38 +202,58 @@ namespace Messenger.ViewModels
 
                     if (response?.Messages != null)
                     {
-                        App.Current.Dispatcher.Invoke(() =>
+
+                        foreach (var message in response.Messages)
                         {
-                            foreach (var message in response.Messages)
+                            var existingMessage = Messages.FirstOrDefault(c => c.MessageID == message.MessageID);
+
+                            if (existingMessage == null)
                             {
-                                var existingMessage = Messages.FirstOrDefault(c => c.MessageID == message.MessageID);
+                                var avatarUrl = ConfigurationManager.AppSettings["APIUrl"] + message.Sender.Avatar;
 
-                                if (existingMessage == null)
+                                if (!AvatarData.ContainsKey(avatarUrl))
                                 {
-                                    var avatarUrl = ConfigurationManager.AppSettings["APIUrl"] + message.Sender.Avatar;
-
-                                    if (!AvatarData.ContainsKey(avatarUrl))
-                                    {
-                                        AvatarData[avatarUrl] = LoadImage.LoadImageFromUrl(avatarUrl);
-                                    }
-
-                                    var newMessage = new Message
-                                    {
-                                        MessageID = message.MessageID,
-                                        UserID = message.Sender.UserID,
-                                        UserFullName = message.Sender.FirstName + " " + message.Sender.LastName,
-                                        UserAvatar = AvatarData[avatarUrl],
-                                        Content = message.Content,
-                                        IsSentByMe = message.Sender.UserID == userService.User.UserID,
-                                        Timestamp = message.CreatedAt
-                                    };
-
-                                    Messages.Add(newMessage);
-
-                                    Messages.CollectionChanged += Messages_CollectionChanged;
+                                    AvatarData[avatarUrl] = LoadImage.LoadImageFromUrl(avatarUrl);
                                 }
+
+                                var photoList = new List<Photo>();
+                                if (message.Attachments.Length > 0)
+                                {
+                                    foreach (var attachment in message.Attachments)
+                                    {
+                                        if (attachment.AttachmentType == "PHOTO")
+                                        {
+                                            photoList.Add(new Photo
+                                            {
+                                                Image = LoadImage.LoadImageFromUrl(ConfigurationManager.AppSettings["APIUrl"] + "/storages/" + attachment.FileURL),
+                                            });
+                                            PhotoCount++;
+                                            OnPropertyChanged(nameof(PhotoCount));
+                                        }
+                                    }
+                                }
+
+                                var newMessage = new Message
+                                {
+                                    MessageID = message.MessageID,
+                                    UserID = message.Sender.UserID,
+                                    UserFullName = message.Sender.FirstName + " " + message.Sender.LastName,
+                                    UserAvatar = AvatarData[avatarUrl],
+                                    Content = message.Content,
+                                    Photos = photoList.ToArray(),
+                                    IsSentByMe = message.Sender.UserID == userService.User.UserID,
+                                    Timestamp = message.CreatedAt
+                                };
+
+                                App.Current.Dispatcher.Invoke(() =>
+                                {
+                                    Messages.Add(newMessage);
+                                });
+
+                                Messages.CollectionChanged += Messages_CollectionChanged;
                             }
-                        });
+                        }
+
                     }
                 }
                 catch (Exception ex)
@@ -177,6 +294,8 @@ namespace Messenger.ViewModels
         private void LoadUserConversation(int userID)
         {
             var userService = ServiceLocator.GetService<IUserService>();
+            if (userService == null)
+                return;
 
             var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
             client.BearerToken = userService.User.AuthToken;
@@ -213,6 +332,9 @@ namespace Messenger.ViewModels
         {
             var userService = ServiceLocator.GetService<IUserService>();
 
+            if (userService == null)
+                return;
+
             var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
             client.BearerToken = userService.User.AuthToken;
 
@@ -246,6 +368,8 @@ namespace Messenger.ViewModels
 
             var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
             client.BearerToken = userService.User.AuthToken;
+
+            UserID = userID;
 
             var getInfo = new DTOs.GetInfo
             {
@@ -322,6 +446,21 @@ namespace Messenger.ViewModels
                         MessageType = "TEXT",
                     };
 
+                    if (Attachments.Count > 0)
+                    {
+                        var attachmentList = new List<DTOs.InAttachment>();
+                        foreach (var attachment in Attachments)
+                        {
+                            attachmentList.Add(new DTOs.InAttachment() { AttachmentType = attachment.FileType, FileData = attachment.Data, FileName = attachment.FileName });
+                        }
+
+                        sendMessage.Attachments = attachmentList.ToArray();
+                        App.Current.Dispatcher.Invoke(() =>
+                        {
+                            Attachments.Clear();
+                        });
+                    }
+
                     try
                     {
                         var response = client.Post(sendMessage);
@@ -338,7 +477,7 @@ namespace Messenger.ViewModels
         {
             if (e.Action == NotifyCollectionChangedAction.Add)
             {
-                Application.Current.Dispatcher.Invoke(() =>
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
                 {
                     ScrollToEnd?.Invoke();
                 });
@@ -347,14 +486,30 @@ namespace Messenger.ViewModels
 
         public event Action ScrollToEnd;
     }
+
+    public class Attachment
+    {
+        public string FileName { get; set; }
+        public string FileType { get; set; }
+        public ImageSource Thumnail { get; set; }
+        public byte[] Data { get; set; }
+    }
+
     public class Message
     {
         public int MessageID { get; set; }
         public int UserID { get; set; }
         public string UserFullName { get; set; }
         public ImageSource UserAvatar { get; set; }
+        public Photo[] Photos { get; set; }
         public bool IsSentByMe { get; set; }
         public string Content { get; set; }
         public DateTime Timestamp { set; get; }
+    }
+
+    public class Photo
+    {
+        public string FileName { get; set; }
+        public ImageSource Image { get; set; }
     }
 }
