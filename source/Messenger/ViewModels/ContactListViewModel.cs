@@ -1,44 +1,79 @@
-﻿using System.Collections.Generic;
+﻿using Messenger.Services;
+using Messenger.Utils;
+using ServiceStack;
+using System;
+using System.Collections.ObjectModel;
+using System.Configuration;
+using System.Diagnostics;
+using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace Messenger.ViewModels
 {
     public class ContactListViewModel : BaseViewModel
     {
-        private List<Contact> _Contacts;
-        public List<Contact> Contacts
+        private ObservableCollection<Contact> _Contacts;
+        public ObservableCollection<Contact> Contacts
         {
             get => _Contacts;
             set
             {
                 _Contacts = value;
-                OnPropertyChanged();
+                OnPropertyChanged(nameof(Contacts));
             }
         }
+        private Services.UserInfo _UserInfo;
         public ContactListViewModel()
         {
-            Contacts = new List<Contact>()
+            Contacts = new ObservableCollection<Contact>();
+
+            var userService = ServiceLocator.GetService<IUserService>();
+            if (userService.User != null)
             {
-                new Contact
+                _UserInfo = userService.User;
+                LoadContact();
+            }
+        }
+
+        public void LoadContact()
+        {
+            var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
+            client.BearerToken = _UserInfo.AuthToken;
+
+            var getContacts = new DTOs.GetContacts();
+
+            try
+            {
+                var response = client.Get(getContacts);
+
+                foreach (var contact in response.Contacts)
                 {
-                    Avatar = "User0",
-                    FullName = "Jerry Vo",
-                },
-                new Contact
-                {
-                    Avatar = "User1",
-                    FullName = "Jerry Nguyen",
-                },
-                 new Contact
-                {
-                    Avatar = "DownMan",
-                    FullName = "Down Main Anime",
+                    Task.Run(() =>
+                    {
+                        var newContact = new Contact
+                        {
+                            UserID = contact.UserID,
+                            UserAvatar = LoadImage.LoadImageFromUrl(contact.Avatar),
+                            UsertFullName = contact.LastName + " " + contact.FirstName,
+                        };
+
+                        App.Current.Dispatcher.Invoke(() =>
+                        {
+                            Contacts.Add(newContact);
+                        });
+                    });
                 }
-            };
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine(err);
+            }
         }
     }
     public class Contact
     {
-        public string Avatar { get; set; }
-        public string FullName { get; set; }
+        public int UserID { get; set; }
+        public ImageSource UserAvatar { get; set; }
+        public string UsertFullName { get; set; }
     }
 }

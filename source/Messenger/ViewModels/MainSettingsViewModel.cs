@@ -19,12 +19,13 @@ namespace Messenger.ViewModels
         public ICommand SwitchToMainCommand { get; }
         public ICommand SwitchToEditProfileCommand { get; }
         public ICommand SwitchToEditPrivacyCommand { get; }
+        public ICommand SwitchToChangePasswordCommand { get; }
         public MainSettingsViewModel()
         {
             SwitchToMainCommand = new RelayCommand(_ => SwitchToMain());
             SwitchToEditProfileCommand = new RelayCommand(_ => SwitchToEditProfile());
             SwitchToEditPrivacyCommand = new RelayCommand(_ => SwitchToEditPrivacy());
-
+            SwitchToChangePasswordCommand = new RelayCommand(_ => SwitchToChangePassword());
             SwitchToMain();
         }
         public void NavigationTo(object view)
@@ -45,6 +46,10 @@ namespace Messenger.ViewModels
         private void SwitchToEditPrivacy()
         {
             NavigationTo(new EditPrivacyUserControl(new EditPrivacyViewModel()));
+        }
+        private void SwitchToChangePassword()
+        {
+            NavigationTo(new ChangePasswordUserControl(new ChangePasswordViewModel()));
         }
     }
 }

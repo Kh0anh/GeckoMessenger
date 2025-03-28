@@ -1,18 +1,4 @@
-﻿C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\obj\Debug\GeneratedInternalTypeHelper.g.i.cs
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\App.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\MainWindow.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Contact\BlockListUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Contact\ContactListUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Contact\MainContactUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Contact\SuggestContactListUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\HomeUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Inbox\ChatUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Inbox\InboxUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\LoginUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\ProfileView.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\RegisterUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Settings\EditPrivacyUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Settings\EditProfileUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Settings\SettingsUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Settings\MainSettingsView.xaml;;
+﻿
+
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Settings\ChangePasswordUserControl.xaml;;
 

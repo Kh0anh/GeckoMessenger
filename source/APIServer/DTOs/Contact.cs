@@ -5,7 +5,7 @@ namespace APIServer.DTOs
 {
 
     [Route("/contact/getContacts")]
-    public class GetContacts : IReturn<NewChatResponse> { }
+    public class GetContacts : IReturn<ContactResponse> { }
 
     [Route("/contact/addContact")]
     public class AddContact : IReturn<AddContactResponse>

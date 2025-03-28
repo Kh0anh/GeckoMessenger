@@ -67,6 +67,11 @@ namespace APIServer.Services
 
             using (var db = DB.Open())
             {
+                var contact = db.Single<Contacts>(c => c.ContactID == userID && c.UserID == request.UserID);
+                if (contact != null)
+                {
+                    return new HttpResult(new AddContactResponse { }, HttpStatusCode.OK);
+                }
                 var newContact = new Contacts
                 {
                     ContactID = userID,

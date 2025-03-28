@@ -142,8 +142,7 @@
                                FontSize="14"
                                VerticalAlignment="Top"
                                TextAlignment="Right"
-                               Grid.Column="2" Margin="0,5,0,0" Grid.RowSpan="2" 
-                               Foreground="Black"/>
+                               Grid.Column="2"/>
                 </Grid>
             </ToggleButton>
             <Grid>

@@ -39,7 +39,7 @@
                         Background="{DynamicResource MainBackgroundBrush}"
                         BorderBrush="{DynamicResource BorderBrush}"
                         FontSize="14"
-                        Text="{Binding SearchText, Mode=TwoWay}">
+                        Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <hc:SearchBar.Style>
                             <Style BasedOn="{StaticResource SearchBarPlus}" TargetType="hc:SearchBar">
                                 <Setter Property="Tag" Value="Hidden" />
@@ -57,47 +57,12 @@
                         Background="Transparent"
                         BorderThickness="0"
                         Click="ClearSearchBar_OnClick"
-                        Content="Xóa"
+                        Content="Đóng"
                         FontSize="14"
                         Foreground="{DynamicResource DangerBrush}"
                         Visibility="{Binding ElementName=SearchBar, Path=Tag}" />
                 </Grid>
-                <!--<hc:AutoCompleteTextBox
-                    Height="40"
-                    Margin="10,10,10,5"
-                    hc:BorderElement.CornerRadius="5"
-                    hc:InfoElement.Placeholder="Tìm kiếm"
-                    Background="{DynamicResource MainBackgroundBrush}"
-                    BorderBrush="{DynamicResource BorderBrush}"
-                    FontSize="14"
-                    ItemsSource="{Binding Conversations}"
-                    SelectionChanged="AutoCompleteTextBox_SelectionChanged"
-                    StaysOpenOnEdit="False"
-                    Text="{Binding Search, Mode=TwoWay}">
-                    <hc:AutoCompleteTextBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <hc:Gravatar
-                                    Grid.Column="0"
-                                    Width="30"
-                                    Height="30"
-                                    Margin="0,0,5,0"
-                                    Source="{Binding ConversationAvatar}"
-                                    Style="{StaticResource GravatarCircle}" />
-                                <TextBlock
-                                    Grid.Column="1"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Text="{Binding ConversationName}" />
-                            </Grid>
-                        </DataTemplate>
-                    </hc:AutoCompleteTextBox.ItemTemplate>
-                </hc:AutoCompleteTextBox>-->
-
+                
                 <!--  Inbox  -->
                 <ScrollViewer
                     Grid.Row="1"
@@ -113,7 +78,7 @@
                             HorizontalContentAlignment="Stretch"
                             Background="Transparent"
                             BorderThickness="0"
-                            ItemsSource="{Binding Conversations}"
+                            ItemsSource="{Binding Conversations, Mode=TwoWay}"
                             SelectedItem="{Binding SelectedConversation}"
                             Style="{DynamicResource ListBoxBaseStyle}">
                             <ListBox.ItemTemplate>
@@ -251,8 +216,8 @@
                             HorizontalContentAlignment="Stretch"
                             Background="{DynamicResource MainContentBackgroundBrush}"
                             BorderThickness="0"
-                            ItemsSource="{Binding Conversations}"
-                            SelectedItem="{Binding SelectedConversation}"
+                            ItemsSource="{Binding SearchResults, Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedConversation, Mode=OneWayToSource}"
                             Style="{DynamicResource ListBoxBaseStyle}"
                             Visibility="{Binding ElementName=SearchBar, Path=Tag}">
                             <ListBox.ItemTemplate>
@@ -273,7 +238,7 @@
                                                 Width="40"
                                                 Height="40"
                                                 Margin="0,0,5,0"
-                                                Source="{Binding ConversationAvatar}"
+                                                Source="{Binding UserAvatar}"
                                                 Style="{StaticResource GravatarCircle}" />
                                             <TextBlock
                                                 Grid.Column="1"
@@ -281,7 +246,7 @@
                                                 FontSize="14"
                                                 FontWeight="Medium"
                                                 Foreground="{DynamicResource PrimaryTextBrush}"
-                                                Text="{Binding ConversationName}" />
+                                                Text="{Binding FullName}" />
                                         </Grid>
                                     </Border>
                                 </DataTemplate>

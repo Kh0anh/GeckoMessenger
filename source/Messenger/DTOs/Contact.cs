@@ -5,7 +5,7 @@ namespace Messenger.DTOs
 {
 
     [Route("/contact/getContacts")]
-    public class GetContacts : IReturn<NewChatResponse> { }
+    public class GetContacts : IReturn<GetContactResponse> { }
 
     [Route("/contact/addContact")]
     public class AddContact : IReturn<AddContactResponse>

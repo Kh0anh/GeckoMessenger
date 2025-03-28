@@ -23,7 +23,6 @@ namespace Messenger.ViewModels
         public string PhoneNumber { get; set; }
         public string JoinDate { get; set; }
 
-        public ICommand Edit { get; set; }
         public ProfileViewModel(int userID)
         {
             Task.Run(() =>
@@ -62,10 +61,7 @@ namespace Messenger.ViewModels
                     {
                         Bio = response.Data.Bio;
                     }
-                    else
-                    {
-                        Bio = "Không có tiểu sử";
-                    }
+                    
                     if (!string.IsNullOrEmpty(response.Data.Username))
                     {
                         Username = response.Data.Username;
@@ -110,8 +106,11 @@ namespace Messenger.ViewModels
         }
         private void CloseWindow()
         {
-            var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-            window?.Close();
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                var window = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+                window?.Close();
+            });
         }
     }
 }
