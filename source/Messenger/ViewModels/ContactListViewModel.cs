@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 ﻿using Messenger.Services;
+=======
+﻿using APIServer.Models;
+using Messenger.Services;
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
 using Messenger.Utils;
 using ServiceStack;
 using System;

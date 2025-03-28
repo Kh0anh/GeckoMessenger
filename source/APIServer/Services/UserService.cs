@@ -268,11 +268,19 @@ namespace APIServer.Services
                 // Tìm kiếm theo tên (FirstName hoặc LastName) hoặc email
                 query = query.Where(u =>
                     u.UserID != userID &&
+<<<<<<< HEAD
                      (u.FirstName.ToLower().Contains(request.Query.ToLower()) ||
                      u.LastName.ToLower().Contains(request.Query.ToLower()) ||
                      u.Username.ToLower().Contains(request.Query.ToLower()) ||
                      u.Email.ToLower().Contains(request.Query.ToLower()) ||
                      u.PhoneNumber.ToLower().Contains(request.Query.ToLower()))
+=======
+                    (u.FirstName.ToLower().Contains(request.Query.ToLower()) ||
+                    u.LastName.ToLower().Contains(request.Query.ToLower()) ||
+                    u.Username.ToLower().Contains(request.Query.ToLower()) ||
+                    u.Email.ToLower().Contains(request.Query.ToLower()) ||
+                    u.PhoneNumber.ToLower().Contains(request.Query.ToLower()))
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
                 );
 
                 var users = db.Select(query.Limit(request.MaxResult))
