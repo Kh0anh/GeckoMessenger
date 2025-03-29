@@ -194,9 +194,13 @@ namespace APIServer.Services
 
             using (var db = DB.Open())
             {
-                var users = db.Select<Users>(db.From<Users>()
-                    .Where($"UserID NOT IN (SELECT UserID FROM Contacts WHERE ContactID = {userID})")
-                    .OrderBy("RANDOM()").Limit(10));
+                var sql = @"
+    SELECT TOP 10 * 
+    FROM Users 
+    WHERE UserID NOT IN (SELECT UserID FROM Contacts WHERE ContactID = @contactID) 
+    ORDER BY NEWID()";
+
+                var users = db.SqlList<Users>(sql, new { contactID = userID });
 
                 List<ContactSugggestResponse> contactSuggestRespones = new List<ContactSugggestResponse>();
                 foreach (var user in users)

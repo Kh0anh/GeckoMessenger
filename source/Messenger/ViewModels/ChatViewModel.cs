@@ -272,17 +272,25 @@ namespace Messenger.ViewModels
                 var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
                 client.BearerToken = userService.User.AuthToken;
 
-                var chat = new DTOs.NewChat
+
+                var newContact = new DTOs.AddContact
+                {
+                    UserID = UserID,
+                };
+
+                var newChat = new DTOs.NewChat
                 {
                     ParticipantID = UserID
                 };
 
                 try
                 {
-                    var response = client.Post(chat);
+                    var newContactResponse = client.Post(newContact);
+
+                    var newChatResponse = client.Post(newChat);
 
                     IsStarted = true;
-                    LoadInfoConversation(response.Conversation);
+                    LoadInfoConversation(newChatResponse.Conversation);
                 }
                 catch (Exception err)
                 {

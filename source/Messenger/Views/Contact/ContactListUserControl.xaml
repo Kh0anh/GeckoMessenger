@@ -48,8 +48,13 @@
                 Grid.Row="0"
                 Margin="10"
                 FontSize="14"
-                FontWeight="Medium"
-                Text="Liên hệ (3)" />
+                FontWeight="Medium">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Liên hệ {0}">
+                        <Binding Path="Contacts.Count" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
             <ScrollViewer
                 Grid.Row="1"
                 HorizontalAlignment="Stretch"
@@ -79,6 +84,7 @@
                                             Height="50"
                                             Margin="0,0,10,0"
                                             VerticalAlignment="Center"
+                                            Source="{Binding UserAvatar}"
                                             Style="{StaticResource GravatarCircle}" />
 
                                         <TextBlock
@@ -86,7 +92,7 @@
                                             FontSize="14"
                                             FontWeight="Medium"
                                             Foreground="{DynamicResource PrimaryTextBrush}"
-                                            Text="{Binding FullName}" />
+                                            Text="{Binding UserFullName}" />
 
                                     </StackPanel>
                                     <Button
@@ -122,6 +128,7 @@
                                                     </MenuItem.Icon>
                                                 </MenuItem>
                                                 <MenuItem
+                                                    Command="{Binding DataContext.CallCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     FontSize="12"
                                                     FontWeight="Medium"
                                                     Foreground="{DynamicResource DangerBrush}"
