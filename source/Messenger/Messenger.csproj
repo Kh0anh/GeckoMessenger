@@ -167,6 +167,9 @@
     <Compile Include="Views\Inbox\ChatUserControl.xaml.cs">
       <DependentUpon>ChatUserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Inbox\GroupUserControl.xaml.cs">
+      <DependentUpon>GroupUserControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Inbox\InboxUserControl.xaml.cs">
       <DependentUpon>InboxUserControl.xaml</DependentUpon>
     </Compile>
@@ -227,6 +230,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Inbox\ChatUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Inbox\GroupUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -101,7 +101,6 @@ namespace Messenger.ViewModels
                 LoadConversation(conversationID.Value);
             }
 
-
             Task.Run(TaskLoadMessage);
         }
 
@@ -223,12 +222,19 @@ namespace Messenger.ViewModels
                                     {
                                         if (attachment.AttachmentType == "PHOTO")
                                         {
-                                            photoList.Add(new Photo
+                                            try
                                             {
-                                                Image = LoadImage.LoadImageFromUrl(ConfigurationManager.AppSettings["APIUrl"] + "/storages/" + attachment.FileURL),
-                                            });
-                                            PhotoCount++;
-                                            OnPropertyChanged(nameof(PhotoCount));
+                                                photoList.Add(new Photo
+                                                {
+                                                    Image = LoadImage.LoadImageFromUrl(ConfigurationManager.AppSettings["APIUrl"] + "/storages/" + attachment.FileURL),
+                                                });
+                                                PhotoCount++;
+                                                OnPropertyChanged(nameof(PhotoCount));
+                                            }
+                                            catch (Exception err)
+                                            {
+                                                Debug.WriteLine(err);
+                                            }
                                         }
                                     }
                                 }
