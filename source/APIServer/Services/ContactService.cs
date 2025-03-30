@@ -45,10 +45,50 @@ namespace APIServer.Services
                         LastName = userInfo.LastName,
                         Avatar = userInfo.Avatar,
                         AddedAt = contact.AddedAt,
+                        BlockAt = contact.BlockAt,
                     });
                 }
 
                 return new HttpResult(new GetContactsResponse { Contacts = contactResponses.ToArray() }, HttpStatusCode.OK);
+            }
+        }
+
+        public object Get(DTOs.GetBlockContacts request)
+        {
+            var session = this.GetSession();
+            if (!session.IsAuthenticated)
+            {
+                return new HttpResult(new { Error = "TokenUnauthorized", Message = "User is not authenticated." })
+                {
+                    StatusCode = HttpStatusCode.Unauthorized
+                };
+            }
+
+            int userID = int.Parse(session.UserAuthId);
+
+            using (var db = DB.Open())
+            {
+                var contacts = db.Select<Contacts>(c => c.ContactID == userID && c.BlockAt != null);
+
+
+                List<ContactResponse> contactResponses = new List<ContactResponse>();
+                foreach (var contact in contacts)
+                {
+                    var userInfo = db.Single<Users>(u => u.UserID == contact.UserID);
+
+                    contactResponses.Add(new ContactResponse
+                    {
+                        UserID = userInfo.UserID,
+                        Username = userInfo.Username,
+                        FirstName = userInfo.FirstName,
+                        LastName = userInfo.LastName,
+                        Avatar = userInfo.Avatar,
+                        AddedAt = contact.AddedAt,
+                        BlockAt = contact.BlockAt,
+                    });
+                }
+
+                return new HttpResult(new GetBlockContactsResponse { Contacts = contactResponses.ToArray() }, HttpStatusCode.OK);
             }
         }
 

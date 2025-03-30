@@ -28,15 +28,15 @@ namespace Messenger.ViewModels
         }
 
         public ICommand DeleteContactCommand { get; set; }
-        public ICommand CallCommand { get; set; }
+        public ICommand BlockContactCommand { get; set; }
 
         private Services.UserInfo _UserInfo;
         public ContactListViewModel()
         {
             Contacts = new ObservableCollection<Contact>();
 
-            CallCommand = new RelayCommand(_ => Call());
             DeleteContactCommand = new RelayCommand<Object>(c => DeleteContact(c));
+            BlockContactCommand = new RelayCommand<Object>(c => BlockContact(c));
 
             var userService = ServiceLocator.GetService<IUserService>();
             if (userService.User != null)
@@ -80,10 +80,6 @@ namespace Messenger.ViewModels
                 Debug.WriteLine(err);
             }
         }
-        private void Call()
-        {
-            Debug.WriteLine("work work work work");
-        }
         private void DeleteContact(Object contactObj)
         {
 
@@ -100,6 +96,31 @@ namespace Messenger.ViewModels
                 try
                 {
                     client.Post(deleteContact);
+                    Contacts.Remove(contact);
+                }
+                catch (Exception err)
+                {
+                    Debug.WriteLine($"{err}");
+                }
+            }
+        }
+
+        private void BlockContact(Object contactObj)
+        {
+
+            if (contactObj is Contact contact)
+            {
+                var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
+                client.BearerToken = _UserInfo.AuthToken;
+
+                var blockContact = new DTOs.BlockContact
+                {
+                    UserID = contact.UserID,
+                };
+
+                try
+                {
+                    client.Post(blockContact);
                     Contacts.Remove(contact);
                 }
                 catch (Exception err)

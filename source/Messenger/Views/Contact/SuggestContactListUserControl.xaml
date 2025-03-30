@@ -48,8 +48,13 @@
                 Grid.Row="0"
                 Margin="10"
                 FontSize="14"
-                FontWeight="Medium"
-                Text="Đề xuất" />
+                FontWeight="Medium">
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="Đề xuất ({0})">
+                        <Binding Path="SuggestContacts.Count" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
             <ScrollViewer
                 Grid.Row="1"
                 HorizontalAlignment="Stretch"

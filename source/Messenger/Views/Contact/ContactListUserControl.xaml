@@ -7,6 +7,7 @@
     xmlns:local="clr-namespace:Messenger.Views.Contact"
     xmlns:materialIcons="clr-namespace:Material.Icons.WPF;assembly=Material.Icons.WPF"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="RootUserControl"
     d:DesignHeight="450"
     d:DesignWidth="800"
     mc:Ignorable="d">
@@ -50,7 +51,7 @@
                 FontSize="14"
                 FontWeight="Medium">
                 <TextBlock.Text>
-                    <MultiBinding StringFormat="Liên hệ {0}">
+                    <MultiBinding StringFormat="Liên hệ ({0})">
                         <Binding Path="Contacts.Count" />
                     </MultiBinding>
                 </TextBlock.Text>
@@ -105,7 +106,8 @@
                                         VerticalAlignment="Top"
                                         Background="Transparent"
                                         BorderThickness="0"
-                                        Click="ContactContextOpen_OnClick">
+                                        Click="ContactContextOpen_OnClick"
+                                        Tag="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
                                         <materialIcons:MaterialIcon
                                             Width="18"
                                             Height="18"
@@ -116,6 +118,8 @@
                                                 Placement="Right"
                                                 VerticalOffset="-30">
                                                 <MenuItem
+                                                    Command="{Binding PlacementTarget.Tag.DataContext.BlockContactCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                    CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                     FontSize="12"
                                                     FontWeight="Medium"
                                                     Foreground="{DynamicResource DangerBrush}"
@@ -128,7 +132,8 @@
                                                     </MenuItem.Icon>
                                                 </MenuItem>
                                                 <MenuItem
-                                                    Command="{Binding DataContext.CallCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
+                                                    Command="{Binding PlacementTarget.Tag.DataContext.DeleteContactCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                    CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                     FontSize="12"
                                                     FontWeight="Medium"
                                                     Foreground="{DynamicResource DangerBrush}"
