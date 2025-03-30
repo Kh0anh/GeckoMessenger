@@ -151,9 +151,9 @@ namespace APIServer.Services
         }
 
         //Đổi mật khẩu
-        public object Post(DTOs.ChangePassword request)
+        public object Put(DTOs.ChangePassword request)
         {
-            if (request.OldPassword.IsNullOrEmpty() || request.NewPassword.IsNullOrEmpty())
+            if (request.OldPassword.IsNullOrEmpty() || request.NewPassword.IsNullOrEmpty() || request.ConfirmPassword.IsNullOrEmpty())
             {
                 return new HttpResult(new DTOs.ChangePasswordResponse
                 {

@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+﻿
+
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Settings\ChangePasswordUserControl.xaml;;
+=======
 ﻿D:\GeckoMessenger\source\Messenger\obj\Debug\GeneratedInternalTypeHelper.g.i.cs
 FD:\GeckoMessenger\source\Messenger\App.xaml;;
 FD:\GeckoMessenger\source\Messenger\MainWindow.xaml;;
@@ -15,4 +20,5 @@ FD:\GeckoMessenger\source\Messenger\Views\Settings\EditPrivacyUserControl.xaml;;
 FD:\GeckoMessenger\source\Messenger\Views\Settings\EditProfileUserControl.xaml;;
 FD:\GeckoMessenger\source\Messenger\Views\Settings\SettingsUserControl.xaml;;
 FD:\GeckoMessenger\source\Messenger\Views\Settings\MainSettingsView.xaml;;
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
 

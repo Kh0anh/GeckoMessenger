@@ -10,6 +10,7 @@ namespace APIServer.Models
         public int UserID { get; set; }
 
         [StringLength(32)]
+        [Unique]
         public string Username { get; set; }
 
         [StringLength(32)]

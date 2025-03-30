@@ -5,7 +5,15 @@ namespace Messenger.DTOs
 {
 
     [Route("/contact/getContacts")]
+<<<<<<< HEAD
     public class GetContacts : IReturn<GetBlockContactsResponse> { }
+=======
+<<<<<<< HEAD
+    public class GetContacts : IReturn<GetContactResponse> { }
+=======
+    public class GetContacts : IReturn<GetContactsResponse> { }
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
+>>>>>>> main
 
     [Route("/contact/addContact")]
     public class AddContact : IReturn<AddContactResponse>

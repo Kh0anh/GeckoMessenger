@@ -135,7 +135,7 @@
                          IsSafeEnabled="False"
                          UnsafePassword="{Binding Password, Mode=TwoWay}"/>
 
-            <!-- Password -->
+            <!-- Birthday -->
             <hc:DatePicker Margin="0,0,0,15"
                          Height="66"
                          FontSize="14"

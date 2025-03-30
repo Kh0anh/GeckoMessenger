@@ -21,6 +21,10 @@ namespace Messenger.ViewModels
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string JoinDate { get; set; }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
         public ProfileViewModel(int userID)
         {
             Task.Run(() =>
@@ -59,7 +63,11 @@ namespace Messenger.ViewModels
                     {
                         Bio = response.Data.Bio;
                     }
+<<<<<<< HEAD
+                    
+=======
 
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
                     if (!string.IsNullOrEmpty(response.Data.Username))
                     {
                         Username = response.Data.Username;
