@@ -61,11 +61,6 @@ namespace Messenger.ViewModels
             {
                 _SearchText = value;
                 OnPropertyChanged(nameof(SearchText));
-
-<<<<<<< HEAD
-
-=======
->>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
                 if (_SearchText.Length > 2)
                 {
                     DoSearch(_SearchText);
@@ -91,10 +86,6 @@ namespace Messenger.ViewModels
             SearchSelectionChangedCommand = new RelayCommand<Conversation>(SearchSelectionChanged);
             Conversations = new ObservableCollection<Conversation>();
             SearchResults = new ObservableCollection<SearchResult>();
-<<<<<<< HEAD
-=======
-
->>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
             Task.Run(TaskLoadConversation);
         }
 
@@ -331,10 +322,6 @@ namespace Messenger.ViewModels
                 OnPropertyChanged(nameof(_FullName));
             }
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
         public ChatUserControl ChatView { get; set; }
     }
 
