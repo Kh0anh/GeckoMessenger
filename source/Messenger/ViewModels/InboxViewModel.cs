@@ -1,4 +1,5 @@
 ﻿using APIServer.Models;
+using HandyControl.Controls;
 using HandyControl.Tools.Command;
 using Messenger.Services;
 using Messenger.Utils;
@@ -94,6 +95,7 @@ namespace Messenger.ViewModels
 
             Conversations = new ObservableCollection<Conversation>();
             SearchResults = new ObservableCollection<SearchResult>();
+            FakeGroup();
             Task.Run(TaskLoadConversation);
         }
 
@@ -232,6 +234,21 @@ namespace Messenger.ViewModels
             }
         }
 
+        private async void FakeGroup()
+        {
+            var newConversation = new Conversation
+            {
+                ConversationID = 0,
+                ConversationName = "Chúng ta cùng qua môn",
+                LatestMessageContent = "",
+                LatestMessage = DateTime.Now,
+                ConversationAvatar = LoadImage.LoadImageFromUrl(ConfigurationManager.AppSettings["APIUrl"] + "storages/DefaultAvatar.png"),
+                GroupView = new GroupUserControl(new GroupViewModel())
+            };
+
+            Conversations.Add(newConversation);
+        }
+
         private async void TaskLoadConversation()
         {
             while (true)
@@ -304,19 +321,19 @@ namespace Messenger.ViewModels
                                 }
                             }
 
-                            List<Conversation> del = new List<Conversation>();
-                            foreach(var con in Conversations)
-                            {
-                                if (!tempConversations.Exists(c => c.ConversationID == con.ConversationID))
-                                {
-                                    del.Add(con);
-                                }
-                            }
+                            //List<Conversation> del = new List<Conversation>();
+                            //foreach(var con in Conversations)
+                            //{
+                            //    if (!tempConversations.Exists(c => c.ConversationID == con.ConversationID))
+                            //    {
+                            //        del.Add(con);
+                            //    }
+                            //}
 
-                            foreach (var d in del)
-                            {
-                                Conversations.Remove(d);
-                            }
+                            //foreach (var d in del)
+                            //{
+                            //    Conversations.Remove(d);
+                            //}
 
                             var sortedConversations = Conversations.OrderByDescending(c => c.LatestMessage).ToList();
                             for (int i = 0; i < sortedConversations.Count; i++)
@@ -385,7 +402,14 @@ namespace Messenger.ViewModels
             }
             if (SelectedConversation is Conversation c)
             {
-                CurrentChat = c.ChatView;
+                if (c.ChatView != null)
+                {
+                    CurrentChat = c.ChatView;
+                }
+                else if (c.GroupView != null)
+                {
+                    CurrentChat = c.GroupView;
+                }
             }
         }
     }
@@ -473,5 +497,6 @@ namespace Messenger.ViewModels
             }
         }
         public ChatUserControl ChatView { get; set; }
+        public GroupUserControl GroupView { get; set; }
     }
 }

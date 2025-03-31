@@ -45,10 +45,50 @@ namespace APIServer.Services
                         LastName = userInfo.LastName,
                         Avatar = userInfo.Avatar,
                         AddedAt = contact.AddedAt,
+                        BlockAt = contact.BlockAt,
                     });
                 }
 
                 return new HttpResult(new GetContactsResponse { Contacts = contactResponses.ToArray() }, HttpStatusCode.OK);
+            }
+        }
+
+        public object Get(DTOs.GetBlockContacts request)
+        {
+            var session = this.GetSession();
+            if (!session.IsAuthenticated)
+            {
+                return new HttpResult(new { Error = "TokenUnauthorized", Message = "User is not authenticated." })
+                {
+                    StatusCode = HttpStatusCode.Unauthorized
+                };
+            }
+
+            int userID = int.Parse(session.UserAuthId);
+
+            using (var db = DB.Open())
+            {
+                var contacts = db.Select<Contacts>(c => c.ContactID == userID && c.BlockAt != null);
+
+
+                List<ContactResponse> contactResponses = new List<ContactResponse>();
+                foreach (var contact in contacts)
+                {
+                    var userInfo = db.Single<Users>(u => u.UserID == contact.UserID);
+
+                    contactResponses.Add(new ContactResponse
+                    {
+                        UserID = userInfo.UserID,
+                        Username = userInfo.Username,
+                        FirstName = userInfo.FirstName,
+                        LastName = userInfo.LastName,
+                        Avatar = userInfo.Avatar,
+                        AddedAt = contact.AddedAt,
+                        BlockAt = contact.BlockAt,
+                    });
+                }
+
+                return new HttpResult(new GetBlockContactsResponse { Contacts = contactResponses.ToArray() }, HttpStatusCode.OK);
             }
         }
 
@@ -72,6 +112,7 @@ namespace APIServer.Services
                 {
                     return new HttpResult(new AddContactResponse { }, HttpStatusCode.OK);
                 }
+
                 var newContact = new Contacts
                 {
                     ContactID = userID,
@@ -133,10 +174,15 @@ namespace APIServer.Services
 
                 if (contact == null)
                 {
-                    return new HttpResult(new { Error = "ContactNotFound", Message = "Contact does not exist." })
+                    contact = new Contacts
                     {
-                        StatusCode = HttpStatusCode.OK
+                        ContactID = userID,
+                        UserID = request.UserID,
                     };
+
+                    db.Insert(contact);
+
+                    contact = db.Single<Contacts>(c => c.ContactID == userID && c.UserID == request.UserID);
                 }
 
                 contact.BlockAt = DateTime.Now;
@@ -193,9 +239,13 @@ namespace APIServer.Services
 
             using (var db = DB.Open())
             {
-                var users = db.Select<Users>(db.From<Users>()
-                    .Where($"UserID NOT IN (SELECT UserID FROM Contacts WHERE ContactID = {userID})")
-                    .OrderBy("RANDOM()").Limit(10));
+                var sql = @"
+    SELECT TOP 10 * 
+    FROM Users 
+    WHERE UserID NOT IN (SELECT UserID FROM Contacts WHERE ContactID = @contactID) 
+    ORDER BY NEWID()";
+
+                var users = db.SqlList<Users>(sql, new { contactID = userID });
 
                 List<ContactSugggestResponse> contactSuggestRespones = new List<ContactSugggestResponse>();
                 foreach (var user in users)

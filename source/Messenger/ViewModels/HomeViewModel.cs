@@ -29,6 +29,7 @@ namespace Messenger.ViewModels
         public ICommand SwitchToContactCommand { get; }
         public ICommand OpenSettingsCommand { get; }
         public ICommand OpenProfileViewCommand { get; }
+        public ICommand CreateGroupCommand { get; }
         public ICommand LogoutCommand { get; }
 
         private InboxUserControl InboxUserControl = new InboxUserControl(new InboxViewModel());
@@ -42,6 +43,7 @@ namespace Messenger.ViewModels
             SwitchToContactCommand = new RelayCommand(_ => SwitchToContact());
             OpenSettingsCommand = new RelayCommand(_ => OpenSettings());
             OpenProfileViewCommand = new RelayCommand(_ => OpenProfileView());
+            CreateGroupCommand = new RelayCommand(_ => CreateGroup());
             LogoutCommand = new RelayCommand(_ => Logout());
 
             var userService = ServiceLocator.GetService<IUserService>();
@@ -57,7 +59,11 @@ namespace Messenger.ViewModels
 
             _MainViewModel.SwitchToLoginCommand.Execute(null);
         }
-
+        private void CreateGroup()
+        {
+            CreateGroup settingsView = new CreateGroup(new CreateGroupViewModel());
+            settingsView.ShowDialog();
+        }
         public void NavigationTo(object view)
         {
             if (view != null)

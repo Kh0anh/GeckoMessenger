@@ -26,6 +26,7 @@ namespace Messenger.ViewModels
         public string FullName { get; set; }
         public string Activity { get; set; }
         public int PhotoCount { get; set; }
+        public int FileCount { get; set; }
 
         private bool _IsStarted;
         public bool IsStarted
@@ -61,7 +62,7 @@ namespace Messenger.ViewModels
             }
         }
 
-        private string _newMessageText;
+        private string _newMessageText = string.Empty;
         public string NewMessageText
         {
             get => _newMessageText;
@@ -120,7 +121,7 @@ namespace Messenger.ViewModels
                     {
                         FileName = Path.GetFileName(openFileDialog.FileName),
                         FileType = "FILE",
-                        Data = File.ReadAllBytes(openFileDialog.FileName),
+                        Data = System.IO.File.ReadAllBytes(openFileDialog.FileName),
                     };
                     App.Current.Dispatcher.Invoke(() =>
                     {
@@ -153,7 +154,7 @@ namespace Messenger.ViewModels
                     {
                         FileName = Path.GetFileName(openFileDialog.FileName),
                         FileType = "PHOTO",
-                        Data = File.ReadAllBytes(openFileDialog.FileName),
+                        Data = System.IO.File.ReadAllBytes(openFileDialog.FileName),
                     };
                     attachment.Thumnail = Utils.LoadImage.LoadImageFromBytes(attachment.Data);
                     App.Current.Dispatcher.Invoke(() =>
@@ -216,6 +217,7 @@ namespace Messenger.ViewModels
                                 }
 
                                 var photoList = new List<Photo>();
+                                var fileList = new List<File>();
                                 if (message.Attachments.Length > 0)
                                 {
                                     foreach (var attachment in message.Attachments)
@@ -236,6 +238,23 @@ namespace Messenger.ViewModels
                                                 Debug.WriteLine(err);
                                             }
                                         }
+                                        if (attachment.AttachmentType == "FILE")
+                                        {
+                                            try
+                                            {
+                                                fileList.Add(new File
+                                                {
+                                                    FileName = attachment.FileURL,
+                                                    Url = ConfigurationManager.AppSettings["APIUrl"] + "/storages/" + attachment.FileURL,
+                                                });
+                                                FileCount++;
+                                                OnPropertyChanged(nameof(FileCount));
+                                            }
+                                            catch (Exception err)
+                                            {
+                                                Debug.WriteLine(err);
+                                            }
+                                        }
                                     }
                                 }
 
@@ -247,6 +266,7 @@ namespace Messenger.ViewModels
                                     UserAvatar = AvatarData[avatarUrl],
                                     Content = message.Content,
                                     Photos = photoList.ToArray(),
+                                    Files = fileList.ToArray(),
                                     IsSentByMe = message.Sender.UserID == userService.User.UserID,
                                     Timestamp = message.CreatedAt
                                 };
@@ -441,7 +461,7 @@ namespace Messenger.ViewModels
 
         private void SendMessage()
         {
-            if (!string.IsNullOrWhiteSpace(NewMessageText))
+            if (!string.IsNullOrWhiteSpace(NewMessageText) || Attachments.Count > 0)
             {
                 var MessageContent = NewMessageText;
                 NewMessageText = string.Empty;
@@ -516,6 +536,7 @@ namespace Messenger.ViewModels
         public string UserFullName { get; set; }
         public ImageSource UserAvatar { get; set; }
         public Photo[] Photos { get; set; }
+        public File[] Files { get; set; }
         public bool IsSentByMe { get; set; }
         public string Content { get; set; }
         public DateTime Timestamp { set; get; }
@@ -525,5 +546,10 @@ namespace Messenger.ViewModels
     {
         public string FileName { get; set; }
         public ImageSource Image { get; set; }
+    }
+    public class File
+    {
+        public string FileName { get; set; }
+        public string Url { get; set; }
     }
 }
