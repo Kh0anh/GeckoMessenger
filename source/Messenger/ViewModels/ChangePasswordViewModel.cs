@@ -21,54 +21,45 @@ namespace Messenger.ViewModels
         public ICommand ChangePasswordCommand { get; }
         public ChangePasswordViewModel()
         {
-            ChangePasswordCommand = new RelayCommand(_ => ChangePassword());
+            ChangePasswordCommand = new RelayCommand(async _ => await ChangePassword());
         }
 
-        private void ChangePassword()
+        private async Task ChangePassword()
         {
             string oldPassword = OldPassword;
             string newPassword = NewPassword;
             string confirmPassword = ConfirmPassword;
-            Task.Run(() =>
+
+            var userService = ServiceLocator.GetService<IUserService>();
+            var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
+            client.BearerToken = userService.User.AuthToken;
+
+            var changePassword = new DTOs.ChangePassword
             {
-                var userService = ServiceLocator.GetService<IUserService>();
-                var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
-                client.BearerToken = userService.User.AuthToken;
+                OldPassword = oldPassword,
+                NewPassword = newPassword,
+                ConfirmPassword = confirmPassword
+            };
 
-                if (string.IsNullOrEmpty(oldPassword) || string.IsNullOrEmpty(newPassword) || string.IsNullOrEmpty(confirmPassword))
+            try
+            {
+                var response = await client.PutAsync(changePassword);
+                if (string.IsNullOrEmpty(response.Error))
                 {
-                    Error = "All password fields must be filled.";
+                    Error = response.Message;
+                    return;
                 }
-
-                if (newPassword != confirmPassword)
+            }
+            catch (WebServiceException ex)
+            {
+                if (ex.ResponseDto is DTOs.ChangePasswordResponse errorResponse)
                 {
-                    Error = "New password and confirm password do not match.";
+                    Error = errorResponse.Message;
+                    OnPropertyChanged(nameof(Error));
                 }
-
-                var changePassword = new DTOs.ChangePassword
-                {
-                    OldPassword = oldPassword,
-                    NewPassword = newPassword,
-                    ConfirmPassword = confirmPassword
-                };
-
-                try
-                {
-                    var response = client.Put(changePassword);
-                    if (!string.IsNullOrEmpty(response.Error))
-                    {
-                        Error = response.Message;
-                    }
-                    else
-                    {
-                        Error = "Password changed successfully";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                }
-            });
+                Debug.WriteLine(ex.Message);
+                return;
+            }
         }
     }
 }

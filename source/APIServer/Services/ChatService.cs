@@ -150,6 +150,8 @@ namespace APIServer.Services
                     };
                 }
 
+                db.LoadReferences(conversation);
+
                 //Kiểm tra có phải là chủ không đối với Group
                 if (conversation.ConversationType.ConversationTypeName == "GROUP" &&
                     participant.ConversationRole.ConversationRoleName != "OWNER")
@@ -193,12 +195,25 @@ namespace APIServer.Services
                     db.From<Participants>().Where(p => p.UserID == userID).Select(p => p.ConversationID)
                 );
 
-                var conversations = db.Select<Conversations>(
-                    db.From<Conversations>().Where(c => conversationIds.Contains(c.ConversationID))
-                );
+                var conversations = db.Select<Conversations>()
+                    .Where(c => conversationIds.Contains(c.ConversationID) && !db.Exists(db.From<DeleteConversations>().Where(dc => dc.ConversationID == c.ConversationID)));
 
                 foreach (var conversation in conversations)
                 {
+                    db.LoadReferences(conversation);
+
+                    if (conversation.ConversationType.ConversationTypeName == "CHAT")
+                    {
+                        var isBlock = db.Exists(db.From<Participants>()
+                            .Join<Contacts>((p, c) => c.ContactID == userID && c.UserID == p.UserID && c.BlockAt != null)
+                            .Where(p => p.ConversationID == conversation.ConversationID));
+
+                        if (isBlock)
+                        {
+                            continue;
+                        }
+                    }
+
                     var participants = db.Select(db.From<Participants>()
                         .Where(c => c.ConversationID == conversation.ConversationID));
 
@@ -258,7 +273,6 @@ namespace APIServer.Services
                         }
                     }
 
-                    db.LoadReferences(conversation);
                     ConversationResponse conversationResponse = new ConversationResponse
                     {
                         ConversationID = conversation.ConversationID,
@@ -503,7 +517,7 @@ namespace APIServer.Services
     new { conversationTypeID = conversationTypeChat.ConversationTypeID, userID, requestUserID = request.UserID }
 );
 
-                if (conversation == null)
+                if (conversation == null || db.Exists(db.From<DeleteConversations>().Where(dc => dc.ConversationID == conversation.ConversationID)))
                 {
                     return new HttpResult(new FindChatResponse() { Conversation = null },
                         HttpStatusCode.OK);
@@ -602,7 +616,7 @@ namespace APIServer.Services
             {
                 var conversation = db.Single<Conversations>(
                     db.From<Conversations>()
-                    .Where(c => c.ConversationID == request.ConversationID)
+                    .Where(c => c.ConversationID == request.ConversationID && !db.Exists(db.From<DeleteConversations>().Where(dc => dc.ConversationID == c.ConversationID)))
                     );
 
                 if (conversation == null)

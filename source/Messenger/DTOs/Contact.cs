@@ -5,11 +5,8 @@ namespace Messenger.DTOs
 {
 
     [Route("/contact/getContacts")]
-<<<<<<< HEAD
-    public class GetContacts : IReturn<GetContactResponse> { }
-=======
     public class GetContacts : IReturn<GetContactsResponse> { }
->>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
+
 
     [Route("/contact/addContact")]
     public class AddContact : IReturn<AddContactResponse>
@@ -19,6 +16,12 @@ namespace Messenger.DTOs
 
     [Route("/contact/deleteContact")]
     public class DeleteContact : IReturn<DeleteContactResponse>
+    {
+        public int UserID { get; set; }
+    }
+
+    [Route("/contact/getBlockContacts")]
+    public class GetBlockContacts : IReturn<GetBlockContactsResponse>
     {
         public int UserID { get; set; }
     }
@@ -51,6 +54,11 @@ namespace Messenger.DTOs
 
     public class DeleteContactResponse { }
 
+    public class GetBlockContactsResponse
+    {
+        public ContactResponse[] Contacts { get; set; }
+    }
+
     public class GetContactsResponse
     {
         public ContactResponse[] Contacts { get; set; }
@@ -64,6 +72,7 @@ namespace Messenger.DTOs
         public string LastName { get; set; }
         public string Avatar { get; set; }
         public DateTime AddedAt { get; set; }
+        public DateTime? BlockAt { get; set; }
     }
 
     public class ContactSugggestResponse
