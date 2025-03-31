@@ -577,6 +577,7 @@
                     Margin="5"
                     Padding="15,0,0,0"
                     hc:BorderElement.CornerRadius="20"
+                    hc:InfoElement.Placeholder="Tin nhắn"
                     AcceptsReturn="True"
                     FontSize="14"
                     Style="{DynamicResource TextBoxExtend}"

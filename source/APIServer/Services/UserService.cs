@@ -268,19 +268,11 @@ namespace APIServer.Services
                 // Tìm kiếm theo tên (FirstName hoặc LastName) hoặc email
                 query = query.Where(u =>
                     u.UserID != userID &&
-<<<<<<< HEAD
                      (u.FirstName.ToLower().Contains(request.Query.ToLower()) ||
                      u.LastName.ToLower().Contains(request.Query.ToLower()) ||
                      u.Username.ToLower().Contains(request.Query.ToLower()) ||
                      u.Email.ToLower().Contains(request.Query.ToLower()) ||
                      u.PhoneNumber.ToLower().Contains(request.Query.ToLower()))
-=======
-                    (u.FirstName.ToLower().Contains(request.Query.ToLower()) ||
-                    u.LastName.ToLower().Contains(request.Query.ToLower()) ||
-                    u.Username.ToLower().Contains(request.Query.ToLower()) ||
-                    u.Email.ToLower().Contains(request.Query.ToLower()) ||
-                    u.PhoneNumber.ToLower().Contains(request.Query.ToLower()))
->>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
                 );
 
                 var users = db.Select(query.Limit(request.MaxResult))
@@ -388,8 +380,14 @@ namespace APIServer.Services
 
                 // Cập nhật thông tin quyền riêng tư
                 userSettings.StatusPrivacy = db.Single<Privacy>(u => u.PrivacyName == request.ActiveStatus).PrivacyID;
+                userSettings.BioPrivacy = db.Single<Privacy>(u => u.PrivacyName == request.BioPrivacy).PrivacyID;
+                userSettings.PhoneNumberPrivacy = db.Single<Privacy>(u => u.PrivacyName == request.PhoneNumberPrivacy).PrivacyID;
+                userSettings.EmailPrivacy = db.Single<Privacy>(u => u.PrivacyName == request.EmailPrivacy).PrivacyID;
+                userSettings.BirthdayPrivacy = db.Single<Privacy>(u => u.PrivacyName == request.BirthdayPrivacy).PrivacyID;
+                userSettings.CallPrivacy = db.Single<Privacy>(u => u.PrivacyName == request.CallPrivacy).PrivacyID;
+                userSettings.InviteGroupPrivacy = db.Single<Privacy>(u => u.PrivacyName == request.InviteGroupPrivacy).PrivacyID;
+                userSettings.MessagePrivacy = db.Single<Privacy>(u => u.PrivacyName == request.MessagePrivacy).PrivacyID;
                 db.Update(userSettings);
-                Debug.WriteLine(request.ActiveStatus);
 
                 return new HttpResult(new DTOs.UpdatePrivacyResponse
                 {
@@ -419,6 +417,12 @@ namespace APIServer.Services
                     {
                         ActiveStatus = db.Single<Privacy>(u => u.PrivacyID == user.StatusPrivacy).PrivacyName,
                         BioPrivacy = db.Single<Privacy>(u => u.PrivacyID == user.BioPrivacy).PrivacyName,
+                        PhoneNumberPrivacy = db.Single<Privacy>(u => u.PrivacyID == user.PhoneNumberPrivacy).PrivacyName,
+                        EmailPrivacy = db.Single<Privacy>(u => u.PrivacyID == user.EmailPrivacy).PrivacyName,
+                        BirthdayPrivacy = db.Single<Privacy>(u => u.PrivacyID == user.BirthdayPrivacy).PrivacyName,
+                        CallPrivacy = db.Single<Privacy>(u => u.PrivacyID == user.CallPrivacy).PrivacyName,
+                        InviteGroupPrivacy = db.Single<Privacy>(u => u.PrivacyID == user.InviteGroupPrivacy).PrivacyName,
+                        MessagePrivacy = db.Single<Privacy>(u => u.PrivacyID == user.MessagePrivacy).PrivacyName
                     }
                 }, HttpStatusCode.OK);
             }
