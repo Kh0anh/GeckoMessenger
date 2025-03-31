@@ -101,6 +101,7 @@ namespace Messenger.ViewModels
                 LoadConversation(conversationID.Value);
             }
 
+
             Task.Run(TaskLoadMessage);
         }
 
@@ -222,19 +223,12 @@ namespace Messenger.ViewModels
                                     {
                                         if (attachment.AttachmentType == "PHOTO")
                                         {
-                                            try
+                                            photoList.Add(new Photo
                                             {
-                                                photoList.Add(new Photo
-                                                {
-                                                    Image = LoadImage.LoadImageFromUrl(ConfigurationManager.AppSettings["APIUrl"] + "/storages/" + attachment.FileURL),
-                                                });
-                                                PhotoCount++;
-                                                OnPropertyChanged(nameof(PhotoCount));
-                                            }
-                                            catch (Exception err)
-                                            {
-                                                Debug.WriteLine(err);
-                                            }
+                                                Image = LoadImage.LoadImageFromUrl(ConfigurationManager.AppSettings["APIUrl"] + "/storages/" + attachment.FileURL),
+                                            });
+                                            PhotoCount++;
+                                            OnPropertyChanged(nameof(PhotoCount));
                                         }
                                     }
                                 }
@@ -278,25 +272,17 @@ namespace Messenger.ViewModels
                 var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
                 client.BearerToken = userService.User.AuthToken;
 
-
-                var newContact = new DTOs.AddContact
-                {
-                    UserID = UserID,
-                };
-
-                var newChat = new DTOs.NewChat
+                var chat = new DTOs.NewChat
                 {
                     ParticipantID = UserID
                 };
 
                 try
                 {
-                    var newContactResponse = client.Post(newContact);
-
-                    var newChatResponse = client.Post(newChat);
+                    var response = client.Post(chat);
 
                     IsStarted = true;
-                    LoadInfoConversation(newChatResponse.Conversation);
+                    LoadInfoConversation(response.Conversation);
                 }
                 catch (Exception err)
                 {

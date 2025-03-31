@@ -158,51 +158,43 @@ namespace APIServer.Services
                 return new HttpResult(new DTOs.ChangePasswordResponse
                 {
                     Error = "RequiredField",
-                    Message = "All password fields must be filled."
+                    Message = "Old password and new password are required."
                 }, HttpStatusCode.BadRequest);
             }
-            else if (request.NewPassword != request.ConfirmPassword)
+
+            using (var db = DB.Open())
             {
-                return new HttpResult(new DTOs.ChangePasswordResponse
+                var userId = int.Parse(GetSession().UserAuthId);
+                var user = db.SingleById<Users>(userId);
+
+                if (user == null)
                 {
-                    Error = "NotMatch",
-                    Message = "New password and confirm password do not match."
-                }, HttpStatusCode.BadRequest);
-            }
-
-                using (var db = DB.Open())
-                {
-                    var userId = int.Parse(GetSession().UserAuthId);
-                    var user = db.SingleById<Users>(userId);
-
-                    if (user == null)
-                    {
-                        return new HttpResult(new DTOs.ChangePasswordResponse
-                        {
-                            Error = "NotFound",
-                            Message = "User not found."
-                        }, HttpStatusCode.NotFound);
-                    }
-
-                    // Xác thực mật khẩu cũ
-                    if (!verifyPassword(request.OldPassword, user.HashPassword))
-                    {
-                        return new HttpResult(new DTOs.ChangePasswordResponse
-                        {
-                            Error = "Incorrect",
-                            Message = "Current password is incorrect."
-                        }, HttpStatusCode.Unauthorized);
-                    }
-
-                    // Hash và cập nhật mật khẩu mới
-                    user.HashPassword = hashPassword(request.NewPassword);
-                    db.Update<Users>(new { HashPassword = user.HashPassword }, u => u.UserID == userId);
-
                     return new HttpResult(new DTOs.ChangePasswordResponse
                     {
-                        Message = "Password changed successfully"
-                    }, HttpStatusCode.OK);
+                        Error = "NotFound",
+                        Message = "User not found."
+                    }, HttpStatusCode.NotFound);
                 }
+
+                // Xác thực mật khẩu cũ
+                if (!verifyPassword(request.OldPassword, user.HashPassword))
+                {
+                    return new HttpResult(new DTOs.ChangePasswordResponse
+                    {
+                        Error = "Incorrect",
+                        Message = "Current password is incorrect."
+                    }, HttpStatusCode.Unauthorized);
+                }
+
+                // Hash và cập nhật mật khẩu mới
+                user.HashPassword = hashPassword(request.NewPassword);
+                db.Update<Users>(new { HashPassword = user.HashPassword }, u => u.UserID == userId);
+
+                return new HttpResult(new DTOs.ChangePasswordResponse
+                {
+                    Message = "Password changed successfully"
+                }, HttpStatusCode.OK);
+            }
         }
 
         private static string hashPassword(string password)

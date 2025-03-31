@@ -76,13 +76,12 @@
                     Grid.Column="1"
                     Padding="8"
                     HorizontalAlignment="Stretch"
-                    DisplayMemberPath="PrivacyTitle"
                     HorizontalContentAlignment="Right"
                     BorderThickness="0"
                     FontSize="14"
                     FontWeight="Medium"
                     ItemsSource="{Binding PrivacyOptions}"
-                    SelectedItem="{Binding SelectedBioPrivacy, Mode=TwoWay}">
+                    SelectedItem="{Binding ActiveStatus, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                     <ComboBox.Style>
                         <Style BasedOn="{StaticResource ComboBoxPlusBaseStyle}" TargetType="hc:ComboBox">
@@ -106,13 +105,13 @@
                     Grid.Column="1"
                     Padding="8"
                     HorizontalAlignment="Stretch"
-                    DisplayMemberPath="PrivacyTitle"
                     HorizontalContentAlignment="Right"
                     BorderThickness="0"
                     FontSize="14"
-                    FontWeight="Medium"
-                    ItemsSource="{Binding PrivacyOptions}"
-                    SelectedItem="{Binding SelectedPhoneNumberPrivacy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    FontWeight="Medium">
+                    <ComboBoxItem Content="Ẩn" />
+                    <ComboBoxItem Content="Liên hệ" />
+                    <ComboBoxItem Content="Công khai" />
                     <ComboBox.Style>
                         <Style BasedOn="{StaticResource ComboBoxPlusBaseStyle}" TargetType="hc:ComboBox">
                             <Style.Triggers>
@@ -136,12 +135,12 @@
                     Padding="8"
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Right"
-                    DisplayMemberPath="PrivacyTitle"
                     BorderThickness="0"
                     FontSize="14"
-                    FontWeight="Medium"
-                    ItemsSource="{Binding PrivacyOptions}"
-                    SelectedItem="{Binding SelectedEmailPrivacy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    FontWeight="Medium">
+                    <ComboBoxItem Content="Ẩn" />
+                    <ComboBoxItem Content="Liên hệ" />
+                    <ComboBoxItem Content="Công khai" />
                     <ComboBox.Style>
                         <Style BasedOn="{StaticResource ComboBoxPlusBaseStyle}" TargetType="hc:ComboBox">
                             <Style.Triggers>
@@ -165,12 +164,12 @@
                     Padding="8"
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Right"
-                    DisplayMemberPath="PrivacyTitle"
                     BorderThickness="0"
                     FontSize="14"
-                    FontWeight="Medium"
-                    ItemsSource="{Binding PrivacyOptions}"
-                    SelectedItem="{Binding SelectedBirthdayPrivacy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    FontWeight="Medium">
+                    <ComboBoxItem Content="Ẩn" />
+                    <ComboBoxItem Content="Liên hệ" />
+                    <ComboBoxItem Content="Công khai" />
                     <ComboBox.Style>
                         <Style BasedOn="{StaticResource ComboBoxPlusBaseStyle}" TargetType="hc:ComboBox">
                             <Style.Triggers>
@@ -194,12 +193,12 @@
                     Padding="8"
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Right"
-                    DisplayMemberPath="PrivacyTitle"
                     BorderThickness="0"
                     FontSize="14"
-                    FontWeight="Medium"
-                    ItemsSource="{Binding PrivacyOptions}"
-                    SelectedItem="{Binding SelectedCallPrivacy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    FontWeight="Medium">
+                    <ComboBoxItem Content="Ẩn" />
+                    <ComboBoxItem Content="Liên hệ" />
+                    <ComboBoxItem Content="Công khai" />
                     <ComboBox.Style>
                         <Style BasedOn="{StaticResource ComboBoxPlusBaseStyle}" TargetType="hc:ComboBox">
                             <Style.Triggers>
@@ -223,12 +222,12 @@
                     Padding="8"
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Right"
-                    DisplayMemberPath="PrivacyTitle"
                     BorderThickness="0"
                     FontSize="14"
-                    FontWeight="Medium"
-                    ItemsSource="{Binding PrivacyOptions}"
-                    SelectedItem="{Binding SelectedInviteGroupPrivacy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    FontWeight="Medium">
+                    <ComboBoxItem Content="Ẩn" />
+                    <ComboBoxItem Content="Liên hệ" />
+                    <ComboBoxItem Content="Công khai" />
                     <ComboBox.Style>
                         <Style BasedOn="{StaticResource ComboBoxPlusBaseStyle}" TargetType="hc:ComboBox">
                             <Style.Triggers>
@@ -252,12 +251,12 @@
                     Padding="8"
                     HorizontalAlignment="Stretch"
                     HorizontalContentAlignment="Right"
-                    DisplayMemberPath="PrivacyTitle"
                     BorderThickness="0"
                     FontSize="14"
-                    FontWeight="Medium"
-                    ItemsSource="{Binding PrivacyOptions}"
-                    SelectedItem="{Binding SelectedMessagePrivacy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                    FontWeight="Medium">
+                    <ComboBoxItem Content="Ẩn" />
+                    <ComboBoxItem Content="Liên hệ" />
+                    <ComboBoxItem Content="Công khai" />
                     <ComboBox.Style>
                         <Style BasedOn="{StaticResource ComboBoxPlusBaseStyle}" TargetType="hc:ComboBox">
                             <Style.Triggers>

@@ -48,13 +48,8 @@
                 Grid.Row="0"
                 Margin="10"
                 FontSize="14"
-                FontWeight="Medium">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="Đề xuất ({0})">
-                        <Binding Path="SuggestContacts.Count" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
+                FontWeight="Medium"
+                Text="Đề xuất" />
             <ScrollViewer
                 Grid.Row="1"
                 HorizontalAlignment="Stretch"
@@ -85,7 +80,6 @@
                                             Height="50"
                                             Margin="0,0,10,0"
                                             VerticalAlignment="Center"
-                                            Source="{Binding UserAvatar}"
                                             Style="{StaticResource GravatarCircle}" />
 
                                         <TextBlock
@@ -93,15 +87,13 @@
                                             FontSize="14"
                                             FontWeight="Medium"
                                             Foreground="{DynamicResource PrimaryTextBrush}"
-                                            Text="{Binding UserFullName}" />
+                                            Text="{Binding FullName}" />
 
                                     </StackPanel>
                                     <Button
                                         Grid.Column="1"
                                         Width="80"
                                         Margin="5"
-                                        Command="{Binding DataContext.AddContactSuggestCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                        CommandParameter="{Binding}"
                                         Foreground="{DynamicResource PrimaryBrush}">
                                         <StackPanel Orientation="Horizontal">
                                             <materialIcons:MaterialIcon
@@ -122,8 +114,6 @@
                                         Grid.Column="2"
                                         Width="80"
                                         Margin="5"
-                                        Command="{Binding DataContext.RemoveContactSuggestCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"
-                                        CommandParameter="{Binding}"
                                         Foreground="{DynamicResource DangerBrush}">
                                         <StackPanel Orientation="Horizontal">
                                             <materialIcons:MaterialIcon

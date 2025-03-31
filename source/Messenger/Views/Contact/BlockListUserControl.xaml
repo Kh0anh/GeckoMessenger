@@ -48,13 +48,8 @@
                 Grid.Row="0"
                 Margin="10"
                 FontSize="14"
-                FontWeight="Medium">
-                <TextBlock.Text>
-                    <MultiBinding StringFormat="Đã chặn ({0})">
-                        <Binding Path="BlockContacts.Count" />
-                    </MultiBinding>
-                </TextBlock.Text>
-            </TextBlock>
+                FontWeight="Medium"
+                Text="Đã chặn (3)" />
             <ScrollViewer
                 Grid.Row="1"
                 HorizontalAlignment="Stretch"
@@ -84,7 +79,6 @@
                                             Height="50"
                                             Margin="0,0,10,0"
                                             VerticalAlignment="Center"
-                                            Source="{Binding UserAvatar}"
                                             Style="{StaticResource GravatarCircle}" />
 
                                         <TextBlock
@@ -92,7 +86,7 @@
                                             FontSize="14"
                                             FontWeight="Medium"
                                             Foreground="{DynamicResource PrimaryTextBrush}"
-                                            Text="{Binding UserFullName}" />
+                                            Text="{Binding FullName}" />
 
                                     </StackPanel>
                                     <Button
@@ -105,8 +99,7 @@
                                         VerticalAlignment="Top"
                                         Background="Transparent"
                                         BorderThickness="0"
-                                        Click="BlockContextOpen_OnClick"
-                                        Tag="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                        Click="BlockContextOpen_OnClick">
                                         <materialIcons:MaterialIcon
                                             Width="18"
                                             Height="18"
@@ -117,8 +110,6 @@
                                                 Placement="Right"
                                                 VerticalOffset="-30">
                                                 <MenuItem
-                                                    Command="{Binding PlacementTarget.Tag.DataContext.AddBackContactCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                                    CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                     FontSize="12"
                                                     FontWeight="Medium"
                                                     Foreground="{DynamicResource PrimaryBrush}"
@@ -131,8 +122,6 @@
                                                     </MenuItem.Icon>
                                                 </MenuItem>
                                                 <MenuItem
-                                                    Command="{Binding PlacementTarget.Tag.DataContext.UnblockContactCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                                    CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                     FontSize="12"
                                                     FontWeight="Medium"
                                                     Foreground="{DynamicResource DangerBrush}"

@@ -1,16 +1,197 @@
 {
   "Version": 1,
+<<<<<<< HEAD
   "WorkspaceRootPath": "D:\\Projects\\Uni\\GeckoMessenger\\source\\",
+  "Documents": [],
+=======
+  "WorkspaceRootPath": "D:\\GeckoMessenger\\source\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\projects\\uni\\geckomessenger\\source\\messenger\\views\\inbox\\chatusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\viewmodels\\inboxviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\inboxviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\viewmodels\\editprivacyviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\editprivacyviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\viewmodels\\chatviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\chatviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\viewmodels\\profileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\profileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\viewmodels\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\registerviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\views\\inbox\\inboxusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\views\\inbox\\inboxusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\views\\inbox\\chatusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\views\\inbox\\chatusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\projects\\uni\\geckomessenger\\source\\messenger\\viewmodels\\chatviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\chatviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\utils\\loadimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\utils\\loadimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|d:\\geckomessenger\\source\\apiserver\\dtos\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\dtos\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|d:\\geckomessenger\\source\\apiserver\\utils\\resourcehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\utils\\resourcehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\services\\contactservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\services\\contactservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\dtos\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\dtos\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|d:\\geckomessenger\\source\\apiserver\\dtos\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\dtos\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\viewmodels\\suggestcontactlistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\suggestcontactlistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\viewmodels\\blocklistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\blocklistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\viewmodels\\contactlistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\contactlistviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\dtos\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\dtos\\contact.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\dtos\\chat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\dtos\\chat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\dtos\\chat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\dtos\\chat.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\services\\reportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\services\\reportservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\services\\chatservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\viewmodels\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\homeviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\models\\conversation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\views\\contact\\contactlistusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\views\\contact\\contactlistusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\models\\contacts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\models\\contacts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\dtos\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\dtos\\report.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\dtos\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\dtos\\admin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\services\\servicelocator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\services\\servicelocator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\geckomessenger\\source\\messenger\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\app.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\views\\contact\\blocklistusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\views\\contact\\blocklistusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\views\\loginusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\views\\loginusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\views\\homeusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\views\\homeusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\views\\settings\\editprivacyusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\views\\settings\\editprivacyusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\services\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\services\\userservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\viewmodels\\editprofileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\editprofileviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\dtos\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\dtos\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\GeckoMessenger\\source\\messenger\\viewmodels\\settingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\settingsviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\models\\conversations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\models\\conversations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\models\\conversationrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\models\\conversationrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\models\\bannedaccounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\models\\bannedaccounts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|D:\\GeckoMessenger\\source\\apiserver\\apphost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\apphost.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -18,11 +199,39 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": -1,
           "Children": [
             {
+<<<<<<< HEAD
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+=======
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\DTOs\\User.cs",
+              "RelativeDocumentMoniker": "Messenger\\DTOs\\User.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\DTOs\\User.cs",
+              "RelativeToolTip": "Messenger\\DTOs\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T06:35:45.175Z",
+              "IsPinned": true
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "User.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\DTOs\\User.cs",
+              "RelativeDocumentMoniker": "APIServer\\DTOs\\User.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\DTOs\\User.cs",
+              "RelativeToolTip": "APIServer\\DTOs\\User.cs",
+              "ViewState": "AgIAAHcAAAAAAAAAAAAUwJIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T10:27:22.013Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
             },
             {
               "$type": "Bookmark",
@@ -39,31 +248,571 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d84ee353-0bef-5a41-a649-8f89aca5d84d}"
+<<<<<<< HEAD
+=======
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{269a02dc-6af8-11d3-bdc4-00c04f688e50}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "RegisterViewModel.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\RegisterViewModel.cs",
+              "RelativeDocumentMoniker": "Messenger\\ViewModels\\RegisterViewModel.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\RegisterViewModel.cs",
+              "RelativeToolTip": "Messenger\\ViewModels\\RegisterViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T07:05:59.305Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ChatUserControl.xaml",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\Views\\Inbox\\ChatUserControl.xaml",
+              "RelativeDocumentMoniker": "Messenger\\Views\\Inbox\\ChatUserControl.xaml",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\Views\\Inbox\\ChatUserControl.xaml",
+              "RelativeToolTip": "Messenger\\Views\\Inbox\\ChatUserControl.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-28T07:05:11.156Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "InboxUserControl.xaml",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\Views\\Inbox\\InboxUserControl.xaml",
+              "RelativeDocumentMoniker": "Messenger\\Views\\Inbox\\InboxUserControl.xaml",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\Views\\Inbox\\InboxUserControl.xaml",
+              "RelativeToolTip": "Messenger\\Views\\Inbox\\InboxUserControl.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-28T07:05:10.136Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "LoadImage.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\Utils\\LoadImage.cs",
+              "RelativeDocumentMoniker": "Messenger\\Utils\\LoadImage.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\Utils\\LoadImage.cs",
+              "RelativeToolTip": "Messenger\\Utils\\LoadImage.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAYwCAAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T07:04:05.494Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ChatUserControl.xaml",
-              "DocumentMoniker": "D:\\Projects\\Uni\\GeckoMessenger\\source\\Messenger\\Views\\Inbox\\ChatUserControl.xaml",
-              "RelativeDocumentMoniker": "Messenger\\Views\\Inbox\\ChatUserControl.xaml",
-              "ToolTip": "D:\\Projects\\Uni\\GeckoMessenger\\source\\Messenger\\Views\\Inbox\\ChatUserControl.xaml",
-              "RelativeToolTip": "Messenger\\Views\\Inbox\\ChatUserControl.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-03-30T10:12:27.854Z",
+              "Title": "InboxViewModel.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\InboxViewModel.cs",
+              "RelativeDocumentMoniker": "Messenger\\ViewModels\\InboxViewModel.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\InboxViewModel.cs",
+              "RelativeToolTip": "Messenger\\ViewModels\\InboxViewModel.cs",
+              "ViewState": "AgIAAFUBAAAAAAAAAAAYwF0BAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T17:57:22.291Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProfileViewModel.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\ProfileViewModel.cs",
+              "RelativeDocumentMoniker": "Messenger\\ViewModels\\ProfileViewModel.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\ProfileViewModel.cs",
+              "RelativeToolTip": "Messenger\\ViewModels\\ProfileViewModel.cs",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAYwHEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T07:06:08.447Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ChatViewModel.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\ChatViewModel.cs",
+              "RelativeDocumentMoniker": "Messenger\\ViewModels\\ChatViewModel.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\ChatViewModel.cs",
+              "RelativeToolTip": "Messenger\\ViewModels\\ChatViewModel.cs",
+              "ViewState": "AgIAAKUBAAAAAAAAAAAuwAICAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T16:32:19.456Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ChatViewModel.cs",
-              "DocumentMoniker": "D:\\Projects\\Uni\\GeckoMessenger\\source\\Messenger\\ViewModels\\ChatViewModel.cs",
-              "RelativeDocumentMoniker": "Messenger\\ViewModels\\ChatViewModel.cs",
-              "ToolTip": "D:\\Projects\\Uni\\GeckoMessenger\\source\\Messenger\\ViewModels\\ChatViewModel.cs",
-              "RelativeToolTip": "Messenger\\ViewModels\\ChatViewModel.cs",
-              "ViewState": "AgIAAB4AAAAAAAAAAAA4wAAAAAAAAAAAAAAAAA==",
+              "Title": "EditPrivacyViewModel.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\EditPrivacyViewModel.cs",
+              "RelativeDocumentMoniker": "Messenger\\ViewModels\\EditPrivacyViewModel.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\EditPrivacyViewModel.cs",
+              "RelativeToolTip": "Messenger\\ViewModels\\EditPrivacyViewModel.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwAcAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T10:08:12.713Z",
+              "WhenOpened": "2025-03-27T06:01:43.894Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "ResourceHelper.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\Utils\\ResourceHelper.cs",
+              "RelativeDocumentMoniker": "APIServer\\Utils\\ResourceHelper.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\Utils\\ResourceHelper.cs",
+              "RelativeToolTip": "APIServer\\Utils\\ResourceHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T07:03:47.894Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "Report.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\DTOs\\Report.cs",
+              "RelativeDocumentMoniker": "APIServer\\DTOs\\Report.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\DTOs\\Report.cs",
+              "RelativeToolTip": "APIServer\\DTOs\\Report.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T06:57:57.155Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "SuggestContactListViewModel.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\SuggestContactListViewModel.cs",
+              "RelativeDocumentMoniker": "Messenger\\ViewModels\\SuggestContactListViewModel.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\SuggestContactListViewModel.cs",
+              "RelativeToolTip": "Messenger\\ViewModels\\SuggestContactListViewModel.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAiwCEAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T06:56:11.786Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Contact.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\DTOs\\Contact.cs",
+              "RelativeDocumentMoniker": "APIServer\\DTOs\\Contact.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\DTOs\\Contact.cs",
+              "RelativeToolTip": "APIServer\\DTOs\\Contact.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T06:22:34.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "ContactService.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\Services\\ContactService.cs",
+              "RelativeDocumentMoniker": "APIServer\\Services\\ContactService.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\Services\\ContactService.cs",
+              "RelativeToolTip": "APIServer\\Services\\ContactService.cs",
+              "ViewState": "AgIAAD0AAAAAAAAAAAAMwEgAAABZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T17:54:20.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "APIServer\\Services\\UserService.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\Services\\UserService.cs",
+              "RelativeToolTip": "APIServer\\Services\\UserService.cs",
+              "ViewState": "AgIAAPsAAAAAAAAAAAAQwCgBAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T08:34:17.76Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "ReportService.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\Services\\ReportService.cs",
+              "RelativeDocumentMoniker": "APIServer\\Services\\ReportService.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\Services\\ReportService.cs",
+              "RelativeToolTip": "APIServer\\Services\\ReportService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T18:13:29.569Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "ContactListViewModel.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\ContactListViewModel.cs",
+              "RelativeDocumentMoniker": "Messenger\\ViewModels\\ContactListViewModel.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\ContactListViewModel.cs",
+              "RelativeToolTip": "Messenger\\ViewModels\\ContactListViewModel.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAowBwAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T17:57:21.262Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Contact.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\DTOs\\Contact.cs",
+              "RelativeDocumentMoniker": "Messenger\\DTOs\\Contact.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\DTOs\\Contact.cs",
+              "RelativeToolTip": "Messenger\\DTOs\\Contact.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T06:21:00.325Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "Chat.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\DTOs\\Chat.cs",
+              "RelativeDocumentMoniker": "Messenger\\DTOs\\Chat.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\DTOs\\Chat.cs",
+              "RelativeToolTip": "Messenger\\DTOs\\Chat.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T06:20:58.147Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Chat.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\DTOs\\Chat.cs",
+              "RelativeDocumentMoniker": "APIServer\\DTOs\\Chat.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\DTOs\\Chat.cs",
+              "RelativeToolTip": "APIServer\\DTOs\\Chat.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T18:48:12.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "BlockListViewModel.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\BlockListViewModel.cs",
+              "RelativeDocumentMoniker": "Messenger\\ViewModels\\BlockListViewModel.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\BlockListViewModel.cs",
+              "RelativeToolTip": "Messenger\\ViewModels\\BlockListViewModel.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAwwCEAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T19:13:43.702Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "ChatService.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\Services\\ChatService.cs",
+              "RelativeDocumentMoniker": "APIServer\\Services\\ChatService.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\Services\\ChatService.cs",
+              "RelativeToolTip": "APIServer\\Services\\ChatService.cs",
+              "ViewState": "AgIAAMEBAAAAAAAAAAAnwNQBAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T17:54:21.271Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "HomeViewModel.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\HomeViewModel.cs",
+              "RelativeDocumentMoniker": "Messenger\\ViewModels\\HomeViewModel.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\HomeViewModel.cs",
+              "RelativeToolTip": "Messenger\\ViewModels\\HomeViewModel.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T19:11:39.865Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "App.config",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\App.config",
+              "RelativeDocumentMoniker": "Messenger\\App.config",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\App.config",
+              "RelativeToolTip": "Messenger\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-03-27T17:55:05.415Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Conversation.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\Models\\Conversation.cs",
+              "RelativeDocumentMoniker": "Messenger\\Models\\Conversation.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\Models\\Conversation.cs",
+              "RelativeToolTip": "Messenger\\Models\\Conversation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T06:22:04.65Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ContactListUserControl.xaml",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\Views\\Contact\\ContactListUserControl.xaml",
+              "RelativeDocumentMoniker": "Messenger\\Views\\Contact\\ContactListUserControl.xaml",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\Views\\Contact\\ContactListUserControl.xaml",
+              "RelativeToolTip": "Messenger\\Views\\Contact\\ContactListUserControl.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-27T19:11:30.465Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Contacts.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\Models\\Contacts.cs",
+              "RelativeDocumentMoniker": "APIServer\\Models\\Contacts.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\Models\\Contacts.cs",
+              "RelativeToolTip": "APIServer\\Models\\Contacts.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T18:11:02.562Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "App.xaml",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\App.xaml",
+              "RelativeDocumentMoniker": "Messenger\\App.xaml",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\App.xaml",
+              "RelativeToolTip": "Messenger\\App.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-28T06:20:52.592Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Admin.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\DTOs\\Admin.cs",
+              "RelativeDocumentMoniker": "Messenger\\DTOs\\Admin.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\DTOs\\Admin.cs",
+              "RelativeToolTip": "Messenger\\DTOs\\Admin.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T06:20:57.502Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "ServiceLocator.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\Services\\ServiceLocator.cs",
+              "RelativeDocumentMoniker": "Messenger\\Services\\ServiceLocator.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\Services\\ServiceLocator.cs",
+              "RelativeToolTip": "Messenger\\Services\\ServiceLocator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T06:20:55.962Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "Report.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\DTOs\\Report.cs",
+              "RelativeDocumentMoniker": "Messenger\\DTOs\\Report.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\DTOs\\Report.cs",
+              "RelativeToolTip": "Messenger\\DTOs\\Report.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-28T06:20:59.804Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "BlockListUserControl.xaml",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\Views\\Contact\\BlockListUserControl.xaml",
+              "RelativeDocumentMoniker": "Messenger\\Views\\Contact\\BlockListUserControl.xaml",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\Views\\Contact\\BlockListUserControl.xaml",
+              "RelativeToolTip": "Messenger\\Views\\Contact\\BlockListUserControl.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-27T19:11:33.306Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "LoginUserControl.xaml",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\Views\\LoginUserControl.xaml",
+              "RelativeDocumentMoniker": "Messenger\\Views\\LoginUserControl.xaml",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\Views\\LoginUserControl.xaml",
+              "RelativeToolTip": "Messenger\\Views\\LoginUserControl.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-27T18:56:03.668Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "HomeUserControl.xaml",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\Views\\HomeUserControl.xaml",
+              "RelativeDocumentMoniker": "Messenger\\Views\\HomeUserControl.xaml",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\Views\\HomeUserControl.xaml",
+              "RelativeToolTip": "Messenger\\Views\\HomeUserControl.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-27T18:56:00.66Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "EditPrivacyUserControl.xaml",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\Views\\Settings\\EditPrivacyUserControl.xaml",
+              "RelativeDocumentMoniker": "Messenger\\Views\\Settings\\EditPrivacyUserControl.xaml",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\Views\\Settings\\EditPrivacyUserControl.xaml",
+              "RelativeToolTip": "Messenger\\Views\\Settings\\EditPrivacyUserControl.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-03-27T16:15:18.856Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\Services\\AuthService.cs",
+              "RelativeDocumentMoniker": "APIServer\\Services\\AuthService.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\Services\\AuthService.cs",
+              "RelativeToolTip": "APIServer\\Services\\AuthService.cs",
+              "ViewState": "AgIAAKsAAAAAAAAAAAAnwL4AAAAZAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T17:54:16.51Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "App.config",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\App.config",
+              "RelativeDocumentMoniker": "APIServer\\App.config",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\App.config",
+              "RelativeToolTip": "APIServer\\App.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-03-27T18:49:53.619Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "UserService.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\Services\\UserService.cs",
+              "RelativeDocumentMoniker": "Messenger\\Services\\UserService.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\Services\\UserService.cs",
+              "RelativeToolTip": "Messenger\\Services\\UserService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T18:22:31.814Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "SettingsViewModel.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\SettingsViewModel.cs",
+              "RelativeDocumentMoniker": "Messenger\\ViewModels\\SettingsViewModel.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\SettingsViewModel.cs",
+              "RelativeToolTip": "Messenger\\ViewModels\\SettingsViewModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T17:57:45.364Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "EditProfileViewModel.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\EditProfileViewModel.cs",
+              "RelativeDocumentMoniker": "Messenger\\ViewModels\\EditProfileViewModel.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\Messenger\\ViewModels\\EditProfileViewModel.cs",
+              "RelativeToolTip": "Messenger\\ViewModels\\EditProfileViewModel.cs",
+              "ViewState": "AgIAAE0AAAAAAAAAAAAowF8AAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T16:52:33.475Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\Program.cs",
+              "RelativeDocumentMoniker": "APIServer\\Program.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\Program.cs",
+              "RelativeToolTip": "APIServer\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T18:11:18.909Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Conversations.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\Models\\Conversations.cs",
+              "RelativeDocumentMoniker": "APIServer\\Models\\Conversations.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\Models\\Conversations.cs",
+              "RelativeToolTip": "APIServer\\Models\\Conversations.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T18:11:09.835Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "ConversationRole.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\Models\\ConversationRole.cs",
+              "RelativeDocumentMoniker": "APIServer\\Models\\ConversationRole.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\Models\\ConversationRole.cs",
+              "RelativeToolTip": "APIServer\\Models\\ConversationRole.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T18:11:08.451Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "BannedAccounts.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\Models\\BannedAccounts.cs",
+              "RelativeDocumentMoniker": "APIServer\\Models\\BannedAccounts.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\Models\\BannedAccounts.cs",
+              "RelativeToolTip": "APIServer\\Models\\BannedAccounts.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T18:11:00.344Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "AppHost.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\AppHost.cs",
+              "RelativeDocumentMoniker": "APIServer\\AppHost.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\AppHost.cs",
+              "RelativeToolTip": "APIServer\\AppHost.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-27T18:10:47.854Z"
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
             }
           ]
         }

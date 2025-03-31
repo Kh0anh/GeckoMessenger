@@ -38,7 +38,11 @@
                         Background="{DynamicResource MainBackgroundBrush}"
                         BorderBrush="{DynamicResource BorderBrush}"
                         FontSize="14"
+<<<<<<< HEAD
                         Text="{Binding SearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+=======
+                        Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
                         <hc:SearchBar.Style>
                             <Style BasedOn="{StaticResource SearchBarPlus}" TargetType="hc:SearchBar">
                                 <Setter Property="Tag" Value="Hidden" />
@@ -61,7 +65,11 @@
                         Foreground="{DynamicResource DangerBrush}"
                         Visibility="{Binding ElementName=SearchBar, Path=Tag}" />
                 </Grid>
+<<<<<<< HEAD
+                
+=======
 
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
                 <!--  Inbox  -->
                 <ScrollViewer
                     Grid.Row="1"
@@ -125,8 +133,7 @@
                                                 VerticalAlignment="Top"
                                                 Background="Transparent"
                                                 BorderThickness="0"
-                                                Click="ConversationContext_OnClick"
-                                                Tag="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
+                                                Click="ConversationContext_OnClick">
                                                 <materialIcons:MaterialIcon
                                                     Width="18"
                                                     Height="18"
@@ -149,8 +156,6 @@
                                                             </MenuItem.Icon>
                                                         </MenuItem>
                                                         <MenuItem
-                                                            Command="{Binding PlacementTarget.Tag.DataContext.BlockUserCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                                            CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                             FontSize="12"
                                                             FontWeight="Medium"
                                                             Foreground="{DynamicResource DangerBrush}"
@@ -163,8 +168,6 @@
                                                             </MenuItem.Icon>
                                                         </MenuItem>
                                                         <MenuItem
-                                                            Command="{Binding PlacementTarget.Tag.DataContext.DeleteConversationCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
-                                                            CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                             FontSize="12"
                                                             FontWeight="Medium"
                                                             Foreground="{DynamicResource DangerBrush}"

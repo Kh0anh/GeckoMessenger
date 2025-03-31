@@ -4,17 +4,30 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
+D:\Projects\Uni\GeckoMessenger\source\Messenger\obj\Debug\
+=======
 D:\GeckoMessenger\source\Messenger\obj\Debug\
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
 Messenger
 none
 false
 DEBUG;TRACE
-D:\GeckoMessenger\source\Messenger\App.xaml
-17-623811594
+<<<<<<< HEAD
+D:\Projects\Uni\GeckoMessenger\source\Messenger\App.xaml
+16573045959
 
-511477605233
+5085073288
+421311529726
+MainWindow.xaml;Views\Contact\BlockListUserControl.xaml;Views\Contact\ContactListUserControl.xaml;Views\Contact\MainContactUserControl.xaml;Views\Contact\SuggestContactListUserControl.xaml;Views\HomeUserControl.xaml;Views\Inbox\ChatUserControl.xaml;Views\Inbox\InboxUserControl.xaml;Views\LoginUserControl.xaml;Views\ProfileView.xaml;Views\RegisterUserControl.xaml;Views\Settings\ChangePasswordUserControl.xaml;Views\Settings\EditPrivacyUserControl.xaml;Views\Settings\EditProfileUserControl.xaml;Views\Settings\SettingsUserControl.xaml;Views\Settings\MainSettingsView.xaml;
+=======
+D:\GeckoMessenger\source\Messenger\App.xaml
+15-116387659
+
+48-25766214
 42-566521054
-MainWindow.xaml;Views\Contact\BlockListUserControl.xaml;Views\Contact\ContactListUserControl.xaml;Views\Contact\MainContactUserControl.xaml;Views\Contact\SuggestContactListUserControl.xaml;Views\HomeUserControl.xaml;Views\Inbox\ChatUserControl.xaml;Views\Inbox\GroupUserControl.xaml;Views\Inbox\InboxUserControl.xaml;Views\LoginUserControl.xaml;Views\ProfileView.xaml;Views\RegisterUserControl.xaml;Views\Settings\ChangePasswordUserControl.xaml;Views\Settings\EditPrivacyUserControl.xaml;Views\Settings\EditProfileUserControl.xaml;Views\Settings\SettingsUserControl.xaml;Views\Settings\MainSettingsView.xaml;
+MainWindow.xaml;Views\Contact\BlockListUserControl.xaml;Views\Contact\ContactListUserControl.xaml;Views\Contact\MainContactUserControl.xaml;Views\Contact\SuggestContactListUserControl.xaml;Views\HomeUserControl.xaml;Views\Inbox\ChatUserControl.xaml;Views\Inbox\InboxUserControl.xaml;Views\LoginUserControl.xaml;Views\ProfileView.xaml;Views\RegisterUserControl.xaml;Views\Settings\EditPrivacyUserControl.xaml;Views\Settings\EditProfileUserControl.xaml;Views\Settings\SettingsUserControl.xaml;Views\Settings\MainSettingsView.xaml;
+>>>>>>> 4ffd7326e3587c336809acb8219698eda1a94f89
 
 True
 

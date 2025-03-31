@@ -67,10 +67,9 @@ namespace Messenger.ViewModels
                 }
                 catch (WebServiceException err)
                 {
-                    if (err.ResponseDto is DTOs.LoginResponse errorResponse)
+                    if (err.ResponseDto is DTOs.RegisterResponse errorResponse)
                     {
                         Error = errorResponse.Message;
-                        OnPropertyChanged(nameof(Error));
                     }
                     Debug.WriteLine(err);
                     return;

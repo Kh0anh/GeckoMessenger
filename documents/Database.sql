@@ -1,4 +1,4 @@
-﻿﻿-- Tạo bảng Privacy trước vì được tham chiếu bởi UserSettings
+﻿-- Tạo bảng Privacy trước vì được tham chiếu bởi UserSettings
 CREATE TABLE Privacy (
     PrivacyID TINYINT IDENTITY(1,1) PRIMARY KEY,
     PrivacyName VARCHAR(16) NOT NULL
@@ -46,7 +46,7 @@ CREATE TABLE UserSettings (
 CREATE TABLE Contacts (
     ContactID INT NOT NULL,
     UserID INT NOT NULL,
-    AddedAt DATETIME DEFAULT SYSDATETIME() NOT NULL,
+    AddedAt DATETIME NOT NULL,
     BlockAt DATETIME,
     PRIMARY KEY (ContactID, UserID),
     FOREIGN KEY (ContactID) REFERENCES Users(UserID),
@@ -120,7 +120,7 @@ CREATE TABLE Participants (
     NickName VARCHAR(32) COLLATE Latin1_General_100_CI_AS_SC_UTF8,
     ConversationRoleID TINYINT NOT NULL,
     CreatedAt DATETIME DEFAULT SYSDATETIME() NOT NULL,
-    DeleteDate DATETIME,
+    DeleteData DATETIME,
     FOREIGN KEY (ConversationID) REFERENCES Conversations(ConversationID),
     FOREIGN KEY (UserID) REFERENCES Users(UserID),
     FOREIGN KEY (ConversationRoleID) REFERENCES ConversationRole(ConversationRoleID)

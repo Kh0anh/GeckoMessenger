@@ -116,13 +116,6 @@ namespace Messenger.DTOs
     public class UpdatePrivacy : IReturn<UpdatePrivacyResponse>
     {
         public string ActiveStatus { get; set; }
-        public string BioPrivacy { get; set; }
-        public string PhoneNumberPrivacy { get; set; }
-        public string EmailPrivacy { get; set; }
-        public string BirthdayPrivacy { get; set; }
-        public string CallPrivacy { get; set; }
-        public string InviteGroupPrivacy { get; set; }
-        public string MessagePrivacy { get; set; }
     }
 
     public class UpdatePrivacyResponse
@@ -147,11 +140,6 @@ namespace Messenger.DTOs
         public string ActiveStatus { get; set; }
         public string BioPrivacy { get; set; }
         public string PhoneNumberPrivacy { get; set; }
-        public string EmailPrivacy { get; set; }
-        public string BirthdayPrivacy { get; set; }
-        public string CallPrivacy { get; set; }
-        public string InviteGroupPrivacy { get; set; }
-        public string MessagePrivacy { get; set; }
     }
 }
 
