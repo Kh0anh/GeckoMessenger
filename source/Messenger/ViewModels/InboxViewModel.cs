@@ -1,9 +1,11 @@
-﻿using HandyControl.Tools.Command;
+﻿using APIServer.Models;
+using HandyControl.Tools.Command;
 using Messenger.Services;
 using Messenger.Utils;
 using Messenger.Views.Inbox;
 using ServiceStack;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Diagnostics;
@@ -61,6 +63,7 @@ namespace Messenger.ViewModels
             {
                 _SearchText = value;
                 OnPropertyChanged(nameof(SearchText));
+
                 if (_SearchText.Length > 2)
                 {
                     DoSearch(_SearchText);
@@ -80,13 +83,93 @@ namespace Messenger.ViewModels
         }
 
         public ICommand SearchSelectionChangedCommand { get; }
+        public ICommand BlockUserCommand { get; }
+        public ICommand DeleteConversationCommand { get; }
 
         public InboxViewModel()
         {
             SearchSelectionChangedCommand = new RelayCommand<Conversation>(SearchSelectionChanged);
+            BlockUserCommand = new RelayCommand<Object>(c => BlockUser(c));
+            DeleteConversationCommand = new RelayCommand<Object>(c => DeleteConversation(c));
+
             Conversations = new ObservableCollection<Conversation>();
             SearchResults = new ObservableCollection<SearchResult>();
             Task.Run(TaskLoadConversation);
+        }
+
+        private void BlockUser(object conversationObj)
+        {
+            if (conversationObj is Conversation conversation)
+            {
+                var userService = ServiceLocator.GetService<IUserService>();
+                if (userService.User == null)
+                {
+                    return;
+                }
+
+                var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
+                client.BearerToken = userService.User.AuthToken;
+
+                ChatViewModel vm;
+                if (conversation.ChatView.DataContext is ChatViewModel _vm)
+                {
+                    vm = _vm;
+                }
+                else
+                {
+                    return;
+                }
+
+                if (vm.UserID == 0)
+                {
+                    return;
+                }
+
+                var blockContact = new DTOs.BlockContact
+                {
+                    UserID = vm.UserID,
+                };
+
+                try
+                {
+                    client.Post(blockContact);
+                    Conversations.Remove(conversation);
+                }
+                catch (Exception err)
+                {
+                    Debug.WriteLine($"{err}");
+                }
+            }
+        }
+
+        private void DeleteConversation(object conversationObj)
+        {
+            if (conversationObj is Conversation conversation)
+            {
+                var userService = ServiceLocator.GetService<IUserService>();
+                if (userService.User == null)
+                {
+                    return;
+                }
+
+                var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
+                client.BearerToken = userService.User.AuthToken;
+
+                var deleteConversation = new DTOs.DeleteConversation
+                {
+                    ConversationID = conversation.ConversationID,
+                };
+
+                try
+                {
+                    client.Post(deleteConversation);
+                    Conversations.Remove(conversation);
+                }
+                catch (Exception err)
+                {
+                    Debug.WriteLine($"{err}");
+                }
+            }
         }
 
         private async void DoSearch(string searchText)
@@ -179,6 +262,8 @@ namespace Messenger.ViewModels
                                 selectedId = conversation.ConversationID;
                             }
 
+                            List<Conversation> tempConversations = new List<Conversation>();
+
                             foreach (var conversationResponse in response.Conversations)
                             {
                                 var existingConversation = Conversations.FirstOrDefault(c => c.ConversationID == conversationResponse.ConversationID);
@@ -190,10 +275,11 @@ namespace Messenger.ViewModels
                                         existingConversation.LatestMessageContent = conversationResponse.LatestMessage;
                                         existingConversation.LatestMessage = conversationResponse.LatestMessageTime;
                                     }
+
+                                    tempConversations.Add(existingConversation);
                                 }
                                 else
                                 {
-                                    Debug.WriteLine(conversationResponse.LatestMessage);
                                     var newConversation = new Conversation
                                     {
                                         ConversationID = conversationResponse.ConversationID,
@@ -214,7 +300,22 @@ namespace Messenger.ViewModels
                                     }
 
                                     Conversations.Add(newConversation);
+                                    tempConversations.Add(newConversation);
                                 }
+                            }
+
+                            List<Conversation> del = new List<Conversation>();
+                            foreach(var con in Conversations)
+                            {
+                                if (!tempConversations.Exists(c => c.ConversationID == con.ConversationID))
+                                {
+                                    del.Add(con);
+                                }
+                            }
+
+                            foreach (var d in del)
+                            {
+                                Conversations.Remove(d);
                             }
 
                             var sortedConversations = Conversations.OrderByDescending(c => c.LatestMessage).ToList();

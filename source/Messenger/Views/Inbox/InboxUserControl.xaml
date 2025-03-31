@@ -61,6 +61,7 @@
                         Foreground="{DynamicResource DangerBrush}"
                         Visibility="{Binding ElementName=SearchBar, Path=Tag}" />
                 </Grid>
+
                 <!--  Inbox  -->
                 <ScrollViewer
                     Grid.Row="1"
@@ -124,7 +125,8 @@
                                                 VerticalAlignment="Top"
                                                 Background="Transparent"
                                                 BorderThickness="0"
-                                                Click="ConversationContext_OnClick">
+                                                Click="ConversationContext_OnClick"
+                                                Tag="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}">
                                                 <materialIcons:MaterialIcon
                                                     Width="18"
                                                     Height="18"
@@ -147,6 +149,8 @@
                                                             </MenuItem.Icon>
                                                         </MenuItem>
                                                         <MenuItem
+                                                            Command="{Binding PlacementTarget.Tag.DataContext.BlockUserCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                            CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                             FontSize="12"
                                                             FontWeight="Medium"
                                                             Foreground="{DynamicResource DangerBrush}"
@@ -159,6 +163,8 @@
                                                             </MenuItem.Icon>
                                                         </MenuItem>
                                                         <MenuItem
+                                                            Command="{Binding PlacementTarget.Tag.DataContext.DeleteConversationCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                                            CommandParameter="{Binding PlacementTarget.DataContext, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
                                                             FontSize="12"
                                                             FontWeight="Medium"
                                                             Foreground="{DynamicResource DangerBrush}"

@@ -146,7 +146,7 @@
                                         Kind="Block" />
                                 </MenuItem.Icon>
                             </MenuItem>
-                            <MenuItem Command="" Header="Tìm kiếm">
+                            <MenuItem Click="SearchMessageOpen_OnClick" Header="Tìm kiếm">
                                 <MenuItem.Icon>
                                     <materialIcons:MaterialIcon
                                         Width="16"
@@ -311,8 +311,8 @@
                                                                         <ItemsControl.ItemTemplate>
                                                                             <DataTemplate>
                                                                                 <Image
-                                                                                    Width="600"
                                                                                     Height="330"
+                                                                                    Margin="45,0,0,0"
                                                                                     Source="{Binding Image}" />
                                                                             </DataTemplate>
                                                                         </ItemsControl.ItemTemplate>

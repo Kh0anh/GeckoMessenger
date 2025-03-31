@@ -1,2 +1,31 @@
-source/.vs/GeckoMessenger/FileContentIndex/e2a521dc-eaea-4f75-9645-820c7c79efa0.vsidx
-source/.vs/GeckoMessenger/v17/.suo
+# Thư mục biên dịch tạm thời
+bin/
+obj/
+out/
+
+# File Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vsidx
+*.vsix
+*.vspx
+*.cache
+*.ncb
+*.opendb
+*.sdf
+
+# File log
+*.log
+*.tlog
+*.log.*
+
+# Kết quả test
+TestResults/
+*.trx
+
+# File lock của .NET
+project.lock.json
+project.assets.json

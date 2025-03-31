@@ -21,6 +21,7 @@ namespace Messenger.ViewModels
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string JoinDate { get; set; }
+
         public ProfileViewModel(int userID)
         {
             Task.Run(() =>
@@ -59,6 +60,7 @@ namespace Messenger.ViewModels
                     {
                         Bio = response.Data.Bio;
                     }
+
                     if (!string.IsNullOrEmpty(response.Data.Username))
                     {
                         Username = response.Data.Username;
