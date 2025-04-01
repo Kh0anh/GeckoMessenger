@@ -87,6 +87,11 @@ namespace Messenger.ViewModels
             });
         }
 
+        private void SwitchToForgotPassword()
+        {
+            //NavigationTo(new ForgotPasswordUserControl(new ForgotPasswordViewModel(this)));
+        }
+
         public void NavigationTo(object view)
         {
             if (view != null)
