@@ -411,6 +411,12 @@ namespace APIServer.Services
                     {
                         ActiveStatus = db.Single<Privacy>(u => u.PrivacyID == user.StatusPrivacy).PrivacyName,
                         BioPrivacy = db.Single<Privacy>(u => u.PrivacyID == user.BioPrivacy).PrivacyName,
+                        PhoneNumberPrivacy = db.Single<Privacy>(u => u.PrivacyID == user.PhoneNumberPrivacy).PrivacyName,
+                        EmailPrivacy = db.Single<Privacy>(u => u.PrivacyID == user.EmailPrivacy).PrivacyName,
+                        BirthdayPrivacy = db.Single<Privacy>(u => u.PrivacyID == user.BirthdayPrivacy).PrivacyName,
+                        CallPrivacy = db.Single<Privacy>(u => u.PrivacyID == user.CallPrivacy).PrivacyName,
+                        InviteGroupPrivacy = db.Single<Privacy>(u => u.PrivacyID == user.InviteGroupPrivacy).PrivacyName,
+                        MessagePrivacy = db.Single<Privacy>(u => u.PrivacyID == user.MessagePrivacy).PrivacyName,
                     }
                 }, HttpStatusCode.OK);
             }

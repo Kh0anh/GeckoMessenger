@@ -27,6 +27,7 @@
                     <RowDefinition Height="60" />
                     <RowDefinition Height="60" />
                     <RowDefinition Height="60" />
+                    <RowDefinition Height="120" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
                 <hc:Gravatar
@@ -92,7 +93,8 @@
                     Margin="0,20,0,0"
                     Background="Transparent"
                     BorderThickness="0"
-                    Command="{Binding SwitchToInboxCommand}">
+                    Command="{Binding SwitchToInboxCommand}"
+                    ToolTip="Nhắn tin">
                     <materialIcons:MaterialIcon
                         Width="30"
                         Height="30"
@@ -105,15 +107,30 @@
                     Margin="0,5,0,0"
                     Background="Transparent"
                     BorderThickness="0"
-                    Command="{Binding SwitchToContactCommand}">
+                    Command="{Binding SwitchToContactCommand}"
+                    ToolTip="Liên hệ">
                     <materialIcons:MaterialIcon
                         Width="30"
                         Height="30"
                         Kind="Contacts" />
                 </Button>
                 <Button
-                    x:Name="btSetting"
                     Grid.Row="3"
+                    Width="50"
+                    Height="50"
+                    Margin="0,5,0,0"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Command="{Binding CreateGroupCommand}"
+                    ToolTip="Tạo nhóm">
+                    <materialIcons:MaterialIcon
+                        Width="30"
+                        Height="30"
+                        Kind="GroupAdd" />
+                </Button>
+                <Button
+                    x:Name="btSetting"
+                    Grid.Row="4"
                     Width="50"
                     Height="50"
                     Margin="0,5,0,5"

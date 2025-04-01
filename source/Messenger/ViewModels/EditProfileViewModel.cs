@@ -1,14 +1,17 @@
-﻿using Messenger.Services;
+﻿using HandyControl.Controls;
+using Messenger.Services;
 using ServiceStack;
 using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Messenger.ViewModels
 {
     public class EditProfileViewModel : BaseViewModel
     {
+        public ImageSource Avatar {  get; set; }    
         private string _userName;
         private string _bio;
         private string _firstName;
@@ -41,6 +44,7 @@ namespace Messenger.ViewModels
             var userService = ServiceLocator.GetService<IUserService>();
             if (userService?.User != null)
             {
+                Avatar = userService.User.Avatar;
                 LoadUserProfile(userService.User.UserID);
             }
         }

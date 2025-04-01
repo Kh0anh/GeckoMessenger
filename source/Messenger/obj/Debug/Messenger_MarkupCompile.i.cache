@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\GeckoMessenger\source\Messenger\App.xaml
-17-623811594
+18618275065
 
-511477605233
-42-566521054
-MainWindow.xaml;Views\Contact\BlockListUserControl.xaml;Views\Contact\ContactListUserControl.xaml;Views\Contact\MainContactUserControl.xaml;Views\Contact\SuggestContactListUserControl.xaml;Views\HomeUserControl.xaml;Views\Inbox\ChatUserControl.xaml;Views\Inbox\GroupUserControl.xaml;Views\Inbox\InboxUserControl.xaml;Views\LoginUserControl.xaml;Views\ProfileView.xaml;Views\RegisterUserControl.xaml;Views\Settings\ChangePasswordUserControl.xaml;Views\Settings\EditPrivacyUserControl.xaml;Views\Settings\EditProfileUserControl.xaml;Views\Settings\SettingsUserControl.xaml;Views\Settings\MainSettingsView.xaml;
+54-9636910
+44-751631211
+MainWindow.xaml;Views\Contact\BlockListUserControl.xaml;Views\Contact\ContactListUserControl.xaml;Views\Contact\MainContactUserControl.xaml;Views\Contact\SuggestContactListUserControl.xaml;Views\CreateGroup.xaml;Views\HomeUserControl.xaml;Views\Inbox\ChatUserControl.xaml;Views\Inbox\GroupUserControl.xaml;Views\Inbox\InboxUserControl.xaml;Views\LoginUserControl.xaml;Views\ProfileView.xaml;Views\RegisterUserControl.xaml;Views\Settings\ChangePasswordUserControl.xaml;Views\Settings\EditPrivacyUserControl.xaml;Views\Settings\EditProfileUserControl.xaml;Views\Settings\SettingsUserControl.xaml;Views\Settings\MainSettingsView.xaml;
 
-True
+False
 

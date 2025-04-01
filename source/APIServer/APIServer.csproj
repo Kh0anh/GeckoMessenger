@@ -167,8 +167,5 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\DefaultAvatar.png" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\DefaultAvatar.jpg" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

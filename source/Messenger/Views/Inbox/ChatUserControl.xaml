@@ -229,6 +229,7 @@
                                                                     <Grid.RowDefinitions>
                                                                         <RowDefinition Height="*" />
                                                                         <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
                                                                     </Grid.RowDefinitions>
                                                                     <Grid Grid.Row="0">
                                                                         <Grid.ColumnDefinitions>
@@ -236,6 +237,15 @@
                                                                             <ColumnDefinition Width="Auto" />
                                                                             <ColumnDefinition Width="Auto" />
                                                                         </Grid.ColumnDefinitions>
+                                                                        <Grid.Style>
+                                                                            <Style TargetType="Grid">
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding Content}" Value="">
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </Grid.Style>
                                                                         <hc:Gravatar
                                                                             Grid.Column="0"
                                                                             Width="30"
@@ -303,7 +313,7 @@
                                                                             <Style TargetType="ItemsControl">
                                                                                 <Style.Triggers>
                                                                                     <DataTrigger Binding="{Binding Photos.Length}" Value="0">
-                                                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
                                                                                     </DataTrigger>
                                                                                 </Style.Triggers>
                                                                             </Style>
@@ -314,6 +324,36 @@
                                                                                     Height="330"
                                                                                     Margin="45,0,0,0"
                                                                                     Source="{Binding Image}" />
+                                                                            </DataTemplate>
+                                                                        </ItemsControl.ItemTemplate>
+                                                                    </ItemsControl>
+                                                                    <ItemsControl
+                                                                        Grid.Row="2"
+                                                                        Margin="40,0,0,0"
+                                                                        ItemsSource="{Binding Files}">
+                                                                        <ItemsControl.Style>
+                                                                            <Style TargetType="ItemsControl">
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding Files.Length}" Value="0">
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </ItemsControl.Style>
+                                                                        <ItemsControl.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <StackPanel Margin="5" HorizontalAlignment="Left">
+                                                                                    <materialIcons:MaterialIcon
+                                                                                        Width="80"
+                                                                                        Height="80"
+                                                                                        HorizontalAlignment="Center"
+                                                                                        Kind="File" />
+                                                                                    <TextBlock
+                                                                                        MaxWidth="230"
+                                                                                        HorizontalAlignment="Right"
+                                                                                        Text="{Binding FileName}"
+                                                                                        TextWrapping="Wrap" />
+                                                                                </StackPanel>
                                                                             </DataTemplate>
                                                                         </ItemsControl.ItemTemplate>
                                                                     </ItemsControl>
@@ -330,12 +370,22 @@
                                                                     <Grid.RowDefinitions>
                                                                         <RowDefinition Height="*" />
                                                                         <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
                                                                     </Grid.RowDefinitions>
                                                                     <Grid Grid.Row="0" HorizontalAlignment="Right">
                                                                         <Grid.ColumnDefinitions>
                                                                             <ColumnDefinition Width="Auto" />
                                                                             <ColumnDefinition Width="Auto" />
                                                                         </Grid.ColumnDefinitions>
+                                                                        <Grid.Style>
+                                                                            <Style TargetType="Grid">
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding Content}" Value="">
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </Grid.Style>
                                                                         <StackPanel
                                                                             Grid.Column="0"
                                                                             Orientation="Horizontal"
@@ -392,7 +442,7 @@
                                                                             <Style TargetType="ItemsControl">
                                                                                 <Style.Triggers>
                                                                                     <DataTrigger Binding="{Binding Photos.Length}" Value="0">
-                                                                                        <Setter Property="Visibility" Value="Hidden" />
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
                                                                                     </DataTrigger>
                                                                                 </Style.Triggers>
                                                                             </Style>
@@ -405,6 +455,33 @@
                                                                                     Margin="5"
                                                                                     HorizontalAlignment="Right"
                                                                                     Source="{Binding Image}" />
+                                                                            </DataTemplate>
+                                                                        </ItemsControl.ItemTemplate>
+                                                                    </ItemsControl>
+                                                                    <ItemsControl Grid.Row="2" ItemsSource="{Binding Files}">
+                                                                        <ItemsControl.Style>
+                                                                            <Style TargetType="ItemsControl">
+                                                                                <Style.Triggers>
+                                                                                    <DataTrigger Binding="{Binding Files.Length}" Value="0">
+                                                                                        <Setter Property="Visibility" Value="Collapsed" />
+                                                                                    </DataTrigger>
+                                                                                </Style.Triggers>
+                                                                            </Style>
+                                                                        </ItemsControl.Style>
+                                                                        <ItemsControl.ItemTemplate>
+                                                                            <DataTemplate>
+                                                                                <StackPanel Margin="5" HorizontalAlignment="Right">
+                                                                                    <materialIcons:MaterialIcon
+                                                                                        Width="80"
+                                                                                        Height="80"
+                                                                                        HorizontalAlignment="Center"
+                                                                                        Kind="File" />
+                                                                                    <TextBlock
+                                                                                        MaxWidth="230"
+                                                                                        HorizontalAlignment="Right"
+                                                                                        Text="{Binding FileName}"
+                                                                                        TextWrapping="Wrap" />
+                                                                                </StackPanel>
                                                                             </DataTemplate>
                                                                         </ItemsControl.ItemTemplate>
                                                                     </ItemsControl>
@@ -577,8 +654,9 @@
                     Margin="5"
                     Padding="15,0,0,0"
                     hc:BorderElement.CornerRadius="20"
-                    hc:InfoElement.Placeholder="Tin nhắn"
+                    hc:InfoElement.Placeholder="{Binding FullName, StringFormat='Nhắn tin tới {0}'}"
                     AcceptsReturn="True"
+                    BorderThickness="0"
                     FontSize="14"
                     Style="{DynamicResource TextBoxExtend}"
                     Text="{Binding NewMessageText, UpdateSourceTrigger=PropertyChanged}"
@@ -806,9 +884,9 @@
                                 VerticalAlignment="Center"
                                 FontSize="14"
                                 Foreground="{DynamicResource PrimaryTextBrush}"
-                                Text="{Binding PhotoCount, StringFormat='{}{0} Hình Ảnh'}" />
+                                Text="{Binding PhotoCount, StringFormat='{}{0} Hình ảnh'}" />
                         </Grid>
-                        <Grid Height="40">
+                        <!--<Grid Height="40">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50" />
                                 <ColumnDefinition Width="250" />
@@ -825,7 +903,7 @@
                                 FontSize="14"
                                 Foreground="{DynamicResource PrimaryTextBrush}"
                                 Text="0 Video" />
-                        </Grid>
+                        </Grid>-->
                         <Grid Height="40">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="50" />
@@ -842,7 +920,7 @@
                                 VerticalAlignment="Center"
                                 FontSize="14"
                                 Foreground="{DynamicResource PrimaryTextBrush}"
-                                Text="0 Tệp tin" />
+                                Text="{Binding FileCount, StringFormat='{}{0} Tệp tin'}" />
                         </Grid>
                     </StackPanel>
                     <StackPanel
