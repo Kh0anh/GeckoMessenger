@@ -579,7 +579,7 @@
                         VerticalAlignment="Center"
                         FontSize="14"
                         FontWeight="Medium"
-                        Text="{Binding Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        Text="{Binding Birthday, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat={}{0:dd/MM/yyyy}}"
                         TextAlignment="Right" />
                 </Grid>
             </ToggleButton>

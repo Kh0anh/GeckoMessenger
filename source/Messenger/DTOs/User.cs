@@ -48,6 +48,7 @@ namespace Messenger.DTOs
         public string Avatar { get; set; }
         public DateTime LastLogin { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string PublicKey { get; set; }
     }
 
     // Lấy trạng thái hoạt động

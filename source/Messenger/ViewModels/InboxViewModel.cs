@@ -234,7 +234,7 @@ namespace Messenger.ViewModels
             }
         }
 
-        private async void FakeGroup()
+        private void FakeGroup()
         {
             var newConversation = new Conversation
             {
