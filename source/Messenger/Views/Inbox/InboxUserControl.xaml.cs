@@ -1,5 +1,4 @@
-﻿using HandyControl.Controls;
-using Messenger.ViewModels;
+﻿using Messenger.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

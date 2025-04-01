@@ -1,5 +1,4 @@
-﻿using APIServer.Models;
-using Messenger.Services;
+﻿using Messenger.Services;
 using ServiceStack;
 using System.Collections.ObjectModel;
 using System.Configuration;

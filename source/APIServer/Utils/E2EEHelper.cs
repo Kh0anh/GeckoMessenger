@@ -12,8 +12,8 @@ namespace APIServer.Utils
         {
             using (var rsa = new RSACryptoServiceProvider(2048))
             {
-                return (Convert.ToBase64String(rsa.ExportCspBlob(false)), 
-                        Convert.ToBase64String(rsa.ExportCspBlob(true)));  
+                return (Convert.ToBase64String(rsa.ExportCspBlob(false)),
+                        Convert.ToBase64String(rsa.ExportCspBlob(true)));
             }
         }
 
@@ -30,8 +30,8 @@ namespace APIServer.Utils
         {
             using (var aes = Aes.Create())
             {
-                aes.GenerateKey(); 
-                aes.GenerateIV();  
+                aes.GenerateKey();
+                aes.GenerateIV();
                 using (var encryptor = aes.CreateEncryptor(aes.Key, aes.IV))
                 {
                     byte[] encrypted = PerformCryptography(Encoding.UTF8.GetBytes(plainText), encryptor);
