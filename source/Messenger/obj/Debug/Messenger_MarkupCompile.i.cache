@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Projects\Uni\GeckoMessenger\source\Messenger\obj\Debug\
+D:\GeckoMessenger\source\Messenger\obj\Debug\
 Messenger
 none
 false
 DEBUG;TRACE
-D:\Projects\Uni\GeckoMessenger\source\Messenger\App.xaml
-18618275065
+D:\GeckoMessenger\source\Messenger\App.xaml
+191473039225
 
-55386843911
-44-1041165263
-MainWindow.xaml;Views\Contact\BlockListUserControl.xaml;Views\Contact\ContactListUserControl.xaml;Views\Contact\MainContactUserControl.xaml;Views\Contact\SuggestContactListUserControl.xaml;Views\CreateGroup.xaml;Views\HomeUserControl.xaml;Views\Inbox\ChatUserControl.xaml;Views\Inbox\GroupUserControl.xaml;Views\Inbox\InboxUserControl.xaml;Views\LoginUserControl.xaml;Views\ProfileView.xaml;Views\RegisterUserControl.xaml;Views\Settings\ChangePasswordUserControl.xaml;Views\Settings\EditPrivacyUserControl.xaml;Views\Settings\EditProfileUserControl.xaml;Views\Settings\SettingsUserControl.xaml;Views\Settings\MainSettingsView.xaml;
+58-771939849
+43-19664958
+MainWindow.xaml;Views\Contact\BlockListUserControl.xaml;Views\Contact\ContactListUserControl.xaml;Views\Contact\MainContactUserControl.xaml;Views\Contact\SuggestContactListUserControl.xaml;Views\CreateGroup.xaml;Views\HomeUserControl.xaml;Views\Inbox\AIChatUserControl.xaml;Views\Inbox\ChatUserControl.xaml;Views\Inbox\GroupUserControl.xaml;Views\Inbox\InboxUserControl.xaml;Views\LoginUserControl.xaml;Views\ProfileView.xaml;Views\RegisterUserControl.xaml;Views\Settings\ChangePasswordUserControl.xaml;Views\Settings\EditPrivacyUserControl.xaml;Views\Settings\EditProfileUserControl.xaml;Views\Settings\SettingsUserControl.xaml;Views\Settings\MainSettingsView.xaml;
 
 True
 

@@ -19,7 +19,7 @@
         <!--  Sidebar  -->
         <Border
             Grid.Column="0"
-            Background="{DynamicResource MainContentBackgroundBrush}"
+            Background="{DynamicResource Bg0}"
             BorderBrush="{DynamicResource BorderBrush}"
             BorderThickness="0,0,1,0">
             <Grid>

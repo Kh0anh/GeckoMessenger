@@ -3,6 +3,7 @@ using Messenger.DTOs;
 using Messenger.Services;
 using Messenger.Utils;
 using Messenger.Views;
+using Microsoft.Win32;
 using ServiceStack;
 using System;
 using System.Collections.Generic;
@@ -12,10 +13,11 @@ using System.Configuration;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Messenger.ViewModels
 {
@@ -80,6 +82,7 @@ namespace Messenger.ViewModels
         public ICommand GiveFileCommand { get; }
         public ICommand GivePhotoCommand { get; }
         public ICommand RemoveAttachmentCommand { get; }
+        public ICommand SaveAttachmentCommand { get; }
         public ICommand OpenProfileCommand { get; }
         public ChatViewModel(int? userID = null, int? conversationID = null)
         {
@@ -92,6 +95,7 @@ namespace Messenger.ViewModels
             OpenProfileCommand = new RelayCommand(_ => OpenProfile());
             GivePhotoCommand = new RelayCommand(_ => GivePhoto());
             RemoveAttachmentCommand = new RelayCommand<Object>(a => RemoveAttachment(a));
+            SaveAttachmentCommand = new RelayCommand<Object>(a => SaveAttachment(a));
 
             if (userID != null)
             {
@@ -105,6 +109,89 @@ namespace Messenger.ViewModels
             Task.Run(TaskLoadMessage);
         }
 
+        private void SaveAttachment(object attachmentObj)
+        {
+            if (attachmentObj is Photo photo)
+            {
+                SaveImageSourceToPng(photo.Image,photo.FileName);
+            }
+            else if (attachmentObj is File file)
+            {
+                DownloadFile(file.Url, file.FileName);
+            }
+        }
+
+        public static void SaveImageSourceToPng(ImageSource imageSource, string fileName)
+        {
+            BitmapSource bitmapSource = imageSource as BitmapSource;
+            if (bitmapSource == null)
+                return;
+
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "PNG Image|*.png",
+                Title = "Chọn nơi lưu ảnh",
+                DefaultExt = "png",
+                FileName = fileName
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                FileStream stream = null;
+                try
+                {
+                    stream = new FileStream(saveFileDialog.FileName, FileMode.Create);
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
+                    encoder.Frames.Add(BitmapFrame.Create(bitmapSource));
+                    encoder.Save(stream);
+                }
+                finally
+                {
+                    stream?.Dispose();
+                }
+            }
+        }
+
+        public static void DownloadFile(string fileUrl, string fileName)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                Filter = "All files|*.*",
+                Title = "Chọn nơi lưu tệp",
+                FileName = fileName
+            };
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                string savePath = saveFileDialog.FileName;
+                try
+                {
+                    HttpWebRequest request = (HttpWebRequest)WebRequest.Create(fileUrl);
+                    using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                    {
+                        using (Stream responseStream = response.GetResponseStream())
+                        {
+                            using (FileStream fileStream = new FileStream(savePath, FileMode.Create))
+                            {
+                                byte[] buffer = new byte[4096];
+                                int bytesRead;
+                                while ((bytesRead = responseStream.Read(buffer, 0, buffer.Length)) > 0)
+                                {
+                                    fileStream.Write(buffer, 0, bytesRead);
+                                }
+                            }
+                        }
+                    }
+
+                    Debug.WriteLine("Tệp đã được tải và lưu tại: " + savePath);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("Đã xảy ra lỗi: " + ex.Message);
+                }
+            }
+        }
+
         private void GiveFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -113,7 +200,7 @@ namespace Messenger.ViewModels
                 Multiselect = false
             };
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if (openFileDialog.ShowDialog() == true)
             {
                 Task.Run(() =>
                 {
@@ -146,7 +233,7 @@ namespace Messenger.ViewModels
                 Multiselect = false
             };
 
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if (openFileDialog.ShowDialog() == true)
             {
                 Task.Run(() =>
                 {

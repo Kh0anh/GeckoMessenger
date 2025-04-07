@@ -93,7 +93,7 @@ namespace Messenger.ViewModels
 
             Conversations = new ObservableCollection<Conversation>();
             SearchResults = new ObservableCollection<SearchResult>();
-            //FakeGroup();
+            AddAi();
             Task.Run(TaskLoadConversation);
         }
 
@@ -230,6 +230,17 @@ namespace Messenger.ViewModels
             {
                 Debug.WriteLine(err);
             }
+        }
+
+        private void AddAi()
+        {
+            var newAiConverastion = new Conversation
+            {
+                ConversationAvatar = LoadImage.LoadImageFromBytes(ResourceHelper.GetEmbeddedResource("Messenger.Resources.gecko.png")),
+                AiChatView = new AIChatUserControl(new AIChatViewModel()),
+                IsAI = true,
+            };
+            Conversations.Add(newAiConverastion);
         }
 
         //private async void FakeGroup()
@@ -433,6 +444,10 @@ namespace Messenger.ViewModels
                 {
                     CurrentChat = c.GroupView;
                 }
+                else if (c.AiChatView != null)
+                {
+                    CurrentChat = c.AiChatView;
+                }
             }
         }
     }
@@ -512,7 +527,17 @@ namespace Messenger.ViewModels
         private DateTime _LatestMessage;
         public DateTime LatestMessage
         {
-            get => _LatestMessage;
+            get
+            {
+                if (AiChatView != null)
+                {
+                    return DateTime.Now;
+                }
+                else
+                {
+                    return _LatestMessage;
+                }
+            }
             set
             {
                 _LatestMessage = value;
@@ -521,5 +546,7 @@ namespace Messenger.ViewModels
         }
         public ChatUserControl ChatView { get; set; }
         public GroupUserControl GroupView { get; set; }
+        public AIChatUserControl AiChatView { get; set; }
+        public bool IsAI { get; set; }
     }
 }
