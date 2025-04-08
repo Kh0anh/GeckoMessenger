@@ -110,10 +110,10 @@ namespace APIServer.Utils
                 var pemReader = new PemReader(reader);
                 var keyObject = pemReader.ReadObject();
 
-                if (keyObject == null)
-                    throw new InvalidDataException("PEM read failed: keyObject is null. Possibly invalid format or unsupported type.");
+                //if (keyObject == null)
+                //    throw new InvalidDataException("PEM read failed: keyObject is null. Possibly invalid format or unsupported type.");
 
-                Debug.WriteLine($"keyObject type: {keyObject.GetType().FullName}");
+                //Debug.WriteLine($"keyObject type: {keyObject.GetType().FullName}");
 
                 if (keyObject is AsymmetricCipherKeyPair keyPair)
                 {
@@ -126,7 +126,8 @@ namespace APIServer.Utils
                 }
                 else
                 {
-                    throw new InvalidDataException("Unexpected key type: " + keyObject.GetType().FullName);
+                    return null;
+                    //throw new InvalidDataException("Unexpected key type: " + keyObject.GetType().FullName);
                 }
             }
         }

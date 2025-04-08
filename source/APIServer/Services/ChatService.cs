@@ -538,28 +538,37 @@ namespace APIServer.Services
                     //// Lấy PrivateKey từ registry
                     var userPrivateKeyFromRegistry = E2EEHelper.LoadFromRegistry(user.Username);
                     RSA rsaPrivateKey = E2EEHelper.LoadRSAPrivateKey(userPrivateKeyFromRegistry);
-                    // Giả mã Aes key bằng private key vừa lấy
-                    byte[] decryptedAesKey = rsaPrivateKey.Decrypt(aesKey.EncryptedAesKey, RSAEncryptionPadding.OaepSHA1);
-
-                    // Giải mã tin nhắn bằng AES key vừa giải mã
-                    string decryptedContent = E2EEHelper.DecryptMessage(message.Content, decryptedAesKey, aesKey.IV);
-                    Debug.WriteLine(decryptedContent);
-                    messageResponses.Add(new MessageResponse
+                    byte[] decryptedAesKey = new byte[0];
+                    string decryptedContent = "";
+                    if (aesKey.EncryptedAesKey != null)
                     {
-                        MessageID = message.MessageID,
-                        Sender = new UserResponse
+                        // Giải mã Aes key bằng private key vừa lấy
+                        decryptedAesKey = rsaPrivateKey.Decrypt(aesKey.EncryptedAesKey, RSAEncryptionPadding.OaepSHA1);
+
+                        // Giải mã tin nhắn bằng AES key vừa giải mã
+                        decryptedContent = E2EEHelper.DecryptMessage(message.Content, decryptedAesKey, aesKey.IV);
+                    }
+                    else
+                    {
+                        decryptedContent = "Tin nhắn đã được mã hóa.";
+                    }
+
+                        messageResponses.Add(new MessageResponse
                         {
-                            UserID = message.Sender.UserID,
-                            Username = message.Sender.Username,
-                            FirstName = message.Sender.FirstName,
-                            LastName = message.Sender.LastName,
-                            Avatar = message.Sender.Avatar,
-                        },
-                        Content = decryptedContent,
-                        MessageType = message.MessageTypeRef.MessageTypeName,
-                        CreatedAt = message.CreatedAt,
-                        Attachments = attachmentResponses?.ToArray()
-                    });
+                            MessageID = message.MessageID,
+                            Sender = new UserResponse
+                            {
+                                UserID = message.Sender.UserID,
+                                Username = message.Sender.Username,
+                                FirstName = message.Sender.FirstName,
+                                LastName = message.Sender.LastName,
+                                Avatar = message.Sender.Avatar,
+                            },
+                            Content = decryptedContent,
+                            MessageType = message.MessageTypeRef.MessageTypeName,
+                            CreatedAt = message.CreatedAt,
+                            Attachments = attachmentResponses?.ToArray()
+                        });
                 }
 
                 return new HttpResult(new GetMessagesResponse() { Messages = messageResponses.ToArray() },
