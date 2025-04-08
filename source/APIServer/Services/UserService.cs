@@ -421,5 +421,27 @@ namespace APIServer.Services
                 }, HttpStatusCode.OK);
             }
         }
+
+        public object Get(DTOs.GetPublicKey request)
+        {
+            var userId = int.Parse(GetSession().UserAuthId);
+            using (var db = DB.Open())
+            {
+                var user = db.SingleById<Users>(userId);
+                if (user == null)
+                {
+                    return new HttpResult(new DTOs.UpdateInfoResponse
+                    {
+                        Error = "NotFound",
+                        Message = "User not found"
+                    }, HttpStatusCode.NotFound);
+                }
+
+                return new HttpResult(new DTOs.GetPublicKeyResponse
+                {
+                    PublicKey = db.Single<Users>(u => u.PublicKey == user.PublicKey).PublicKey
+                }, HttpStatusCode.OK);
+            }
+        }
     }
 }

@@ -98,3 +98,5 @@ D:\Projects\Uni\GeckoMessenger\source\APIServer\obj\Debug\APIServer.csproj.CoreC
 D:\Projects\Uni\GeckoMessenger\source\APIServer\obj\Debug\APIServer.csproj.Up2Date
 D:\Projects\Uni\GeckoMessenger\source\APIServer\obj\Debug\APIServer.exe
 D:\Projects\Uni\GeckoMessenger\source\APIServer\obj\Debug\APIServer.pdb
+D:\Projects\Uni\GeckoMessenger\source\APIServer\bin\Debug\BouncyCastle.Crypto.dll
+D:\Projects\Uni\GeckoMessenger\source\APIServer\bin\Debug\BouncyCastle.Crypto.xml

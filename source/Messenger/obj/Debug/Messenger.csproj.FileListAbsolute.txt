@@ -159,6 +159,7 @@ D:\Projects\Uni\GeckoMessenger\source\Messenger\obj\Debug\Messenger.csproj.CoreC
 D:\Projects\Uni\GeckoMessenger\source\Messenger\obj\Debug\Messenger.csproj.Up2Date
 D:\Projects\Uni\GeckoMessenger\source\Messenger\obj\Debug\Messenger.exe
 D:\Projects\Uni\GeckoMessenger\source\Messenger\obj\Debug\Messenger.pdb
+D:\Projects\Uni\GeckoMessenger\source\Messenger\bin\Debug\BouncyCastle.Crypto.xml
 D:\Projects\Uni\GeckoMessenger\source\Messenger\bin\Debug\APIServer.exe
 D:\Projects\Uni\GeckoMessenger\source\Messenger\bin\Debug\Costura.dll
 D:\Projects\Uni\GeckoMessenger\source\Messenger\bin\Debug\HandyControl.dll
@@ -180,6 +181,7 @@ D:\Projects\Uni\GeckoMessenger\source\Messenger\bin\Debug\System.Memory.dll
 D:\Projects\Uni\GeckoMessenger\source\Messenger\bin\Debug\System.Numerics.Vectors.dll
 D:\Projects\Uni\GeckoMessenger\source\Messenger\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
 D:\Projects\Uni\GeckoMessenger\source\Messenger\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\Projects\Uni\GeckoMessenger\source\Messenger\bin\Debug\BouncyCastle.Crypto.dll
 D:\Projects\Uni\GeckoMessenger\source\Messenger\bin\Debug\ServiceStack.OrmLite.dll
 D:\Projects\Uni\GeckoMessenger\source\Messenger\bin\Debug\ServiceStack.OrmLite.SqlServer.dll
 D:\Projects\Uni\GeckoMessenger\source\Messenger\bin\Debug\BCrypt.Net-Core.dll

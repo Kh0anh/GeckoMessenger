@@ -154,6 +154,18 @@ namespace Messenger.DTOs
         public string InviteGroupPrivacy { get; set; }
         public string MessagePrivacy { get; set; }
     }
+
+    [Route("/user/getPublicKey")]
+    public class PublicKey : IReturn<GetPublicKeyResponse>
+    {
+        public int UserID { get; set; }
+    }
+    public class GetPublicKeyResponse
+    {
+        public string Error { get; set; }
+        public string Message { get; set; }
+        public string PublicKey { get; set; }
+    }
 }
 
 

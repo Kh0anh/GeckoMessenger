@@ -1,4 +1,5 @@
 ﻿using APIServer.Models;
+using APIServer.Utils;
 using ServiceStack;
 using ServiceStack.Auth;
 using ServiceStack.Data;
@@ -7,6 +8,8 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+
 
 namespace APIServer.Services
 {
@@ -91,6 +94,9 @@ namespace APIServer.Services
                     }, HttpStatusCode.Conflict);
                 }
 
+                ///////Tạo cặp khóa RSA///////
+                (string publicKey, string privateKey) = Utils.E2EEHelper.GenerateRSAKey();
+                /////////////////////////////
                 var user = new Users
                 {
                     Username = request.Username,
@@ -102,9 +108,13 @@ namespace APIServer.Services
                     LastName = request.LastName,
                     Bio = "",
                     Avatar = "storages/DefaultAvatar.png",
-                    LastLogin = DateTime.UtcNow
+                    LastLogin = DateTime.UtcNow,
+                    PublicKey = publicKey // Thêm public key vào db
                 };
                 Debug.WriteLine(request.Birthday.ToString("yyyy-MM-dd"));
+                //Lưu vô registry
+                E2EEHelper.SaveToRegistry(request.Username, privateKey);
+                /////////////////
                 db.Save(user);
 
                 var contactPrivacy = db.Single<Privacy>(p => p.PrivacyName == "CONTACT");

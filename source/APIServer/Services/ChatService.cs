@@ -9,6 +9,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace APIServer.Services
 {
@@ -46,6 +48,7 @@ namespace APIServer.Services
 
                 //Các điều kiện privacy
                 //...
+                
 
                 var conversationTypeChat = db.Single<ConversationType>(p => p.ConversationTypeName == "CHAT");
                 Conversations newConversation = new Conversations
@@ -64,6 +67,26 @@ namespace APIServer.Services
                 };
                 db.Save(pA);
 
+                //Tạo Aes Key và IV
+                (byte[] aesKey, byte[] iv) = E2EEHelper.GenerateAESKey();
+
+                /////////// Thêm Pa key ////////////
+                // Lấy Pa public key
+                var paPublicKey = db.Single<Users>(u => u.UserID == userID).PublicKey;
+                var rsaPublicKey = E2EEHelper.LoadRSAPublicKey(paPublicKey);
+                // Mã hóa Aes key bằng public key vừa lấy
+                byte[] encryptedAesKey = rsaPublicKey.Encrypt(aesKey, RSAEncryptionPadding.OaepSHA1);
+                
+                AesKeys addPaKey = new AesKeys
+                {
+                    ConversationID = newConversation.ConversationID,
+                    UserID = userID,
+                    EncryptedAesKey = encryptedAesKey,
+                    IV = iv
+                };
+                db.Save(addPaKey);
+                ///////////////////////
+
                 Participants pB = new Participants
                 {
                     ConversationID = newConversation.ConversationID,
@@ -72,10 +95,30 @@ namespace APIServer.Services
                 };
                 db.Save(pB);
 
+                ///////// Thêm Pb key /////////////
+                // Lấy Pb public key
+                var pbPublicKey = db.Single<Users>(u => u.UserID == participant.UserID).PublicKey;
+                var pbRsaPublicKey = E2EEHelper.LoadRSAPublicKey(pbPublicKey);
+                // Mã hóa Aes key bằng public key vừa lấy
+                byte[] encryptedParticipantAesKey = pbRsaPublicKey.Encrypt(aesKey, RSAEncryptionPadding.OaepSHA1);
+                
+                AesKeys addPbKey = new AesKeys
+                {
+                    ConversationID = newConversation.ConversationID,
+                    UserID = participant.UserID,
+                    EncryptedAesKey = encryptedParticipantAesKey,
+                    IV = iv
+                };
+                db.Save(addPbKey);
+                ///////////////////////
+
                 db.LoadReferences(newConversation);
                 db.LoadReferences(pA);
                 db.LoadReferences(pB);
-                return new HttpResult(new DTOs.NewChatResponse
+                db.LoadReferences(addPaKey);
+                db.LoadReferences(addPbKey);
+
+                return new HttpResult(new NewChatResponse
                 {
                     Conversation = new ConversationResponse
                     {
@@ -371,6 +414,28 @@ namespace APIServer.Services
 
                     db.LoadReferences(message);
 
+                    // Lấy AES key và IV của cuộc trò chuyện
+                    var aesKey = db.Single<AesKeys>(k => k.ConversationID == request.ConversationID && k.UserID == userID);
+
+                    // Lấy username
+                    var user = db.Single<Users>(u => u.UserID == userID);
+                    if (user == null)
+                    {
+                        return new HttpResult(new { Error = "UserNotFound", Message = "User not found." })
+                        {
+                            StatusCode = HttpStatusCode.NotFound
+                        };
+                    }
+
+                    //// Lấy PrivateKey từ registry
+                    var userPrivateKeyFromRegistry = E2EEHelper.LoadFromRegistry(user.Username);
+                    RSA rsaPrivateKey = E2EEHelper.LoadRSAPrivateKey(userPrivateKeyFromRegistry);
+                    // Giả mã Aes key bằng private key vừa lấy
+                    byte[] decryptedAesKey = rsaPrivateKey.Decrypt(aesKey.EncryptedAesKey, RSAEncryptionPadding.OaepSHA1);
+
+                    // Giải mã tin nhắn bằng AES key vừa giải mã
+                    string decryptedContent = E2EEHelper.DecryptMessage(message.Content, decryptedAesKey, aesKey.IV);
+                    Debug.WriteLine(decryptedContent);
                     messageResponses.Add(new MessageResponse
                     {
                         MessageID = message.MessageID,
@@ -382,7 +447,7 @@ namespace APIServer.Services
                             LastName = message.Sender.LastName,
                             Avatar = message.Sender.Avatar,
                         },
-                        Content = message.Content,
+                        Content = decryptedContent,
                         MessageType = message.MessageTypeRef.MessageTypeName,
                         CreatedAt = message.CreatedAt,
                         Attachments = attachmentResponses?.ToArray()
@@ -745,6 +810,36 @@ namespace APIServer.Services
                     Content = request.Content,
                     MessageType = messageType.MessageTypeID,
                 };
+
+                // Get AES key and IV for this conversation
+                var aesKey = db.Single<AesKeys>(k => k.ConversationID == request.ConversationID && k.UserID == userID);
+                if (aesKey == null)
+                {
+                    return new HttpResult(new { Error = "AesKeyNotFound", Message = "AES key not found for this conversation." })
+                    {
+                        StatusCode = HttpStatusCode.NotFound
+                    };
+                }
+
+                // Get username from Users table
+                var user = db.Single<Users>(u => u.UserID == userID);
+                if (user == null)
+                {
+                    return new HttpResult(new { Error = "UserNotFound", Message = "User not found." })
+                    {
+                        StatusCode = HttpStatusCode.NotFound
+                    };
+                }
+
+                //// Lấy private key của user từ registry
+                var userPrivateKeyFromRegistry = E2EEHelper.LoadFromRegistry(user.Username);
+                RSA rsaPrivateKey = E2EEHelper.LoadRSAPrivateKey(userPrivateKeyFromRegistry);
+                //// Giải mã AES key đã bị mã hóa bằng Private Key đã lấy trước đó
+                byte[] decryptedAesKey = rsaPrivateKey.Decrypt(aesKey.EncryptedAesKey, RSAEncryptionPadding.OaepSHA1);
+
+                //// Mã hóa tin nhắn bằng AES
+                string encryptedContent = E2EEHelper.EncryptMessage(request.Content, decryptedAesKey, aesKey.IV);
+                newMessage.Content = encryptedContent;
 
                 db.Save(newMessage);
 
