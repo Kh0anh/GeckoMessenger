@@ -40,5 +40,8 @@ namespace APIServer.Models
 
         [Default("GETDATE()")]
         public DateTime CreatedAt { get; set; }
+
+        [CustomField("NVARCHAR(MAX)")]
+        public string PublicKey { get; set; }
     }
 }

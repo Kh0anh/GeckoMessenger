@@ -37,6 +37,7 @@ namespace APIServer.DTOs
     //Thông tin người dùng được lấy ra
     public class UserInfo
     {
+        public static string AuthToken { get; internal set; }
         public int UserID { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }
@@ -48,6 +49,7 @@ namespace APIServer.DTOs
         public string Avatar { get; set; }
         public DateTime LastLogin { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string PublicKey { get; set; }
     }
 
     // Lấy trạng thái hoạt động
@@ -152,6 +154,18 @@ namespace APIServer.DTOs
         public string CallPrivacy { get; set; }
         public string InviteGroupPrivacy { get; set; }
         public string MessagePrivacy { get; set; }
+    }
+
+    [Route("/user/getPublicKey")]
+    public class GetPublicKey : IReturn<GetPublicKeyResponse>
+    {
+        public int UserID { get; set; }
+    }
+    public class GetPublicKeyResponse
+    {
+        public string Error { get; set; }
+        public string Message { get; set; }
+        public string PublicKey { get; set; }
     }
 }
 
