@@ -154,6 +154,113 @@ namespace APIServer.Services
             }
         }
 
+        public object Post(DTOs.NewGroup request)
+        {
+            //Xác thực token
+            var session = this.GetSession();
+            if (!session.IsAuthenticated)
+            {
+                return new HttpResult(new { Error = "TokenUnauthorized", Message = "User is not authenticated." })
+                {
+                    StatusCode = HttpStatusCode.Unauthorized
+                };
+            }
+
+            int userID = int.Parse(session.UserAuthId);
+
+            using (var db = DB.Open())
+            {
+                //var participant = db.Single<Users>(u => u.UserID == request.ParticipantID);
+
+                ////Kiểm tra xem người tham gia tồn tại không
+                //if (participant == null)
+                //{
+                //    return new HttpResult(new
+                //    { Error = "ParticipantNotFound", Message = "The participant does not exist." })
+                //    {
+                //        StatusCode = HttpStatusCode.Unauthorized
+                //    };
+                //}
+
+                //Các điều kiện privacy
+                //...
+
+                var conversationTypeChat = db.Single<ConversationType>(p => p.ConversationTypeName == "GROUP");
+                var groupTypePrivate = db.Single<GroupType>(p => p.GroupTypeName == "PRIVATE");
+
+                string avatarPath = Utils.Hash.GetMD5Hash(request.GroupAvatar.Concat(BitConverter.GetBytes(DateTime.Now.Ticks)).ToArray());
+
+                VirtualFiles.WriteFile(avatarPath + ".png", request.GroupAvatar);
+
+                Conversations newConversation = new Conversations
+                {
+                    ConversationName = avatarPath,
+                    ConversationTitle = request.GroupTitle,
+                    CreatorID = userID,
+                    ConversationTypeID = conversationTypeChat.ConversationTypeID,
+                    GroupTypeID = groupTypePrivate.GroupTypeID,
+                };
+                db.Save(newConversation);
+
+                var roleOwner = db.Single<ConversationRole>(p => p.ConversationRoleName == "OWNER");
+                var roleUser = db.Single<ConversationRole>(p => p.ConversationRoleName == "USER");
+
+                var newParticipants = new List<Participants>();
+
+                Participants ownerP = new Participants
+                {
+                    ConversationID = newConversation.ConversationID,
+                    UserID = userID,
+                    ConversationRoleID = roleOwner.ConversationRoleID
+                };
+                db.Save(ownerP);
+                db.LoadReferences(ownerP);
+                newParticipants.Add(ownerP);
+
+                foreach (var participantID in request.Participants)
+                {
+                    Participants p = new Participants
+                    {
+                        ConversationID = newConversation.ConversationID,
+                        UserID = participantID,
+                        ConversationRoleID = roleUser.ConversationRoleID
+                    };
+                    db.Save(p);
+                    db.LoadReferences(p);
+                    newParticipants.Add(p);
+                }
+
+                var participantResponses = new List<ParticipantResponse>();
+                foreach (var participant in newParticipants)
+                {
+                    participantResponses.Add(new ParticipantResponse
+                    {
+                        ParticipantID = participant.ParticipantID,
+                        ConversationID = newConversation.ConversationID,
+                        UserID = participant.UserID,
+                        NickName = participant.NickName,
+                        ConversationRole = participant.ConversationRole.ConversationRoleName,
+                        CreatedAt = participant.CreatedAt
+                    });
+                }
+
+                db.LoadReferences(newConversation);
+                return new HttpResult(new DTOs.NewChatResponse
+                {
+                    Conversation = new ConversationResponse
+                    {
+                        ConversationID = newConversation.ConversationID,
+                        ConversationName = newConversation.ConversationName,
+                        ConversationTitle = newConversation.ConversationTitle,
+                        CreatorID = newConversation.CreatorID,
+                        ConversationType = newConversation.ConversationType.ConversationTypeName,
+                        GroupType = newConversation.GroupType?.GroupTypeName ?? null,
+                        Participants = participantResponses.ToArray()
+                    }
+                }, HttpStatusCode.OK);
+            }
+        }
+
         public object Post(DTOs.DeleteConversation request)
         {
             //Xác thực token
@@ -194,6 +301,7 @@ namespace APIServer.Services
                 }
 
                 db.LoadReferences(conversation);
+                db.LoadReferences(participant);
 
                 //Kiểm tra có phải là chủ không đối với Group
                 if (conversation.ConversationType.ConversationTypeName == "GROUP" &&

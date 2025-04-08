@@ -6,7 +6,6 @@ using System;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Diagnostics;
-using System.Net.Mail;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;

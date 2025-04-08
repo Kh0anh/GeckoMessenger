@@ -1,14 +1,29 @@
-﻿<Application x:Class="Messenger.App"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Messenger"
-             xmlns:hc="https://handyorg.github.io/handycontrol"
-             StartupUri="MainWindow.xaml">
+﻿<Application
+    x:Class="Messenger.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:hc="https://handyorg.github.io/handycontrol"
+    xmlns:local="clr-namespace:Messenger"
+    StartupUri="MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <hc:ThemeResources RequestedTheme="Light"/>
-                <hc:Theme/>
+                <hc:ThemeResources RequestedTheme="Light">
+                    <hc:ThemeResources.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Light" hc:ThemeDictionary.Key="Light">
+                            <!--<SolidColorBrush x:Key="Bg0" Color="#397AA3" />
+                            <SolidColorBrush x:Key="MainContentBackgroundBrush" Color="#3877A0" />
+                            <SolidColorBrush x:Key="MainContentBackgroundBrush" Color="#35719B" />
+
+                            <SolidColorBrush x:Key="PrimaryTextBrush" Color="#D9DCD6" />
+                            <SolidColorBrush x:Key="SecondaryTextBrush" Color="#CDD3CF" />
+                            <SolidColorBrush x:Key="Tx2" Color="#C1C9C7" />
+
+                            <SolidColorBrush x:Key="BorderBrush" Color="#2F6690" />-->
+                        </ResourceDictionary>
+                    </hc:ThemeResources.ThemeDictionaries>
+                </hc:ThemeResources>
+                <hc:Theme />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

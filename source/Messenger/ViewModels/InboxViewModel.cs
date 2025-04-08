@@ -1,6 +1,4 @@
-﻿using APIServer.Models;
-using HandyControl.Controls;
-using HandyControl.Tools.Command;
+﻿using HandyControl.Tools.Command;
 using Messenger.Services;
 using Messenger.Utils;
 using Messenger.Views.Inbox;
@@ -95,7 +93,7 @@ namespace Messenger.ViewModels
 
             Conversations = new ObservableCollection<Conversation>();
             SearchResults = new ObservableCollection<SearchResult>();
-            FakeGroup();
+            AddAi();
             Task.Run(TaskLoadConversation);
         }
 
@@ -234,20 +232,31 @@ namespace Messenger.ViewModels
             }
         }
 
-        private void FakeGroup()
+        private async void FakeGroup()
         {
-            var newConversation = new Conversation
+            var newAiConverastion = new Conversation
             {
-                ConversationID = 0,
-                ConversationName = "Chúng ta cùng qua môn",
-                LatestMessageContent = "",
-                LatestMessage = DateTime.Now,
-                ConversationAvatar = LoadImage.LoadImageFromUrl(ConfigurationManager.AppSettings["APIUrl"] + "storages/DefaultAvatar.png"),
-                GroupView = new GroupUserControl(new GroupViewModel())
+                ConversationAvatar = LoadImage.LoadImageFromBytes(ResourceHelper.GetEmbeddedResource("Messenger.Resources.gecko.png")),
+                AiChatView = new AIChatUserControl(new AIChatViewModel()),
+                IsAI = true,
             };
-
-            Conversations.Add(newConversation);
+            Conversations.Add(newAiConverastion);
         }
+
+        //private async void FakeGroup()
+        //{
+        //    var newConversation = new Conversation
+        //    {
+        //        ConversationID = 0,
+        //        ConversationName = "Chúng ta cùng qua môn",
+        //        LatestMessageContent = "",
+        //        LatestMessage = DateTime.Now,
+        //        ConversationAvatar = LoadImage.LoadImageFromUrl(ConfigurationManager.AppSettings["APIUrl"] + "storages/DefaultAvatar.png"),
+        //        GroupView = new GroupUserControl(new GroupViewModel())
+        //    };
+
+        //    Conversations.Add(newConversation);
+        //}
 
         private async void TaskLoadConversation()
         {
@@ -302,11 +311,11 @@ namespace Messenger.ViewModels
                                         ConversationID = conversationResponse.ConversationID,
                                         LatestMessageContent = conversationResponse.LatestMessage,
                                         LatestMessage = conversationResponse.LatestMessageTime,
-                                        ChatView = new ChatUserControl(new ChatViewModel(conversationID: conversationResponse.ConversationID))
                                     };
 
                                     if (conversationResponse.ConversationType == "CHAT")
                                     {
+                                        newConversation.ChatView = new ChatUserControl(new ChatViewModel(conversationID: conversationResponse.ConversationID));
                                         DTOs.ParticipantResponse participant = conversationResponse.Participants
                                             .FirstOrDefault(p => p.UserID != userService.User.UserID);
 
@@ -314,6 +323,11 @@ namespace Messenger.ViewModels
                                         {
                                             LoadUserInfoTask(participant, newConversation);
                                         }
+                                    }
+                                    else if (conversationResponse.ConversationType == "GROUP")
+                                    {
+                                        newConversation.GroupView = new GroupUserControl(new GroupViewModel(conversationResponse.ConversationID));
+                                        LoadGroupInfoTask(conversationResponse, newConversation);
                                     }
 
                                     Conversations.Add(newConversation);
@@ -352,6 +366,26 @@ namespace Messenger.ViewModels
                 {
                     Debug.WriteLine(err);
                 }
+            }
+        }
+
+        private async void LoadGroupInfoTask(DTOs.ConversationResponse conversationData, Conversation conversation)
+        {
+            try
+            {
+                var avatarUrl = ConfigurationManager.AppSettings["APIUrl"] + "/storages/" + conversationData.ConversationName + ".png";
+                var avatarImage = LoadImage.LoadImageFromUrl(avatarUrl);
+                var fullName = conversationData.ConversationTitle;
+
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    conversation.ConversationName = fullName;
+                    conversation.ConversationAvatar = avatarImage;
+                });
+            }
+            catch (Exception err)
+            {
+                Debug.WriteLine(err);
             }
         }
 
@@ -409,6 +443,10 @@ namespace Messenger.ViewModels
                 else if (c.GroupView != null)
                 {
                     CurrentChat = c.GroupView;
+                }
+                else if (c.AiChatView != null)
+                {
+                    CurrentChat = c.AiChatView;
                 }
             }
         }
@@ -489,7 +527,17 @@ namespace Messenger.ViewModels
         private DateTime _LatestMessage;
         public DateTime LatestMessage
         {
-            get => _LatestMessage;
+            get
+            {
+                if (AiChatView != null)
+                {
+                    return DateTime.Now;
+                }
+                else
+                {
+                    return _LatestMessage;
+                }
+            }
             set
             {
                 _LatestMessage = value;
@@ -498,5 +546,7 @@ namespace Messenger.ViewModels
         }
         public ChatUserControl ChatView { get; set; }
         public GroupUserControl GroupView { get; set; }
+        public AIChatUserControl AiChatView { get; set; }
+        public bool IsAI { get; set; }
     }
 }

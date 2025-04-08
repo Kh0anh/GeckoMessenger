@@ -17,17 +17,82 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="60" />
         </Grid.RowDefinitions>
-        <Grid Margin="0,0,0,5" Background="{DynamicResource MainContentBackgroundBrush}">
+        <Grid Background="{DynamicResource MainContentBackgroundBrush}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="135" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <hc:ImageSelector
-                Width="100"
-                Height="100"
-                Margin="16"
-                HorizontalAlignment="Left"
-                hc:BorderElement.CornerRadius="50" />
+            <Grid
+                Grid.Row="1"
+                Margin="0,0,0,5"
+                Background="{DynamicResource MainContentBackgroundBrush}">
+                <hc:Gravatar
+                    Grid.Column="0"
+                    Width="100"
+                    Height="100"
+                    Source="{Binding Avatar}"
+                    Style="{StaticResource GravatarCircle}" />
+                <Button
+                    x:Name="OpenEditImageContext"
+                    Width="46"
+                    Height="46"
+                    Margin="70,70,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource PrimaryBrush}"
+                    BorderThickness="0"
+                    Click="OpenEditImageContext_Click"
+                    Tag="{Binding DataContext, RelativeSource={RelativeSource AncestorType=Window}}">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border
+                                Width="32"
+                                Height="32"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="25">
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                    <materialIcons:MaterialIcon
+                        Width="18"
+                        Height="18"
+                        Foreground="White"
+                        Kind="Camera" />
+                    <Button.ContextMenu>
+                        <ContextMenu
+                            HorizontalOffset="30"
+                            Placement="Right"
+                            VerticalOffset="-30">
+                            <MenuItem
+                                Command="{Binding PlacementTarget.Tag.SelectAvatarCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                FontSize="14"
+                                FontWeight="Medium"
+                                Header="Chọn ảnh">
+                                <MenuItem.Icon>
+                                    <materialIcons:MaterialIcon
+                                        Width="18"
+                                        Height="18"
+                                        Kind="Image" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                            <MenuItem
+                                Command="{Binding PlacementTarget.Tag.RemoveAvatarCommand, RelativeSource={RelativeSource AncestorType=ContextMenu}}"
+                                FontSize="14"
+                                FontWeight="Medium"
+                                Foreground="{DynamicResource DangerBrush}"
+                                Header="Xoá ảnh">
+                                <MenuItem.Icon>
+                                    <materialIcons:MaterialIcon
+                                        Width="18"
+                                        Height="18"
+                                        Kind="DeleteEmpty" />
+                                </MenuItem.Icon>
+                            </MenuItem>
+                        </ContextMenu>
+                    </Button.ContextMenu>
+                </Button>
+            </Grid>
             <StackPanel Grid.Column="1" VerticalAlignment="Bottom">
                 <TextBox
                     Height="66"
@@ -36,7 +101,8 @@
                     hc:InfoElement.Title="TÊN NHÓM"
                     hc:InfoElement.TitlePlacement="Top"
                     FontSize="14"
-                    Style="{StaticResource TextBoxExtend}" />
+                    Style="{StaticResource TextBoxExtend}"
+                    Text="{Binding GroupName, Mode=TwoWay}" />
             </StackPanel>
         </Grid>
         <StackPanel Grid.Row="1">
@@ -150,6 +216,7 @@
                 Height="36"
                 Margin="5"
                 HorizontalAlignment="Right"
+                Click="Button_Click"
                 Content="Hủy"
                 FontSize="14"
                 FontWeight="Medium"
@@ -159,6 +226,7 @@
                 Width="80"
                 Height="36"
                 Margin="5"
+                Command="{Binding NewGroupCommand}"
                 Content="Tạo"
                 FontSize="14"
                 FontWeight="Medium"

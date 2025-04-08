@@ -9,6 +9,14 @@ namespace APIServer.DTOs
         public int ParticipantID { get; set; }
     }
 
+    [Route("/chat/newGroup")]
+    public class NewGroup : IReturn<NewChatResponse>
+    {
+        public byte[] GroupAvatar { get; set; }
+        public string GroupTitle { get; set; }
+        public int[] Participants { get; set; }
+    }
+
     [Route("/chat/deleteConversation")]
     public class DeleteConversation : IReturn<DeleteConversationResponse>
     {

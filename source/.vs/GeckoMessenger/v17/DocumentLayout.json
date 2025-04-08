@@ -1,7 +1,16 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Projects\\Uni\\GeckoMessenger\\source\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\projects\\uni\\geckomessenger\\source\\messenger\\viewmodels\\inboxviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\inboxviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|D:\\Projects\\Uni\\GeckoMessenger\\source\\messenger\\views\\inbox\\inboxusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\views\\inbox\\inboxusercontrol.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,6 +39,30 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{d84ee353-0bef-5a41-a649-8f89aca5d84d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "InboxViewModel.cs",
+              "DocumentMoniker": "D:\\Projects\\Uni\\GeckoMessenger\\source\\Messenger\\ViewModels\\InboxViewModel.cs",
+              "RelativeDocumentMoniker": "Messenger\\ViewModels\\InboxViewModel.cs",
+              "ToolTip": "D:\\Projects\\Uni\\GeckoMessenger\\source\\Messenger\\ViewModels\\InboxViewModel.cs",
+              "RelativeToolTip": "Messenger\\ViewModels\\InboxViewModel.cs",
+              "ViewState": "AgIAANAAAAAAAAAAAAAswPYAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-08T15:00:15.054Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "InboxUserControl.xaml",
+              "DocumentMoniker": "D:\\Projects\\Uni\\GeckoMessenger\\source\\Messenger\\Views\\Inbox\\InboxUserControl.xaml",
+              "RelativeDocumentMoniker": "Messenger\\Views\\Inbox\\InboxUserControl.xaml",
+              "ToolTip": "D:\\Projects\\Uni\\GeckoMessenger\\source\\Messenger\\Views\\Inbox\\InboxUserControl.xaml",
+              "RelativeToolTip": "Messenger\\Views\\Inbox\\InboxUserControl.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-04-08T14:59:37.719Z"
             }
           ]
         }

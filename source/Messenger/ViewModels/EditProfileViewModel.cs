@@ -1,5 +1,4 @@
-﻿using HandyControl.Controls;
-using Messenger.Services;
+﻿using Messenger.Services;
 using ServiceStack;
 using System;
 using System.Configuration;
@@ -11,7 +10,7 @@ namespace Messenger.ViewModels
 {
     public class EditProfileViewModel : BaseViewModel
     {
-        public ImageSource Avatar {  get; set; }    
+        public ImageSource Avatar { get; set; }
         private string _userName;
         private string _bio;
         private string _firstName;
@@ -93,33 +92,33 @@ namespace Messenger.ViewModels
 
         public void LoadUserProfile(int userID)
         {
-                var userService = ServiceLocator.GetService<IUserService>();
-                var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
-                client.BearerToken = userService.User.AuthToken;
+            var userService = ServiceLocator.GetService<IUserService>();
+            var client = new JsonServiceClient(ConfigurationManager.AppSettings["APIUrl"]);
+            client.BearerToken = userService.User.AuthToken;
 
-                var getInfo = new DTOs.GetInfo { UserID = userID };
-                var response = client.Get(getInfo);
+            var getInfo = new DTOs.GetInfo { UserID = userID };
+            var response = client.Get(getInfo);
 
-                if (response.Error != null)
-                {
-                    Debug.WriteLine($"Error loading user profile: {response.Message}");
-                    return;
-                }
+            if (response.Error != null)
+            {
+                Debug.WriteLine($"Error loading user profile: {response.Message}");
+                return;
+            }
 
-                Username = response.Data.Username;
-                Bio = response.Data.Bio;
-                Email = response.Data.Email;
-                PhoneNumber = response.Data.PhoneNumber;
-                Birthday = response.Data.Birthday;
-                Fullname = response.Data.FirstName + " " + response.Data.LastName;
+            Username = response.Data.Username;
+            Bio = response.Data.Bio;
+            Email = response.Data.Email;
+            PhoneNumber = response.Data.PhoneNumber;
+            Birthday = response.Data.Birthday;
+            Fullname = response.Data.FirstName + " " + response.Data.LastName;
 
-                EditUsername = response.Data.Username;
-                EditBio = response.Data.Bio;
-                EditEmail = response.Data.Email;
-                EditPhoneNumber = response.Data.PhoneNumber;
-                EditBirthday = response.Data.Birthday;
-                EditFirstname = response.Data.FirstName;
-                EditLastname = response.Data.LastName;
+            EditUsername = response.Data.Username;
+            EditBio = response.Data.Bio;
+            EditEmail = response.Data.Email;
+            EditPhoneNumber = response.Data.PhoneNumber;
+            EditBirthday = response.Data.Birthday;
+            EditFirstname = response.Data.FirstName;
+            EditLastname = response.Data.LastName;
         }
     }
 }

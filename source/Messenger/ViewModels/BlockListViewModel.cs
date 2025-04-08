@@ -1,10 +1,8 @@
-﻿using APIServer.Models;
-using HandyControl.Tools.Command;
+﻿using HandyControl.Tools.Command;
 using Messenger.Services;
 using Messenger.Utils;
 using ServiceStack;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Diagnostics;
