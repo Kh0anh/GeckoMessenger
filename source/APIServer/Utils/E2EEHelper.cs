@@ -1,4 +1,4 @@
-﻿using Microsoft.Win32;
+using Microsoft.Win32;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
@@ -109,7 +109,6 @@ namespace APIServer.Utils
             {
                 var pemReader = new PemReader(reader);
                 var keyObject = pemReader.ReadObject();
-
                 //if (keyObject == null)
                 //    throw new InvalidDataException("PEM read failed: keyObject is null. Possibly invalid format or unsupported type.");
 

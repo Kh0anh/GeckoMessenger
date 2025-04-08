@@ -232,7 +232,7 @@ namespace Messenger.ViewModels
             }
         }
 
-        private void AddAi()
+        private async void FakeGroup()
         {
             var newAiConverastion = new Conversation
             {

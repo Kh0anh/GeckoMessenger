@@ -37,6 +37,7 @@ namespace APIServer.DTOs
     //Thông tin người dùng được lấy ra
     public class UserInfo
     {
+        public static string AuthToken { get; internal set; }
         public int UserID { get; set; }
         public string Username { get; set; }
         public string Email { get; set; }

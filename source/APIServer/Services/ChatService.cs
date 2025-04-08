@@ -538,6 +538,23 @@ namespace APIServer.Services
                     //// Lấy PrivateKey từ registry
                     var userPrivateKeyFromRegistry = E2EEHelper.LoadFromRegistry(user.Username);
                     RSA rsaPrivateKey = E2EEHelper.LoadRSAPrivateKey(userPrivateKeyFromRegistry);
+                    // Giả mã Aes key bằng private key vừa lấy
+                    byte[] decryptedAesKey = rsaPrivateKey.Decrypt(aesKey.EncryptedAesKey, RSAEncryptionPadding.OaepSHA1);
+
+                    // Giải mã tin nhắn bằng AES key vừa giải mã
+                    string decryptedContent = E2EEHelper.DecryptMessage(message.Content, decryptedAesKey, aesKey.IV);
+                    Debug.WriteLine(decryptedContent);
+                    messageResponses.Add(new MessageResponse
+                    {
+                        return new HttpResult(new { Error = "UserNotFound", Message = "User not found." })
+                        {
+                            StatusCode = HttpStatusCode.NotFound
+                        };
+                    }
+
+                    //// Lấy PrivateKey từ registry
+                    var userPrivateKeyFromRegistry = E2EEHelper.LoadFromRegistry(user.Username);
+                    RSA rsaPrivateKey = E2EEHelper.LoadRSAPrivateKey(userPrivateKeyFromRegistry);
                     byte[] decryptedAesKey = new byte[0];
                     string decryptedContent = "";
                     if (aesKey.EncryptedAesKey != null)
