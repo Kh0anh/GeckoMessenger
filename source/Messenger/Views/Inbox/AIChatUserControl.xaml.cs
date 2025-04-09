@@ -26,7 +26,14 @@ namespace Messenger.Views.Inbox
         {
             InitializeComponent();
             DataContext = viewModel;
-            VM = (AIChatViewModel)DataContext;
+            if (DataContext is AIChatViewModel vm)
+            {
+                VM = vm;
+                vm.ScrollToEnd += () =>
+                {
+                    MessagesScrollViewer.ScrollToEnd();
+                };
+            }
         }
     }
 }
