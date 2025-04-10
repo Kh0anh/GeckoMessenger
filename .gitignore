@@ -32,3 +32,4 @@ project.assets.json
 source/.vs/GeckoMessenger/CopilotIndices/17.13.431.34963/CodeChunks.db
 source/.vs/GeckoMessenger/CopilotIndices/17.13.431.34963/SemanticSymbols.db
 source/Messenger/obj/Debug/Messenger_MarkupCompile.i.cache
+*.cache
