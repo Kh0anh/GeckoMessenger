@@ -1,8 +1,10 @@
 ﻿using Messenger.Utils;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -109,9 +111,23 @@ namespace Messenger.ViewModels
                         LatestMessage = "Không có phản hồi từ Gecko";
                         modelMsg.Content = "[Không có phản hồi từ Gecko]";
                     }
+
+                    Messages.CollectionChanged += Messages_CollectionChanged;
                 }
             }
         }
+        private void Messages_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                System.Windows.Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ScrollToEnd?.Invoke();
+                });
+            }
+        }
+
+        public event Action ScrollToEnd;
         public class AIMessage : BaseViewModel
         {
             public string Role { get; set; }
