@@ -61,7 +61,7 @@ namespace Messenger.ViewModels
         {
             if (!string.IsNullOrWhiteSpace(NewMessageText))
             {
-                var apiKey = "API";
+                var apiKey = "AIzaSyD-r_Rido_B_sxUCY9t0fMGFfFxpMKCtvo";
                 var url = $"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key={apiKey}";
 
                 var userMsg = new AIMessage { Role = "user", Content = NewMessageText };

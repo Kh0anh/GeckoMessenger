@@ -1,4 +1,6 @@
-﻿using HandyControl.Tools.Command;
+﻿using APIServer.DTOs;
+using APIServer.Utils;
+using HandyControl.Tools.Command;
 using Messenger.Services;
 using Messenger.Utils;
 using Messenger.Views.Inbox;
@@ -9,10 +11,13 @@ using System.Collections.ObjectModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
+using System.Linq.Expressions;
+using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using System.Windows.Media;
+using ResourceHelper = Messenger.Utils.ResourceHelper;
 
 namespace Messenger.ViewModels
 {
@@ -280,7 +285,7 @@ namespace Messenger.ViewModels
                     var response = await client.GetAsync(getConversations);
                     if (response?.Conversations != null)
                     {
-                        App.Current.Dispatcher.Invoke(() =>
+                        await App.Current.Dispatcher.Invoke(() =>
                         {
                             int selectedId = -1;
                             if (SelectedConversation is Conversation conversation)
@@ -294,6 +299,64 @@ namespace Messenger.ViewModels
                             {
                                 var existingConversation = Conversations.FirstOrDefault(c => c.ConversationID == conversationResponse.ConversationID);
 
+                                #region E2EE
+                                string encryptedMessage = conversationResponse.LatestMessage;
+                                try
+                                {
+                                    if (userService != null && userService.User != null)
+                                    {
+                                        var privateKeyFromRegistry = E2EEHelper.LoadFromRegistry(userService.User.Username);
+                                        var getAesKey = new DTOs.GetAES
+                                        {
+                                            UserID = userService.User.UserID,
+                                            ConversationID = conversationResponse.ConversationID
+                                        };
+
+                                        var responseAES = client.Get(getAesKey);
+                                        if (responseAES != null && responseAES.EncryptedAesKey != null && responseAES.IV != null)
+                                        {
+                                            // Load RSA private key
+                                            RSA rsaPrivateKey = E2EEHelper.LoadRSAPrivateKey(privateKeyFromRegistry);
+                                            if (rsaPrivateKey != null)
+                                            {
+                                                // Giải mã  AES key bằng private key
+                                                byte[] decryptedAesKey = rsaPrivateKey.Decrypt(responseAES.EncryptedAesKey, RSAEncryptionPadding.OaepSHA1);
+
+                                                //Giải mã tin nhắn
+                                                string decryptedMessage = E2EEHelper.DecryptMessage(encryptedMessage.Replace("Bạn: ", ""), decryptedAesKey, responseAES.IV);
+                                                if (encryptedMessage.Contains("Bạn: "))
+                                                {
+                                                    conversationResponse.LatestMessage = "Bạn: " + decryptedMessage;
+                                                }
+                                                else
+                                                {
+                                                    conversationResponse.LatestMessage = decryptedMessage;
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (encryptedMessage.Contains("Bạn: "))
+                                                {
+                                                    conversationResponse.LatestMessage = "Bạn: " + "Tin nhắn đã được mã hóa.";
+                                                }
+                                                
+                                                else
+                                                {
+                                                    conversationResponse.LatestMessage = "Tin nhắn đã được mã hóa.";
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            conversationResponse.LatestMessage = "Tin nhắn được mã hóa.";
+                                        }
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Debug.WriteLine(ex.ToString());
+                                }
+                                #endregion
                                 if (existingConversation != null)
                                 {
                                     if (existingConversation.LatestMessage != conversationResponse.LatestMessageTime)
@@ -359,6 +422,7 @@ namespace Messenger.ViewModels
                             }
 
                             SelectedConversation = Conversations.FirstOrDefault(c => c.ConversationID == selectedId);
+                            return Task.CompletedTask;
                         });
                     }
                 }
@@ -369,7 +433,7 @@ namespace Messenger.ViewModels
             }
         }
 
-        private async void LoadGroupInfoTask(DTOs.ConversationResponse conversationData, Conversation conversation)
+        private void LoadGroupInfoTask(DTOs.ConversationResponse conversationData, Conversation conversation)
         {
             try
             {

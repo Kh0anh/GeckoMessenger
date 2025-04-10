@@ -540,7 +540,7 @@ namespace APIServer.Services
                     RSA rsaPrivateKey = E2EEHelper.LoadRSAPrivateKey(userPrivateKeyFromRegistry);
                     byte[] decryptedAesKey = new byte[0];
                     string decryptedContent = "";
-                    if (aesKey.EncryptedAesKey != null)
+                    if (aesKey.EncryptedAesKey != null && rsaPrivateKey != null)
                     {
                         // Giải mã Aes key bằng private key vừa lấy
                         decryptedAesKey = rsaPrivateKey.Decrypt(aesKey.EncryptedAesKey, RSAEncryptionPadding.OaepSHA1);
@@ -951,13 +951,21 @@ namespace APIServer.Services
                 //// Lấy private key của user từ registry
                 var userPrivateKeyFromRegistry = E2EEHelper.LoadFromRegistry(user.Username);
                 RSA rsaPrivateKey = E2EEHelper.LoadRSAPrivateKey(userPrivateKeyFromRegistry);
-                //// Giải mã AES key đã bị mã hóa bằng Private Key đã lấy trước đó
-                byte[] decryptedAesKey = rsaPrivateKey.Decrypt(aesKey.EncryptedAesKey, RSAEncryptionPadding.OaepSHA1);
-
-                //// Mã hóa tin nhắn bằng AES
-                string encryptedContent = E2EEHelper.EncryptMessage(request.Content, decryptedAesKey, aesKey.IV);
-                newMessage.Content = encryptedContent;
-
+                if (rsaPrivateKey != null)
+                {
+                    //// Giải mã AES key đã bị mã hóa bằng Private Key đã lấy trước đó
+                    byte[] decryptedAesKey = rsaPrivateKey.Decrypt(aesKey.EncryptedAesKey, RSAEncryptionPadding.OaepSHA1);
+                    //// Mã hóa tin nhắn bằng AES
+                    string encryptedContent = E2EEHelper.EncryptMessage(request.Content, decryptedAesKey, aesKey.IV);
+                    newMessage.Content = encryptedContent;
+                }
+                else
+                {
+                    return new HttpResult(new { Error = "PrivateKeyNotFound", Message = "RSA private key could not be loaded." })
+                    {
+                        StatusCode = HttpStatusCode.BadRequest
+                    };
+                }
                 db.Save(newMessage);
 
                 Debug.WriteLine(newMessage.Content);

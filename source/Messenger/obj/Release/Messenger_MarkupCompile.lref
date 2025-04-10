@@ -1,18 +1,22 @@
 ﻿
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\App.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\MainWindow.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Contact\BlockListUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Contact\ContactListUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Contact\MainContactUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Contact\SuggestContactListUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\HomeUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Inbox\ChatUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Inbox\InboxUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\LoginUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\ProfileView.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\RegisterUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Settings\EditPrivacyUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Settings\EditProfileUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Settings\SettingsUserControl.xaml;;
-FC:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\Views\Settings\MainSettingsView.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\App.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\MainWindow.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Contact\BlockListUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Contact\ContactListUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Contact\MainContactUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Contact\SuggestContactListUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\CreateGroup.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\HomeUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Inbox\AIChatUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Inbox\ChatUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Inbox\GroupUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Inbox\InboxUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\LoginUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\ProfileView.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\RegisterUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Settings\ChangePasswordUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Settings\EditPrivacyUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Settings\EditProfileUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Settings\SettingsUserControl.xaml;;
+FD:\Projects\Uni\GeckoMessenger\source\Messenger\Views\Settings\MainSettingsView.xaml;;
 
