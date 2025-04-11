@@ -20,10 +20,10 @@ namespace APIServer.Models
         [References(typeof(Users))]
         public int UserID { get; set; }
 
-        [Column(TypeName = "varbinary(32)")]
+        [Column(TypeName = "varbinary(256)")]
         public byte[] EncryptedAesKey { get; set; }
 
-        [Column(TypeName = "varbinary(16)")]
+        [Column(TypeName = "varbinary(256)")]
         public byte[] IV { get; set; }
     }
 }

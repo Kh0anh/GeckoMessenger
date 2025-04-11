@@ -1,10 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Projects\\Uni\\GeckoMessenger\\source\\",
+  "WorkspaceRootPath": "D:\\GeckoMessenger\\source\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\projects\\uni\\geckomessenger\\source\\messenger\\viewmodels\\aichatviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\aichatviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|d:\\geckomessenger\\source\\apiserver\\models\\aeskeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\models\\aeskeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,39 +14,19 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d84ee353-0bef-5a41-a649-8f89aca5d84d}"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AIChatViewModel.cs",
-              "DocumentMoniker": "D:\\Projects\\Uni\\GeckoMessenger\\source\\Messenger\\ViewModels\\AIChatViewModel.cs",
-              "RelativeDocumentMoniker": "Messenger\\ViewModels\\AIChatViewModel.cs",
-              "ToolTip": "D:\\Projects\\Uni\\GeckoMessenger\\source\\Messenger\\ViewModels\\AIChatViewModel.cs",
-              "RelativeToolTip": "Messenger\\ViewModels\\AIChatViewModel.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAABFAAAAAAAAAA==",
+              "Title": "AesKeys.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\Models\\AesKeys.cs",
+              "RelativeDocumentMoniker": "APIServer\\Models\\AesKeys.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\Models\\AesKeys.cs",
+              "RelativeToolTip": "APIServer\\Models\\AesKeys.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-10T08:00:19.71Z",
+              "WhenOpened": "2025-04-11T07:22:13.286Z",
               "EditorCaption": ""
             }
           ]
