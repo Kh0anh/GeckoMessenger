@@ -166,6 +166,20 @@ namespace Messenger.DTOs
         public string Message { get; set; }
         public string PublicKey { get; set; }
     }
+
+    [Route("/user/getAES")]
+    public class GetAES : IReturn<GetAESResponse>
+    {
+        public int UserID { get; set; }
+        public int ConversationID { get; set; }
+    }
+    public class GetAESResponse
+    {
+        public string Error { get; set; }
+        public string Message { get; set; }
+        public byte[] EncryptedAesKey { get; set; }
+        public byte[] IV { get; set; }
+    }
 }
 
 

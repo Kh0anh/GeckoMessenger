@@ -3,7 +3,6 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.OpenSsl;
-using Org.BouncyCastle.Pkcs;
 using Org.BouncyCastle.Security;
 using System;
 using System.Diagnostics;
@@ -20,13 +19,28 @@ namespace APIServer.Utils
         {
             try
             {
-                RegistryKey key = Registry.CurrentUser.CreateSubKey(path);
-                key.SetValue(username, encryptedRsaPrivateKey);
-                key.Close();
+                // Tạo hoặc mở key chính với quyền cần thiết
+                using (RegistryKey baseKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE", true) ??
+                                            Registry.CurrentUser.CreateSubKey(@"SOFTWARE"))
+                {
+                    // Tạo hoặc mở subkey "GeckoMessenger"
+                    using (RegistryKey geckoKey = baseKey.OpenSubKey("GeckoMessenger", true) ??
+                                                baseKey.CreateSubKey("GeckoMessenger"))
+                    {
+                        // Tạo hoặc mở subkey "Users"
+                        using (RegistryKey usersKey = geckoKey.OpenSubKey("Users", true) ??
+                                                    geckoKey.CreateSubKey("Users"))
+                        {
+                            // Lưu giá trị
+                            usersKey.SetValue(username, encryptedRsaPrivateKey, RegistryValueKind.String);
+                        }
+                    }
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error saving to registry: " + ex.Message);
+                Debug.WriteLine("Error saving to registry: " + ex.Message);
+                Debug.WriteLine("Stack trace: " + ex.StackTrace);
             }
         }
 
@@ -34,20 +48,30 @@ namespace APIServer.Utils
         {
             try
             {
-                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(path))
+                // Mở key theo đường dẫn đầy đủ
+                using (RegistryKey softwareKey = Registry.CurrentUser.OpenSubKey(@"SOFTWARE"))
                 {
-                    if (key != null)
+                    if (softwareKey == null) return string.Empty;
+
+                    using (RegistryKey geckoKey = softwareKey.OpenSubKey("GeckoMessenger"))
                     {
-                        object value = key.GetValue(username);
-                        if (value is string rsaPrivateKey)
-                            return rsaPrivateKey;
+                        if (geckoKey == null) return string.Empty;
+
+                        using (RegistryKey usersKey = geckoKey.OpenSubKey("Users"))
+                        {
+                            if (usersKey == null) return string.Empty;
+
+                            object value = usersKey.GetValue(username);
+                            if (value is string rsaPrivateKey)
+                                return rsaPrivateKey;
+                        }
                     }
                 }
-
             }
-            catch
+            catch (Exception ex)
             {
-                Console.WriteLine("Error loading from registry.");
+                Debug.WriteLine("Error loading from registry: " + ex.Message);
+                Debug.WriteLine("Stack trace: " + ex.StackTrace);
             }
             return string.Empty;
         }
@@ -109,10 +133,6 @@ namespace APIServer.Utils
             {
                 var pemReader = new PemReader(reader);
                 var keyObject = pemReader.ReadObject();
-                //if (keyObject == null)
-                //    throw new InvalidDataException("PEM read failed: keyObject is null. Possibly invalid format or unsupported type.");
-
-                //Debug.WriteLine($"keyObject type: {keyObject.GetType().FullName}");
 
                 if (keyObject is AsymmetricCipherKeyPair keyPair)
                 {
@@ -126,7 +146,6 @@ namespace APIServer.Utils
                 else
                 {
                     return null;
-                    //throw new InvalidDataException("Unexpected key type: " + keyObject.GetType().FullName);
                 }
             }
         }

@@ -422,12 +422,12 @@ namespace APIServer.Services
             }
         }
 
-        public object Get(DTOs.GetPublicKey request)
+        public object Get(DTOs.GetAES request)
         {
-            var userId = int.Parse(GetSession().UserAuthId);
+            var userID = int.Parse(GetSession().UserAuthId);
             using (var db = DB.Open())
             {
-                var user = db.SingleById<Users>(userId);
+                var user = db.Single<AesKeys>(k => k.ConversationID == request.ConversationID && k.UserID == userID);
                 if (user == null)
                 {
                     return new HttpResult(new DTOs.UpdateInfoResponse
@@ -437,9 +437,10 @@ namespace APIServer.Services
                     }, HttpStatusCode.NotFound);
                 }
 
-                return new HttpResult(new DTOs.GetPublicKeyResponse
+                return new HttpResult(new DTOs.GetAESResponse
                 {
-                    PublicKey = db.Single<Users>(u => u.PublicKey == user.PublicKey).PublicKey
+                    EncryptedAesKey = db.Single<AesKeys>(ea => ea.EncryptedAesKey == user.EncryptedAesKey).EncryptedAesKey,
+                    IV = db.Single<AesKeys>(iv => iv.IV == user.IV).IV
                 }, HttpStatusCode.OK);
             }
         }

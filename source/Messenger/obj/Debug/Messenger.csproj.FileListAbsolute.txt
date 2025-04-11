@@ -89,6 +89,7 @@ C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\obj\Debug\
 C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\obj\Debug\Messenger.csproj.Up2Date
 C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\obj\Debug\Messenger.exe
 C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\Messenger\obj\Debug\Messenger.pdb
+<<<<<<< HEAD
 D:\Projects\Uni\GeckoMessenger\source\Messenger\obj\Debug\Messenger.csproj.AssemblyReference.cache
 D:\Projects\Uni\GeckoMessenger\source\Messenger\obj\Debug\MainWindow.g.cs
 D:\Projects\Uni\GeckoMessenger\source\Messenger\obj\Debug\Views\Contact\BlockListUserControl.g.cs
@@ -292,3 +293,5 @@ Z:\GeckoMessenger\source\Messenger\obj\Debug\Messenger.csproj.CoreCompileInputs.
 Z:\GeckoMessenger\source\Messenger\obj\Debug\Messenger.csproj.Up2Date
 Z:\GeckoMessenger\source\Messenger\obj\Debug\Messenger.exe
 Z:\GeckoMessenger\source\Messenger\obj\Debug\Messenger.pdb
+=======
+>>>>>>> main

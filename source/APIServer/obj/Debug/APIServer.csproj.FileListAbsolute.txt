@@ -48,6 +48,7 @@ C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\APIServer\obj\Debug\
 C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\APIServer\obj\Debug\APIServer.csproj.Up2Date
 C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\APIServer\obj\Debug\APIServer.exe
 C:\Users\HUY\Desktop\Project Document\GeckoMessenger\source\APIServer\obj\Debug\APIServer.pdb
+<<<<<<< HEAD
 D:\Projects\Uni\GeckoMessenger\source\APIServer\bin\Debug\APIServer.exe.config
 D:\Projects\Uni\GeckoMessenger\source\APIServer\bin\Debug\APIServer.exe
 D:\Projects\Uni\GeckoMessenger\source\APIServer\bin\Debug\APIServer.pdb
@@ -152,3 +153,5 @@ Z:\GeckoMessenger\source\APIServer\obj\Debug\APIServer.csproj.CoreCompileInputs.
 Z:\GeckoMessenger\source\APIServer\obj\Debug\APIServer.csproj.Up2Date
 Z:\GeckoMessenger\source\APIServer\obj\Debug\APIServer.exe
 Z:\GeckoMessenger\source\APIServer\obj\Debug\APIServer.pdb
+=======
+>>>>>>> main
