@@ -4,16 +4,28 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 D:\Projects\Uni\GeckoMessenger\source\Messenger\obj\Release\
+=======
+D:\GeckoMessenger\source\Messenger\obj\Release\
+>>>>>>> 7891565f44d994a910d291803135ee8e7b2ab4d4
 Messenger
 none
 false
 TRACE
+<<<<<<< HEAD
 D:\Projects\Uni\GeckoMessenger\source\Messenger\App.xaml
 191473039225
 
 571601249326
 43-429578118
+=======
+D:\GeckoMessenger\source\Messenger\App.xaml
+191473039225
+
+571601249326
+432024678950
+>>>>>>> 7891565f44d994a910d291803135ee8e7b2ab4d4
 MainWindow.xaml;Views\Contact\BlockListUserControl.xaml;Views\Contact\ContactListUserControl.xaml;Views\Contact\MainContactUserControl.xaml;Views\Contact\SuggestContactListUserControl.xaml;Views\CreateGroup.xaml;Views\HomeUserControl.xaml;Views\Inbox\AIChatUserControl.xaml;Views\Inbox\ChatUserControl.xaml;Views\Inbox\GroupUserControl.xaml;Views\Inbox\InboxUserControl.xaml;Views\LoginUserControl.xaml;Views\ProfileView.xaml;Views\RegisterUserControl.xaml;Views\Settings\ChangePasswordUserControl.xaml;Views\Settings\EditPrivacyUserControl.xaml;Views\Settings\EditProfileUserControl.xaml;Views\Settings\SettingsUserControl.xaml;Views\Settings\MainSettingsView.xaml;
 
 False

@@ -3,8 +3,13 @@
   "WorkspaceRootPath": "D:\\Projects\\Uni\\GeckoMessenger\\source\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|d:\\projects\\uni\\geckomessenger\\source\\messenger\\viewmodels\\aichatviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{A883C85E-189A-4CAF-A304-252B7EA65C7A}|Messenger\\Messenger.csproj|solutionrelative:messenger\\viewmodels\\aichatviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+=======
+      "AbsoluteMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|d:\\geckomessenger\\source\\apiserver\\models\\aeskeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9501C8FB-DEA1-465F-A07E-55BF11351D96}|APIServer\\APIServer.csproj|solutionrelative:apiserver\\models\\aeskeys.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+>>>>>>> 7891565f44d994a910d291803135ee8e7b2ab4d4
     }
   ],
   "DocumentGroupContainers": [
@@ -14,6 +19,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 5,
           "Children": [
             {
@@ -47,6 +53,21 @@
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAD8AAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-10T08:00:19.71Z",
+=======
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AesKeys.cs",
+              "DocumentMoniker": "D:\\GeckoMessenger\\source\\APIServer\\Models\\AesKeys.cs",
+              "RelativeDocumentMoniker": "APIServer\\Models\\AesKeys.cs",
+              "ToolTip": "D:\\GeckoMessenger\\source\\APIServer\\Models\\AesKeys.cs",
+              "RelativeToolTip": "APIServer\\Models\\AesKeys.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T07:22:13.286Z",
+>>>>>>> 7891565f44d994a910d291803135ee8e7b2ab4d4
               "EditorCaption": ""
             }
           ]
