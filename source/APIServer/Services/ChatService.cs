@@ -10,7 +10,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace APIServer.Services
 {
@@ -48,7 +47,7 @@ namespace APIServer.Services
 
                 //Các điều kiện privacy
                 //...
-                
+
 
                 var conversationTypeChat = db.Single<ConversationType>(p => p.ConversationTypeName == "CHAT");
                 Conversations newConversation = new Conversations
@@ -76,7 +75,7 @@ namespace APIServer.Services
                 var rsaPublicKey = E2EEHelper.LoadRSAPublicKey(paPublicKey);
                 // Mã hóa Aes key bằng public key vừa lấy
                 byte[] encryptedAesKey = rsaPublicKey.Encrypt(aesKey, RSAEncryptionPadding.OaepSHA1);
-                
+
                 AesKeys addPaKey = new AesKeys
                 {
                     ConversationID = newConversation.ConversationID,
@@ -101,7 +100,7 @@ namespace APIServer.Services
                 var pbRsaPublicKey = E2EEHelper.LoadRSAPublicKey(pbPublicKey);
                 // Mã hóa Aes key bằng public key vừa lấy
                 byte[] encryptedParticipantAesKey = pbRsaPublicKey.Encrypt(aesKey, RSAEncryptionPadding.OaepSHA1);
-                
+
                 AesKeys addPbKey = new AesKeys
                 {
                     ConversationID = newConversation.ConversationID,
@@ -408,9 +407,39 @@ namespace APIServer.Services
                             }
                             else
                             {
+                                // Lấy AES key và IV của cuộc trò chuyện
+                                var aesKey = db.Single<AesKeys>(k => k.ConversationID == conversation.ConversationID && k.UserID == userID);
+
+                                // Lấy username
+                                var user = db.Single<Users>(u => u.UserID == userID);
+                                if (user == null)
+                                {
+                                    return new HttpResult(new { Error = "UserNotFound", Message = "User not found." })
+                                    {
+                                        StatusCode = HttpStatusCode.NotFound
+                                    };
+                                }
+
+                                //// Lấy PrivateKey từ registry
+                                var userPrivateKeyFromRegistry = E2EEHelper.LoadFromRegistry(user.Username);
+                                RSA rsaPrivateKey = E2EEHelper.LoadRSAPrivateKey(userPrivateKeyFromRegistry);
+                                byte[] decryptedAesKey = new byte[0];
+                                string decryptedContent = "";
+                                if (aesKey.EncryptedAesKey != null)
+                                {
+                                    // Giải mã Aes key bằng private key vừa lấy
+                                    decryptedAesKey = rsaPrivateKey.Decrypt(aesKey.EncryptedAesKey, RSAEncryptionPadding.OaepSHA1);
+
+                                    // Giải mã tin nhắn bằng AES key vừa giải mã
+                                    decryptedContent = E2EEHelper.DecryptMessage(latestMessage.Content, decryptedAesKey, aesKey.IV);
+                                }
+                                else
+                                {
+                                    decryptedContent = "Tin nhắn đã được mã hóa.";
+                                }
                                 latestMessageText = latestMessage.SenderID == userID
-                                    ? $"Bạn: {latestMessage.Content}"
-                                    : latestMessage.Content;
+                                    ? $"Bạn: {decryptedContent}"
+                                    : decryptedContent;
                             }
                         }
                         else if (latestMessage.MessageTypeRef.MessageTypeName == "CALL")
@@ -553,22 +582,22 @@ namespace APIServer.Services
                         decryptedContent = "Tin nhắn đã được mã hóa.";
                     }
 
-                        messageResponses.Add(new MessageResponse
+                    messageResponses.Add(new MessageResponse
+                    {
+                        MessageID = message.MessageID,
+                        Sender = new UserResponse
                         {
-                            MessageID = message.MessageID,
-                            Sender = new UserResponse
-                            {
-                                UserID = message.Sender.UserID,
-                                Username = message.Sender.Username,
-                                FirstName = message.Sender.FirstName,
-                                LastName = message.Sender.LastName,
-                                Avatar = message.Sender.Avatar,
-                            },
-                            Content = decryptedContent,
-                            MessageType = message.MessageTypeRef.MessageTypeName,
-                            CreatedAt = message.CreatedAt,
-                            Attachments = attachmentResponses?.ToArray()
-                        });
+                            UserID = message.Sender.UserID,
+                            Username = message.Sender.Username,
+                            FirstName = message.Sender.FirstName,
+                            LastName = message.Sender.LastName,
+                            Avatar = message.Sender.Avatar,
+                        },
+                        Content = decryptedContent,
+                        MessageType = message.MessageTypeRef.MessageTypeName,
+                        CreatedAt = message.CreatedAt,
+                        Attachments = attachmentResponses?.ToArray()
+                    });
                 }
 
                 return new HttpResult(new GetMessagesResponse() { Messages = messageResponses.ToArray() },
