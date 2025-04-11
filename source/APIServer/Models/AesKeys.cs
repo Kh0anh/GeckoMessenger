@@ -23,7 +23,7 @@ namespace APIServer.Models
         [Column(TypeName = "varbinary(256)")]
         public byte[] EncryptedAesKey { get; set; }
 
-        [Column(TypeName = "varbinary(256)")]
+        [Column(TypeName = "varbinary(16)")]
         public byte[] IV { get; set; }
     }
 }
