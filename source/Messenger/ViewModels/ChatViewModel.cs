@@ -263,7 +263,7 @@ namespace Messenger.ViewModels
         {
             while (true)
             {
-                await Task.Delay(300);
+                await Task.Delay(100);
 
                 if (ConversationInfo == null)
                 {

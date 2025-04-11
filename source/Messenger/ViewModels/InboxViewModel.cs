@@ -262,7 +262,7 @@ namespace Messenger.ViewModels
         {
             while (true)
             {
-                await Task.Delay(1000);
+                await Task.Delay(100);
 
                 var userService = ServiceLocator.GetService<IUserService>();
                 if (userService.User == null)

@@ -1,5 +1,4 @@
-﻿﻿-- Tạo bảng Privacy trước vì được tham chiếu bởi UserSettings
-CREATE TABLE Privacy (
+﻿CREATE TABLE Privacy (
     PrivacyID TINYINT IDENTITY(1,1) PRIMARY KEY,
     PrivacyName VARCHAR(16) NOT NULL
 );
@@ -17,7 +16,8 @@ CREATE TABLE Users (
     Bio VARCHAR(255) COLLATE Latin1_General_100_CI_AS_SC_UTF8 NOT NULL,
     Avatar VARCHAR(128) NOT NULL,
     LastLogin DATETIME NOT NULL,
-    CreatedAt DATETIME DEFAULT SYSDATETIME() NOT NULL
+    CreatedAt DATETIME DEFAULT SYSDATETIME() NOT NULL,
+	PublicKey NVARCHAR(MAX) NULL,
 );
 
 -- Bảng UserSettings
@@ -205,6 +205,16 @@ CREATE TABLE MessageDelete (
     FOREIGN KEY (MessageID) REFERENCES Messages(MessageID),
     FOREIGN KEY (DeleteByUserID) REFERENCES Users(UserID),
     FOREIGN KEY (DeleteTypeID) REFERENCES DeleteType(DeleteTypeID)
+);
+
+CREATE TABLE AesKeys (
+    AesKeyID INT PRIMARY KEY IDENTITY(1,1),
+    ConversationID INT NOT NULL,
+    UserID INT NOT NULL,
+    EncryptedAesKey VARBINARY(256) NOT NULL,
+    IV VARBINARY(16) NOT NULL,
+    CONSTRAINT FK_AesKeys_Conversation FOREIGN KEY (ConversationID) REFERENCES Conversations(ConversationID),
+    CONSTRAINT FK_AesKeys_User FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
 -- Thêm dữ liệu cho các bảng lookup

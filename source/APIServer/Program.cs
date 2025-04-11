@@ -5,8 +5,8 @@ namespace APIServer
 {
     internal class Program
     {
-        public static readonly string APIUrl = "http://localhost:8080/";
-        public static readonly string ConnectString = "Server=kh0anh.hopto.org,1433;Database=GeckoMessenger;User Id=sa;Password=giahuyst;";
+        public static readonly string APIUrl = "http://192.168.1.83:34752/";
+        public static readonly string ConnectString = "Server=192.168.1.83,1433;Database=GeckoMessenger;User Id=sa;Password=giahuyst;";
         public static readonly string JWTKey = "0000000000000000000000000000000";
         static void Main(string[] args)
         {
